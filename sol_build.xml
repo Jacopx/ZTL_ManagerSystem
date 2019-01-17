@@ -49,7 +49,7 @@
 
 	<target name="build-service">
 		<echo>Building... (build-service)</echo>
-		<ant antfile="sol-build.xml" target="generate-artifacts"></ant>
+		<ant antfile="sol_build.xml" target="generate-artifacts"></ant>
 		<javac
 				destdir="${build.dir}"
 				debug="${debug}"
