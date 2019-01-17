@@ -74,6 +74,10 @@ public class rnsResources {
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
         URI self = builder.build();
         place.setSelf(self.toString());
+        URI connections = builder.clone().path("connections").build();
+        place.setConnections(connections.toString());
+        URI connectedBy = builder.clone().path("connectedBy").build();
+        place.setConnectedBy(connectedBy.toString());
 
         Place created = service.createPlace(id, place);
         if (created!=null) {
@@ -96,6 +100,38 @@ public class rnsResources {
         if (place==null)
             throw new NotFoundException();
         return place;
+    }
+
+    @PUT
+    @Path("/places/{id}")
+    @ApiOperation(value = "updatePlace", notes = "update single place"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+    })
+    @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public Place updatePlace(@PathParam("id") long id, Place place) {
+        Place updated = service.updatePlace(id, place);
+        if (updated==null)
+            throw new NotFoundException();
+        return updated;
+    }
+
+    @DELETE
+    @Path("/places/{id}")
+    @ApiOperation(value = "deleteItem", notes = "delete single item"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 204, message = "No content"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 409, message = "Conflict (item is cited)"),
+    })
+    public void deleteItem(@PathParam("id") long id) {
+        Place place = service.deletePlace(id);
+        if (place==null)
+            throw new NotFoundException();
+        return;
     }
 
     @GET

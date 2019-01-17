@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
  * Copyright by Jacopx on 2019-01-16.
  */
 public class rnsService {
-    rnsDB db = new rnsDB();
+    private rnsDB db = rnsDB.getRnsDB();
 
     public rnsService() {
 
@@ -28,6 +28,14 @@ public class rnsService {
 
     public Place getPlace(String id) {
         return null;
+    }
+
+    public Place updatePlace(long id, Place place) {
+        return db.updatePlace(id, place);
+    }
+
+    public Place deletePlace(long id) {
+        return db.deletePlace(id);
     }
 
     public Connections getConnections() {
