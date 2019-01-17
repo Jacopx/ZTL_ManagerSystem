@@ -10,12 +10,8 @@ import org.joda.time.DateTime;
 public class rnsService {
     private rnsDB db = rnsDB.getRnsDB();
 
-    public rnsService() {
-
-    }
-
     public long getNextId() {
-        return db.getNextId();
+        return rnsDB.getNextId();
     }
 
     public Places getPlaces(SearchPlaces scope, String keyword, String type) {
@@ -26,8 +22,8 @@ public class rnsService {
         return db.createPlace(id, place);
     }
 
-    public Place getPlace(String id) {
-        return null;
+    public Place getPlace(long id) {
+        return db.getPlace(id);
     }
 
     public Place updatePlace(long id, Place place) {

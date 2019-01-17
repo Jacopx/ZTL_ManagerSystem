@@ -94,7 +94,7 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Place getItem(@PathParam("id") String id) {
+    public Place getItem(@PathParam("id") long id) {
         Place place = service.getPlace(id);
         if (place==null)
             throw new NotFoundException();

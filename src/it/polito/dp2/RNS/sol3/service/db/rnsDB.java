@@ -5,10 +5,13 @@ import it.polito.dp2.RNS.lab2.*;
 import it.polito.dp2.RNS.lab2.PathFinderFactory;
 import it.polito.dp2.RNS.sol1.RnsReaderFactory;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.Connection;
-import it.polito.dp2.RNS.sol3.rest.service.jaxb.GateItem;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.Place;
+import it.polito.dp2.RNS.sol3.rest.service.jaxb.Places;
+import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
 import javax.ws.rs.ClientErrorException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -53,11 +56,12 @@ public class rnsDB {
             e.printStackTrace();
         }
 
+        placeExtById = new ConcurrentHashMap<>();
+
         // PLACE GATE
         for (GateReader gateReader : monitor.getGates(null)) {
             Place newGate = new Place();
             newGate.setId(gateReader.getId());
-            createPlace(getNextId(), newGate);
         }
 
         // PLACE PARKING AREA
@@ -78,6 +82,14 @@ public class rnsDB {
         for(ConnectionReader connectionReader:monitor.getConnections()) {
             Connection newConnection = new Connection();
         }
+    }
+
+    public Collection<Place> getPlaces(SearchPlaces scope, String keyword, String type) {
+        return (Collection<Place>) placeExtById;
+    }
+
+    public Place getPlace(long id) {
+        return placeExtById.get(id).getPlace();
     }
 
     public Place createPlace(long id, Place place) {
