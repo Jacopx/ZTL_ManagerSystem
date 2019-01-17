@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <!-- ROOT ELEMENT -->
+    <xsd:element name="rns">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="roads" type="Roads" minOccurs="0"/>
+                <xsd:element name="item" type="EntityItem" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="connection" type="ConnectionItem" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+
+        <xsd:key name="key">
+            <xsd:selector xpath=".//place|.//item/vehicle|.//roads/road"/>
+            <xsd:field xpath="@id"/>
+        </xsd:key>
+
+        <xsd:keyref name="refKey_from" refer="key">
+            <xsd:selector xpath="item/vehicle"/>
+            <xsd:field xpath="comesFrom"/>
+        </xsd:keyref>
+
+        <xsd:keyref name="refKey_to" refer="key">
+            <xsd:selector xpath="item/vehicle"/>
+            <xsd:field xpath="directTo"/>
+        </xsd:keyref>
+
+        <xsd:keyref name="refKey_position" refer="key">
+            <xsd:selector xpath="item/vehicle"/>
+            <xsd:field xpath="position"/>
+        </xsd:keyref>
+
+        <xsd:keyref name="refKey_fromConn" refer="key">
+            <xsd:selector xpath="connection"/>
+            <xsd:field xpath="from"/>
+        </xsd:keyref>
+
+        <xsd:keyref name="refKey_toConn" refer="key">
+            <xsd:selector xpath="connection"/>
+            <xsd:field xpath="to"/>
+        </xsd:keyref>
+    </xsd:element>
+
+    <xsd:complexType name="EntityItem">
+        <xsd:choice>
+            <xsd:element name="place" type="PlaceItem" minOccurs="0"/>
+            <xsd:element name="vehicle" type="VehicleItem" minOccurs="0"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="PlaceItem">
+        <xsd:choice>
+            <xsd:element name="roadSegment" type="SegmentItem"/>
+            <xsd:element name="parkingArea">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="services" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+                <xsd:unique name="unique_Service">
+                    <xsd:selector xpath="./services"/>
+                    <xsd:field xpath="."/>
+                </xsd:unique>
+            </xsd:element>
+            <xsd:element name="gate" type="GateItem"/>
+        </xsd:choice>
+        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="capacity" type="xsd:integer" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="SegmentItem">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Roads">
+        <xsd:sequence>
+            <xsd:element name="road" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="place" type="PlaceItem" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                    <xsd:attribute name="id" type="xsd:string" use="required"/>
+                </xsd:complexType>
+
+                <xsd:unique name="unique_segName">
+                    <xsd:selector xpath="place/roadSegment"/>
+                    <xsd:field xpath="name"/>
+                </xsd:unique>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="GateItem">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="IN"/>
+            <xsd:enumeration value="OUT"/>
+            <xsd:enumeration value="INOUT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <!-- All type of item vehicle collect in this complex -->
+    <xsd:complexType name="VehicleItem">
+        <xsd:sequence>
+            <xsd:element name="type">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="CAR"/>
+                        <xsd:enumeration value="TRUCK"/>
+                        <xsd:enumeration value="SHUTTLE"/>
+                        <xsd:enumeration value="CARAVAN"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="entryTime" type="xsd:dateTime"/>
+            <xsd:element name="state">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="PARKED"/>
+                        <xsd:enumeration value="IN_TRANSIT"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="comesFrom" type="xsd:string"/>
+            <xsd:element name="directTo" type="xsd:string"/>
+            <xsd:element name="position" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="ConnectionItem">
+        <xsd:sequence>
+            <xsd:element name="from" type="xsd:string"/>
+            <xsd:element name="to" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

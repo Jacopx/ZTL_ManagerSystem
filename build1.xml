@@ -20,7 +20,7 @@
 	<property name="src.dir" location="${lab1.location}/src" />
 	<property name="build.dir" location="${lab1.location}/build" />
 	<property name="lib.dir" location="${lab1.location}/lib" />
-	<property name="gen.dir" location="${lab1.location}/gen" />
+	<property name="gen.dir" location="${lab1.location}/gen-src" />
 	<property name="schema.dir" location="${lab1.location}/xsd" />
 	<property name="lib.jar" value="lab1.jar" />
 	
@@ -60,7 +60,7 @@
 			<arg value="${gen.dir}" />
 			<arg value="-p" />
 			<arg value="it.polito.dp2.RNS.sol1.jaxb" />
-			<arg value="${schema.dir}/rnsInfo.xsd" />
+			<arg value="./xsd/rnsInfo.xsd" />
 		</exec>
 		<touch file="${gen.dir}/.flagfile" />
 	</target>
