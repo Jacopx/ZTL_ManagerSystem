@@ -37,7 +37,7 @@ public class rnsDB {
             }
 
             System.setProperty("it.polito.dp2.RNS.RnsReaderFactory", "it.polito.dp2.RNS.Random.RnsReaderFactoryImpl");
-            System.setProperty("it.polito.dp2.RNS.lab2.PathFinderFactory", "it.polito.dp2.RNS.sol2.RnsReaderFactoryFactory");
+            System.setProperty("it.polito.dp2.RNS.lab2.PathFinderFactory", "it.polito.dp2.RNS.sol2.RnsReaderFactory");
 
             // Loading Neo4j
             pff = PathFinderFactory.newInstance().newPathFinder();
