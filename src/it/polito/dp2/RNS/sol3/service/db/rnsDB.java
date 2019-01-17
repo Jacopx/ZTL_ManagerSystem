@@ -107,14 +107,14 @@ public class rnsDB {
             newConnection.setFrom(connectionReader.getFrom().getId());
             newConnection.setTo(connectionReader.getTo().getId());
 
-            long id = getNextId();
-            long from = placeExtById.get(connectionReader.getFrom().toString());
-            placeExtByNode.get(from).addConnections(id, newConnection);
-
-            long to = placeExtById.get(connectionReader.getFrom().toString());
-            placeExtByNode.get(to).addConnectedBy(id, newConnection);
-
-            connectionById.putIfAbsent(id, newConnection);
+//            long id = getNextId();
+//            long from = placeExtById.get(connectionReader.getFrom().toString());
+//            placeExtByNode.get(from).addConnections(id, newConnection);
+//
+//            long to = placeExtById.get(connectionReader.getFrom().toString());
+//            placeExtByNode.get(to).addConnectedBy(id, newConnection);
+//
+//            connectionById.putIfAbsent(id, newConnection);
         }
     }
 
