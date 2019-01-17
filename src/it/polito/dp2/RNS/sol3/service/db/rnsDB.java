@@ -34,6 +34,8 @@ public class rnsDB {
         try {
             if(System.getProperty("it.polito.dp2.RNS.lab3.Neo4JURL") == null) {
                 System.setProperty("it.polito.dp2.RNS.lab2.URL", "http://localhost:7474/db");
+            } else {
+                System.setProperty("it.polito.dp2.RNS.lab2.URL", System.getProperty("it.polito.dp2.RNS.lab3.Neo4JURL"));
             }
 
             System.setProperty("it.polito.dp2.RNS.lab2.PathFinderFactory", "it.polito.dp2.RNS.sol2.PathFinderFactory");
