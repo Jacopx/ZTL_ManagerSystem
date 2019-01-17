@@ -4,9 +4,7 @@ import it.polito.dp2.RNS.*;
 import it.polito.dp2.RNS.lab2.*;
 import it.polito.dp2.RNS.lab2.PathFinderFactory;
 import it.polito.dp2.RNS.sol1.RnsReaderFactory;
-import it.polito.dp2.RNS.sol3.rest.service.jaxb.Connection;
-import it.polito.dp2.RNS.sol3.rest.service.jaxb.Place;
-import it.polito.dp2.RNS.sol3.rest.service.jaxb.Places;
+import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
 import javax.ws.rs.ClientErrorException;
@@ -21,7 +19,9 @@ public class rnsDB {
     private static rnsDB rnsDB = new rnsDB();
     private static long lastId=0;
 
-    private ConcurrentHashMap<Long,PlaceExt> placeExtById;
+    private ConcurrentHashMap<Long,PlaceExt> placeExtByNode;
+    private ConcurrentHashMap<String, Long> placeExtById;
+    private ConcurrentHashMap<Long, Connection> connectionById;
 
     public static rnsDB getRnsDB() {
         return rnsDB;
@@ -56,31 +56,65 @@ public class rnsDB {
             e.printStackTrace();
         }
 
+        placeExtByNode = new ConcurrentHashMap<>();
         placeExtById = new ConcurrentHashMap<>();
+        connectionById = new ConcurrentHashMap<>();
 
         // PLACE GATE
         for (GateReader gateReader : monitor.getGates(null)) {
             Place newGate = new Place();
+            if(gateReader.getType().toString().equals(GateItem.IN.value())) {
+                newGate.setGate(GateItem.IN);
+            } else if(gateReader.getType().toString().equals(GateItem.INOUT.value())) {
+                newGate.setGate(GateItem.INOUT);
+            } else {
+                newGate.setGate(GateItem.OUT);
+            }
             newGate.setId(gateReader.getId());
+
+            createPlace(getNextId(), newGate);
         }
 
         // PLACE PARKING AREA
         for (ParkingAreaReader parkingAreaReader : monitor.getParkingAreas(null)) {
+
+            ParkingItem park = new ParkingItem();
+            park.getServices().addAll(parkingAreaReader.getServices());
+
             Place newPark = new Place();
             newPark.setId(parkingAreaReader.getId());
+            newPark.setParking(park);
+
             createPlace(getNextId(), newPark);
         }
 
         // ROAD SEGMENT
         for (RoadSegmentReader roadSegmentReader : monitor.getRoadSegments(null)) {
+
+            SegmentItem seg = new SegmentItem();
+            seg.setName(roadSegmentReader.getName());
+
             Place newRoadSeg = new Place();
             newRoadSeg.setId(roadSegmentReader.getId());
+            newRoadSeg.setSegment(seg);
+
             createPlace(getNextId(), newRoadSeg);
         }
 
         // CONNECTIONS
         for(ConnectionReader connectionReader:monitor.getConnections()) {
             Connection newConnection = new Connection();
+            newConnection.setFrom(connectionReader.getFrom().getId());
+            newConnection.setTo(connectionReader.getTo().getId());
+
+            long id = getNextId();
+            long from = placeExtById.get(connectionReader.getFrom().toString());
+            placeExtByNode.get(from).addConnections(id, newConnection);
+
+            long to = placeExtById.get(connectionReader.getFrom().toString());
+            placeExtByNode.get(to).addConnectedBy(id, newConnection);
+
+            connectionById.putIfAbsent(id, newConnection);
         }
     }
 
@@ -89,19 +123,20 @@ public class rnsDB {
     }
 
     public Place getPlace(long id) {
-        return placeExtById.get(id).getPlace();
+        return placeExtByNode.get(id).getPlace();
     }
 
     public Place createPlace(long id, Place place) {
-        PlaceExt itemExt = new PlaceExt(id,place);
-        if (placeExtById.putIfAbsent(id, itemExt)==null) {
+        PlaceExt itemExt = new PlaceExt(id, place);
+        if (placeExtByNode.putIfAbsent(id, itemExt)==null) {
+            placeExtById.putIfAbsent(place.getId(), id);
             return place;
         } else
             return null;
     }
 
     public Place updatePlace(long  id, Place place) {
-        PlaceExt pe = placeExtById.get(id);
+        PlaceExt pe = placeExtByNode.get(id);
         if (pe==null)
             return null;
         Place old = pe.getPlace();
@@ -115,17 +150,18 @@ public class rnsDB {
     }
 
     public Place deletePlace(long id) {
-        PlaceExt pe = placeExtById.get(id);
+        //@TODO: Delete node from other map
+        PlaceExt pe = placeExtByNode.get(id);
         if (pe==null)
             return null;
         if (!pe.getConnectedBy().isEmpty())
             throw new ClientErrorException(409); // it is connected by some place, we cannot delete
-        pe = placeExtById.remove(id);
+        pe = placeExtByNode.remove(id);
         if (pe==null)
             return null;
         Place place = pe.getPlace();
         for (Long tid:pe.getConnectionsC()) {
-            PlaceExt target = placeExtById.get(tid);
+            PlaceExt target = placeExtByNode.get(tid);
             target.removeConnectedBy(id);
         }
 //        removeIndexing(item);
