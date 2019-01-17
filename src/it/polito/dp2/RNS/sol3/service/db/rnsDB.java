@@ -1,10 +1,11 @@
 package it.polito.dp2.RNS.sol3.service.db;
 
-import it.polito.dp2.RNS.RnsReader;
-import it.polito.dp2.RNS.RnsReaderException;
+import it.polito.dp2.RNS.*;
 import it.polito.dp2.RNS.lab2.*;
 import it.polito.dp2.RNS.lab2.PathFinderFactory;
 import it.polito.dp2.RNS.sol1.RnsReaderFactory;
+import it.polito.dp2.RNS.sol3.rest.service.jaxb.Connection;
+import it.polito.dp2.RNS.sol3.rest.service.jaxb.GateItem;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.Place;
 
 import javax.ws.rs.ClientErrorException;
@@ -29,7 +30,7 @@ public class rnsDB {
 
     private rnsDB() {
         PathFinder pff;
-        RnsReader rnsReader;
+        RnsReader monitor = null;
 
         try {
             if(System.getProperty("it.polito.dp2.RNS.lab3.Neo4JURL") == null) {
@@ -46,11 +47,36 @@ public class rnsDB {
             pff.reloadModel();
 
             // Loading local DB
-            rnsReader = RnsReaderFactory.newInstance().newRnsReader();
-
+            monitor = RnsReaderFactory.newInstance().newRnsReader();
 
         } catch (PathFinderException | RnsReaderException | ServiceException | ModelException e) {
             e.printStackTrace();
+        }
+
+        // PLACE GATE
+        for (GateReader gateReader : monitor.getGates(null)) {
+            Place newGate = new Place();
+            newGate.setId(gateReader.getId());
+            createPlace(getNextId(), newGate);
+        }
+
+        // PLACE PARKING AREA
+        for (ParkingAreaReader parkingAreaReader : monitor.getParkingAreas(null)) {
+            Place newPark = new Place();
+            newPark.setId(parkingAreaReader.getId());
+            createPlace(getNextId(), newPark);
+        }
+
+        // ROAD SEGMENT
+        for (RoadSegmentReader roadSegmentReader : monitor.getRoadSegments(null)) {
+            Place newRoadSeg = new Place();
+            newRoadSeg.setId(roadSegmentReader.getId());
+            createPlace(getNextId(), newRoadSeg);
+        }
+
+        // CONNECTIONS
+        for(ConnectionReader connectionReader:monitor.getConnections()) {
+            Connection newConnection = new Connection();
         }
     }
 
