@@ -36,7 +36,7 @@ public class rnsDB {
     private rnsDB() {
         PathFinder pff;
         RnsReader monitor = null;
-        URL url = null;
+        String url = null;
 
         try {
             if(System.getProperty("it.polito.dp2.RNS.lab3.Neo4JURL") == null) {
@@ -48,7 +48,7 @@ public class rnsDB {
             System.setProperty("it.polito.dp2.RNS.lab2.PathFinderFactory", "it.polito.dp2.RNS.sol2.PathFinderFactory");
             System.setProperty("it.polito.dp2.RNS.RnsReaderFactory", "it.polito.dp2.RNS.Random.RnsReaderFactoryImpl");
 
-            url = new URL(System.getProperty("URL"));
+            url = System.getProperty("URL");
             System.out.println("URL: " + url);
 
             // Loading Neo4j
@@ -78,7 +78,7 @@ public class rnsDB {
             }
             long id = getNextId();
             newGate.setId(gateReader.getId());
-            newGate.setSelf(url.toString() + "/places/" + id);
+            newGate.setSelf(url + "/places/" + id);
 
             createPlace(id, newGate);
         }
@@ -93,7 +93,7 @@ public class rnsDB {
             newPark.setId(parkingAreaReader.getId());
             newPark.setParking(park);
             long id = getNextId();
-            newPark.setSelf(url.toString() + "/places/" + id);
+            newPark.setSelf(url + "/places/" + id);
 
             createPlace(id, newPark);
         }
@@ -108,7 +108,7 @@ public class rnsDB {
             newRoadSeg.setId(roadSegmentReader.getId());
             newRoadSeg.setSegment(seg);
             long id = getNextId();
-            newRoadSeg.setSelf(url.toString() + "/places/" + id);
+            newRoadSeg.setSelf(url + "/places/" + id);
 
             createPlace(id, newRoadSeg);
         }
