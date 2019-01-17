@@ -43,10 +43,6 @@
 			<arg value="${gen.dir}" />
 			<arg value="-p" />
 			<arg value="it.polito.dp2.RNS.sol3.rest.service.jaxb" />
-			<!--<arg value="${schema.dir}/RNSinfo.xsd" />-->
-			<arg value="${schema.dir}/ObjectFactory.xsd" />
-			<arg value="${schema.dir}/pathResponse.xsd" />
-			<arg value="${schema.dir}/basicResponse.xsd" />
 			<arg value="${schema.dir}/rnsSystem.xsd" />
 		</exec>
 	</target>

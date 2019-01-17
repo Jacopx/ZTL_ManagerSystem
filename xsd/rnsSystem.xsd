@@ -3,6 +3,7 @@
     <xsd:element name="rnsSystem">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element name="self" type="xsd:anyURI"/>
                 <xsd:element name="places" type="xsd:anyURI"/>
                 <xsd:element name="vehicles" type="xsd:anyURI"/>
                 <xsd:element name="connections" type="xsd:anyURI"/>
@@ -56,24 +57,50 @@
         </xsd:sequence>
     </xsd:complexType>
 
-    <xsd:complexType name="VehicleItem">
-        <xsd:sequence>
-            <xsd:element name="id" type="xsd:string"/>
-            <xsd:element name="self" type="xsd:anyURI"/>
-            <xsd:element name="type" type="xsd:string"/>
-            <xsd:element name="state" type="xsd:string"/>
-            <xsd:element name="entry_time" type="xsd:dateTime"/>
-            <xsd:element name="position" type="xsd:anyURI"/>
-            <xsd:element name="to" type="xsd:anyURI"/>
-        </xsd:sequence>
-    </xsd:complexType>
+    <xsd:element name="vehicles">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="totalPages" type="xsd:positiveInteger"/>
+                <xsd:element name="page" type="xsd:positiveInteger"/>
+                <xsd:element name="next" type="xsd:anyURI" minOccurs="0"/>
+                <xsd:element ref="vehicle" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
-    <xsd:complexType name="ConnectionItem">
-        <xsd:sequence>
-            <xsd:element name="id" type="xsd:string"/>
-            <xsd:element name="self" type="xsd:anyURI"/>
-            <xsd:element name="to" type="xsd:anyURI"/>
-        </xsd:sequence>
-    </xsd:complexType>
+    <xsd:element name="vehicle">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:string"/>
+                <xsd:element name="self" type="xsd:anyURI"/>
+                <xsd:element name="type" type="xsd:string"/>
+                <xsd:element name="state" type="xsd:string"/>
+                <xsd:element name="entry_time" type="xsd:dateTime"/>
+                <xsd:element name="position" type="xsd:anyURI"/>
+                <xsd:element name="to" type="xsd:anyURI"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="connections">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="totalPages" type="xsd:positiveInteger"/>
+                <xsd:element name="page" type="xsd:positiveInteger"/>
+                <xsd:element name="next" type="xsd:anyURI" minOccurs="0"/>
+                <xsd:element ref="connection" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="connection">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:string"/>
+                <xsd:element name="self" type="xsd:anyURI"/>
+                <xsd:element name="to" type="xsd:anyURI"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
 </xsd:schema>
