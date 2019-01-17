@@ -8,7 +8,6 @@ import it.polito.dp2.RNS.sol1.RnsReaderFactory;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.Place;
 
 import javax.ws.rs.ClientErrorException;
-import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -33,7 +32,7 @@ public class rnsDB {
         RnsReader rnsReader;
 
         try {
-            if(System.getProperty("it.polito.dp2.RNS.lab2.URL") == null) {
+            if(System.getProperty("it.polito.dp2.RNS.lab3.Neo4JURL") == null) {
                 System.setProperty("it.polito.dp2.RNS.lab3.Neo4JURL", "http://localhost:7474/db");
             }
 
