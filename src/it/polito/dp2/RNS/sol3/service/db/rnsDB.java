@@ -49,6 +49,7 @@ public class rnsDB {
             System.setProperty("it.polito.dp2.RNS.RnsReaderFactory", "it.polito.dp2.RNS.Random.RnsReaderFactoryImpl");
 
             url = new URL(System.getProperty("URL"));
+            System.out.println("URL: " + url);
 
             // Loading Neo4j
             pff = PathFinderFactory.newInstance().newPathFinder();
@@ -77,11 +78,7 @@ public class rnsDB {
             }
             long id = getNextId();
             newGate.setId(gateReader.getId());
-            try {
-                newGate.setSelf(new URL(url, "/places/" + id).toString());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
+            newGate.setSelf(url.toString() + "/places/" + id);
 
             createPlace(id, newGate);
         }
@@ -96,11 +93,7 @@ public class rnsDB {
             newPark.setId(parkingAreaReader.getId());
             newPark.setParking(park);
             long id = getNextId();
-            try {
-                newPark.setSelf(new URL(url, "/places/" + id).toString());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
+            newPark.setSelf(url.toString() + "/places/" + id);
 
             createPlace(id, newPark);
         }
@@ -115,11 +108,7 @@ public class rnsDB {
             newRoadSeg.setId(roadSegmentReader.getId());
             newRoadSeg.setSegment(seg);
             long id = getNextId();
-            try {
-                newRoadSeg.setSelf(new URL(url, "/places/" + id).toString());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
+            newRoadSeg.setSelf(url.toString() + "/places/" + id);
 
             createPlace(id, newRoadSeg);
         }
