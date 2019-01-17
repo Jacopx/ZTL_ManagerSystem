@@ -33,11 +33,11 @@ public class rnsDB {
 
         try {
             if(System.getProperty("it.polito.dp2.RNS.lab3.Neo4JURL") == null) {
-                System.setProperty("it.polito.dp2.RNS.lab3.Neo4JURL", "http://localhost:7474/db");
+                System.setProperty("it.polito.dp2.RNS.lab2.URL", "http://localhost:7474/db");
             }
 
+            System.setProperty("it.polito.dp2.RNS.lab2.PathFinderFactory", "it.polito.dp2.RNS.sol2.PathFinderFactory");
             System.setProperty("it.polito.dp2.RNS.RnsReaderFactory", "it.polito.dp2.RNS.Random.RnsReaderFactoryImpl");
-            System.setProperty("it.polito.dp2.RNS.lab2.PathFinderFactory", "it.polito.dp2.RNS.sol2.RnsReaderFactory");
 
             // Loading Neo4j
             pff = PathFinderFactory.newInstance().newPathFinder();
