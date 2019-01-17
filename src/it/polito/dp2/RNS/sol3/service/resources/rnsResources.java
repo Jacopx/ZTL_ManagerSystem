@@ -16,8 +16,8 @@ import java.net.URI;
 /**
  * Copyright by Jacopx on 2019-01-16.
  */
-@Path("/RnsSystem")
-@Api(value = "/RnsSystem")
+@Path("/")
+@Api(value = "/")
 public class rnsResources {
     public UriInfo uriInfo;
 
