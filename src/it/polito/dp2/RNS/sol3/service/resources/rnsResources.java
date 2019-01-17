@@ -8,7 +8,6 @@ import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.service.SearchVehicles;
 import it.polito.dp2.RNS.sol3.service.service.rnsService;
 import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
-import org.joda.time.DateTime;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
