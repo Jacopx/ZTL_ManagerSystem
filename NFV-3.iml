@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$MODULE_DIR$/lib/swagger-annotations-1.5.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/swagger-core-1.5.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/swagger-jaxrs-1.5.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/swagger-jersey2-jaxrs-1.5.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/swagger-models-1.5.0.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/activation-1.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/annotations-2.0.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/ant-1.6.5.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/aopalliance-repackaged-2.5.0-b32.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/codemodel-2.6.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/commons-lang3-3.2.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/commons-lang-2.6.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/comresrcgen-1.0.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/gson-2.2.4.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/guava-15.0.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/hk2-api-2.5.0-b32.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/hk2-locator-2.5.0-b32.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/hk2-utils-2.5.0-b32.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/istack-commons-runtime-2.21.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/istack-commons-tools-2.21.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-annotations-2.4.0.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-core-2.4.2.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-core-asl-1.9.11.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-databind-2.4.2.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-dataformat-xml-2.4.2.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-dataformat-yaml-2.4.2.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-datatype-joda-2.4.2.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-jaxrs-base-2.4.2.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-jaxrs-json-provider-2.4.2.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-mapper-asl-1.9.11.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jackson-module-jaxb-annotations-2.4.2.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/javassist-3.20.0-GA.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/javax.annotation-api-1.2.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/javax.inject-2.5.0-b32.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/javax.json-1.0.4.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/javax.ws.rs-api-2.0.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jaxb-api-2.2.12-b140109.1041.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jaxb-core-2.2.11.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jaxb-runtime-2.2.11.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jaxb-xjc-2.2.11.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-client-1.19.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-client-2.25.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-common-2.25.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-container-servlet-2.25.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-container-servlet-core-2.25.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-core-1.19.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-entity-filtering-2.25.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-guava-2.25.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-media-jaxb-2.25.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-media-moxy-2.25.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-media-multipart-2.25.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jersey-server-2.25.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/joda-time-2.2.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/jsonschema2pojo-core-0.4.0.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/json-simple-1.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/localizer-1.0.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/mimepull-1.9.6.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/org.eclipse.persistence.asm-2.6.0.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/org.eclipse.persistence.core-2.6.0.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/org.eclipse.persistence.moxy-2.6.0.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/osgi-resource-locator-1.0.1.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/reflections-0.9.9.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/rngom-2.2.11.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/slf4j-api-1.6.3.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/stax2-api-3.1.4.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/txw2-2.2.11.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/validation-api-1.1.0.Final.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/wadl-ant-1.1.6.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/wadl-core-1.1.6.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/wadl-xslt-1.1.6.jar!/" />
+    <libelement value="jar:///opt/dp2/shared/lib/xsom-20140925.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/lab3.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/RNS.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/RNSRandom.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/hamcrest-core-1.3.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/junit-4.12.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/lab1.jar!/" />
+    <conelement value="org.eclipse.jst.j2ee.internal.web.container" />
+    <conelement value="org.eclipse.jst.j2ee.internal.module.container" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/bin" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/gen-src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.web.container" level="application" />
+    <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.module.container" level="application" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library">
+      <library name="swagger-annotations-1.5.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/swagger-annotations-1.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="swagger-core-1.5.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/swagger-core-1.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="swagger-jaxrs-1.5.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/swagger-jaxrs-1.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="swagger-jersey2-jaxrs-1.5.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/swagger-jersey2-jaxrs-1.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="swagger-models-1.5.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/swagger-models-1.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="activation-1.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/activation-1.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="annotations-2.0.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/annotations-2.0.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="ant-1.6.5.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/ant-1.6.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="aopalliance-repackaged-2.5.0-b32.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/aopalliance-repackaged-2.5.0-b32.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="codemodel-2.6.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/codemodel-2.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-lang3-3.2.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/commons-lang3-3.2.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-lang-2.6.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/commons-lang-2.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="comresrcgen-1.0.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/comresrcgen-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="gson-2.2.4.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/gson-2.2.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="guava-15.0.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/guava-15.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="hk2-api-2.5.0-b32.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/hk2-api-2.5.0-b32.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="hk2-locator-2.5.0-b32.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/hk2-locator-2.5.0-b32.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="hk2-utils-2.5.0-b32.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/hk2-utils-2.5.0-b32.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="istack-commons-runtime-2.21.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/istack-commons-runtime-2.21.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="istack-commons-tools-2.21.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/istack-commons-tools-2.21.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-annotations-2.4.0.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-annotations-2.4.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-core-2.4.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-core-2.4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-core-asl-1.9.11.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-core-asl-1.9.11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-databind-2.4.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-databind-2.4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-dataformat-xml-2.4.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-dataformat-xml-2.4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-dataformat-yaml-2.4.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-dataformat-yaml-2.4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-datatype-joda-2.4.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-datatype-joda-2.4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-jaxrs-base-2.4.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-jaxrs-base-2.4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-jaxrs-json-provider-2.4.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-jaxrs-json-provider-2.4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-mapper-asl-1.9.11.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-mapper-asl-1.9.11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-module-jaxb-annotations-2.4.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jackson-module-jaxb-annotations-2.4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="javassist-3.20.0-GA.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/javassist-3.20.0-GA.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="javax.annotation-api-1.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/javax.annotation-api-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="javax.inject-2.5.0-b32.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/javax.inject-2.5.0-b32.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="javax.json-1.0.4.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/javax.json-1.0.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="javax.ws.rs-api-2.0.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/javax.ws.rs-api-2.0.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib-src/javax.ws.rs-api-2.0.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jaxb-api-2.2.12-b140109.1041.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jaxb-api-2.2.12-b140109.1041.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jaxb-core-2.2.11.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jaxb-core-2.2.11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jaxb-runtime-2.2.11.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jaxb-runtime-2.2.11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jaxb-xjc-2.2.11.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jaxb-xjc-2.2.11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-client-1.19.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-client-1.19.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-client-2.25.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-client-2.25.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-common-2.25.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-common-2.25.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-container-servlet-2.25.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-container-servlet-2.25.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-container-servlet-core-2.25.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-container-servlet-core-2.25.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-core-1.19.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-core-1.19.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-entity-filtering-2.25.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-entity-filtering-2.25.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-guava-2.25.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-guava-2.25.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-media-jaxb-2.25.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-media-jaxb-2.25.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-media-moxy-2.25.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-media-moxy-2.25.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-media-multipart-2.25.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-media-multipart-2.25.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jersey-server-2.25.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jersey-server-2.25.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="joda-time-2.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/joda-time-2.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jsonschema2pojo-core-0.4.0.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/jsonschema2pojo-core-0.4.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="json-simple-1.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/json-simple-1.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="localizer-1.0.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/localizer-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="mimepull-1.9.6.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/mimepull-1.9.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="org.eclipse.persistence.asm-2.6.0.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/org.eclipse.persistence.asm-2.6.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="org.eclipse.persistence.core-2.6.0.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/org.eclipse.persistence.core-2.6.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="org.eclipse.persistence.moxy-2.6.0.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/org.eclipse.persistence.moxy-2.6.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="osgi-resource-locator-1.0.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/osgi-resource-locator-1.0.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="reflections-0.9.9.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/reflections-0.9.9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="rngom-2.2.11.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/rngom-2.2.11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="slf4j-api-1.6.3.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/slf4j-api-1.6.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="stax2-api-3.1.4.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/stax2-api-3.1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="txw2-2.2.11.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/txw2-2.2.11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="validation-api-1.1.0.Final.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/validation-api-1.1.0.Final.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="wadl-ant-1.1.6.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/wadl-ant-1.1.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="wadl-core-1.1.6.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/wadl-core-1.1.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="wadl-xslt-1.1.6.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/wadl-xslt-1.1.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="xsom-20140925.jar">
+        <CLASSES>
+          <root url="jar:///opt/dp2/shared/lib/xsom-20140925.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="lab3.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/lab3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="RNS.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/RNS.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="RNSRandom.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/RNSRandom.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="hamcrest-core-1.3.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/hamcrest-core-1.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib-src/hamcrest-core-1.3-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="junit-4.12.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/junit-4.12.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib-src/junit-4.12-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="lab1.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/lab1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

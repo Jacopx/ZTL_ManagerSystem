@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project basedir="." default="build-service" name="RNS-SOL3">
+	<description>
+			Script for RNS Assignment 3 solution
+	</description>
+
+	<property name="gen.dir" location="${basedir}/gen-src" />
+	<property name="schema.dir" location="${basedir}/xsd" />
+	<property name="src.dir" location="${basedir}/src" />
+	<property name="build.dir" location="${basedir}/build" />
+
+	<property name="lib.dir" location="${basedir}/lib" />
+	<property name="lib.src.dir" location="${basedir}/lib-src" />
+	<property name="lib.jar" value="lab1.jar" />
+	<property name="shared.location" location="/opt/dp2/shared"/>
+	<property name="ext.lib.dir" location="${shared.location}/lib" />
+
+	<property name="debug" value="true" />
+	<property name="target" value="1.8" />
+	<property name="source" value="1.8" />
+
+	<!-- The classpath to be used for running the tests -->
+	<path id="sol.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${ext.lib.dir}">
+			<include name="*.jar" />
+			<exclude name="ant-*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="init">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${gen.dir}"/>
+	</target>
+
+	<!-- Target generate-bindings -->
+	<target name="generate-artifacts" depends="init" description="Generate bindings from schema">
+		<exec executable="xjc" failonerror="true" >
+			<arg value="-d" />
+			<arg value="${gen.dir}" />
+			<arg value="-p" />
+			<arg value="it.polito.dp2.RNS.sol3.rest.service.jaxb" />
+			<!--<arg value="${schema.dir}/RNSinfo.xsd" />-->
+			<arg value="${schema.dir}/ObjectFactory.xsd" />
+			<arg value="${schema.dir}/pathResponse.xsd" />
+			<arg value="${schema.dir}/basicResponse.xsd" />
+			<arg value="${schema.dir}/rnsSystem.xsd" />
+		</exec>
+	</target>
+
+	<target name="build-service">
+		<echo>Building... (build-service)</echo>
+		<javac
+				destdir="${build.dir}"
+				debug="${debug}"
+				source="${source}"
+				target="${target}"
+				includeantruntime="false">
+			<src path="${src.dir}" />
+			<src path="${gen.dir}" />
+			<include name="it/polito/dp2/RNS/sol3/**" />
+			<classpath>
+				<path refid="sol.classpath" />
+			</classpath>
+		</javac>
+		<echo>Done.</echo>
+	</target>
+</project>

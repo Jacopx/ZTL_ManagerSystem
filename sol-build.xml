@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project basedir="." default="generate-artifacts" name="RNS-SOL2">
+	<description>
+			Script for RNS Assignment 2 solution
+	</description>
+
+	<property name="lab2.location" location="." />
+	<property name="schema.dir" location="${lab2.location}/custom" />
+	<property name="lib.jar" value="lab1.jar" />
+
+	<!-- Target generate-bindings -->
+	<target name="generate-artifacts" unless="generate-artifacts.notRequired" description="Generate bindings from schema">
+		<exec executable="xjc" failonerror="true" >
+			<arg value="-d" />
+			<arg value="${gen.dir}" />
+			<arg value="-p" />
+			<arg value="it.polito.dp2.RNS.sol2.jaxb" />
+			<!--<arg value="${schema.dir}/RNSinfo.xsd" />-->
+			<arg value="${schema.dir}/ObjectFactory.xsd" />
+			<arg value="${schema.dir}/pathResponse.xsd" />
+			<arg value="${schema.dir}/basicResponse.xsd" />
+		</exec>
+	</target>
+</project>

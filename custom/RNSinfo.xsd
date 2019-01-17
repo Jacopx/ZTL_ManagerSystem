@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <!-- ROOT ELEMENT -->
+    <xsd:element name="rns">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="item" type="EntityItem" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="connection" type="ConnectionItem" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+
+        <xsd:key name="key">
+            <xsd:selector xpath=".//place"/>
+            <xsd:field xpath="@id"/>
+        </xsd:key>
+        <xsd:keyref name="refKey_fromConn" refer="key">
+            <xsd:selector xpath="connection"/>
+            <xsd:field xpath="from"/>
+        </xsd:keyref>
+        <xsd:keyref name="refKey_toConn" refer="key">
+            <xsd:selector xpath="connection"/>
+            <xsd:field xpath="to"/>
+        </xsd:keyref>
+    </xsd:element>
+
+    <xsd:complexType name="EntityItem">
+        <xsd:choice>
+            <xsd:element name="place" type="PlaceItem" minOccurs="0">
+            </xsd:element>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="PlaceItem">
+        <xsd:attribute name="id" type="xsd:string" use="required"/>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="ConnectionItem">
+        <xsd:sequence>
+            <xsd:element name="from" type="xsd:string"/>
+            <xsd:element name="to" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

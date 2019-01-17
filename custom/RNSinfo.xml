@@ -1,0 +1,12 @@
+<rns>
+  <!--Zero or more repetitions:-->
+  <item>
+    <!--Optional:-->
+    <place id="string"/>
+  </item>
+  <!--Zero or more repetitions:-->
+  <connection>
+    <from>string</from>
+    <to>string</to>
+  </connection>
+</rns>

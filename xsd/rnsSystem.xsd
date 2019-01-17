@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="rnsSystem">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="places" type="xsd:anyURI"/>
+                <xsd:element name="vehicles" type="xsd:anyURI"/>
+                <xsd:element name="connections" type="xsd:anyURI"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="places">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="totalPages" type="xsd:positiveInteger"/>
+                <xsd:element name="page" type="xsd:positiveInteger"/>
+                <xsd:element name="next" type="xsd:anyURI" minOccurs="0"/>
+                <xsd:element ref="place" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="place">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:string"/>
+                <xsd:element name="self" type="xsd:anyURI"/>
+                <xsd:choice>
+                    <xsd:element name="gate" type="GateItem"/>
+                    <xsd:element name="segment" type="SegmentItem"/>
+                    <xsd:element name="parking" type="ParkingItem"/>
+                </xsd:choice>
+                <xsd:element name="type" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="GateItem">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="IN"/>
+            <xsd:enumeration value="OUT"/>
+            <xsd:enumeration value="INOUT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="SegmentItem">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ParkingItem">
+        <xsd:sequence>
+            <xsd:element name="services" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="VehicleItem">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="self" type="xsd:anyURI"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="state" type="xsd:string"/>
+            <xsd:element name="entry_time" type="xsd:dateTime"/>
+            <xsd:element name="position" type="xsd:anyURI"/>
+            <xsd:element name="to" type="xsd:anyURI"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ConnectionItem">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="self" type="xsd:anyURI"/>
+            <xsd:element name="to" type="xsd:anyURI"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

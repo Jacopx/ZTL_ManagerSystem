@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <!-- ROOT ELEMENT -->
+    <xsd:element name="ShortestResponse">
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element name="nodes" type="Nodes"/>
+                <xsd:element name="relationships" type="RelationshipsList"/>
+                <xsd:element name="length" type="xsd:integer"/>
+                <xsd:element name="start" type="xsd:string"/>
+                <xsd:element name="end" type="xsd:string"/>
+            </xsd:all>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="Nodes">
+        <xsd:list itemType="xsd:string"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="RelationshipsList">
+        <xsd:list itemType="xsd:string"/>
+    </xsd:simpleType>
+</xsd:schema>
