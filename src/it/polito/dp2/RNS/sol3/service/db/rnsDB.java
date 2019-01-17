@@ -42,9 +42,7 @@ public class rnsDB {
 
             // Loading Neo4j
             pff = PathFinderFactory.newInstance().newPathFinder();
-            if(!pff.isModelLoaded()) {
-                pff.reloadModel();
-            }
+            pff.reloadModel();
 
             // Loading local DB
             rnsReader = RnsReaderFactory.newInstance().newRnsReader();
