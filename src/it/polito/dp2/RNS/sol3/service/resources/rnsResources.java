@@ -28,23 +28,23 @@ public class rnsResources {
         this.uriInfo = uriInfo;
     }
 
-    @GET
-    @ApiOperation(value = "getRnsSystem", notes = "reads main resource")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
-    })
-    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public rnsSystem getRnsSystem() {
-        rnsSystem rns = new rnsSystem();
-        UriBuilder root = uriInfo.getAbsolutePathBuilder();
-        biblio.setSelf(root.toTemplate());
-        UriBuilder items = root.clone().path("items");
-        biblio.setItems(items.toTemplate());
-        biblio.setJournals(root.clone().path("journals").toTemplate());
-        biblio.setArticles(items.clone().path("articles").toTemplate());
-        biblio.setBooks(items.clone().path("books").toTemplate());
-        return biblio;
-    }
+//    @GET
+//    @ApiOperation(value = "getRnsSystem", notes = "reads main resource")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "OK"),
+//    })
+//    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+//    public rnsSystem getRnsSystem() {
+//        rnsSystem rns = new rnsSystem();
+//        UriBuilder root = uriInfo.getAbsolutePathBuilder();
+//        biblio.setSelf(root.toTemplate());
+//        UriBuilder items = root.clone().path("items");
+//        biblio.setItems(items.toTemplate());
+//        biblio.setJournals(root.clone().path("journals").toTemplate());
+//        biblio.setArticles(items.clone().path("articles").toTemplate());
+//        biblio.setBooks(items.clone().path("books").toTemplate());
+//        return biblio;
+//    }
 
 
 }

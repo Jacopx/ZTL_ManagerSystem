@@ -17,18 +17,28 @@
     <fileColor scope="Non-Project Files (Material Oceanic)" color="2E3C43" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.452565">
+    <splitter split-orientation="horizontal" split-proportion="0.51376146">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="505">
-                  <caret line="36" column="37" lean-forward="true" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+                <state relative-caret-position="598">
+                  <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#437#438#0" expanded="true" />
-                    <element signature="e#475#476#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol1/RnsReaderPersonal.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="483">
+                  <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -51,7 +61,7 @@
             <entry file="file://$PROJECT_DIR$/xsd/rnsSystem.xsd">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="1656">
-                  <caret line="72" column="54" lean-forward="true" selection-start-line="72" selection-start-column="54" selection-end-line="72" selection-end-column="54" />
+                  <caret line="72" column="54" selection-start-line="72" selection-start-column="54" selection-end-line="72" selection-end-column="54" />
                 </state>
               </provider>
             </entry>
@@ -59,8 +69,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/sol_build.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="348">
-                  <caret line="49" column="55" lean-forward="true" selection-start-line="49" selection-start-column="55" selection-end-line="49" selection-end-column="55" />
+                <state relative-caret-position="486">
+                  <caret line="55" column="14" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
                 </state>
               </provider>
             </entry>
@@ -81,10 +91,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/service/rnsService.java" />
-        <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java" />
         <option value="$PROJECT_DIR$/xsd/rnsSystem.xsd" />
         <option value="$PROJECT_DIR$/sol_build.xml" />
         <option value="$PROJECT_DIR$/sol-build.xml" />
+        <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java" />
       </list>
     </option>
   </component>
@@ -98,12 +108,59 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
               <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="it" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="it" type="462c0819:PsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="it" type="462c0819:PsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+              <item name="dp2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="it" type="462c0819:PsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+              <item name="dp2" type="462c0819:PsiDirectoryNode" />
+              <item name="RNS" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="it" type="462c0819:PsiDirectoryNode" />
+              <item name="polito" type="462c0819:PsiDirectoryNode" />
+              <item name="dp2" type="462c0819:PsiDirectoryNode" />
+              <item name="RNS" type="462c0819:PsiDirectoryNode" />
+              <item name="sol2" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
@@ -115,6 +172,13 @@
               <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="RNS" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="RNS" type="462c0819:PsiDirectoryNode" />
+              <item name="sol1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
@@ -156,8 +220,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -224,18 +286,19 @@
       <workItem from="1547642142475" duration="110000" />
       <workItem from="1547653210640" duration="8000" />
       <workItem from="1547653242093" duration="3441000" />
-      <workItem from="1547707529902" duration="2690000" />
+      <workItem from="1547707529902" duration="3266000" />
+      <workItem from="1547727820158" duration="44000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8959000" />
+    <option name="totallyTimeSpent" value="9579000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.15297619" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15297619" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -257,7 +320,7 @@
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="13" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" visible="true" weight="0.15654762" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.15654762" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -386,32 +449,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/service/rnsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="36" column="37" lean-forward="true" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#437#438#0" expanded="true" />
-            <element signature="e#475#476#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xsd/rnsSystem.xsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1656">
-          <caret line="72" column="54" lean-forward="true" selection-start-line="72" selection-start-column="54" selection-end-line="72" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build2.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2775">
@@ -426,10 +463,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/service/rnsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xsd/rnsSystem.xsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1656">
+          <caret line="72" column="54" selection-start-line="72" selection-start-column="54" selection-end-line="72" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sol_build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="49" column="55" lean-forward="true" selection-start-line="49" selection-start-column="55" selection-end-line="49" selection-end-column="55" />
+        <state relative-caret-position="486">
+          <caret line="55" column="14" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol1/RnsReaderPersonal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
