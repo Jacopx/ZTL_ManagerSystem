@@ -8,6 +8,8 @@ import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
 import javax.ws.rs.ClientErrorException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,6 +36,7 @@ public class rnsDB {
     private rnsDB() {
         PathFinder pff;
         RnsReader monitor = null;
+        URL url = null;
 
         try {
             if(System.getProperty("it.polito.dp2.RNS.lab3.Neo4JURL") == null) {
@@ -45,6 +48,8 @@ public class rnsDB {
             System.setProperty("it.polito.dp2.RNS.lab2.PathFinderFactory", "it.polito.dp2.RNS.sol2.PathFinderFactory");
             System.setProperty("it.polito.dp2.RNS.RnsReaderFactory", "it.polito.dp2.RNS.Random.RnsReaderFactoryImpl");
 
+            url = new URL(System.getProperty("URL"));
+
             // Loading Neo4j
             pff = PathFinderFactory.newInstance().newPathFinder();
             pff.reloadModel();
@@ -52,7 +57,7 @@ public class rnsDB {
             // Loading local DB
             monitor = RnsReaderFactory.newInstance().newRnsReader();
 
-        } catch (PathFinderException | RnsReaderException | ServiceException | ModelException e) {
+        } catch (PathFinderException | RnsReaderException | ServiceException | ModelException | MalformedURLException e) {
             e.printStackTrace();
         }
 
@@ -70,9 +75,15 @@ public class rnsDB {
             } else {
                 newGate.setGate(GateItem.OUT);
             }
+            long id = getNextId();
             newGate.setId(gateReader.getId());
+            try {
+                newGate.setSelf(new URL(url, "/places/" + id).toString());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
 
-            createPlace(getNextId(), newGate);
+            createPlace(id, newGate);
         }
 
         // PLACE PARKING AREA
@@ -84,8 +95,14 @@ public class rnsDB {
             Place newPark = new Place();
             newPark.setId(parkingAreaReader.getId());
             newPark.setParking(park);
+            long id = getNextId();
+            try {
+                newPark.setSelf(new URL(url, "/places/" + id).toString());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
 
-            createPlace(getNextId(), newPark);
+            createPlace(id, newPark);
         }
 
         // ROAD SEGMENT
@@ -97,8 +114,14 @@ public class rnsDB {
             Place newRoadSeg = new Place();
             newRoadSeg.setId(roadSegmentReader.getId());
             newRoadSeg.setSegment(seg);
+            long id = getNextId();
+            try {
+                newRoadSeg.setSelf(new URL(url, "/places/" + id).toString());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
 
-            createPlace(getNextId(), newRoadSeg);
+            createPlace(id, newRoadSeg);
         }
 
         // CONNECTIONS
