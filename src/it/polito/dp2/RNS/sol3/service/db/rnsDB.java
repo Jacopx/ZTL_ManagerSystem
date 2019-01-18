@@ -159,8 +159,10 @@ public class rnsDB {
     public Places getSegments(String keyword) {
         Places list = new Places();
         for(PlaceExt place:segments.values()) {
-            if(place.getPlace().getId().contains(keyword))
-                list.getPlace().add(place.getPlace());
+            if(keyword != null) {
+                if(place.getPlace().getId().contains(keyword))
+                    list.getPlace().add(place.getPlace());
+            }
         }
         return list;
     }
@@ -168,8 +170,10 @@ public class rnsDB {
     public Places getParkings(String keyword) {
         Places list = new Places();
         for(PlaceExt place:parkings.values()) {
-            if(place.getPlace().getId().contains(keyword))
-                list.getPlace().add(place.getPlace());
+            if(keyword != null) {
+                if(place.getPlace().getId().contains(keyword))
+                    list.getPlace().add(place.getPlace());
+            }
         }
         return list;
     }
@@ -177,8 +181,16 @@ public class rnsDB {
     public Places getGates(String keyword, String type) {
         Places list = new Places();
         for(PlaceExt place:gates.values()) {
-            if(place.getPlace().getId().contains(keyword) || place.getPlace().getGate().value().equals(type))
-                list.getPlace().add(place.getPlace());
+            if(keyword != null || type != null) {
+                if(place.getPlace().getId().contains(keyword) || place.getPlace().getGate().value().equals(type))
+                    list.getPlace().add(place.getPlace());
+            } else if(keyword != null) {
+                if(place.getPlace().getId().contains(keyword))
+                    list.getPlace().add(place.getPlace());
+            } else {
+                if(place.getPlace().getGate().value().equals(type))
+                    list.getPlace().add(place.getPlace());
+            }
         }
         return list;
     }
