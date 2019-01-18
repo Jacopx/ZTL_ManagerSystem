@@ -19,9 +19,12 @@ public class rnsDB {
     private static long lastConn=0;
     private static String URL;
 
-    private ConcurrentHashMap<Long,PlaceExt> placeExtByNode;
+    private ConcurrentHashMap<Long, PlaceExt> placeExtByNode;
     private ConcurrentHashMap<String, Long> placeExtById;
     private ConcurrentHashMap<Long, Connection> connectionById;
+    private ConcurrentHashMap<Long, PlaceExt> parkings;
+    private ConcurrentHashMap<Long, PlaceExt> segments;
+    private ConcurrentHashMap<Long, PlaceExt> gates;
 
     public static rnsDB getRnsDB() {
         return rnsDB;
@@ -70,6 +73,9 @@ public class rnsDB {
         placeExtByNode = new ConcurrentHashMap<>();
         placeExtById = new ConcurrentHashMap<>();
         connectionById = new ConcurrentHashMap<>();
+        parkings = new ConcurrentHashMap<>();
+        segments = new ConcurrentHashMap<>();
+        gates = new ConcurrentHashMap<>();
 
         // PLACE GATE
         for (GateReader gateReader : monitor.getGates(null)) {
@@ -86,6 +92,7 @@ public class rnsDB {
             newGate.setSelf(URL + "/places/" + id);
 
             createPlace(id, newGate);
+            gates.putIfAbsent(id, placeExtByNode.get(id));
         }
 
         // PLACE PARKING AREA
@@ -101,6 +108,7 @@ public class rnsDB {
             newPark.setSelf(URL + "/places/" + id);
 
             createPlace(id, newPark);
+            parkings.putIfAbsent(id, placeExtByNode.get(id));
         }
 
         // ROAD SEGMENT
@@ -116,6 +124,7 @@ public class rnsDB {
             newRoadSeg.setSelf(URL + "/places/" + id);
 
             createPlace(id, newRoadSeg);
+            segments.putIfAbsent(id, placeExtByNode.get(id));
         }
 
         // CONNECTIONS
@@ -138,10 +147,38 @@ public class rnsDB {
         }
     }
 
-    public Places getPlaces(SearchPlaces scope, String keyword, String type) {
+    public Places getPlaces(String keyword) {
         Places list = new Places();
         for(PlaceExt place:placeExtByNode.values()) {
+            if(place.getPlace().getId().contains(keyword))
             list.getPlace().add(place.getPlace());
+        }
+        return list;
+    }
+
+    public Places getSegments(String keyword) {
+        Places list = new Places();
+        for(PlaceExt place:segments.values()) {
+            if(place.getPlace().getId().contains(keyword))
+                list.getPlace().add(place.getPlace());
+        }
+        return list;
+    }
+
+    public Places getParkings(String keyword) {
+        Places list = new Places();
+        for(PlaceExt place:parkings.values()) {
+            if(place.getPlace().getId().contains(keyword))
+                list.getPlace().add(place.getPlace());
+        }
+        return list;
+    }
+
+    public Places getGates(String keyword, String type) {
+        Places list = new Places();
+        for(PlaceExt place:gates.values()) {
+            if(place.getPlace().getId().contains(keyword) || place.getPlace().getGate().value().equals(type))
+                list.getPlace().add(place.getPlace());
         }
         return list;
     }

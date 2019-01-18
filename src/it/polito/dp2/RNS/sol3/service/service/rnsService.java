@@ -14,7 +14,16 @@ public class rnsService {
     }
 
     public Places getPlaces(SearchPlaces scope, String keyword, String type) {
-        return db.getPlaces(scope, keyword, type);
+        switch (scope) {
+            case SEGMENT:
+                return db.getSegments(keyword);
+            case PARKING:
+                return db.getParkings(keyword);
+            case GATE:
+                return db.getGates(keyword, type);
+            case ALL: default:
+                return db.getPlaces(keyword);
+        }
     }
 
     public Place getPlace(long id) {
