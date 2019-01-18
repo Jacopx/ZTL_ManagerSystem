@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class rnsDB {
     private static rnsDB rnsDB = new rnsDB();
     private static long lastId=0;
+    private static String URL;
 
     private ConcurrentHashMap<Long,PlaceExt> placeExtByNode;
     private ConcurrentHashMap<String, Long> placeExtById;
@@ -40,6 +41,13 @@ public class rnsDB {
             } else {
                 System.setProperty("it.polito.dp2.RNS.lab2.URL", System.getProperty("it.polito.dp2.RNS.lab3.Neo4JURL"));
             }
+
+            if(System.getProperty("URL") == null) {
+                URL = "http://localhost:8080/RnsSystem/rest";
+                System.setProperty("URL", URL);
+            }
+
+            URL = System.getProperty("URL");
 
             System.setProperty("it.polito.dp2.RNS.lab2.PathFinderFactory", "it.polito.dp2.RNS.sol2.PathFinderFactory");
             System.setProperty("it.polito.dp2.RNS.RnsReaderFactory", "it.polito.dp2.RNS.Random.RnsReaderFactoryImpl");
@@ -71,7 +79,7 @@ public class rnsDB {
             }
             newGate.setId(gateReader.getId());
             long id = getNextId();
-            newGate.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + id);
+            newGate.setSelf(URL + "/places/" + id);
 
             createPlace(id, newGate);
         }
@@ -86,7 +94,7 @@ public class rnsDB {
             newPark.setId(parkingAreaReader.getId());
             newPark.setParking(park);
             long id = getNextId();
-            newPark.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + id);
+            newPark.setSelf(URL + "/places/" + id);
 
             createPlace(id, newPark);
         }
@@ -101,7 +109,7 @@ public class rnsDB {
             newRoadSeg.setId(roadSegmentReader.getId());
             newRoadSeg.setSegment(seg);
             long id = getNextId();
-            newRoadSeg.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + id);
+            newRoadSeg.setSelf(URL + "/places/" + id);
 
             createPlace(id, newRoadSeg);
         }
@@ -112,14 +120,15 @@ public class rnsDB {
             newConnection.setFrom(connectionReader.getFrom().getId());
             newConnection.setTo(connectionReader.getTo().getId());
 
-//            long id = getNextId();
-//            long from = placeExtById.get(connectionReader.getFrom().toString());
-//            placeExtByNode.get(from).addConnections(id, newConnection);
-//
-//            long to = placeExtById.get(connectionReader.getFrom().toString());
-//            placeExtByNode.get(to).addConnectedBy(id, newConnection);
-//
-//            connectionById.putIfAbsent(id, newConnection);
+            long id = getNextId();
+            long from = placeExtById.get(connectionReader.getFrom().toString());
+            placeExtByNode.get(from).addConnections(id, newConnection);
+
+            long to = placeExtById.get(connectionReader.getFrom().toString());
+            placeExtByNode.get(to).addConnectedBy(id, newConnection);
+            newConnection.setSelf(URL + "/connections/" + id);
+
+            connectionById.putIfAbsent(id, newConnection);
         }
     }
 
