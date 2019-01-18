@@ -11,6 +11,7 @@ import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import java.net.URI;
 
 /**
  * Copyright by Jacopx on 2019-01-16.
@@ -127,11 +128,34 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicle getVehicle(@PathParam("id") String id) {
+    public Vehicle getVehicle(@PathParam("id") long id) {
         Vehicle vehicle = service.getVehicle(id);
         if (vehicle==null)
             throw new NotFoundException();
         return vehicle;
+    }
+
+    @POST
+    @Path("/vehicles")
+    @ApiOperation(value = "createVehicle", notes = "create a new vehicle"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Bad Request"),
+    })
+    @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public Response createVehicle(Vehicle vehicle) {
+        long id = service.getNextVehicle();
+        UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
+        URI self = builder.build();
+        vehicle.setSelf(self.toString());
+
+        Vehicle created = service.addVehicle(id, vehicle);
+        if (created!=null) {
+            return Response.created(self).entity(created).build();
+        } else
+            throw new InternalServerErrorException();
     }
 
 }

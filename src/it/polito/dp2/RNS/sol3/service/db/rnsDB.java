@@ -8,6 +8,8 @@ import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -17,7 +19,11 @@ public class rnsDB {
     private static rnsDB rnsDB = new rnsDB();
     private static long lastId=0;
     private static long lastConn=0;
+    private static long lastVehicle=0;
     private static String URL;
+
+    PathFinder pff = null;
+    RnsReader monitor = null;
 
     private ConcurrentHashMap<Long, PlaceExt> placeExtByNode;
     private ConcurrentHashMap<String, Long> placeExtById;
@@ -25,6 +31,7 @@ public class rnsDB {
     private ConcurrentHashMap<Long, PlaceExt> parkings;
     private ConcurrentHashMap<Long, PlaceExt> segments;
     private ConcurrentHashMap<Long, PlaceExt> gates;
+    private ConcurrentHashMap<Long, Vehicle> vehicles;
 
     public static rnsDB getRnsDB() {
         return rnsDB;
@@ -38,9 +45,11 @@ public class rnsDB {
         return ++lastConn;
     }
 
+    public static synchronized long getNextVehicle() {
+        return ++lastVehicle;
+    }
+
     private rnsDB() {
-        PathFinder pff;
-        RnsReader monitor = null;
 
         try {
             if(System.getProperty("it.polito.dp2.RNS.lab3.Neo4JURL") == null) {
@@ -62,6 +71,7 @@ public class rnsDB {
             // Loading Neo4j
             pff = PathFinderFactory.newInstance().newPathFinder();
             pff.reloadModel();
+
 
             // Loading local DB
             monitor = RnsReaderFactory.newInstance().newRnsReader();
@@ -151,65 +161,12 @@ public class rnsDB {
         Places list = new Places();
         for(PlaceExt place:placeExtByNode.values()) {
             list.getPlace().add(place.getPlace());
-//            if(keyword != null) {
-//                if(place.getPlace().getId().contains(keyword))
-//                    list.getPlace().add(place.getPlace());
-//            }
-        }
-        return list;
-    }
-
-    public Places getSegments(String keyword) {
-        Places list = new Places();
-        for(PlaceExt place:segments.values()) {
-            list.getPlace().add(place.getPlace());
-//            if(keyword != null) {
-//                if(place.getPlace().getId().contains(keyword))
-//                    list.getPlace().add(place.getPlace());
-//            }
-        }
-        return list;
-    }
-
-    public Places getParkings(String keyword) {
-        Places list = new Places();
-        for(PlaceExt place:parkings.values()) {
-            list.getPlace().add(place.getPlace());
-//            if(keyword != null) {
-//                if(place.getPlace().getId().contains(keyword))
-//                    list.getPlace().add(place.getPlace());
-//            }
-        }
-        return list;
-    }
-
-    public Places getGates(String keyword, String type) {
-        Places list = new Places();
-        for(PlaceExt place:gates.values()) {
-            list.getPlace().add(place.getPlace());
-//            if(keyword != null || type != null) {
-//                if(place.getPlace().getId().contains(keyword) || place.getPlace().getGate().value().equals(type))
-//                    list.getPlace().add(place.getPlace());
-//            } else if(keyword != null) {
-//                if(place.getPlace().getId().contains(keyword))
-//                    list.getPlace().add(place.getPlace());
-//            } else {
-//                if(place.getPlace().getGate().value().equals(type))
-//                    list.getPlace().add(place.getPlace());
-//            }
         }
         return list;
     }
 
     public Place getPlace(long node) {
-        Connections conns = new Connections();
-        conns.getConnection().addAll(placeExtByNode.get(node).getConnectionsC());
-        Connections connsBy = new Connections();
-        connsBy.getConnection().addAll(placeExtByNode.get(node).getConnectedByC());
-        Place returned = new Place();
-        returned.setConnections(conns.toString());
-        returned.setConnectedBy(conns.toString());
-        return returned;
+        return placeExtByNode.get(node).getPlace();
     }
 
     public Place createPlace(long node, Place place) {
@@ -223,5 +180,27 @@ public class rnsDB {
 
     public Connection getConnection(long id) {
         return connectionById.get(id);
+    }
+
+    public Vehicle addVehicle(long id, Vehicle vehicle) {
+        VehicleExt vehicleExt = new VehicleExt(id, vehicle);
+        if (vehicles.putIfAbsent(id, vehicle)==null) {
+            vehicleExt.setPaths(computePath(vehicle));
+            return vehicle;
+        } else
+            return null;
+    }
+
+    private Set<List<String>> computePath(Vehicle vehicle) {
+        try {
+            return pff.findShortestPaths(vehicle.getPosition(), vehicle.getTo(), 999);
+        } catch (UnknownIdException | BadStateException | ServiceException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Vehicle getVehicle(long id) {
+        return vehicles.get(id);
     }
 }

@@ -13,14 +13,16 @@ public class rnsService {
         return rnsDB.getNextId();
     }
 
+    public long getNextConn() {
+        return rnsDB.getNextConn();
+    }
+
+    public long getNextVehicle() {
+        return rnsDB.getNextVehicle();
+    }
+
     public Places getPlaces(SearchPlaces scope, String keyword, String type) {
         switch (scope) {
-            case SEGMENT:
-                return db.getSegments(keyword);
-            case PARKING:
-                return db.getParkings(keyword);
-            case GATE:
-                return db.getGates(keyword, type);
             case ALL: default:
                 return db.getPlaces(keyword);
         }
@@ -42,7 +44,11 @@ public class rnsService {
         return null;
     }
 
-    public Vehicle getVehicle(String id) {
-        return null;
+    public Vehicle getVehicle(long id) {
+        return db.getVehicle(id);
+    }
+
+    public Vehicle addVehicle(long id, Vehicle vehicle) {
+        return db.addVehicle(id, vehicle);
     }
 }
