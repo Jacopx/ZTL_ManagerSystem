@@ -2,7 +2,6 @@ package it.polito.dp2.RNS.sol3.service.service;
 
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.db.rnsDB;
-import org.joda.time.DateTime;
 
 /**
  * Copyright by Jacopx on 2019-01-16.
@@ -18,20 +17,8 @@ public class rnsService {
         return null;
     }
 
-    public Place createPlace(long id, Place place) {
-        return db.createPlace(id, place);
-    }
-
     public Place getPlace(long id) {
         return db.getPlace(id);
-    }
-
-    public Place updatePlace(long id, Place place) {
-        return db.updatePlace(id, place);
-    }
-
-    public Place deletePlace(long id) {
-        return db.deletePlace(id);
     }
 
     public Connections getConnections() {

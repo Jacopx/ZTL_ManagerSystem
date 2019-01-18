@@ -8,10 +8,7 @@ import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
 import javax.ws.rs.ClientErrorException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -58,7 +55,7 @@ public class rnsDB {
             // Loading local DB
             monitor = RnsReaderFactory.newInstance().newRnsReader();
 
-        } catch (PathFinderException | RnsReaderException | ServiceException | ModelException | MalformedURLException e) {
+        } catch (PathFinderException | RnsReaderException | ServiceException | ModelException e) {
             e.printStackTrace();
         }
 
@@ -146,38 +143,4 @@ public class rnsDB {
         } else
             return null;
     }
-
-    public Place updatePlace(long  id, Place place) {
-        PlaceExt pe = placeExtByNode.get(id);
-        if (pe==null)
-            return null;
-        Place old = pe.getPlace();
-        place.setSelf(old.getSelf());
-        place.setConnections(old.getConnections());
-        place.setConnectedBy(old.getConnectedBy());
-//        removeIndexing(old);
-        pe.setPlace(place);
-//        addIndexing(place);
-        return place;
-    }
-
-    public Place deletePlace(long id) {
-        //@TODO: Delete node from other map
-        PlaceExt pe = placeExtByNode.get(id);
-        if (pe==null)
-            return null;
-        if (!pe.getConnectedBy().isEmpty())
-            throw new ClientErrorException(409); // it is connected by some place, we cannot delete
-        pe = placeExtByNode.remove(id);
-        if (pe==null)
-            return null;
-        Place place = pe.getPlace();
-        for (Long tid:pe.getConnectionsC()) {
-            PlaceExt target = placeExtByNode.get(tid);
-            target.removeConnectedBy(id);
-        }
-//        removeIndexing(item);
-        return place;
-    }
-
 }
