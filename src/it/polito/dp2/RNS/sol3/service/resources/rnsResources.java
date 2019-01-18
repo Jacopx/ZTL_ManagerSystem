@@ -158,4 +158,20 @@ public class rnsResources {
             throw new InternalServerErrorException();
     }
 
+    @PUT
+    @Path("/vehicles/{id}")
+    @ApiOperation(value = "updateVehicle", notes = "update single vehicle"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+    })
+    @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public Vehicle updateItem(@PathParam("id") long id, Vehicle vehicle) {
+        Vehicle updated = service.updateVehicle(id, vehicle);
+        if (updated==null)
+            throw new NotFoundException();
+        return updated;
+    }
+
 }

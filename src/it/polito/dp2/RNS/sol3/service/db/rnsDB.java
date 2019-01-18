@@ -5,9 +5,7 @@ import it.polito.dp2.RNS.lab2.*;
 import it.polito.dp2.RNS.lab2.PathFinderFactory;
 import it.polito.dp2.RNS.sol1.RnsReaderFactory;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
-import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,7 +29,7 @@ public class rnsDB {
     private ConcurrentHashMap<Long, PlaceExt> parkings;
     private ConcurrentHashMap<Long, PlaceExt> segments;
     private ConcurrentHashMap<Long, PlaceExt> gates;
-    private ConcurrentHashMap<Long, Vehicle> vehicles;
+    private ConcurrentHashMap<Long, VehicleExt> vehicles;
 
     public static rnsDB getRnsDB() {
         return rnsDB;
@@ -71,7 +69,6 @@ public class rnsDB {
             // Loading Neo4j
             pff = PathFinderFactory.newInstance().newPathFinder();
             pff.reloadModel();
-
 
             // Loading local DB
             monitor = RnsReaderFactory.newInstance().newRnsReader();
@@ -158,23 +155,25 @@ public class rnsDB {
         }
 
         // VEHICLE for debug
-        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
-            Vehicle v = new Vehicle();
-//            v.setEntryTime();
-            v.setId(vehicleReader.getId());
-            v.setFrom(vehicleReader.getOrigin().getId());
-            v.setTo(vehicleReader.getDestination().getId());
-            v.setPosition(vehicleReader.getPosition().getId());
-            v.setState(vehicleReader.getState().value());
-
-            addVehicle(getNextVehicle(), v);
-        }
+//        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
+//            Vehicle v = new Vehicle();
+////            v.setEntryTime();
+//            v.setId(vehicleReader.getId());
+//            v.setFrom(vehicleReader.getOrigin().getId());
+//            v.setTo(vehicleReader.getDestination().getId());
+//            v.setPosition(vehicleReader.getPosition().getId());
+//            v.setState(vehicleReader.getState().value());
+//
+//            addVehicle(getNextVehicle(), v);
+//        }
     }
 
     public Places getPlaces(String keyword) {
         Places list = new Places();
         for(PlaceExt place:placeExtByNode.values()) {
-            list.getPlace().add(place.getPlace());
+            if(!keyword.isEmpty()) {
+                list.getPlace().add(place.getPlace());
+            }
         }
         return list;
     }
@@ -198,7 +197,8 @@ public class rnsDB {
 
     public Vehicle addVehicle(long id, Vehicle vehicle) {
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
-        if (vehicles.putIfAbsent(id, vehicle)==null) {
+        vehicle.setSelf(URL + "/vehicles/" + id);
+        if (vehicles.putIfAbsent(id, vehicleExt)==null) {
             vehicleExt.setPaths(computePath(vehicle));
             return vehicle;
         } else
@@ -215,6 +215,24 @@ public class rnsDB {
     }
 
     public Vehicle getVehicle(long id) {
-        return vehicles.get(id);
+        return vehicles.get(id).getVehicle();
+    }
+
+    public Vehicle updateVehicle(long id, Vehicle vehicle) {
+        VehicleExt vehicleExt = vehicles.get(id);
+        if(vehicleExt == null)
+            return null;
+        Vehicle old = vehicleExt.getVehicle();
+        vehicle.setSelf(old.getSelf());
+        vehicle.setId(old.getId());
+        vehicle.setEntryTime(old.getEntryTime());
+        vehicleExt.setVehicle(vehicle);
+
+        //@TODO: Missing verify goodness
+        if(!vehicle.getPosition().equals(old.getPosition())) {
+            vehicleExt.setPaths(computePath(vehicle));
+        }
+
+        return vehicle;
     }
 }

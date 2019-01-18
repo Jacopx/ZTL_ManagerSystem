@@ -51,4 +51,8 @@ public class rnsService {
     public Vehicle addVehicle(long id, Vehicle vehicle) {
         return db.addVehicle(id, vehicle);
     }
+
+    public Vehicle updateVehicle(long id, Vehicle vehicle) {
+        return db.updateVehicle(id, vehicle);
+    }
 }
