@@ -155,6 +155,19 @@ public class rnsDB {
 
             connectionById.putIfAbsent(id, newConnection);
         }
+
+        // VEHICLE for debug
+        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
+            Vehicle v = new Vehicle();
+//            v.setEntryTime();
+            v.setId(vehicleReader.getId());
+            v.setFrom(vehicleReader.getOrigin().getId());
+            v.setTo(vehicleReader.getDestination().getId());
+            v.setPosition(vehicleReader.getPosition().getId());
+            v.setState(vehicleReader.getState().value());
+
+            addVehicle(getNextVehicle(), v);
+        }
     }
 
     public Places getPlaces(String keyword) {
