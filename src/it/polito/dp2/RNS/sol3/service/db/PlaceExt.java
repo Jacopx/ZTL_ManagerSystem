@@ -4,6 +4,7 @@ import it.polito.dp2.RNS.sol3.rest.service.jaxb.Connection;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.Place;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,6 +19,8 @@ public class PlaceExt {
     public PlaceExt(long id, Place place) {
         this.id = id;
         this.place = place;
+        connections = new HashMap<>();
+        connectedBy = new HashMap<>();
     }
 
     public long getId() {
