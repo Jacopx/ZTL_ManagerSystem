@@ -122,16 +122,16 @@ public class rnsDB {
         // CONNECTIONS
         for(ConnectionReader connectionReader:monitor.getConnections()) {
             Connection newConnection = new Connection();
-            newConnection.setFrom(connectionReader.getFrom().getId());
-            newConnection.setTo(connectionReader.getTo().getId());
-
             long id = getNextConn();
+            newConnection.setFrom(placeExtByNode.get(connectionReader.getFrom().getId()).getPlace().getSelf());
+            newConnection.setTo(placeExtByNode.get(connectionReader.getTo().getId()).getPlace().getSelf());
+            newConnection.setSelf(URL + "/connections/" + id);
+
             long from = placeExtById.get(connectionReader.getFrom().getId());
             placeExtByNode.get(from).addConnections(id, newConnection);
 
             long to = placeExtById.get(connectionReader.getFrom().getId());
             placeExtByNode.get(to).addConnectedBy(id, newConnection);
-            newConnection.setSelf(URL + "/connections/" + id);
 
             connectionById.putIfAbsent(id, newConnection);
         }
