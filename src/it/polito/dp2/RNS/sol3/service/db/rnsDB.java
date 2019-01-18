@@ -73,11 +73,10 @@ public class rnsDB {
             } else {
                 newGate.setGate(GateItem.OUT);
             }
-            long id = getNextId();
-//            newGate.setId(gateReader.getId());
+            newGate.setId(gateReader.getId());
 //            newGate.setSelf(url + "/places/" + id);
 
-            createPlace(id, newGate);
+            createPlace(getNextId(), newGate);
         }
 
         // PLACE PARKING AREA
@@ -89,10 +88,9 @@ public class rnsDB {
             Place newPark = new Place();
             newPark.setId(parkingAreaReader.getId());
             newPark.setParking(park);
-            long id = getNextId();
 //            newPark.setSelf(url + "/places/" + id);
 
-            createPlace(id, newPark);
+            createPlace(getNextId(), newPark);
         }
 
         // ROAD SEGMENT
@@ -104,10 +102,9 @@ public class rnsDB {
             Place newRoadSeg = new Place();
             newRoadSeg.setId(roadSegmentReader.getId());
             newRoadSeg.setSegment(seg);
-            long id = getNextId();
 //            newRoadSeg.setSelf(url + "/places/" + id);
 
-            createPlace(id, newRoadSeg);
+            createPlace(getNextId(), newRoadSeg);
         }
 
         // CONNECTIONS
