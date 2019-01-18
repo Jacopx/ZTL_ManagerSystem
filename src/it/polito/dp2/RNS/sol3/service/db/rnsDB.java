@@ -150,8 +150,10 @@ public class rnsDB {
     public Places getPlaces(String keyword) {
         Places list = new Places();
         for(PlaceExt place:placeExtByNode.values()) {
-            if(place.getPlace().getId().contains(keyword))
-            list.getPlace().add(place.getPlace());
+            if(keyword != null) {
+                if(place.getPlace().getId().contains(keyword))
+                    list.getPlace().add(place.getPlace());
+            }
         }
         return list;
     }
