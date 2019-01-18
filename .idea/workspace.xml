@@ -4,7 +4,6 @@
     <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xsd/rnsSystem.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/xsd/rnsSystem.xsd" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,8 +60,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="384">
-                  <caret line="168" column="44" selection-start-line="168" selection-start-column="44" selection-end-line="168" selection-end-column="44" />
+                <state relative-caret-position="461">
+                  <caret line="88" column="16" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="16" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#2825#3452#1" />
@@ -70,11 +69,11 @@
                     <element signature="e#4130#4581#1" />
                     <element signature="e#4678#5416#1" />
                     <element signature="method#getPlaces#0;class#rnsDB#0" />
-                    <element signature="e#6511#6512#0" expanded="true" />
+                    <element signature="e#6545#6546#0" expanded="true" />
                     <element signature="method#createPlace#0;class#rnsDB#0" />
                     <element signature="e#7276#7322#1" />
-                    <element signature="e#6908#6909#0" expanded="true" />
-                    <element signature="e#7606#7607#0" expanded="true" />
+                    <element signature="e#6942#6943#0" expanded="true" />
+                    <element signature="e#7640#7641#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -264,7 +263,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547826620943" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547826730892" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -330,7 +329,7 @@
       <workItem from="1547746650243" duration="4130000" />
       <workItem from="1547760679520" duration="3398000" />
       <workItem from="1547799943175" duration="1563000" />
-      <workItem from="1547815910017" duration="9164000" />
+      <workItem from="1547815910017" duration="9243000" />
     </task>
     <task id="LOCAL-00001" summary="Starting good development">
       <created>1547734269114</created>
@@ -563,11 +562,18 @@
       <option name="project" value="LOCAL" />
       <updated>1547823713451</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Adding vehicle for debug">
+      <created>1547826634872</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1547826634872</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42325000" />
+    <option name="totallyTimeSpent" value="42404000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -611,7 +617,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Starting good development" />
     <MESSAGE value="Implementing all place" />
     <MESSAGE value="Missing files" />
     <MESSAGE value="Correcting path" />
@@ -636,7 +641,8 @@
     <MESSAGE value="Trying to solve problem" />
     <MESSAGE value="Return places with connections" />
     <MESSAGE value="Adding vehicle managing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding vehicle managing" />
+    <MESSAGE value="Adding vehicle for debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding vehicle for debug" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -909,8 +915,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="168" column="44" selection-start-line="168" selection-start-column="44" selection-end-line="168" selection-end-column="44" />
+        <state relative-caret-position="461">
+          <caret line="88" column="16" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2825#3452#1" />
@@ -918,11 +924,11 @@
             <element signature="e#4130#4581#1" />
             <element signature="e#4678#5416#1" />
             <element signature="method#getPlaces#0;class#rnsDB#0" />
-            <element signature="e#6511#6512#0" expanded="true" />
+            <element signature="e#6545#6546#0" expanded="true" />
             <element signature="method#createPlace#0;class#rnsDB#0" />
             <element signature="e#7276#7322#1" />
-            <element signature="e#6908#6909#0" expanded="true" />
-            <element signature="e#7606#7607#0" expanded="true" />
+            <element signature="e#6942#6943#0" expanded="true" />
+            <element signature="e#7640#7641#0" expanded="true" />
           </folding>
         </state>
       </provider>

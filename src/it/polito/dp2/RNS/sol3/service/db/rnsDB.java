@@ -86,6 +86,7 @@ public class rnsDB {
         parkings = new ConcurrentHashMap<>();
         segments = new ConcurrentHashMap<>();
         gates = new ConcurrentHashMap<>();
+        vehicles = new ConcurrentHashMap<>();
 
         // PLACE GATE
         for (GateReader gateReader : monitor.getGates(null)) {
