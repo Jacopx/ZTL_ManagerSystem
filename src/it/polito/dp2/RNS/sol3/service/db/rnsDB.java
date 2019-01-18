@@ -126,10 +126,10 @@ public class rnsDB {
             newConnection.setTo(connectionReader.getTo().getId());
 
             long id = getNextConn();
-            long from = placeExtById.get(connectionReader.getFrom().toString());
+            long from = placeExtById.get(connectionReader.getFrom().getId());
             placeExtByNode.get(from).addConnections(id, newConnection);
 
-            long to = placeExtById.get(connectionReader.getFrom().toString());
+            long to = placeExtById.get(connectionReader.getFrom().getId());
             placeExtByNode.get(to).addConnectedBy(id, newConnection);
             newConnection.setSelf(URL + "/connections/" + id);
 
