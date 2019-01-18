@@ -33,7 +33,6 @@ public class rnsDB {
     private rnsDB() {
         PathFinder pff;
         RnsReader monitor = null;
-        String url = null;
 
         try {
             if(System.getProperty("it.polito.dp2.RNS.lab3.Neo4JURL") == null) {
@@ -44,9 +43,6 @@ public class rnsDB {
 
             System.setProperty("it.polito.dp2.RNS.lab2.PathFinderFactory", "it.polito.dp2.RNS.sol2.PathFinderFactory");
             System.setProperty("it.polito.dp2.RNS.RnsReaderFactory", "it.polito.dp2.RNS.Random.RnsReaderFactoryImpl");
-
-            url = System.getProperty("URL");
-            System.out.println("URL: " + url);
 
             // Loading Neo4j
             pff = PathFinderFactory.newInstance().newPathFinder();
@@ -74,7 +70,7 @@ public class rnsDB {
                 newGate.setGate(GateItem.OUT);
             }
             newGate.setId(gateReader.getId());
-            newGate.setSelf(url + "/places/" + lastId++);
+            newGate.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + lastId++);
 
             createPlace(getNextId(), newGate);
         }
@@ -88,7 +84,7 @@ public class rnsDB {
             Place newPark = new Place();
             newPark.setId(parkingAreaReader.getId());
             newPark.setParking(park);
-            newPark.setSelf(url + "/places/" + lastId++);
+            newPark.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + lastId++);
 
             createPlace(getNextId(), newPark);
         }
@@ -102,7 +98,7 @@ public class rnsDB {
             Place newRoadSeg = new Place();
             newRoadSeg.setId(roadSegmentReader.getId());
             newRoadSeg.setSegment(seg);
-            newRoadSeg.setSelf(url + "/places/" + lastId++);
+            newRoadSeg.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + lastId++);
 
             createPlace(getNextId(), newRoadSeg);
         }
@@ -128,14 +124,14 @@ public class rnsDB {
         return (Collection<Place>) placeExtById;
     }
 
-    public Place getPlace(long id) {
-        return placeExtByNode.get(id).getPlace();
+    public Place getPlace(long node) {
+        return placeExtByNode.get(node).getPlace();
     }
 
-    public Place createPlace(long id, Place place) {
-        PlaceExt itemExt = new PlaceExt(id, place);
-        if (placeExtByNode.putIfAbsent(id, itemExt)==null) {
-            placeExtById.putIfAbsent(place.getId(), id);
+    public Place createPlace(long node, Place place) {
+        PlaceExt itemExt = new PlaceExt(node, place);
+        if (placeExtByNode.putIfAbsent(node, itemExt)==null) {
+            placeExtById.putIfAbsent(place.getId(), node);
             return place;
         } else
             return null;
