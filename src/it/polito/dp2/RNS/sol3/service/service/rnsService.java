@@ -14,7 +14,7 @@ public class rnsService {
     }
 
     public Places getPlaces(SearchPlaces scope, String keyword, String type) {
-        return null;
+        return db.getPlaces(scope, keyword, type);
     }
 
     public Place getPlace(long id) {

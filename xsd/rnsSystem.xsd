@@ -14,9 +14,6 @@
     <xsd:element name="places">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="totalPages" type="xsd:positiveInteger"/>
-                <xsd:element name="page" type="xsd:positiveInteger"/>
-                <xsd:element name="next" type="xsd:anyURI" minOccurs="0"/>
                 <xsd:element ref="place" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>

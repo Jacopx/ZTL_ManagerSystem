@@ -7,7 +7,6 @@ import it.polito.dp2.RNS.sol1.RnsReaderFactory;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
-import javax.ws.rs.ClientErrorException;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -139,8 +138,12 @@ public class rnsDB {
         }
     }
 
-    public Collection<Place> getPlaces(SearchPlaces scope, String keyword, String type) {
-        return (Collection<Place>) placeExtById;
+    public Places getPlaces(SearchPlaces scope, String keyword, String type) {
+        Places list = new Places();
+        for(PlaceExt place:placeExtByNode.values()) {
+            list.getPlace().add(place.getPlace());
+        }
+        return list;
     }
 
     public Place getPlace(long node) {

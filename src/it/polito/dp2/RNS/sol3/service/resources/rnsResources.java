@@ -11,7 +11,6 @@ import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.net.URI;
 
 /**
  * Copyright by Jacopx on 2019-01-16.
