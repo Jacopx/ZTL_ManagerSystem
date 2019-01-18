@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class rnsDB {
     private static rnsDB rnsDB = new rnsDB();
     private static long lastId=0;
+    private static long lastConn=0;
     private static String URL;
 
     private ConcurrentHashMap<Long,PlaceExt> placeExtByNode;
@@ -29,6 +30,10 @@ public class rnsDB {
 
     public static synchronized long getNextId() {
         return ++lastId;
+    }
+
+    public static synchronized long getNextConn() {
+        return ++lastConn;
     }
 
     private rnsDB() {
@@ -120,7 +125,7 @@ public class rnsDB {
             newConnection.setFrom(connectionReader.getFrom().getId());
             newConnection.setTo(connectionReader.getTo().getId());
 
-            long id = getNextId();
+            long id = getNextConn();
             long from = placeExtById.get(connectionReader.getFrom().toString());
             placeExtByNode.get(from).addConnections(id, newConnection);
 
