@@ -47,25 +47,15 @@ public class PlaceExt {
         return connections.keySet();
     }
 
-    public void setConnections(Map<Long, Connection> connections) {
-        this.connections = connections;
-    }
-
-    public Connection addConnections(long tid, Connection c) {
-        return connections.putIfAbsent(tid, c);
+    public Connection addConnections(long cid, Connection c) {
+        return connections.putIfAbsent(cid, c);
     }
 
     public Map<Long, Connection> getConnectedBy() {
         return connectedBy;
     }
 
-    public void setConnectedBy(Map<Long, Connection> connectedBy) {
-        this.connectedBy = connectedBy;
+    public Connection addConnectedBy(long cid, Connection c) {
+        return connectedBy.putIfAbsent(cid, c);
     }
-
-    public Connection addConnectedBy(long tid, Connection c) {
-        return connectedBy.putIfAbsent(tid, c);
-    }
-
-    public Connection removeConnectedBy(long tid) { return connectedBy.remove(tid);}
 }

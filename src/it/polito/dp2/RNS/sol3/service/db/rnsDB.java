@@ -128,12 +128,12 @@ public class rnsDB {
             long FROM = placeExtById.get(connectionReader.getFrom().getId());
             PlaceExt placeFrom = placeExtByNode.get(FROM);
             newConnection.setFrom(placeFrom.getPlace().getSelf());
-            placeFrom.addConnections(FROM, newConnection);
+            placeFrom.addConnections(id, newConnection);
 
             long TO = placeExtById.get(connectionReader.getTo().getId());
             PlaceExt placeTo = placeExtByNode.get(TO);
             newConnection.setTo(placeTo.getPlace().getSelf());
-            placeTo.addConnections(TO, newConnection);
+            placeTo.addConnectedBy(id, newConnection);
 
             connectionById.putIfAbsent(id, newConnection);
         }
@@ -154,5 +154,9 @@ public class rnsDB {
             return place;
         } else
             return null;
+    }
+
+    public Connection getConnection(long id) {
+        return connectionById.get(id);
     }
 }

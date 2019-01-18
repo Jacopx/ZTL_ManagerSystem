@@ -95,7 +95,7 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Connection getConnection(@PathParam("id") String id) {
+    public Connection getConnection(@PathParam("id") long id) {
         Connection connection = service.getConnection(id);
         if (connection==null)
             throw new NotFoundException();

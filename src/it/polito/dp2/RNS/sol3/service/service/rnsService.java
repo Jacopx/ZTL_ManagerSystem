@@ -25,8 +25,8 @@ public class rnsService {
         return null;
     }
 
-    public Connection getConnection(String id) {
-        return null;
+    public Connection getConnection(long id) {
+        return db.getConnection(id);
     }
 
     public Vehicles getVehicles(SearchVehicles all, String keyword, String type, String state, String entrytime, String position) {
