@@ -70,9 +70,10 @@ public class rnsDB {
                 newGate.setGate(GateItem.OUT);
             }
             newGate.setId(gateReader.getId());
-            newGate.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + lastId++);
+            long id = getNextId();
+            newGate.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + id);
 
-            createPlace(getNextId(), newGate);
+            createPlace(id, newGate);
         }
 
         // PLACE PARKING AREA
@@ -84,9 +85,10 @@ public class rnsDB {
             Place newPark = new Place();
             newPark.setId(parkingAreaReader.getId());
             newPark.setParking(park);
-            newPark.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + lastId++);
+            long id = getNextId();
+            newPark.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + id);
 
-            createPlace(getNextId(), newPark);
+            createPlace(id, newPark);
         }
 
         // ROAD SEGMENT
@@ -98,9 +100,10 @@ public class rnsDB {
             Place newRoadSeg = new Place();
             newRoadSeg.setId(roadSegmentReader.getId());
             newRoadSeg.setSegment(seg);
-            newRoadSeg.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + lastId++);
+            long id = getNextId();
+            newRoadSeg.setSelf("http://localhost:8080/RnsSystem/rest" + "/places/" + id);
 
-            createPlace(getNextId(), newRoadSeg);
+            createPlace(id, newRoadSeg);
         }
 
         // CONNECTIONS
