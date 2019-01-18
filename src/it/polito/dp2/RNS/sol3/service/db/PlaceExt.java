@@ -43,8 +43,8 @@ public class PlaceExt {
         return connections;
     }
 
-    public Collection<Long> getConnectionsC() {
-        return connections.keySet();
+    public Collection<Connection> getConnectionsC() {
+        return connections.values();
     }
 
     public Connection addConnections(long cid, Connection c) {
@@ -53,6 +53,10 @@ public class PlaceExt {
 
     public Map<Long, Connection> getConnectedBy() {
         return connectedBy;
+    }
+
+    public Collection<Connection> getConnectedByC() {
+        return connectedBy.values();
     }
 
     public Connection addConnectedBy(long cid, Connection c) {

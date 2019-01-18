@@ -162,10 +162,11 @@ public class rnsDB {
     public Places getSegments(String keyword) {
         Places list = new Places();
         for(PlaceExt place:segments.values()) {
-            if(keyword != null) {
-                if(place.getPlace().getId().contains(keyword))
-                    list.getPlace().add(place.getPlace());
-            }
+            list.getPlace().add(place.getPlace());
+//            if(keyword != null) {
+//                if(place.getPlace().getId().contains(keyword))
+//                    list.getPlace().add(place.getPlace());
+//            }
         }
         return list;
     }
@@ -173,10 +174,11 @@ public class rnsDB {
     public Places getParkings(String keyword) {
         Places list = new Places();
         for(PlaceExt place:parkings.values()) {
-            if(keyword != null) {
-                if(place.getPlace().getId().contains(keyword))
-                    list.getPlace().add(place.getPlace());
-            }
+            list.getPlace().add(place.getPlace());
+//            if(keyword != null) {
+//                if(place.getPlace().getId().contains(keyword))
+//                    list.getPlace().add(place.getPlace());
+//            }
         }
         return list;
     }
@@ -184,22 +186,30 @@ public class rnsDB {
     public Places getGates(String keyword, String type) {
         Places list = new Places();
         for(PlaceExt place:gates.values()) {
-            if(keyword != null || type != null) {
-                if(place.getPlace().getId().contains(keyword) || place.getPlace().getGate().value().equals(type))
-                    list.getPlace().add(place.getPlace());
-            } else if(keyword != null) {
-                if(place.getPlace().getId().contains(keyword))
-                    list.getPlace().add(place.getPlace());
-            } else {
-                if(place.getPlace().getGate().value().equals(type))
-                    list.getPlace().add(place.getPlace());
-            }
+            list.getPlace().add(place.getPlace());
+//            if(keyword != null || type != null) {
+//                if(place.getPlace().getId().contains(keyword) || place.getPlace().getGate().value().equals(type))
+//                    list.getPlace().add(place.getPlace());
+//            } else if(keyword != null) {
+//                if(place.getPlace().getId().contains(keyword))
+//                    list.getPlace().add(place.getPlace());
+//            } else {
+//                if(place.getPlace().getGate().value().equals(type))
+//                    list.getPlace().add(place.getPlace());
+//            }
         }
         return list;
     }
 
     public Place getPlace(long node) {
-        return placeExtByNode.get(node).getPlace();
+        Connections conns = new Connections();
+        conns.getConnection().addAll(placeExtByNode.get(node).getConnectionsC());
+        Connections connsBy = new Connections();
+        connsBy.getConnection().addAll(placeExtByNode.get(node).getConnectedByC());
+        Place returned = new Place();
+        returned.setConnections(conns.toString());
+        returned.setConnectedBy(conns.toString());
+        return returned;
     }
 
     public Place createPlace(long node, Place place) {
