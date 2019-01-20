@@ -264,19 +264,16 @@ public class rnsDB {
         }
     }
 
+    //@TODO: Resolve with stream
     private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
         Vehicles list = new Vehicles();
-        List newList = new ArrayList();
-        newList = vehicles.values().stream()
+        List newList = vehicles.values().stream()
                 .filter(v -> keyword == null || v.getVehicle().getId().contains(keyword))
                 .filter(v -> state == null || v.getVehicle().getState().equals(state))
                 .filter(v -> entrytime ==  null || v.getVehicle().getEntryTime().equals(entrytime))
                 .filter(v -> position == null || v.getVehicle().getPosition().equals(position))
                 .collect(Collectors.toList());
-
-        for(VehicleExt v: this.vehicles.values()) {
-            list.getVehicle().add(v.getVehicle());
-        }
+        list.getVehicle().addAll(newList);
         return list;
     }
 
