@@ -33,7 +33,7 @@ public class rnsService {
     }
 
     public Connections getConnections() {
-        return null;
+        return db.getConnections();
     }
 
     public Connection getConnection(long id) {

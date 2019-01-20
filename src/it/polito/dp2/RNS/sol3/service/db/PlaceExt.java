@@ -32,6 +32,12 @@ public class PlaceExt {
     }
 
     public Place getPlace() {
+        for(Connection c:connections.values())
+            place.getConnections().add(c.getSelf());
+
+        for(Connection c:connectedBy.values())
+            place.getConnectedBy().add(c.getSelf());
+
         return place;
     }
 

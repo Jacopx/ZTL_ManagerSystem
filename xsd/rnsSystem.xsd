@@ -29,8 +29,10 @@
                     <xsd:element name="segment" type="SegmentItem"/>
                     <xsd:element name="parking" type="ParkingItem"/>
                 </xsd:choice>
-                <xsd:element name="connections" type="xsd:anyURI" minOccurs="0"/>
-                <xsd:element name="connectedBy" type="xsd:anyURI" minOccurs="0"/>
+                <xsd:sequence>
+                    <xsd:element name="connections" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="connectedBy" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

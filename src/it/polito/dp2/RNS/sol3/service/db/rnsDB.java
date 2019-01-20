@@ -191,6 +191,12 @@ public class rnsDB {
             return null;
     }
 
+    public Connections getConnections() {
+        Connections list = new Connections();
+        list.getConnection().addAll(connectionById.values());
+        return list;
+    }
+
     public Connection getConnection(long id) {
         return connectionById.get(id);
     }
