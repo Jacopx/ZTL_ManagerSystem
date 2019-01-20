@@ -21,11 +21,8 @@ public class rnsService {
         return rnsDB.getNextVehicle();
     }
 
-    public Places getPlaces(SearchPlaces scope, String keyword, String type) {
-        switch (scope) {
-            case ALL: default:
-                return db.getPlaces(keyword);
-        }
+    public Places getPlaces(SearchPlaces scope, String keyword) {
+        return db.getPlaces(scope, keyword);
     }
 
     public Place getPlace(long id) {
@@ -40,8 +37,8 @@ public class rnsService {
         return db.getConnection(id);
     }
 
-    public Vehicles getVehicles(SearchVehicles all, String keyword, String type, String state, String entrytime, String position) {
-        return null;
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entrytime, String position) {
+        return db.getVehicles(scope, keyword, state, entrytime, position);
     }
 
     public Vehicle getVehicle(long id) {

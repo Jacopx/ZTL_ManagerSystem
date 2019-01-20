@@ -50,12 +50,22 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Places getPlaces(@QueryParam("keyword") String keyword,
-                           @QueryParam("type") String type
+    public Places getPlaces(@QueryParam("type") String type, @QueryParam("keyword") String keyword
     ) {
-        return service.getPlaces(SearchPlaces.ALL, keyword, type);
+        switch (type.toLowerCase()) {
+            case "gate":
+                return service.getPlaces(SearchPlaces.GATE, keyword);
+            case "segment":
+                return service.getPlaces(SearchPlaces.SEGMENT, keyword);
+            case "parking":
+                return service.getPlaces(SearchPlaces.PARKING, keyword);
+            default:
+                return service.getPlaces(SearchPlaces.ALL, keyword);
+        }
     }
 
     @GET
@@ -64,6 +74,7 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -92,6 +103,7 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -108,15 +120,28 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicles getVehicles(@QueryParam("keyword") String keyword,
-                                @QueryParam("type") String type,
+    public Vehicles getVehicles(@QueryParam("type") String type,
+                                @QueryParam("keyword") String keyword,
                                 @QueryParam("state") String state,
                                 @QueryParam("entrytime") String entrytime,
                                 @QueryParam("position") String position
     ) {
-        return service.getVehicles(SearchVehicles.ALL, keyword, type, state, entrytime, position);
+        switch (type.toLowerCase()) {
+            case "car":
+                return service.getVehicles(SearchVehicles.CAR, keyword, state, entrytime, position);
+            case "truck":
+                return service.getVehicles(SearchVehicles.TRUCK, keyword, state, entrytime, position);
+            case "caravan":
+                return service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entrytime, position);
+            case "shuttle":
+                return service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entrytime, position);
+            default:
+                return service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
+        }
     }
 
     @GET
@@ -125,6 +150,7 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -142,6 +168,7 @@ public class rnsResources {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found"),
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -164,6 +191,8 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found"),
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})

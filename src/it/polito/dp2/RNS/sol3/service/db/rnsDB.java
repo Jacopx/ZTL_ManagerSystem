@@ -5,10 +5,14 @@ import it.polito.dp2.RNS.lab2.*;
 import it.polito.dp2.RNS.lab2.PathFinderFactory;
 import it.polito.dp2.RNS.sol1.RnsReaderFactory;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
+import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
+import it.polito.dp2.RNS.sol3.service.service.SearchVehicles;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * Copyright by Jacopx on 15/01/2019.
@@ -168,11 +172,29 @@ public class rnsDB {
 //        }
     }
 
-    public Places getPlaces(String keyword) {
+    //@TODO: To be tested
+    public Places getPlaces(SearchPlaces scope, String keyword) {
+        switch (scope) {
+            case SEGMENT: {
+                return searchPlaces(segments, keyword);
+            } case PARKING: {
+                return searchPlaces(parkings, keyword);
+            } case GATE: {
+                return searchPlaces(gates, keyword);
+            } case ALL: default: {
+                return searchPlaces(placeExtByNode, keyword);
+            }
+        }
+    }
+
+    private Places searchPlaces(ConcurrentHashMap<Long, PlaceExt> place, String keyword) {
         Places list = new Places();
-        for(PlaceExt place:placeExtByNode.values()) {
+        for(PlaceExt p:place.values()) {
             if(!keyword.isEmpty()) {
-                list.getPlace().add(place.getPlace());
+                if(p.getPlace().getId().contains(keyword))
+                    list.getPlace().add(p.getPlace());
+            } else {
+                list.getPlace().add(p.getPlace());
             }
         }
         return list;
@@ -201,6 +223,7 @@ public class rnsDB {
         return connectionById.get(id);
     }
 
+    //@TODO: Differentiation by vehicle type
     public Vehicle addVehicle(long id, Vehicle vehicle) {
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
         vehicle.setSelf(URL + "/vehicles/" + id);
@@ -218,6 +241,43 @@ public class rnsDB {
             e.printStackTrace();
         }
         return null;
+    }
+
+    //@TODO: To be tested
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entrytime, String position) {
+        switch (scope) {
+            case CAR: {
+                return searchVehicles(vehicles, keyword, state, entrytime, position);
+            }
+            case TRUCK: {
+                return searchVehicles(vehicles, keyword, state, entrytime, position);
+            }
+            case CARAVAN: {
+                return searchVehicles(vehicles, keyword, state, entrytime, position);
+            }
+            case SHUTTLE: {
+                return searchVehicles(vehicles, keyword, state, entrytime, position);
+            }
+            case ALL: default: {
+                return searchVehicles(vehicles, keyword, state, entrytime, position);
+            }
+        }
+    }
+
+    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
+        Vehicles list = new Vehicles();
+        List newList = new ArrayList();
+        newList = vehicles.values().stream()
+                .filter(v -> keyword == null || v.getVehicle().getId().contains(keyword))
+                .filter(v -> state == null || v.getVehicle().getState().equals(state))
+                .filter(v -> entrytime ==  null || v.getVehicle().getEntryTime().equals(entrytime))
+                .filter(v -> position == null || v.getVehicle().getPosition().equals(position))
+                .collect(Collectors.toList());
+
+        for(VehicleExt v: this.vehicles.values()) {
+            list.getVehicle().add(v.getVehicle());
+        }
+        return list;
     }
 
     public Vehicle getVehicle(long id) {
