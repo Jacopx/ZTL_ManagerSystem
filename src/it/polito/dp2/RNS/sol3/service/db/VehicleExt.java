@@ -14,6 +14,7 @@ public class VehicleExt {
     private long id;
     private Vehicle vehicle;
     private Set<List<String>> paths;
+    private ShortPaths shortPaths;
 
     public VehicleExt(long id, Vehicle vehicle) {
         this.id = id;
@@ -29,15 +30,7 @@ public class VehicleExt {
     }
 
     public Vehicle getVehicle() {
-        Vehicle v = new Vehicle();
-        ShortPaths newPaths = new ShortPaths();
-        for(List<String> ps:paths) {
-            SuggPath newPath = new SuggPath();
-            newPath.getRelation().addAll(ps);
-            newPaths.getSuggPath().add(newPath);
-        }
-        v.getShortPaths().add(newPaths);
-        return v;
+        return vehicle;
     }
 
     public void setVehicle(Vehicle vehicle) {
@@ -49,6 +42,13 @@ public class VehicleExt {
     }
 
     public void setPaths(Set<List<String>> paths) {
-        this.paths = paths;
+        ShortPaths newPaths = new ShortPaths();
+        for(List<String> ps:paths) {
+            SuggPath newPath = new SuggPath();
+            newPath.getRelation().addAll(ps);
+            newPaths.getSuggPath().add(newPath);
+        }
+        vehicle.getShortPaths().add(newPaths);
+        this.shortPaths = newPaths;
     }
 }
