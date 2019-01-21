@@ -52,6 +52,7 @@ public class rnsResources {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 401, message = "Not Auth"),
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -150,39 +151,45 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicles getVehicles(@QueryParam("type") String type,
+    public Vehicles getVehicles(@QueryParam("admin") int admin,
+                                @QueryParam("type") String type,
                                 @QueryParam("keyword") String keyword,
                                 @QueryParam("state") String state,
                                 @QueryParam("entrytime") String entrytime,
                                 @QueryParam("position") String position
     ) {
-        Vehicles vs;
-        if(type != null && !type.isEmpty()) {
-            switch (type.toLowerCase()) {
-                case "car": {
-                    vs = service.getVehicles(SearchVehicles.CAR, keyword, state, entrytime, position);
-                    break;
+        Vehicles vs = null;
+        if(admin == 1) {
+            if(type != null && !type.isEmpty()) {
+                switch (type.toLowerCase()) {
+                    case "car": {
+                        vs = service.getVehicles(SearchVehicles.CAR, keyword, state, entrytime, position);
+                        break;
+                    }
+                    case "truck": {
+                        vs = service.getVehicles(SearchVehicles.TRUCK, keyword, state, entrytime, position);
+                        break;
+                    }
+                    case "caravan": {
+                        vs = service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entrytime, position);
+                        break;
+                    }
+                    case "shuttle": {
+                        vs = service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entrytime, position);
+                        break;
+                    }
+                    default: {
+                        vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
+                        break;
+                    }
                 }
-                case "truck": {
-                    vs = service.getVehicles(SearchVehicles.TRUCK, keyword, state, entrytime, position);
-                    break;
-                }
-                case "caravan": {
-                    vs = service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entrytime, position);
-                    break;
-                }
-                case "shuttle": {
-                    vs = service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entrytime, position);
-                    break;
-                }
-                default: {
-                    vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
-                    break;
-                }
+            } else {
+                vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
             }
         } else {
-            vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
+            throw new NotAuthorizedException("Admin privilege required!");
         }
+
         if(vs == null)
             throw new NotFoundException();
         return vs;
