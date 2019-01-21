@@ -49,6 +49,9 @@
 
 	<target name="build-service">
 		<echo>Building... (build-service)</echo>
+		<ant antfile="build1.xml" target="build"></ant>
+		<ant antfile="build1.xml" target="buildRnsInfo"></ant>
+		<ant antfile="build2.xml" target="buildClient"></ant>
 		<ant antfile="sol_build.xml" target="generate-artifacts"></ant>
 		<javac
 				destdir="${build.dir}"
