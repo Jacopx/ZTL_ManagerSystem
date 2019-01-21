@@ -1,6 +1,6 @@
 package it.polito.dp2.RNS.sol3.service.db;
 
-import it.polito.dp2.RNS.sol3.rest.service.jaxb.Paths;
+import it.polito.dp2.RNS.sol3.rest.service.jaxb.ShortPaths;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.SuggPath;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.Vehicle;
 
@@ -30,13 +30,13 @@ public class VehicleExt {
 
     public Vehicle getVehicle() {
         Vehicle v = new Vehicle();
-        Paths newPaths = new Paths();
+        ShortPaths newPaths = new ShortPaths();
         for(List<String> ps:paths) {
             SuggPath newPath = new SuggPath();
             newPath.getRelation().addAll(ps);
             newPaths.getSuggPath().add(newPath);
         }
-        v.getPaths().add(newPaths);
+        v.getShortPaths().add(newPaths);
         return vehicle;
     }
 
