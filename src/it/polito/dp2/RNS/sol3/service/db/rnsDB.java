@@ -11,6 +11,8 @@ import it.polito.dp2.RNS.sol3.service.service.SearchVehicles;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -282,6 +284,7 @@ public class rnsDB {
     private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
         Vehicles list = new Vehicles();
         boolean add; int added=0;
+        String format = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
         for(VehicleExt v:vehicles.values()) {
             add = true;
             if(keyword != null && !keyword.isEmpty()) {
@@ -295,7 +298,15 @@ public class rnsDB {
             if(!add) continue;
 
             if(entrytime != null && !entrytime.isEmpty()) {
-                add = v.getVehicle().getEntryTime().toString().equals(entrytime);
+                XMLGregorianCalendar calendar;
+                try {
+                    GregorianCalendar cal = new GregorianCalendar();
+                    cal.setTime(new SimpleDateFormat(format).parse(entrytime));
+                    calendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
+                } catch (DatatypeConfigurationException | ParseException e) {
+                    e.printStackTrace();
+                }
+                add = v.getVehicle().getEntryTime().equals(calendar);
             }
             if(!add) continue;
 
