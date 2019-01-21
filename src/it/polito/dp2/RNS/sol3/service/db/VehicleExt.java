@@ -1,5 +1,7 @@
 package it.polito.dp2.RNS.sol3.service.db;
 
+import it.polito.dp2.RNS.sol3.rest.service.jaxb.Paths;
+import it.polito.dp2.RNS.sol3.rest.service.jaxb.Path;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.Vehicle;
 
 import java.util.List;
@@ -27,6 +29,14 @@ public class VehicleExt {
     }
 
     public Vehicle getVehicle() {
+        Vehicle v = new Vehicle();
+        Paths newPaths = new Paths();
+        for(List<String> ps:paths) {
+            Path newPath = new Path();
+            newPath.getRelation().addAll(ps);
+            newPaths.getPath().add(newPath);
+        }
+        v.getPaths().add(newPaths);
         return vehicle;
     }
 

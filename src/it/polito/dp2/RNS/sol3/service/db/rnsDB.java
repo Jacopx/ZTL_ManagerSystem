@@ -168,7 +168,7 @@ public class rnsDB {
             v.setFrom(vehicleReader.getOrigin().getId());
             v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
             v.setTo(vehicleReader.getDestination().getId());
-            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
+            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getDestination().getId())).getPlace().getSelf());
             v.setPosition(vehicleReader.getPosition().getId());
             v.setState(vehicleReader.getState().value());
 

@@ -79,6 +79,21 @@
                 <xsd:element name="fromNode" type="xsd:anyURI"/>
                 <xsd:element name="to" type="xsd:anyURI"/>
                 <xsd:element name="toNode" type="xsd:anyURI"/>
+                <xsd:element name="paths" type="Paths" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="Paths">
+        <xsd:sequence>
+            <xsd:element ref="path" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="path">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="relation" type="xsd:anyURI" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
