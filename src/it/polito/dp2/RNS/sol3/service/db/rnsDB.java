@@ -298,7 +298,7 @@ public class rnsDB {
             if(!add) continue;
 
             if(entrytime != null && !entrytime.isEmpty()) {
-                XMLGregorianCalendar calendar;
+                XMLGregorianCalendar calendar = null;
                 try {
                     GregorianCalendar cal = new GregorianCalendar();
                     cal.setTime(new SimpleDateFormat(format).parse(entrytime));
