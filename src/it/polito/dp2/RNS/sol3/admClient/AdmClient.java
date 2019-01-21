@@ -45,10 +45,6 @@ public class AdmClient implements it.polito.dp2.RNS.lab3.AdmClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("places");
 
-        PlacesRequest placesRequest = new PlacesRequest();
-        placesRequest.setAdmin(1);
-        placesRequest.setKeyword(s);
-
         Response response = target.queryParam("keyword", s).request(MediaType.APPLICATION_JSON).get();
         if(response.getStatus() == 200) {
             Places places = response.readEntity(new GenericType<Places>(){});
