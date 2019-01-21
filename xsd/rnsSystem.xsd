@@ -74,8 +74,11 @@
                 <xsd:element name="state" type="xsd:string"/>
                 <xsd:element name="entry_time" type="xsd:dateTime"/>
                 <xsd:element name="position" type="xsd:anyURI"/>
+                <xsd:element name="positionNode" type="xsd:anyURI"/>
                 <xsd:element name="from" type="xsd:anyURI"/>
+                <xsd:element name="fromNode" type="xsd:anyURI"/>
                 <xsd:element name="to" type="xsd:anyURI"/>
+                <xsd:element name="toNode" type="xsd:anyURI"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -93,7 +96,9 @@
             <xsd:sequence>
                 <xsd:element name="self" type="xsd:anyURI"/>
                 <xsd:element name="from" type="xsd:anyURI"/>
+                <xsd:element name="fromNode" type="xsd:anyURI"/>
                 <xsd:element name="to" type="xsd:anyURI"/>
+                <xsd:element name="toNode" type="xsd:anyURI"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

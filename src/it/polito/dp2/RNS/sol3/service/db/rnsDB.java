@@ -140,7 +140,6 @@ public class rnsDB {
         }
 
         // CONNECTIONS
-        //@TODO: Fix multiple instance of same connections
         for(ConnectionReader connectionReader:monitor.getConnections()) {
             Connection newConnection = new Connection();
             long id = getNextConn();
@@ -148,12 +147,14 @@ public class rnsDB {
             newConnection.setSelf(URL + "/connections/" + id);
             long FROM = placeExtById.get(connectionReader.getFrom().getId());
             PlaceExt placeFrom = placeExtByNode.get(FROM);
-            newConnection.setFrom(placeFrom.getPlace().getSelf());
+            newConnection.setFrom(placeFrom.getPlace().getId());
+            newConnection.setFromNode(placeFrom.getPlace().getSelf());
             placeFrom.addConnections(id, newConnection);
 
             long TO = placeExtById.get(connectionReader.getTo().getId());
             PlaceExt placeTo = placeExtByNode.get(TO);
-            newConnection.setTo(placeTo.getPlace().getSelf());
+            newConnection.setTo(placeTo.getPlace().getId());
+            newConnection.setToNode(placeTo.getPlace().getSelf());
             placeTo.addConnectedBy(id, newConnection);
 
             connectionById.putIfAbsent(id, newConnection);
@@ -165,7 +166,9 @@ public class rnsDB {
 //            v.setEntryTime();
             v.setId(vehicleReader.getId());
             v.setFrom(vehicleReader.getOrigin().getId());
+            v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
             v.setTo(vehicleReader.getDestination().getId());
+            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
             v.setPosition(vehicleReader.getPosition().getId());
             v.setState(vehicleReader.getState().value());
 
