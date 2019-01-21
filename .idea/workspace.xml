@@ -53,13 +53,12 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="651">
-                  <caret line="292" column="111" selection-start-line="292" selection-start-column="111" selection-end-line="292" selection-end-column="111" />
+                <state relative-caret-position="148">
+                  <caret line="284" column="20" selection-start-line="284" selection-start-column="20" selection-end-line="284" selection-end-column="20" />
                   <folding>
                     <element signature="e#8264#8265#0" expanded="true" />
                     <element signature="e#8322#8323#0" expanded="true" />
-                    <element signature="e#11575#11576#0" expanded="true" />
-                    <element signature="e#11627#11628#0" expanded="true" />
+                    <element signature="e#12127#12128#0" expanded="true" />
                     <element signature="method#updateVehicle#0;class#rnsDB#0" />
                   </folding>
                 </state>
@@ -94,7 +93,7 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/xsd/rnsSystem.xsd">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="188">
+                <state relative-caret-position="1702">
                   <caret line="74" column="61" lean-forward="true" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
                 </state>
               </provider>
@@ -179,7 +178,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548078615688" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548079547562" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -249,14 +248,7 @@
       <workItem from="1547973714157" duration="400000" />
       <workItem from="1547974137595" duration="7452000" />
       <workItem from="1548058291959" duration="5982000" />
-      <workItem from="1548065474676" duration="5695000" />
-    </task>
-    <task id="LOCAL-00011" summary="Fixing system property">
-      <created>1547757570394</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1547757570394</updated>
+      <workItem from="1548065474676" duration="6593000" />
     </task>
     <task id="LOCAL-00012" summary="Solving some issue">
       <created>1547761776000</created>
@@ -594,11 +586,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548077017602</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Trying stream">
+      <created>1548078627707</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1548078627707</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65868000" />
+    <option name="totallyTimeSpent" value="66766000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -642,7 +641,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Return places with connections" />
     <MESSAGE value="Adding vehicle managing" />
     <MESSAGE value="Adding vehicle for debug" />
     <MESSAGE value="Error not allocated map" />
@@ -667,7 +665,8 @@
     <MESSAGE value="Little but and more resistant" />
     <MESSAGE value="Minor fix" />
     <MESSAGE value="Removing double check of vehicles and places" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removing double check of vehicles and places" />
+    <MESSAGE value="Trying stream" />
+    <option name="LAST_COMMIT_MESSAGE" value="Trying stream" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -941,7 +940,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/xsd/rnsSystem.xsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
+        <state relative-caret-position="1702">
           <caret line="74" column="61" lean-forward="true" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
         </state>
       </provider>
@@ -959,16 +958,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/VehicleExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding>
-            <element signature="method#VehicleExt#0;class#VehicleExt#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1359">
@@ -979,15 +968,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/VehicleExt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+          <folding>
+            <element signature="method#VehicleExt#0;class#VehicleExt#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="292" column="111" selection-start-line="292" selection-start-column="111" selection-end-line="292" selection-end-column="111" />
+        <state relative-caret-position="148">
+          <caret line="284" column="20" selection-start-line="284" selection-start-column="20" selection-end-line="284" selection-end-column="20" />
           <folding>
             <element signature="e#8264#8265#0" expanded="true" />
             <element signature="e#8322#8323#0" expanded="true" />
-            <element signature="e#11575#11576#0" expanded="true" />
-            <element signature="e#11627#11628#0" expanded="true" />
+            <element signature="e#12127#12128#0" expanded="true" />
             <element signature="method#updateVehicle#0;class#rnsDB#0" />
           </folding>
         </state>

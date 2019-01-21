@@ -282,17 +282,39 @@ public class rnsDB {
     //@TODO: Resolve with stream
     private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
         Vehicles list = new Vehicles();
-//        for(VehicleExt v:vehicles.values()) {
-//            list.getVehicle().add(v.getVehicle());
-//        }
+        boolean add;
+        for(VehicleExt v:vehicles.values()) {
+            add = true;
+            if(!keyword.isEmpty() && keyword != null) {
+                add = v.getVehicle().getId().contains(keyword);
+            }
+            if(!add) continue;
+
+            if(!state.isEmpty() && state != null) {
+                add = v.getVehicle().getState().equals(state);
+            }
+            if(!add) continue;
+
+            if(!entrytime.isEmpty() && entrytime != null) {
+                add = v.getVehicle().getEntryTime().equals(entrytime);
+            }
+            if(!add) continue;
+
+            if(!position.isEmpty() && position != null) {
+                add = v.getVehicle().getPosition().equals(position);
+            }
+            if(!add) continue;
+
+            list.getVehicle().add(v.getVehicle());
+        }
+
+
         List newList = vehicles.values().stream()
                 .filter(v -> (keyword == null) || v.getVehicle().getId().contains(keyword))
                 .filter(v -> (state == null) || v.getVehicle().getState().equals(state))
                 .filter(v -> (position == null) || v.getVehicle().getPosition().equals(position))
                 .collect(Collectors.toList());
         //                .filter(v -> (entrytime ==  null) || v.getVehicle().getEntryTime().equals(entrytime))
-
-        list.getVehicle().addAll(newList);
         return list;
     }
 
