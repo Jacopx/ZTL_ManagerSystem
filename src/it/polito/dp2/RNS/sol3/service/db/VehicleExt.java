@@ -37,7 +37,7 @@ public class VehicleExt {
             newPaths.getSuggPath().add(newPath);
         }
         v.getShortPaths().add(newPaths);
-        return vehicle;
+        return v;
     }
 
     public void setVehicle(Vehicle vehicle) {
