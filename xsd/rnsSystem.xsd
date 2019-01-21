@@ -4,9 +4,13 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="self" type="xsd:anyURI"/>
-                <xsd:element name="places" type="xsd:anyURI"/>
-                <xsd:element name="vehicles" type="xsd:anyURI"/>
-                <xsd:element name="connections" type="xsd:anyURI"/>
+                <xsd:element name="placesLink" type="xsd:anyURI"/>
+                <xsd:element name="vehiclesLink" type="xsd:anyURI"/>
+                <xsd:element name="connectionsLink" type="xsd:anyURI"/>
+                <xsd:sequence>
+                    <xsd:element ref="places"/>
+                    <xsd:element ref="vehicles"/>
+                </xsd:sequence>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

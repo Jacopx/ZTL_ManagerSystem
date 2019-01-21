@@ -34,14 +34,18 @@ public class rnsResources {
             @ApiResponse(code = 200, message = "OK"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public RnsSystem getRnsSystem() {
+    public RnsSystem getRnsSystem(@QueryParam("admin") int admin) {
         RnsSystem rns = new RnsSystem();
         UriBuilder root = uriInfo.getAbsolutePathBuilder();
         UriBuilder places = root.clone().path("places");
         rns.setSelf(root.toTemplate());
-        rns.setPlaces(places.toTemplate());
-        rns.setVehicles(root.clone().path("vehicles").toTemplate());
-        rns.setConnections(root.clone().path("connections").toTemplate());
+        rns.setPlacesLink(places.toTemplate());
+        rns.setVehiclesLink(root.clone().path("vehicles").toTemplate());
+        rns.setConnectionsLink(root.clone().path("connections").toTemplate());
+        if(admin == 1) {
+            rns.setPlaces(getPlaces(admin, null, null));
+            rns.setVehicles(getVehicles(admin, null, null, null, null, null));
+        }
         return rns;
     }
 
