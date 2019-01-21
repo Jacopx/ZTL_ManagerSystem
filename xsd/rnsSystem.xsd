@@ -86,11 +86,11 @@
 
     <xsd:complexType name="Paths">
         <xsd:sequence>
-            <xsd:element ref="path" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="suggPath" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
     </xsd:complexType>
 
-    <xsd:element name="path">
+    <xsd:element name="suggPath">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="relation" type="xsd:anyURI" maxOccurs="unbounded"/>
