@@ -5,7 +5,6 @@ import it.polito.dp2.RNS.lab3.ServiceException;
 import it.polito.dp2.RNS.sol1.PlaceReaderPersonal;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.Place;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.Places;
-import it.polito.dp2.RNS.sol3.rest.service.jaxb.PlacesRequest;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
