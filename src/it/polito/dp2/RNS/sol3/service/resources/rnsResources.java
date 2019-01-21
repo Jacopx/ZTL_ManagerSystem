@@ -134,17 +134,21 @@ public class rnsResources {
                                 @QueryParam("entrytime") String entrytime,
                                 @QueryParam("position") String position
     ) {
-        switch (type.toLowerCase()) {
-            case "car":
-                return service.getVehicles(SearchVehicles.CAR, keyword, state, entrytime, position);
-            case "truck":
-                return service.getVehicles(SearchVehicles.TRUCK, keyword, state, entrytime, position);
-            case "caravan":
-                return service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entrytime, position);
-            case "shuttle":
-                return service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entrytime, position);
-            default:
-                return service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
+        if(type != null && !type.isEmpty()) {
+            switch (type.toLowerCase()) {
+                case "car":
+                    return service.getVehicles(SearchVehicles.CAR, keyword, state, entrytime, position);
+                case "truck":
+                    return service.getVehicles(SearchVehicles.TRUCK, keyword, state, entrytime, position);
+                case "caravan":
+                    return service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entrytime, position);
+                case "shuttle":
+                    return service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entrytime, position);
+                default:
+                    return service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
+            }
+        } else {
+            return service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
         }
     }
 
