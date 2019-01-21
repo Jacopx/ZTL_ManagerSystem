@@ -79,12 +79,12 @@
                 <xsd:element name="fromNode" type="xsd:anyURI"/>
                 <xsd:element name="to" type="xsd:anyURI"/>
                 <xsd:element name="toNode" type="xsd:anyURI"/>
-                <xsd:element name="paths" type="Paths" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="shortPaths" type="ShortPaths" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:complexType name="Paths">
+    <xsd:complexType name="ShortPaths">
         <xsd:sequence>
             <xsd:element ref="suggPath" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
