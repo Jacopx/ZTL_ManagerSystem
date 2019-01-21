@@ -140,6 +140,7 @@ public class rnsDB {
         }
 
         // CONNECTIONS
+        //@TODO: Fix multiple instance of same connections
         for(ConnectionReader connectionReader:monitor.getConnections()) {
             Connection newConnection = new Connection();
             long id = getNextConn();
@@ -159,17 +160,17 @@ public class rnsDB {
         }
 
         // VEHICLE for debug
-//        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
-//            Vehicle v = new Vehicle();
-////            v.setEntryTime();
-//            v.setId(vehicleReader.getId());
-//            v.setFrom(vehicleReader.getOrigin().getId());
-//            v.setTo(vehicleReader.getDestination().getId());
-//            v.setPosition(vehicleReader.getPosition().getId());
-//            v.setState(vehicleReader.getState().value());
-//
-//            addVehicle(getNextVehicle(), v);
-//        }
+        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
+            Vehicle v = new Vehicle();
+//            v.setEntryTime();
+            v.setId(vehicleReader.getId());
+            v.setFrom(vehicleReader.getOrigin().getId());
+            v.setTo(vehicleReader.getDestination().getId());
+            v.setPosition(vehicleReader.getPosition().getId());
+            v.setState(vehicleReader.getState().value());
+
+            addVehicle(getNextVehicle(), v);
+        }
     }
 
     //@TODO: To be tested
@@ -190,7 +191,7 @@ public class rnsDB {
     private Places searchPlaces(ConcurrentHashMap<Long, PlaceExt> place, String keyword) {
         Places list = new Places();
         for(PlaceExt p:place.values()) {
-            if(!keyword.isEmpty()) {
+            if(keyword != null && !keyword.isEmpty()) {
                 if(p.getPlace().getId().contains(keyword))
                     list.getPlace().add(p.getPlace());
             } else {
@@ -234,6 +235,7 @@ public class rnsDB {
             return null;
     }
 
+    //@TODO: Add paths to vehicle nodes
     private Set<List<String>> computePath(Vehicle vehicle) {
         try {
             return pff.findShortestPaths(vehicle.getPosition(), vehicle.getTo(), 999);
@@ -268,10 +270,10 @@ public class rnsDB {
     private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
         Vehicles list = new Vehicles();
         List newList = vehicles.values().stream()
-                .filter(v -> keyword == null || v.getVehicle().getId().contains(keyword))
-                .filter(v -> state == null || v.getVehicle().getState().equals(state))
-                .filter(v -> entrytime ==  null || v.getVehicle().getEntryTime().equals(entrytime))
-                .filter(v -> position == null || v.getVehicle().getPosition().equals(position))
+                .filter(v -> (keyword == null || keyword.isEmpty()) || v.getVehicle().getId().contains(keyword))
+                .filter(v -> (state == null || keyword.isEmpty()) || v.getVehicle().getState().equals(state))
+                .filter(v -> (entrytime ==  null || keyword.isEmpty()) || v.getVehicle().getEntryTime().equals(entrytime))
+                .filter(v -> (position == null || keyword.isEmpty()) || v.getVehicle().getPosition().equals(position))
                 .collect(Collectors.toList());
         list.getVehicle().addAll(newList);
         return list;

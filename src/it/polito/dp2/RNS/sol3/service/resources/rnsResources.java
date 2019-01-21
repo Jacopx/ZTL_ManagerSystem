@@ -56,15 +56,19 @@ public class rnsResources {
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Places getPlaces(@QueryParam("type") String type, @QueryParam("keyword") String keyword
     ) {
-        switch (type.toLowerCase()) {
-            case "gate":
-                return service.getPlaces(SearchPlaces.GATE, keyword);
-            case "segment":
-                return service.getPlaces(SearchPlaces.SEGMENT, keyword);
-            case "parking":
-                return service.getPlaces(SearchPlaces.PARKING, keyword);
-            default:
-                return service.getPlaces(SearchPlaces.ALL, keyword);
+        if(type != null && !type.isEmpty()) {
+            switch (type.toLowerCase()) {
+                case "gate":
+                    return service.getPlaces(SearchPlaces.GATE, keyword);
+                case "segment":
+                    return service.getPlaces(SearchPlaces.SEGMENT, keyword);
+                case "parking":
+                    return service.getPlaces(SearchPlaces.PARKING, keyword);
+                default:
+                    return service.getPlaces(SearchPlaces.ALL, keyword);
+            }
+        } else {
+            return service.getPlaces(SearchPlaces.ALL, keyword);
         }
     }
 
