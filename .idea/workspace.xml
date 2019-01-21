@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="Adding vehicle update and insert">
+    <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" afterDir="false" />
     </list>
@@ -40,9 +40,11 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="622">
-                  <caret line="272" column="50" selection-start-line="272" selection-start-column="50" selection-end-line="272" selection-end-column="50" />
+                <state relative-caret-position="-1013">
+                  <caret line="183" column="52" lean-forward="true" selection-start-line="183" selection-start-column="52" selection-end-line="183" selection-end-column="52" />
                   <folding>
+                    <element signature="method#rnsDB#0;class#rnsDB#0" />
+                    <element signature="method#searchPlaces#0;class#rnsDB#0" />
                     <element signature="method#createPlace#0;class#rnsDB#0" />
                     <element signature="method#getConnections#0;class#rnsDB#0" />
                     <element signature="method#addVehicle#0;class#rnsDB#0" />
@@ -184,7 +186,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548060449857" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548060838850" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -253,7 +255,7 @@
       <workItem from="1547815910017" duration="13178000" />
       <workItem from="1547973714157" duration="400000" />
       <workItem from="1547974137595" duration="7452000" />
-      <workItem from="1548058291959" duration="1815000" />
+      <workItem from="1548058291959" duration="2194000" />
     </task>
     <task id="LOCAL-00001" summary="Starting good development">
       <created>1547734269114</created>
@@ -542,11 +544,25 @@
       <option name="project" value="LOCAL" />
       <updated>1548060265447</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="temp fix">
+      <created>1548060461781</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1548060461781</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Fixing stream">
+      <created>1548060619984</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1548060619984</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56006000" />
+    <option name="totallyTimeSpent" value="56385000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -590,8 +606,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Improving DB part" />
-    <MESSAGE value="Connection to be fixed" />
     <MESSAGE value="Adding self" />
     <MESSAGE value="Fixing new self added" />
     <MESSAGE value="Removing unused functions" />
@@ -615,7 +629,9 @@
     <MESSAGE value="Fix little error" />
     <MESSAGE value="Making some fix to vehicles and places" />
     <MESSAGE value="Trying to fix vehicles search" />
-    <option name="LAST_COMMIT_MESSAGE" value="Trying to fix vehicles search" />
+    <MESSAGE value="temp fix" />
+    <MESSAGE value="Fixing stream" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing stream" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -903,9 +919,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="272" column="50" selection-start-line="272" selection-start-column="50" selection-end-line="272" selection-end-column="50" />
+        <state relative-caret-position="-1013">
+          <caret line="183" column="52" lean-forward="true" selection-start-line="183" selection-start-column="52" selection-end-line="183" selection-end-column="52" />
           <folding>
+            <element signature="method#rnsDB#0;class#rnsDB#0" />
+            <element signature="method#searchPlaces#0;class#rnsDB#0" />
             <element signature="method#createPlace#0;class#rnsDB#0" />
             <element signature="method#getConnections#0;class#rnsDB#0" />
             <element signature="method#addVehicle#0;class#rnsDB#0" />
