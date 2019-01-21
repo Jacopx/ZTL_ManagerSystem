@@ -8,7 +8,11 @@ import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 import it.polito.dp2.RNS.sol3.service.service.SearchVehicles;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -163,7 +167,13 @@ public class rnsDB {
         // VEHICLE for debug
         for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
             Vehicle v = new Vehicle();
-//            v.setEntryTime();
+
+            try {
+                XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) vehicleReader.getEntryTime());
+                v.setEntryTime(cal);
+            } catch (DatatypeConfigurationException e) {
+                e.printStackTrace();
+            }
             v.setId(vehicleReader.getId());
             v.setFrom(vehicleReader.getOrigin().getId());
             v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());

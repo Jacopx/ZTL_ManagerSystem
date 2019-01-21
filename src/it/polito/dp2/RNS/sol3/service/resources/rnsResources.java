@@ -8,6 +8,7 @@ import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.service.SearchVehicles;
 import it.polito.dp2.RNS.sol3.service.service.rnsService;
 import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -56,20 +57,32 @@ public class rnsResources {
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Places getPlaces(@QueryParam("type") String type, @QueryParam("keyword") String keyword
     ) {
+        Places places;
         if(type != null && !type.isEmpty()) {
             switch (type.toLowerCase()) {
-                case "gate":
-                    return service.getPlaces(SearchPlaces.GATE, keyword);
-                case "segment":
-                    return service.getPlaces(SearchPlaces.SEGMENT, keyword);
-                case "parking":
-                    return service.getPlaces(SearchPlaces.PARKING, keyword);
-                default:
-                    return service.getPlaces(SearchPlaces.ALL, keyword);
+                case "gate": {
+                    places = service.getPlaces(SearchPlaces.GATE, keyword);
+                    break;
+                }
+                case "segment": {
+                    places = service.getPlaces(SearchPlaces.SEGMENT, keyword);
+                    break;
+                }
+                case "parking": {
+                    places = service.getPlaces(SearchPlaces.PARKING, keyword);
+                    break;
+                }
+                default: {
+                    places = service.getPlaces(SearchPlaces.ALL, keyword);
+                    break;
+                }
             }
         } else {
-            return service.getPlaces(SearchPlaces.ALL, keyword);
+            places = service.getPlaces(SearchPlaces.ALL, keyword);
         }
+        if (places==null)
+            throw new NotFoundException();
+        return places;
     }
 
     @GET
@@ -95,10 +108,14 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Connections getConnections() {
-        return service.getConnections();
+        Connections conns = service.getConnections();
+        if(conns == null)
+            throw new NotFoundException();
+        return conns;
     }
 
     @GET
@@ -134,22 +151,36 @@ public class rnsResources {
                                 @QueryParam("entrytime") String entrytime,
                                 @QueryParam("position") String position
     ) {
+        Vehicles vs;
         if(type != null && !type.isEmpty()) {
             switch (type.toLowerCase()) {
-                case "car":
-                    return service.getVehicles(SearchVehicles.CAR, keyword, state, entrytime, position);
-                case "truck":
-                    return service.getVehicles(SearchVehicles.TRUCK, keyword, state, entrytime, position);
-                case "caravan":
-                    return service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entrytime, position);
-                case "shuttle":
-                    return service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entrytime, position);
-                default:
-                    return service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
+                case "car": {
+                    vs = service.getVehicles(SearchVehicles.CAR, keyword, state, entrytime, position);
+                    break;
+                }
+                case "truck": {
+                    vs = service.getVehicles(SearchVehicles.TRUCK, keyword, state, entrytime, position);
+                    break;
+                }
+                case "caravan": {
+                    vs = service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entrytime, position);
+                    break;
+                }
+                case "shuttle": {
+                    vs = service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entrytime, position);
+                    break;
+                }
+                default: {
+                    vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
+                    break;
+                }
             }
         } else {
-            return service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
+            vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
         }
+        if(vs == null)
+            throw new NotFoundException();
+        return vs;
     }
 
     @GET
