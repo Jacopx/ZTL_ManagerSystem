@@ -298,14 +298,7 @@ public class rnsDB {
             if(!add) continue;
 
             if(entrytime != null && !entrytime.isEmpty()) {
-                XMLGregorianCalendar xmlGregorianCalendar = null;
-                try {
-                    xmlGregorianCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(entrytime);
-                } catch (DatatypeConfigurationException e) {
-                    e.printStackTrace();
-                }
-
-                add = v.getVehicle().getEntryTime().equals(xmlGregorianCalendar);
+                add = v.getVehicle().getEntryTime().toString().equals(entrytime);
             }
             if(!add) continue;
 
