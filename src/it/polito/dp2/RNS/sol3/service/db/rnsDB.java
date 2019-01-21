@@ -174,6 +174,7 @@ public class rnsDB {
             } catch (DatatypeConfigurationException e) {
                 e.printStackTrace();
             }
+
             v.setId(vehicleReader.getId());
             v.setFrom(vehicleReader.getOrigin().getId());
             v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
@@ -215,9 +216,7 @@ public class rnsDB {
     }
 
     public Place getPlace(long node) {
-        if(placeExtByNode.contains(node))
-            return placeExtByNode.get(node).getPlace();
-        return null;
+        return placeExtByNode.get(node).getPlace();
     }
 
     public Place createPlace(long node, Place place) {
@@ -298,9 +297,7 @@ public class rnsDB {
     }
 
     public Vehicle getVehicle(long id) {
-        if(vehicles.contains(id))
-            return vehicles.get(id).getVehicle();
-        return null;
+        return vehicles.get(id).getVehicle();
     }
 
     public Vehicle updateVehicle(long id, Vehicle vehicle) {
