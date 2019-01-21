@@ -55,31 +55,36 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Places getPlaces(@QueryParam("type") String type, @QueryParam("keyword") String keyword
+    public Places getPlaces(@QueryParam("admin") int admin, @QueryParam("type") String type, @QueryParam("keyword") String keyword
     ) {
         Places places;
-        if(type != null && !type.isEmpty()) {
-            switch (type.toLowerCase()) {
-                case "gate": {
-                    places = service.getPlaces(SearchPlaces.GATE, keyword);
-                    break;
+        if(admin == 1) {
+            if(type != null && !type.isEmpty()) {
+                switch (type.toLowerCase()) {
+                    case "gate": {
+                        places = service.getPlaces(SearchPlaces.GATE, keyword);
+                        break;
+                    }
+                    case "segment": {
+                        places = service.getPlaces(SearchPlaces.SEGMENT, keyword);
+                        break;
+                    }
+                    case "parking": {
+                        places = service.getPlaces(SearchPlaces.PARKING, keyword);
+                        break;
+                    }
+                    default: {
+                        places = service.getPlaces(SearchPlaces.ALL, keyword);
+                        break;
+                    }
                 }
-                case "segment": {
-                    places = service.getPlaces(SearchPlaces.SEGMENT, keyword);
-                    break;
-                }
-                case "parking": {
-                    places = service.getPlaces(SearchPlaces.PARKING, keyword);
-                    break;
-                }
-                default: {
-                    places = service.getPlaces(SearchPlaces.ALL, keyword);
-                    break;
-                }
+            } else {
+                places = service.getPlaces(SearchPlaces.ALL, keyword);
             }
         } else {
-            places = service.getPlaces(SearchPlaces.ALL, keyword);
+            throw new NotAuthorizedException();
         }
+
         if (places==null)
             throw new NotFoundException();
         return places;
