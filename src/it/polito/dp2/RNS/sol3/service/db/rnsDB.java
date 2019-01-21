@@ -13,10 +13,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -246,10 +243,22 @@ public class rnsDB {
         vehicle.setSelf(URL + "/vehicles/" + id);
         if (vehicles.putIfAbsent(id, vehicleExt)==null) {
             //@TODO: From placeID to connectionID
-            vehicleExt.setPaths(computePath(vehicle));
+            vehicleExt.setPaths(convert(computePath(vehicle)));
             return vehicle;
         } else
             return null;
+    }
+
+    private Set<List<String>> convert(Set<List<String>> computePath) {
+        Set<List<String>> newPaths = new HashSet<>();
+        for(List<String> ps:computePath) {
+            List<String> newList = new ArrayList<>();
+            for(String node:ps) {
+                newList.add(placeExtByNode.get(placeExtById.get(node)).getPlace().getSelf());
+            }
+            newPaths.add(newList);
+        }
+        return newPaths;
     }
 
     private Set<List<String>> computePath(Vehicle vehicle) {
@@ -284,7 +293,6 @@ public class rnsDB {
     private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
         Vehicles list = new Vehicles();
         boolean add; int added=0;
-        String format = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
         for(VehicleExt v:vehicles.values()) {
             add = true;
             if(keyword != null && !keyword.isEmpty()) {
@@ -331,7 +339,7 @@ public class rnsDB {
 
         //@TODO: Missing verify goodness
         if(!vehicle.getPosition().equals(old.getPosition())) {
-            vehicleExt.setPaths(computePath(vehicle));
+            vehicleExt.setPaths(convert(computePath(vehicle)));
         }
 
         return vehicle;
