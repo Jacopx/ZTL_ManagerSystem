@@ -307,14 +307,6 @@ public class rnsDB {
 
             list.getVehicle().add(v.getVehicle());
         }
-
-
-        List newList = vehicles.values().stream()
-                .filter(v -> (keyword == null) || v.getVehicle().getId().contains(keyword))
-                .filter(v -> (state == null) || v.getVehicle().getState().equals(state))
-                .filter(v -> (position == null) || v.getVehicle().getPosition().equals(position))
-                .collect(Collectors.toList());
-        //                .filter(v -> (entrytime ==  null) || v.getVehicle().getEntryTime().equals(entrytime))
         return list;
     }
 

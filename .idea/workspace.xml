@@ -53,12 +53,12 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="148">
-                  <caret line="284" column="20" selection-start-line="284" selection-start-column="20" selection-end-line="284" selection-end-column="20" />
+                <state relative-caret-position="556">
+                  <caret line="308" column="9" selection-start-line="308" selection-start-column="9" selection-end-line="308" selection-end-column="9" />
                   <folding>
                     <element signature="e#8264#8265#0" expanded="true" />
                     <element signature="e#8322#8323#0" expanded="true" />
-                    <element signature="e#12127#12128#0" expanded="true" />
+                    <element signature="e#11637#11638#0" expanded="true" />
                     <element signature="method#updateVehicle#0;class#rnsDB#0" />
                   </folding>
                 </state>
@@ -178,7 +178,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548079547562" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548079584441" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -248,14 +248,7 @@
       <workItem from="1547973714157" duration="400000" />
       <workItem from="1547974137595" duration="7452000" />
       <workItem from="1548058291959" duration="5982000" />
-      <workItem from="1548065474676" duration="6593000" />
-    </task>
-    <task id="LOCAL-00012" summary="Solving some issue">
-      <created>1547761776000</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1547761776000</updated>
+      <workItem from="1548065474676" duration="6630000" />
     </task>
     <task id="LOCAL-00013" summary="Improving DB part">
       <created>1547763657825</created>
@@ -593,11 +586,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548078627707</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Implementing searchVehicles">
+      <created>1548079569601</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1548079569601</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66766000" />
+    <option name="totallyTimeSpent" value="66803000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -641,7 +641,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adding vehicle managing" />
     <MESSAGE value="Adding vehicle for debug" />
     <MESSAGE value="Error not allocated map" />
     <MESSAGE value="Adding vehicle update and insert" />
@@ -666,7 +665,8 @@
     <MESSAGE value="Minor fix" />
     <MESSAGE value="Removing double check of vehicles and places" />
     <MESSAGE value="Trying stream" />
-    <option name="LAST_COMMIT_MESSAGE" value="Trying stream" />
+    <MESSAGE value="Implementing searchVehicles" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementing searchVehicles" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -980,12 +980,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="284" column="20" selection-start-line="284" selection-start-column="20" selection-end-line="284" selection-end-column="20" />
+        <state relative-caret-position="556">
+          <caret line="308" column="9" selection-start-line="308" selection-start-column="9" selection-end-line="308" selection-end-column="9" />
           <folding>
             <element signature="e#8264#8265#0" expanded="true" />
             <element signature="e#8322#8323#0" expanded="true" />
-            <element signature="e#12127#12128#0" expanded="true" />
+            <element signature="e#11637#11638#0" expanded="true" />
             <element signature="method#updateVehicle#0;class#rnsDB#0" />
           </folding>
         </state>
