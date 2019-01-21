@@ -259,7 +259,6 @@ public class rnsDB {
         return null;
     }
 
-    //@TODO: To be tested
     public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entrytime, String position) {
         switch (scope) {
             case CAR: {
@@ -283,16 +282,17 @@ public class rnsDB {
     //@TODO: Resolve with stream
     private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
         Vehicles list = new Vehicles();
-        for(VehicleExt v:vehicles.values()) {
-            list.getVehicle().add(v.getVehicle());
-        }
-//        List newList = vehicles.values().stream()
-//                .filter(v -> (keyword == null || keyword.isEmpty()) || v.getVehicle().getId().contains(keyword))
-//                .filter(v -> (state == null || keyword.isEmpty()) || v.getVehicle().getState().equals(state))
-//                .filter(v -> (entrytime ==  null || keyword.isEmpty()) || v.getVehicle().getEntryTime().equals(entrytime))
-//                .filter(v -> (position == null || keyword.isEmpty()) || v.getVehicle().getPosition().equals(position))
-//                .collect(Collectors.toList());
-//        list.getVehicle().addAll(newList);
+//        for(VehicleExt v:vehicles.values()) {
+//            list.getVehicle().add(v.getVehicle());
+//        }
+        List newList = vehicles.values().stream()
+                .filter(v -> (keyword == null) || v.getVehicle().getId().contains(keyword))
+                .filter(v -> (state == null) || v.getVehicle().getState().equals(state))
+                .filter(v -> (position == null) || v.getVehicle().getPosition().equals(position))
+                .collect(Collectors.toList());
+        //                .filter(v -> (entrytime ==  null) || v.getVehicle().getEntryTime().equals(entrytime))
+
+        list.getVehicle().addAll(newList);
         return list;
     }
 
