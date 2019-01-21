@@ -5,9 +5,10 @@
 			Script for RNS Assignment 2 solution
 	</description>
 
-	<property name="lab2.location" location="." />
-	<property name="schema.dir" location="${lab2.location}/custom" />
+	<property name="basedir" location="." />
+	<property name="schema.dir" location="${basedir}/custom" />
 	<property name="lib.jar" value="lab1.jar" />
+	<property name="gen.dir" location="${basedir}/gen-src" />
 
 	<!-- Target generate-bindings -->
 	<target name="generate-artifacts" unless="generate-artifacts.notRequired" description="Generate bindings from schema">
