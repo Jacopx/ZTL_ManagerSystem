@@ -6,7 +6,7 @@
 	</description>
 
 	<property name="basedir" location="." />
-	<property name="schema.dir" location="${basedir}/custom" />
+	<property name="custom.dir" location="${basedir}/custom" />
 	<property name="lib.jar" value="lab1.jar" />
 	<property name="gen.dir" location="${basedir}/gen-src" />
 
@@ -18,9 +18,9 @@
 			<arg value="-p" />
 			<arg value="it.polito.dp2.RNS.sol2.jaxb" />
 			<!--<arg value="${schema.dir}/RNSinfo.xsd" />-->
-			<arg value="${schema.dir}/ObjectFactory.xsd" />
-			<arg value="${schema.dir}/pathResponse.xsd" />
-			<arg value="${schema.dir}/basicResponse.xsd" />
+			<arg value="${custom.dir}/ObjectFactory.xsd" />
+			<arg value="${custom.dir}/pathResponse.xsd" />
+			<arg value="${custom.dir}/basicResponse.xsd" />
 		</exec>
 	</target>
 </project>
