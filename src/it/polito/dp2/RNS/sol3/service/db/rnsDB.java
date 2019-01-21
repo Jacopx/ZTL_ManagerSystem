@@ -281,7 +281,7 @@ public class rnsDB {
 
     private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
         Vehicles list = new Vehicles();
-        boolean add;
+        boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
             add = true;
             if(keyword != null && !keyword.isEmpty()) {
@@ -305,8 +305,9 @@ public class rnsDB {
             if(!add) continue;
 
             list.getVehicle().add(v.getVehicle());
+            ++added;
         }
-        if (list.getVehicle().isEmpty())
+        if (added == 0)
             return null;
         return list;
     }
