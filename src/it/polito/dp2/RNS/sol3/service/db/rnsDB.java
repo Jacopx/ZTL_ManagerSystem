@@ -285,22 +285,22 @@ public class rnsDB {
         boolean add;
         for(VehicleExt v:vehicles.values()) {
             add = true;
-            if(!keyword.isEmpty() && keyword != null) {
+            if(keyword != null && !keyword.isEmpty()) {
                 add = v.getVehicle().getId().contains(keyword);
             }
             if(!add) continue;
 
-            if(!state.isEmpty() && state != null) {
+            if(state != null && !state.isEmpty()) {
                 add = v.getVehicle().getState().equals(state);
             }
             if(!add) continue;
 
-            if(!entrytime.isEmpty() && entrytime != null) {
+            if(entrytime != null && !entrytime.isEmpty()) {
                 add = v.getVehicle().getEntryTime().equals(entrytime);
             }
             if(!add) continue;
 
-            if(!position.isEmpty() && position != null) {
+            if(position != null && !position.isEmpty()) {
                 add = v.getVehicle().getPosition().equals(position);
             }
             if(!add) continue;
