@@ -298,15 +298,14 @@ public class rnsDB {
             if(!add) continue;
 
             if(entrytime != null && !entrytime.isEmpty()) {
-                XMLGregorianCalendar calendar = null;
+                XMLGregorianCalendar xmlGregorianCalendar = null;
                 try {
-                    GregorianCalendar cal = new GregorianCalendar();
-                    cal.setTime(new SimpleDateFormat(format).parse(entrytime));
-                    calendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
-                } catch (DatatypeConfigurationException | ParseException e) {
+                    xmlGregorianCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(entrytime);
+                } catch (DatatypeConfigurationException e) {
                     e.printStackTrace();
                 }
-                add = v.getVehicle().getEntryTime().equals(calendar);
+
+                add = v.getVehicle().getEntryTime().equals(xmlGregorianCalendar);
             }
             if(!add) continue;
 

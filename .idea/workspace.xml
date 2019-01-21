@@ -51,12 +51,12 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="401">
-                  <caret line="300" column="53" selection-start-line="300" selection-start-column="53" selection-end-line="300" selection-end-column="53" />
+                <state relative-caret-position="539">
+                  <caret line="306" column="16" lean-forward="true" selection-start-line="306" selection-start-column="16" selection-end-line="306" selection-end-column="16" />
                   <folding>
                     <element signature="e#8264#8265#0" expanded="true" />
                     <element signature="e#8322#8323#0" expanded="true" />
-                    <element signature="e#12261#12262#0" expanded="true" />
+                    <element signature="e#12154#12155#0" expanded="true" />
                     <element signature="method#updateVehicle#0;class#rnsDB#0" />
                   </folding>
                 </state>
@@ -176,7 +176,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548081056952" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548081318629" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -246,14 +246,7 @@
       <workItem from="1547973714157" duration="400000" />
       <workItem from="1547974137595" duration="7452000" />
       <workItem from="1548058291959" duration="5982000" />
-      <workItem from="1548065474676" duration="7761000" />
-    </task>
-    <task id="LOCAL-00019" summary="Try to fix">
-      <created>1547800724380</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1547800724380</updated>
+      <workItem from="1548065474676" duration="7963000" />
     </task>
     <task id="LOCAL-00020" summary="Try to fix">
       <created>1547802112263</created>
@@ -591,11 +584,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548081009556</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Fixing calendar problem in getVehicles">
+      <created>1548081063756</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1548081063756</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67934000" />
+    <option name="totallyTimeSpent" value="68136000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -976,12 +976,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="300" column="53" selection-start-line="300" selection-start-column="53" selection-end-line="300" selection-end-column="53" />
+        <state relative-caret-position="539">
+          <caret line="306" column="16" lean-forward="true" selection-start-line="306" selection-start-column="16" selection-end-line="306" selection-end-column="16" />
           <folding>
             <element signature="e#8264#8265#0" expanded="true" />
             <element signature="e#8322#8323#0" expanded="true" />
-            <element signature="e#12261#12262#0" expanded="true" />
+            <element signature="e#12154#12155#0" expanded="true" />
             <element signature="method#updateVehicle#0;class#rnsDB#0" />
           </folding>
         </state>
