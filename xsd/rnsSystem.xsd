@@ -28,6 +28,7 @@
             <xsd:sequence>
                 <xsd:element name="id" type="xsd:string"/>
                 <xsd:element name="self" type="xsd:anyURI"/>
+                <xsd:element name="capacity" type="xsd:int"/>
                 <xsd:choice>
                     <xsd:element name="gate" type="GateItem"/>
                     <xsd:element name="segment" type="SegmentItem"/>

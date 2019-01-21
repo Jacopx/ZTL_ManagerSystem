@@ -25,8 +25,8 @@ public class rnsService {
         return db.getPlaces(scope, keyword);
     }
 
-    public Place getPlace(long id) {
-        return db.getPlace(id);
+    public Place getPlace(long id, String placeID) {
+        return db.getPlace(id, placeID);
     }
 
     public Connections getConnections() {

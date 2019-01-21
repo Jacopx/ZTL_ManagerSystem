@@ -67,4 +67,22 @@
 		</javac>
 		<echo>Done.</echo>
 	</target>
+
+	<target name="build-client">
+		<echo>Building... (build-service)</echo>
+		<javac
+				destdir="${build.dir}"
+				debug="${debug}"
+				source="${source}"
+				target="${target}"
+				includeantruntime="false">
+			<src path="${src.dir}" />
+			<src path="${gen.dir}" />
+			<include name="it/polito/dp2/RNS/sol3/**" />
+			<classpath>
+				<path refid="sol.classpath" />
+			</classpath>
+		</javac>
+		<echo>Done.</echo>
+	</target>
 </project>

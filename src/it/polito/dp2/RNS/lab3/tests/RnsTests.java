@@ -51,7 +51,7 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 
         
         // Create implementation under test       
-        System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.admClient.AdmClientFactory");
+        System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.AdmClient.AdmClientFactory");
         // Create implementation under test       
         testRnsReader = AdmClientFactory.newInstance().newAdmClient();
         
@@ -89,7 +89,7 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 	// creates an instance of the AdmClient under test
 	AdmClient createTestAdmClient() throws AdmClientException, FactoryConfigurationError {
 		// Create AdmClient under test
-		System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.admClient.AdmClientFactory");
+		System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.AdmClient.AdmClientFactory");
 		AdmClient testAdmClient = AdmClientFactory.newInstance().newAdmClient();
 		assertNotNull("The implementation under test generated a null AdmClient", testAdmClient);
 		return testAdmClient;

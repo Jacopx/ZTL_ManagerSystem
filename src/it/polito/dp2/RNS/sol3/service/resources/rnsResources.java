@@ -60,7 +60,9 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Places getPlaces(@QueryParam("admin") int admin, @QueryParam("type") String type, @QueryParam("keyword") String keyword
+    public Places getPlaces(@QueryParam("admin") int admin,
+                            @QueryParam("type") String type,
+                            @QueryParam("keyword") String keyword
     ) {
         Places places;
         if(admin == 1) {
@@ -105,8 +107,8 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Place getItem(@PathParam("id") long id) {
-        Place place = service.getPlace(id);
+    public Place getPlace(@PathParam("id") long id, @QueryParam("placeID") String placeID) {
+        Place place = service.getPlace(id, placeID);
         if (place==null)
             throw new NotFoundException();
         return place;

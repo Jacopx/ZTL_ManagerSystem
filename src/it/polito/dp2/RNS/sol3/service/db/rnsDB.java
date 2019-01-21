@@ -95,6 +95,7 @@ public class rnsDB {
         // PLACE GATE
         for (GateReader gateReader : monitor.getGates(null)) {
             Place newGate = new Place();
+            newGate.setCapacity(gateReader.getCapacity());
             if(gateReader.getType().toString().equals(GateItem.IN.value())) {
                 newGate.setGate(GateItem.IN);
             } else if(gateReader.getType().toString().equals(GateItem.INOUT.value())) {
@@ -117,6 +118,7 @@ public class rnsDB {
             park.getServices().addAll(parkingAreaReader.getServices());
 
             Place newPark = new Place();
+            newPark.setCapacity(parkingAreaReader.getCapacity());
             newPark.setId(parkingAreaReader.getId());
             newPark.setParking(park);
             long id = getNextId();
@@ -133,6 +135,7 @@ public class rnsDB {
             seg.setName(roadSegmentReader.getName());
 
             Place newRoadSeg = new Place();
+            newRoadSeg.setCapacity(roadSegmentReader.getCapacity());
             newRoadSeg.setId(roadSegmentReader.getId());
             newRoadSeg.setSegment(seg);
             long id = getNextId();
@@ -164,27 +167,27 @@ public class rnsDB {
         }
 
         // VEHICLE for debug
-        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
-            Vehicle v = new Vehicle();
-
-            try {
-                XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) vehicleReader.getEntryTime());
-                v.setEntryTime(cal);
-            } catch (DatatypeConfigurationException e) {
-                e.printStackTrace();
-            }
-
-            v.setId(vehicleReader.getId());
-            v.setFrom(vehicleReader.getOrigin().getId());
-            v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
-            v.setTo(vehicleReader.getDestination().getId());
-            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getDestination().getId())).getPlace().getSelf());
-            v.setPosition(vehicleReader.getPosition().getId());
-            v.setPositionNode(placeExtByNode.get(placeExtById.get(vehicleReader.getPosition().getId())).getPlace().getSelf());
-            v.setState(vehicleReader.getState().value());
-
-            addVehicle(getNextVehicle(), v);
-        }
+//        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
+//            Vehicle v = new Vehicle();
+//
+//            try {
+//                XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) vehicleReader.getEntryTime());
+//                v.setEntryTime(cal);
+//            } catch (DatatypeConfigurationException e) {
+//                e.printStackTrace();
+//            }
+//
+//            v.setId(vehicleReader.getId());
+//            v.setFrom(vehicleReader.getOrigin().getId());
+//            v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
+//            v.setTo(vehicleReader.getDestination().getId());
+//            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getDestination().getId())).getPlace().getSelf());
+//            v.setPosition(vehicleReader.getPosition().getId());
+//            v.setPositionNode(placeExtByNode.get(placeExtById.get(vehicleReader.getPosition().getId())).getPlace().getSelf());
+//            v.setState(vehicleReader.getState().value());
+//
+//            addVehicle(getNextVehicle(), v);
+//        }
     }
 
     public Places getPlaces(SearchPlaces scope, String keyword) {
@@ -214,8 +217,12 @@ public class rnsDB {
         return list;
     }
 
-    public Place getPlace(long node) {
-        return placeExtByNode.get(node).getPlace();
+    public Place getPlace(long node, String placeID) {
+        if(node >= 0)
+            return placeExtByNode.get(node).getPlace();
+        if(placeID != null && !placeID.isEmpty())
+            return placeExtByNode.get(placeExtById.get(placeID)).getPlace();
+        return null;
     }
 
     public Place createPlace(long node, Place place) {
@@ -237,7 +244,6 @@ public class rnsDB {
         return connectionById.get(id);
     }
 
-    //@TODO: Differentiation by vehicle type
     public Vehicle addVehicle(long id, Vehicle vehicle) {
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
         vehicle.setSelf(URL + "/vehicles/" + id);
