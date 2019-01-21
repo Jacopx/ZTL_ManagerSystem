@@ -279,7 +279,6 @@ public class rnsDB {
         }
     }
 
-    //@TODO: Resolve with stream
     private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
         Vehicles list = new Vehicles();
         boolean add;
@@ -296,7 +295,7 @@ public class rnsDB {
             if(!add) continue;
 
             if(entrytime != null && !entrytime.isEmpty()) {
-                add = v.getVehicle().getEntryTime().equals(entrytime);
+                add = v.getVehicle().getEntryTime().toString().equals(entrytime);
             }
             if(!add) continue;
 
@@ -307,6 +306,8 @@ public class rnsDB {
 
             list.getVehicle().add(v.getVehicle());
         }
+        if (list.getVehicle().isEmpty())
+            return null;
         return list;
     }
 
