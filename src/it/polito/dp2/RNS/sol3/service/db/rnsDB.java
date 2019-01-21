@@ -205,7 +205,9 @@ public class rnsDB {
     }
 
     public Place getPlace(long node) {
-        return placeExtByNode.get(node).getPlace();
+        if(placeExtByNode.contains(node))
+            return placeExtByNode.get(node).getPlace();
+        return null;
     }
 
     public Place createPlace(long node, Place place) {
@@ -232,13 +234,13 @@ public class rnsDB {
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
         vehicle.setSelf(URL + "/vehicles/" + id);
         if (vehicles.putIfAbsent(id, vehicleExt)==null) {
+            //@TODO: From placeID to connectionID
             vehicleExt.setPaths(computePath(vehicle));
             return vehicle;
         } else
             return null;
     }
 
-    //@TODO: Add paths to vehicle nodes
     private Set<List<String>> computePath(Vehicle vehicle) {
         try {
             return pff.findShortestPaths(vehicle.getPosition(), vehicle.getTo(), 999);
@@ -286,7 +288,9 @@ public class rnsDB {
     }
 
     public Vehicle getVehicle(long id) {
-        return vehicles.get(id).getVehicle();
+        if(vehicles.contains(id))
+            return vehicles.get(id).getVehicle();
+        return null;
     }
 
     public Vehicle updateVehicle(long id, Vehicle vehicle) {
