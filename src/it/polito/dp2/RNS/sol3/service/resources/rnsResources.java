@@ -82,7 +82,7 @@ public class rnsResources {
                 places = service.getPlaces(SearchPlaces.ALL, keyword);
             }
         } else {
-            throw new NotAuthorizedException();
+            throw new NotAuthorizedException("Admin privilege required!");
         }
 
         if (places==null)
