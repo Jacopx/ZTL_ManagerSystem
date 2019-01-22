@@ -16,6 +16,8 @@
 	<property name="shared.location" location="/opt/dp2/shared"/>
 	<property name="ext.lib.dir" location="${shared.location}/lib" />
 
+	<property name="it.polito.dp2.RNS.lab3.AdmClientFactory" value="it.polito.dp2.RNS.sol3.AdmClientFactory" />
+
 	<property name="debug" value="true" />
 	<property name="target" value="1.8" />
 	<property name="source" value="1.8" />

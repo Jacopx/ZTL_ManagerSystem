@@ -62,9 +62,15 @@ public class rnsResources {
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Places getPlaces(@QueryParam("admin") int admin,
                             @QueryParam("type") String type,
-                            @QueryParam("keyword") String keyword
+                            @QueryParam("keyword") String keyword,
+                            @QueryParam("placeID") String placeID
     ) {
         Places places;
+        if(placeID != null && !placeID.isEmpty()) {
+            places = new Places();
+            places.getPlace().add(service.getPlace(-1, placeID));
+            return places;
+        }
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
@@ -107,8 +113,8 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Place getPlace(@PathParam("id") long id, @QueryParam("placeID") String placeID) {
-        Place place = service.getPlace(id, placeID);
+    public Place getPlace(@PathParam("id") long id) {
+        Place place = service.getPlace(id, null);
         if (place==null)
             throw new NotFoundException();
         return place;
@@ -162,9 +168,15 @@ public class rnsResources {
                                 @QueryParam("keyword") String keyword,
                                 @QueryParam("state") String state,
                                 @QueryParam("entrytime") String entrytime,
-                                @QueryParam("position") String position
+                                @QueryParam("position") String position,
+                                @QueryParam("plate") String plate
     ) {
         Vehicles vs = null;
+        if(plate != null && !plate.isEmpty()) {
+            vs = new Vehicles();
+            vs.getVehicle().add(service.getVehicle(-1, plate));
+            return vs;
+        }
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
@@ -211,8 +223,8 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicle getVehicle(@PathParam("id") long id, @QueryParam("plate") String plate) {
-        Vehicle vehicle = service.getVehicle(id, plate);
+    public Vehicle getVehicle(@PathParam("id") long id) {
+        Vehicle vehicle = service.getVehicle(id, null);
         if (vehicle==null)
             throw new NotFoundException();
         return vehicle;
