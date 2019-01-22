@@ -276,7 +276,7 @@ public class rnsDB {
         return null;
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entrytime, String position) {
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, XMLGregorianCalendar entrytime, String position) {
         switch (scope) {
             case CAR: {
                 return searchVehicles(vehicles, keyword, state, entrytime, position);
@@ -296,7 +296,7 @@ public class rnsDB {
         }
     }
 
-    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
+    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, XMLGregorianCalendar entrytime, String position) {
         Vehicles list = new Vehicles();
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
@@ -311,8 +311,8 @@ public class rnsDB {
             }
             if(!add) continue;
 
-            if(entrytime != null && !entrytime.isEmpty()) {
-                add = v.getVehicle().getEntryTime().toString().equals(entrytime);
+            if(entrytime != null ) {
+                add = v.getVehicle().getEntryTime().equals(entrytime);
             }
             if(!add) continue;
 

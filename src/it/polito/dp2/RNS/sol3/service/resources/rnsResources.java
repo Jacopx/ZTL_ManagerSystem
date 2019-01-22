@@ -12,6 +12,7 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.net.URI;
 
 /**
@@ -167,7 +168,7 @@ public class rnsResources {
                                 @QueryParam("type") String type,
                                 @QueryParam("keyword") String keyword,
                                 @QueryParam("state") String state,
-                                @QueryParam("entrytime") String entrytime,
+                                @QueryParam("entrytime") XMLGregorianCalendar entrytime,
                                 @QueryParam("position") String position,
                                 @QueryParam("plateID") String plateID
     ) {

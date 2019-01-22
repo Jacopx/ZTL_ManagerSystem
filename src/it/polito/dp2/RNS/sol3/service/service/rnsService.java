@@ -3,6 +3,8 @@ package it.polito.dp2.RNS.sol3.service.service;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.db.rnsDB;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 /**
  * Copyright by Jacopx on 2019-01-16.
  */
@@ -37,7 +39,7 @@ public class rnsService {
         return db.getConnection(id);
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entrytime, String position) {
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, XMLGregorianCalendar entrytime, String position) {
         return db.getVehicles(scope, keyword, state, entrytime, position);
     }
 
