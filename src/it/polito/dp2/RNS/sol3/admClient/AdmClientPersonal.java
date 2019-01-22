@@ -42,11 +42,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public VehicleReader getUpdatedVehicle(String id) throws ServiceException {
-        VehicleReader vehicleReader = getVehicle(id);
-        if(vehicleReader == null) {
-            throw new ServiceException();
-        }
-        return vehicleReader;
+        return getVehicle(id);
     }
 
     @Override
@@ -225,8 +221,8 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             response = target.request(MediaType.APPLICATION_JSON).get();
 
         if(response.getStatus() == 200) {
-            System.out.println("Vehicle: " + s + " GET 200 OK");
             Vehicle vehicle = response.readEntity(new GenericType<Vehicle>(){});
+            System.out.println("Vehicle [" + vehicle.getId() + "]: " + vehicle.getEntryTime());
             return new VehicleReaderPersonal(vehicle.getId(), vehicle.getEntryTime().toGregorianCalendar(), vehicle.getType(), vehicle.getState());
         } else {
             System.out.println("Vehicle: " + s + " 4xx NOT");
