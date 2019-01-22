@@ -23,9 +23,9 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     private String URL;
 
     public AdmClientPersonal newAdmClient() {
-        if(System.getProperty("URL") == null) {
+        if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
             this.URL = "http://localhost:8080/RnsSystem/rest";
-            System.setProperty("URL", URL);
+            System.setProperty("it.polito.dp2.RNS.lab3.URL", URL);
         }
 
         AdmClientPersonal monitor = new AdmClientPersonal();
@@ -214,7 +214,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public VehicleReader getVehicle(String s) {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target("http://localhost:8080/RnsSystem/rest").path("vehicles");
+        WebTarget target = client.target(URL).path("vehicles");
 
         Response response;
         if(s != null && !s.isEmpty())
@@ -223,11 +223,11 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             response = target.request(MediaType.APPLICATION_JSON).get();
 
         if(response.getStatus() == 200) {
-            System.out.println("Vehicle: " + s + "GET 200 OK");
+            System.out.println("Vehicle: " + s + " GET 200 OK");
             Vehicle vehicle = response.readEntity(new GenericType<Vehicle>(){});
             return new VehicleReaderPersonal(vehicle.getId(), vehicle.getEntryTime().toGregorianCalendar(), vehicle.getType(), vehicle.getState());
         } else {
-            System.out.println("Vehicle: " + s + "4xx NOT");
+            System.out.println("Vehicle: " + s + " 4xx NOT");
             return null;
         }
     }

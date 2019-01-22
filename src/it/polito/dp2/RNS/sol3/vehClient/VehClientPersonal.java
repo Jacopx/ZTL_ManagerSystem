@@ -24,9 +24,9 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     private String URL;
 
     public VehClientPersonal newVehClient() {
-        if(System.getProperty("URL") == null) {
+        if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
             this.URL = "http://localhost:8080/RnsSystem/rest";
-            System.setProperty("URL", URL);
+            System.setProperty("it.polito.dp2.RNS.lab3.URL", URL);
         }
 
         VehClientPersonal monitor = new VehClientPersonal();

@@ -368,9 +368,10 @@ public class rnsDB {
             else
                 return null;
         if(plate != null && !plate.isEmpty()) {
-            Vehicle ve = vehicles.values().stream().filter(v -> v.getVehicle().getId().equals(plate)).findFirst().get().getVehicle();
-            if(ve != null)
-                return ve;
+            for(VehicleExt ve:vehicles.values()) {
+                if(ve.getVehicle().getId().equals(plate))
+                    return ve.getVehicle();
+            }
         }
         return null;
     }
