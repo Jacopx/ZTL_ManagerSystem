@@ -12,6 +12,7 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
  */
 public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     private String BASE;
+    private RnsReader rnsReader;
 
     public AdmClientPersonal newAdmClient() {
         if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
@@ -30,95 +32,84 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             BASE = System.getProperty("it.polito.dp2.RNS.lab3.URL");
         }
 
+        rnsReader = new RnsReaderPersonal();
         AdmClientPersonal monitor = new AdmClientPersonal();
         return monitor;
     }
 
     @Override
     public Set<VehicleReader> getUpdatedVehicles(String place) throws ServiceException {
-        return null;
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(BASE).path("vehicles");
+
+        Response response = null;
+        if(place != null && !place.isEmpty())
+            response = target.queryParam("position", place).request(MediaType.APPLICATION_JSON).get();
+        else
+            return null;
+
+        if(response.getStatus() == 200) {
+            Set<VehicleReader> vehicleReaderSet = new HashSet<>();
+            Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
+            for(Vehicle v:vehicleResponse.getVehicle()) {
+               vehicleReaderSet.add(new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState()));
+            }
+            return vehicleReaderSet;
+        } else {
+            throw new ServiceException();
+        }
     }
 
     @Override
     public VehicleReader getUpdatedVehicle(String id) throws ServiceException {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(BASE).path("vehicles");
+
+        Response response = null;
+        if(id != null && !id.isEmpty())
+            response = target.queryParam("plateID", id).request(MediaType.APPLICATION_JSON).get();
+        else
+            return null;
+
+        if(response.getStatus() == 200) {
+            Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
+            for(Vehicle v:vehicleResponse.getVehicle()) {
+                return new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState());
+            }
+        } else {
+            throw new ServiceException();
+        }
         return null;
     }
 
     @Override
     public Set<PlaceReader> getPlaces(String s) {
-        Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(BASE).path("places");
-
-        Response response = null;
-        if(s != null && !s.isEmpty())
-            response = target.queryParam("keyword", s).request(MediaType.APPLICATION_JSON).get();
-        else
-            response = target.request(MediaType.APPLICATION_JSON).get();
-
-        if(response.getStatus() == 200) {
-            Places placesResponse = response.readEntity(new GenericType<Places>(){});
-            Set<PlaceReader> places = new HashSet<>();
-            Set<PlaceReader> nextPlaces;
-            for(Place pR:placesResponse.getPlace()) {
-                nextPlaces = new HashSet<>();
-                for(String placeID:pR.getConnections()) {
-                    PlaceReader temp = getPlace(placeID);
-                    nextPlaces.add(new PlaceReaderPersonal(temp.getCapacity(), temp.getId(), null));
-                }
-                places.add(new PlaceReaderPersonal(pR.getCapacity(), pR.getId(), nextPlaces));
-                System.out.println("PlaceReader of set: " + pR.getId());
-            }
-            return places;
-        }
-        return null;
+        return rnsReader.getPlaces(s);
     }
 
     @Override
     public PlaceReader getPlace(String s) {
-        Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(BASE).path("places");
-
-        Response response = null;
-        if(s != null && !s.isEmpty())
-            response = target.queryParam("placeID", s).request(MediaType.APPLICATION_JSON).get();
-        else
-            response = target.request(MediaType.APPLICATION_JSON).get();
-
-        if(response.getStatus() == 200) {
-            Places placesResponse = response.readEntity(new GenericType<Places>(){});
-            PlaceReader placeReader = null; Set<PlaceReader> nextPlaces;
-            for(Place pR:placesResponse.getPlace()) {
-                nextPlaces = new HashSet<>();
-                for(String placeID:pR.getConnections()) {
-                    PlaceReader temp = getPlace(placeID);
-                    nextPlaces.add(new PlaceReaderPersonal(temp.getCapacity(), temp.getId(), null));
-                }
-                placeReader = new PlaceReaderPersonal(pR.getCapacity(), pR.getId(), nextPlaces);
-            }
-            System.out.println("PlaceReader: " + placeReader.getId());
-            return placeReader;
-        }
-        return null;
+        return rnsReader.getPlace(s);
     }
 
     @Override
     public Set<GateReader> getGates(GateType gateType) {
-        return null;
+        return rnsReader.getGates(gateType);
     }
 
     @Override
     public Set<RoadSegmentReader> getRoadSegments(String s) {
-        return null;
+        return rnsReader.getRoadSegments(s);
     }
 
     @Override
     public Set<ParkingAreaReader> getParkingAreas(Set<String> set) {
-        return null;
+        return rnsReader.getParkingAreas(set);
     }
 
     @Override
     public Set<ConnectionReader> getConnections() {
-        return null;
+        return rnsReader.getConnections();
     }
 
     @Override
