@@ -43,8 +43,8 @@ public class rnsResources {
         rns.setVehiclesLink(root.clone().path("vehicles").toTemplate());
         rns.setConnectionsLink(root.clone().path("connections").toTemplate());
         if(admin == 1) {
-            rns.setPlaces(getPlaces(admin, null, null));
-            rns.setVehicles(getVehicles(admin, null, null, null, null, null));
+            rns.setPlaces(getPlaces(admin, null, null, null));
+            rns.setVehicles(getVehicles(admin, null, null, null, null, null, null));
         }
         return rns;
     }
