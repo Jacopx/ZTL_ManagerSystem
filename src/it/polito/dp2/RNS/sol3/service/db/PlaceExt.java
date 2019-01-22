@@ -34,11 +34,11 @@ public class PlaceExt {
     public Place getPlace() {
         for(Connection cT:connections.values())
             if(!place.getConnections().contains(cT.getSelf()))
-                place.getConnections().add(cT.getSelf());
+                place.getConnections().add(cT.getToNode());
 
         for(Connection cB:connectedBy.values())
             if(!place.getConnectedBy().contains(cB.getSelf()))
-                place.getConnectedBy().add(cB.getSelf());
+                place.getConnectedBy().add(cB.getFromNode());
 
         return place;
     }

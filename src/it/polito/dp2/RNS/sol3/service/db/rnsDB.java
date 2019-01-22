@@ -206,7 +206,6 @@ public class rnsDB {
     }
 
     private Places searchPlaces(ConcurrentHashMap<Long, PlaceExt> place, String keyword) {
-        if(lastId == 0) return null;
         Places list = new Places();
         for(PlaceExt p:place.values()) {
             if(keyword != null && !keyword.isEmpty()) {
@@ -248,22 +247,16 @@ public class rnsDB {
 
     public Vehicle addVehicle(long id, Vehicle vehicle) {
 
-        vehicle.setPositionNode(placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf());
-        vehicle.setFromNode(placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf());
-        vehicle.setToNode(placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf());
-
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
         vehicle.setSelf(URL + "/vehicles/" + id);
         if (vehicles.putIfAbsent(id, vehicleExt)==null) {
             Set<List<String>> computedPath = computePath(vehicle);
-            if(computedPath != null)
-                if(computedPath.size() == 0) {
-                    vehicle.setState("REFUSED");
-                    return vehicle;
-                } else {
-                    vehicleExt.setPaths(convert(computedPath));
-                }
-
+            if(computedPath != null && computedPath.size() == 0) {
+                vehicle.setState("REFUSED");
+                return vehicle;
+            } else {
+                vehicleExt.setPaths(convert(computedPath));
+            }
             return vehicle;
         } else
             return null;
@@ -311,7 +304,6 @@ public class rnsDB {
     }
 
     private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position) {
-        if(lastVehicle == 0) return null;
         Vehicles list = new Vehicles();
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {

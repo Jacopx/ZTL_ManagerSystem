@@ -66,11 +66,6 @@ public class rnsResources {
                             @QueryParam("placeID") String placeID
     ) {
         Places places;
-        if(placeID != null && !placeID.isEmpty()) {
-            places = new Places();
-            places.getPlace().add(service.getPlace(-1, placeID));
-            return places;
-        }
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
@@ -172,11 +167,6 @@ public class rnsResources {
                                 @QueryParam("plateID") String plateID
     ) {
         Vehicles vs = null;
-        if(plateID != null && !plateID.isEmpty()) {
-            vs = new Vehicles();
-            vs.getVehicle().add(service.getVehicle(-1, plateID));
-            return vs;
-        }
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
@@ -245,27 +235,12 @@ public class rnsResources {
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Response createVehicle(Vehicle vehicle) {
 
-        Places placeFrom = getPlaces(1, "gate", null, vehicle.getFrom());
-        if (placeFrom.getPlace().isEmpty())
-            throw new HTTPException(406);
-
-        for(Place p:placeFrom.getPlace()) {
-            if(p.getId().equals(vehicle.getFrom()))
-                if((p.getGate().value().equals("IN") || p.getGate().value().equals("INTOUT"))) {
-                    break;
-                } else {
-                    throw new HTTPException(409);
-                }
-        }
-
         long id = service.getNextVehicle();
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
         URI self = builder.build();
         vehicle.setSelf(self.toString());
 
         Vehicle created = service.addVehicle(id, vehicle);
-        if(created.getState().equals("REFUSED"))
-            throw new HTTPException(410);
 
         return Response.created(self).entity(created).build();
     }
