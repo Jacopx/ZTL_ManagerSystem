@@ -29,6 +29,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     private Set<ParkingAreaReader> parkings;
     private Set<RoadSegmentReader> segments;
     private Set<ConnectionReader> connections;
+    private Set<VehicleReader> vehicles;
 
     public AdmClientPersonal newAdmClient() {
         if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
@@ -50,6 +51,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         parkings = new HashSet<>();
         segments = new HashSet<>();
         connections = new HashSet<>();
+        vehicles = new HashSet<>();
 
         loadDB();
 
@@ -67,6 +69,8 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         System.out.println("segments#"+segments.size());
         connections = rnsReader.getConnections();
         System.out.println("connections#"+connections.size());
+        vehicles = rnsReader.getVehicles(null, null, null);
+        System.out.println("vehicles#"+vehicles.size());
     }
 
     @Override
@@ -116,27 +120,27 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public Set<PlaceReader> getPlaces(String s) {
-        return places.stream().filter(p -> p.getId().equals(s)).collect(Collectors.toSet());
+        return places.stream().filter(p -> s == null || p.getId().equals(s)).collect(Collectors.toSet());
     }
 
     @Override
     public PlaceReader getPlace(String s) {
-        return places.stream().filter(p -> p.getId().equals(s)).findFirst().get();
+        return places.stream().filter(p -> s == null || p.getId().equals(s)).findFirst().get();
     }
 
     @Override
     public Set<GateReader> getGates(GateType gateType) {
-        return gates.stream().filter(g -> g.getType() == gateType).collect(Collectors.toSet());
+        return gates.stream().filter(g -> gateType == null || g.getType() == gateType).collect(Collectors.toSet());
     }
 
     @Override
     public Set<RoadSegmentReader> getRoadSegments(String s) {
-        return segments.stream().filter(seg -> seg.getName().equals(s)).collect(Collectors.toSet());
+        return segments.stream().filter(seg -> s == null || seg.getName().equals(s)).collect(Collectors.toSet());
     }
 
     @Override
     public Set<ParkingAreaReader> getParkingAreas(Set<String> set) {
-        return parkings.stream().filter(park -> park.getServices().contains(set)).collect(Collectors.toSet());
+        return parkings.stream().filter(park -> set == null || park.getServices().containsAll(set)).collect(Collectors.toSet());
     }
 
     @Override
@@ -146,11 +150,18 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public Set<VehicleReader> getVehicles(Calendar calendar, Set<VehicleType> set, VehicleState vehicleState) {
-        return null;
+        if (calendar == null && set == null && vehicleState == null)
+            return vehicles;
+
+        return vehicles.stream()
+                .filter(v -> set == null || set.contains(v.getType()))
+                .filter(v -> vehicleState == null || vehicleState.equals(v.getState()))
+                .filter(v -> calendar == null || calendar.equals(v.getEntryTime()))
+                .collect(Collectors.toSet());
     }
 
     @Override
     public VehicleReader getVehicle(String s) {
-        return null;
+        return vehicles.stream().filter(v -> s.equals(v.getId())).findFirst().orElse(null);
     }
 }
