@@ -168,7 +168,7 @@ public class rnsResources {
                                 @QueryParam("type") String type,
                                 @QueryParam("keyword") String keyword,
                                 @QueryParam("state") String state,
-                                @QueryParam("entrytime") String entrytime,
+                                @QueryParam("entryTime") String entryTime,
                                 @QueryParam("position") String position,
                                 @QueryParam("plateID") String plateID
     ) {
@@ -182,28 +182,28 @@ public class rnsResources {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
                     case "car": {
-                        vs = service.getVehicles(SearchVehicles.CAR, keyword, state, entrytime, position);
+                        vs = service.getVehicles(SearchVehicles.CAR, keyword, state, entryTime, position);
                         break;
                     }
                     case "truck": {
-                        vs = service.getVehicles(SearchVehicles.TRUCK, keyword, state, entrytime, position);
+                        vs = service.getVehicles(SearchVehicles.TRUCK, keyword, state, entryTime, position);
                         break;
                     }
                     case "caravan": {
-                        vs = service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entrytime, position);
+                        vs = service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entryTime, position);
                         break;
                     }
                     case "shuttle": {
-                        vs = service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entrytime, position);
+                        vs = service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entryTime, position);
                         break;
                     }
                     default: {
-                        vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
+                        vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position);
                         break;
                     }
                 }
             } else {
-                vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entrytime, position);
+                vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position);
             }
         } else {
             throw new NotAuthorizedException("Admin privilege required!");

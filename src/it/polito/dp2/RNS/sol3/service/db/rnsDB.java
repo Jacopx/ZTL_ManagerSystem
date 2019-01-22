@@ -276,27 +276,27 @@ public class rnsDB {
         return null;
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entrytime, String position) {
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position) {
         switch (scope) {
             case CAR: {
-                return searchVehicles(vehicles, keyword, state, entrytime, position);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case TRUCK: {
-                return searchVehicles(vehicles, keyword, state, entrytime, position);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case CARAVAN: {
-                return searchVehicles(vehicles, keyword, state, entrytime, position);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case SHUTTLE: {
-                return searchVehicles(vehicles, keyword, state, entrytime, position);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case ALL: default: {
-                return searchVehicles(vehicles, keyword, state, entrytime, position);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
         }
     }
 
-    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
+    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position) {
         Vehicles list = new Vehicles();
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
@@ -311,10 +311,11 @@ public class rnsDB {
             }
             if(!add) continue;
 
-            XMLGregorianCalendar cal = convertDateTime(entrytime);
+            XMLGregorianCalendar cal = convertDateTime(entryTime);
 
-            if(entrytime != null ) {
-                add = v.getVehicle().getEntryTime().equals(cal);
+            if(entryTime != null ) {
+                if(v.getVehicle().getEntryTime().compare(cal) != 0)
+                    add = false;
             }
             if(!add) continue;
 

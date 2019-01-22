@@ -38,7 +38,11 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public VehicleReader getUpdatedVehicle(String id) throws ServiceException {
-        return null;
+        VehicleReader vehicleReader = getVehicle(id);
+        if(vehicleReader == null) {
+            throw new ServiceException();
+        }
+        return vehicleReader;
     }
 
     @Override
