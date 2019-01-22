@@ -9,6 +9,10 @@ import it.polito.dp2.RNS.lab3.VehClientException;
 public class VehClientFactory extends it.polito.dp2.RNS.lab3.VehClientFactory {
     @Override
     public VehClient newVehClient() throws VehClientException {
-        return new VehClientPersonal().newVehClient();
+        VehClient vehClient = new VehClientPersonal();
+        if(vehClient == null)
+            throw new VehClientException();
+        ((VehClientPersonal) vehClient).newVehClient();
+        return vehClient;
     }
 }

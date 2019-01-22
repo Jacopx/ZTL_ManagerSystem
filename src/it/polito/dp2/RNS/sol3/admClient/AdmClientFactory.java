@@ -9,6 +9,10 @@ import it.polito.dp2.RNS.lab3.AdmClientException;
 public class AdmClientFactory extends it.polito.dp2.RNS.lab3.AdmClientFactory {
     @Override
     public AdmClient newAdmClient() throws AdmClientException {
-        return new AdmClientPersonal().newAdmClient();
+        AdmClient admClient = new AdmClientPersonal();
+        if(admClient == null)
+            throw new AdmClientException();
+        ((AdmClientPersonal) admClient).newAdmClient();
+        return  admClient;
     }
 }

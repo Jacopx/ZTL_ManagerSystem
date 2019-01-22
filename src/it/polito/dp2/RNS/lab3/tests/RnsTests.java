@@ -48,10 +48,9 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		// Create reference data generator
         System.setProperty("it.polito.dp2.RNS.RnsReaderFactory", "it.polito.dp2.RNS.Random.RnsReaderFactoryImpl");
         referenceRnsReader = RnsReaderFactory.newInstance().newRnsReader();
-
         
         // Create implementation under test       
-        System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.AdmClientPersonal.AdmClientFactory");
+        System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.admClient.AdmClientFactory");
         // Create implementation under test       
         testRnsReader = AdmClientFactory.newInstance().newAdmClient();
         
@@ -89,7 +88,7 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 	// creates an instance of the AdmClientPersonal under test
 	AdmClient createTestAdmClient() throws AdmClientException, FactoryConfigurationError {
 		// Create AdmClientPersonal under test
-		System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.AdmClientPersonal.AdmClientFactory");
+		System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.admClient.AdmClientFactory");
 		AdmClient testAdmClient = AdmClientFactory.newInstance().newAdmClient();
 		assertNotNull("The implementation under test generated a null AdmClientPersonal", testAdmClient);
 		return testAdmClient;
