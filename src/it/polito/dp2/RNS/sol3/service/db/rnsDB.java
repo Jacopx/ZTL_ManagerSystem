@@ -311,6 +311,7 @@ public class rnsDB {
             if(plateID != null && !plateID.isEmpty()) {
                 if(v.getVehicle().getId().equals(plateID)) {
                     list.getVehicle().add(v.getVehicle());
+                    break;
                 } else {
                     continue;
                 }
