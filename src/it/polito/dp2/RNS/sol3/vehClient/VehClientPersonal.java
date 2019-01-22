@@ -21,11 +21,11 @@ import java.util.List;
  * Copyright by Jacopx on 2019-01-21.
  */
 public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
-    String URL;
+    private String URL;
 
     public VehClientPersonal newVehClient() {
         if(System.getProperty("URL") == null) {
-            URL = "http://localhost:8080/RnsSystem/rest";
+            this.URL = "http://localhost:8080/RnsSystem/rest";
             System.setProperty("URL", URL);
         }
 

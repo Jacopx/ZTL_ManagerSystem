@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
  * Copyright by Jacopx on 2019-01-21.
  */
 public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
-    String URL;
+    private String URL;
 
     public AdmClientPersonal newAdmClient() {
         if(System.getProperty("URL") == null) {
-            URL = "http://localhost:8080/RnsSystem/rest";
+            this.URL = "http://localhost:8080/RnsSystem/rest";
             System.setProperty("URL", URL);
         }
 
@@ -57,11 +57,12 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             Places places = response.readEntity(new GenericType<Places>(){});
             Set<PlaceReader> placesSet = new HashSet<>();
 
-            //@TODO: Missing parameters
             for(Place p:places.getPlace()) {
-                placesSet.add(new PlaceReaderPersonal(p.getCapacity(), p.getId(), null));
+                Set<PlaceReader> placeReaderSet = new HashSet<>();
+                for(String nexPl:p.getConnections())
+                    placeReaderSet.add(getPlaceID(nexPl));
+                placesSet.add(new PlaceReaderPersonal(p.getCapacity(), p.getId(), placeReaderSet));
             }
-
             return placesSet;
         }
         return null;
@@ -75,8 +76,25 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         Response response = target.queryParam("placeID", s).request(MediaType.APPLICATION_JSON).get();
         if(response.getStatus() == 200) {
             Place place = response.readEntity(new GenericType<Place>(){});
-            //@TODO: Missing parameters
-            return new PlaceReaderPersonal(place.getCapacity(), place.getId(), null);
+            Set<PlaceReader> placeReaderSet = new HashSet<>();
+            for(String p:place.getConnections())
+                placeReaderSet.add(getPlaceID(p));
+            return new PlaceReaderPersonal(place.getCapacity(), place.getId(), placeReaderSet);
+        }
+        return null;
+    }
+
+    private PlaceReader getPlaceID(String nodePath) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(nodePath);
+
+        Response response = target.request(MediaType.APPLICATION_JSON).get();
+        if(response.getStatus() == 200) {
+            Place place = response.readEntity(new GenericType<Place>(){});
+            Set<PlaceReader> placeReaderSet = new HashSet<>();
+            for(String p:place.getConnections())
+                placeReaderSet.add(getPlaceID(p));
+            return new PlaceReaderPersonal(place.getCapacity(), place.getId(), placeReaderSet);
         }
         return null;
     }
@@ -198,7 +216,12 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles");
 
-        Response response = target.queryParam("plateID", s).request(MediaType.APPLICATION_JSON).get();
+        Response response;
+        if(s != null && !s.isEmpty())
+            response = target.queryParam("plateID", s).request(MediaType.APPLICATION_JSON).get();
+        else
+            response = target.request(MediaType.APPLICATION_JSON).get();
+
         if(response.getStatus() == 200) {
             System.out.println("Vehicle: " + s + "GET 200 OK");
             Vehicle vehicle = response.readEntity(new GenericType<Vehicle>(){});
