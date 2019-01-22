@@ -311,10 +311,10 @@ public class rnsDB {
             }
             if(!add) continue;
 
-            XMLGregorianCalendar cal = convertDateTime(entryTime);
+            GregorianCalendar cal = convertDateTime(entryTime);
 
             if(entryTime != null ) {
-                if(v.getVehicle().getEntryTime().toGregorianCalendar().compareTo(cal.toGregorianCalendar()) != 0)
+                if(v.getVehicle().getEntryTime().toGregorianCalendar().compareTo(cal) != 0)
                     add = false;
             }
             if(!add) continue;
@@ -332,19 +332,15 @@ public class rnsDB {
         return list;
     }
 
-    private XMLGregorianCalendar convertDateTime(String entrytime) {
+    private GregorianCalendar convertDateTime(String entryTime) {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
-            // below line converting our string to date
-            Date date = simpleDateFormat.parse(entrytime);
+            Date date = sdf.parse(entryTime);
+            GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
+            cal.setTime(date);
 
-            // here we are getting the object of GregorianCalendar class
-            GregorianCalendar gregorianCalendar =(GregorianCalendar) GregorianCalendar.getInstance();
-
-            // by below we are setting the time of date into gregorianCalendar
-            gregorianCalendar.setTime(date);
-            return DatatypeFactory.newInstance().newXMLGregorianCalendar(gregorianCalendar);
+            return cal;
 
         } catch (Exception e) {
             e.printStackTrace();

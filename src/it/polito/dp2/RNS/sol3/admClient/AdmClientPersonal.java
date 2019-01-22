@@ -174,7 +174,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         Response response = target.queryParam("admin", 1)
                 .queryParam("type", set)
                 .queryParam("state", vehicleState)
-                .queryParam("entrytime", calendar)
+                .queryParam("entryTime", calendar)
                 .request(MediaType.APPLICATION_JSON).get();
 
         if(response.getStatus() == 200) {
