@@ -319,24 +319,26 @@ public class rnsDB {
             }
             if(!add) continue;
 
-            Date date = null;
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-                date = sdf.parse(entryTime);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            if(entryTime != null && !entryTime.isEmpty()) {
+                Date date = null;
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                    date = sdf.parse(entryTime);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
-            GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
-            if(date != null) cal.setTime(date);
+                GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
+                if(date != null) cal.setTime(date);
 
-            if(entryTime != null ) {
-                if(v.getVehicle().getEntryTime().toGregorianCalendar().compareTo(cal) != 0)
-                    add = false;
-                else
-                    add = true;
+                if(entryTime != null ) {
+                    if(v.getVehicle().getEntryTime().toGregorianCalendar().compareTo(cal) != 0)
+                        add = false;
+                    else
+                        add = true;
+                }
+                if(!add) continue;
             }
-            if(!add) continue;
 
             if(position != null && !position.isEmpty()) {
                 add = v.getVehicle().getPosition().equals(position);
