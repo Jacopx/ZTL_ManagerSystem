@@ -1,6 +1,7 @@
 package it.polito.dp2.RNS.sol3.admClient;
 
 import it.polito.dp2.RNS.*;
+import it.polito.dp2.RNS.RnsReaderFactory;
 import it.polito.dp2.RNS.lab3.ServiceException;
 import it.polito.dp2.RNS.sol1.*;
 import it.polito.dp2.RNS.sol1.jaxb.Roads;
@@ -37,7 +38,11 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             BASE = System.getProperty("it.polito.dp2.RNS.lab3.URL");
         }
 
-        rnsReader = new RnsReaderPersonal();
+        try {
+            rnsReader = RnsReaderFactory.newInstance().newRnsReader();
+        } catch (RnsReaderException e) {
+            e.printStackTrace();
+        }
         AdmClientPersonal monitor = new AdmClientPersonal();
 
         places = new HashSet<>();
