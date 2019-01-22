@@ -206,6 +206,7 @@ public class rnsDB {
     }
 
     private Places searchPlaces(ConcurrentHashMap<Long, PlaceExt> place, String keyword) {
+        if(lastId == 0) return null;
         Places list = new Places();
         for(PlaceExt p:place.values()) {
             if(keyword != null && !keyword.isEmpty()) {
@@ -310,6 +311,7 @@ public class rnsDB {
     }
 
     private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position) {
+        if(lastVehicle == 0) return null;
         Vehicles list = new Vehicles();
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
