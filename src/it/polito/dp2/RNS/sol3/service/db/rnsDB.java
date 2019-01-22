@@ -308,16 +308,16 @@ public class rnsDB {
         Vehicles list = new Vehicles();
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
+            add = true;
             if(plateID != null && !plateID.isEmpty()) {
                 if(v.getVehicle().getId().equals(plateID)) {
                     list.getVehicle().add(v.getVehicle());
-                    ++added;
-                    break;
+                    return list;
                 } else {
                     continue;
                 }
             }
-            add = true;
+
             if(keyword != null && !keyword.isEmpty()) {
                 add = v.getVehicle().getId().contains(keyword);
             }
