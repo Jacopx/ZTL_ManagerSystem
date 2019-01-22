@@ -243,18 +243,19 @@ public class rnsResources {
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicle createVehicle(Vehicle vehicle) {
+    public Response createVehicle(Vehicle vehicle) {
 
         Places placeFrom = getPlaces(1, "gate", null, vehicle.getFrom());
         if (placeFrom.getPlace().isEmpty())
             throw new HTTPException(406);
 
         for(Place p:placeFrom.getPlace()) {
-            if(p.getId().equals(vehicle.getFrom()) && (p.getGate().value().equals("IN") || p.getGate().value().equals("INTOUT"))) {
-                break;
-            } else {
-                throw new HTTPException(409);
-            }
+            if(p.getId().equals(vehicle.getFrom()))
+                if((p.getGate().value().equals("IN") || p.getGate().value().equals("INTOUT"))) {
+                    break;
+                } else {
+                    throw new HTTPException(409);
+                }
         }
 
         long id = service.getNextVehicle();
@@ -266,7 +267,7 @@ public class rnsResources {
         if(created.getState().equals("REFUSED"))
             throw new HTTPException(410);
 
-        return created;
+        return Response.created(self).entity(created).build();
     }
 
     @PUT
