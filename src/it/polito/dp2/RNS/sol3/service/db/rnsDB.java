@@ -179,6 +179,7 @@ public class rnsDB {
             }
 
             v.setId(vehicleReader.getId());
+            v.setType(vehicleReader.getType().value());
             v.setFrom(vehicleReader.getOrigin().getId());
             v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
             v.setTo(vehicleReader.getDestination().getId());
@@ -318,11 +319,22 @@ public class rnsDB {
             }
             if(!add) continue;
 
-            GregorianCalendar cal = convertDateTime(entryTime);
+            Date date = null;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                date = sdf.parse(entryTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
+            if(date != null) cal.setTime(date);
 
             if(entryTime != null ) {
                 if(v.getVehicle().getEntryTime().toGregorianCalendar().compareTo(cal) != 0)
                     add = false;
+                else
+                    add = true;
             }
             if(!add) continue;
 
@@ -337,22 +349,6 @@ public class rnsDB {
         if (added == 0)
             return null;
         return list;
-    }
-
-    private GregorianCalendar convertDateTime(String entryTime) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-
-            Date date = sdf.parse(entryTime);
-            GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
-            cal.setTime(date);
-
-            return cal;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public Vehicle getVehicle(long id, String plate) {
