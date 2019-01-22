@@ -18,16 +18,16 @@ import java.util.Set;
 /**
  * Copyright by Jacopx on 2019-01-21.
  */
-public class AdmClient implements it.polito.dp2.RNS.lab3.AdmClient {
+public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     String URL;
 
-    public AdmClient newAdmClient() {
+    public AdmClientPersonal newAdmClient() {
         if(System.getProperty("URL") == null) {
             URL = "http://localhost:8080/RnsSystem/rest";
             System.setProperty("URL", URL);
         }
 
-        AdmClient monitor = new AdmClient();
+        AdmClientPersonal monitor = new AdmClientPersonal();
         return monitor;
     }
 
@@ -69,6 +69,7 @@ public class AdmClient implements it.polito.dp2.RNS.lab3.AdmClient {
         Response response = target.queryParam("placeID", s).request(MediaType.APPLICATION_JSON).get();
         if(response.getStatus() == 200) {
             Place place = response.readEntity(new GenericType<Place>(){});
+            //@TODO: Missing parameters
             return new PlaceReaderPersonal(place.getCapacity(), place.getId(), null);
         }
         return null;

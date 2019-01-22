@@ -31,7 +31,7 @@ import java.util.TreeSet;
 
 public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 
-	protected static AdmClient testAdmClient;			// AdmClient under test
+	protected static AdmClient testAdmClient;			// AdmClientPersonal under test
 	protected static VehClient testVehClient;			// VehClient under test
 
 	protected static URL serviceUrl;
@@ -51,7 +51,7 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 
         
         // Create implementation under test       
-        System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.AdmClient.AdmClientFactory");
+        System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.AdmClientPersonal.AdmClientFactory");
         // Create implementation under test       
         testRnsReader = AdmClientFactory.newInstance().newAdmClient();
         
@@ -86,12 +86,12 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 	}
 	
 
-	// creates an instance of the AdmClient under test
+	// creates an instance of the AdmClientPersonal under test
 	AdmClient createTestAdmClient() throws AdmClientException, FactoryConfigurationError {
-		// Create AdmClient under test
-		System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.AdmClient.AdmClientFactory");
+		// Create AdmClientPersonal under test
+		System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.AdmClientPersonal.AdmClientFactory");
 		AdmClient testAdmClient = AdmClientFactory.newInstance().newAdmClient();
-		assertNotNull("The implementation under test generated a null AdmClient", testAdmClient);
+		assertNotNull("The implementation under test generated a null AdmClientPersonal", testAdmClient);
 		return testAdmClient;
 	}
 	
@@ -117,7 +117,7 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		int numberOfVehicles = getVehNumber(ac.getUpdatedVehicles(null));
 		
 		// check that initially the admin client does not find the vehicle
-		assertNull("AdmClient returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
+		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
 		// perform first step (enter)
 		vcm.nextStep();
 		// check the number of vehicles seen by the admin client has been increased by one
@@ -126,7 +126,7 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		while(!vcm.isExited())
 			vcm.nextStep();
 		// check that finally admin client does not find the vehicle
-		assertNull("AdmClient returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
+		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
 		// and that the number of vehicles seen by the admin client is as expected
 		checkExpectedVehNumber(ac.getUpdatedVehicles(null), numberOfVehicles);
 
@@ -147,8 +147,8 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		int numberOfVehicles = getVehNumber(ac.getUpdatedVehicles(null));
 		
 		// check that initially the admin client does not find the vehicles
-		assertNull("AdmClient returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId1));
-		assertNull("AdmClient returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId2));
+		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId1));
+		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId2));
 		// perform first step (enter vehicle 1)
 		vcm1.nextStep();
 		// check the number of vehicles seen by the admin client has been increased by one
@@ -169,8 +169,8 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		while(!vcm2.isExited())
 			vcm2.nextStep();
 		// check that finally admin client does not find the vehicles
-		assertNull("AdmClient returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId1));
-		assertNull("AdmClient returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId2));
+		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId1));
+		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId2));
 		// and that the number of vehicles seen by the admin client is as expected
 		checkExpectedVehNumber(ac.getUpdatedVehicles(null), numberOfVehicles);
     }
@@ -185,7 +185,7 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		// initialize the test object that manages the vehicle lifecycle
 		VehicleClientManager vcm = new VehicleClientManager(plateId, type, "UnknownPlace");
 		// check that initially the admin client does not find the vehicle
-		assertNull("AdmClient returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
+		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
 		// perform first step (enter)
 		vcm.nextStep();
     }
@@ -200,25 +200,25 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		// initialize the test object that manages the vehicle lifecycle
 		VehicleClientManager vcm = new VehicleClientManager(plateId, type, referenceRoadSegment.getId());
 		// check that initially the admin client does not find the vehicle
-		assertNull("AdmClient returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
+		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
 		// perform first step (enter)
 		vcm.nextStep();
     }
 
 
 	void checkExpectedVehNumber(Set<VehicleReader> vehicles, int expectedVehNumber) {
-		assertNotNull("AdmClient returned null set of VehicleReader", vehicles);
+		assertNotNull("AdmClientPersonal returned null set of VehicleReader", vehicles);
 		assertEquals("Wrong number of vehicles", expectedVehNumber, vehicles.size());
 	}
 
 	int getVehNumber(Set<VehicleReader> vehicles) {
-		assertNotNull("AdmClient returned null set of VehicleReader", vehicles);
+		assertNotNull("AdmClientPersonal returned null set of VehicleReader", vehicles);
 		return vehicles.size();
 	}
 
 	void checkVehicle(VehicleReader vehicle, String plateId, VehicleType type, VehicleState state, String source, String position,
 			String dest) {
-		assertNotNull("AdmClient returned null VehicleReader while a non-null one was expected", vehicle);
+		assertNotNull("AdmClientPersonal returned null VehicleReader while a non-null one was expected", vehicle);
 		compareString(plateId, vehicle.getId(), "Plate id of returned vehicle");
 		assertEquals("Wrong vehicle type in returned vehicle",type,vehicle.getType());
 		assertEquals("Wrong vehicle state in returned vehicle",state,vehicle.getState());
@@ -305,7 +305,7 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
     			// communicate exit
     			vc.exit(dest);
     			exited = true;
-    			assertNull("AdmClient returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
+    			assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
 			}
 		}
 		

@@ -19,15 +19,15 @@ import it.polito.dp2.RNS.VehicleState;
 import it.polito.dp2.RNS.VehicleType;
 
 /**
-* AdmClient is an interface for interacting with the RNS service as administrator.
-* AdmClient extends RnsReader: an implementation of AdmClient is expected to contact the RNS service
+* AdmClientPersonal is an interface for interacting with the RNS service as administrator.
+* AdmClientPersonal extends RnsReader: an implementation of AdmClientPersonal is expected to contact the RNS service
 * at initialization time, and get from the service the information about places and their connections.
 * This information is stored in the implementation object and remains fixed for the lifetime of the object.
-* For what concerns vehicles, an implementation of AdmClient always returns fresh information through
+* For what concerns vehicles, an implementation of AdmClientPersonal always returns fresh information through
 * getUpdatedVehicles or getUpdatedVehicle. Whenever one of these methods is called, the implementation
 * contacts the service and returns the fresh information just obtained from the service.
 * Instead, when the getVehicles or getVehicle inherited from RnsReader are called, an implementation of
-* AdmClient does not return any information about vehicles (i.e. it returns, respectively, an empty set or null).
+* AdmClientPersonal does not return any information about vehicles (i.e. it returns, respectively, an empty set or null).
 */
 public interface AdmClient extends RnsReader {
 
