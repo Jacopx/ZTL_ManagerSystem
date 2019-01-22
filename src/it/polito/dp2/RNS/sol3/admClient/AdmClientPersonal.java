@@ -20,12 +20,14 @@ import java.util.stream.Collectors;
  * Copyright by Jacopx on 2019-01-21.
  */
 public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
-    private String URL;
+    private String BASE;
 
     public AdmClientPersonal newAdmClient() {
         if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
-            this.URL = "http://localhost:8080/RnsSystem/rest";
-            System.setProperty("it.polito.dp2.RNS.lab3.URL", URL);
+            this.BASE = "http://localhost:8080/RnsSystem/rest";
+            System.setProperty("it.polito.dp2.RNS.lab3.URL", BASE);
+        } else {
+            BASE = System.getProperty("it.polito.dp2.RNS.lab3.URL");
         }
 
         AdmClientPersonal monitor = new AdmClientPersonal();
@@ -50,7 +52,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public Set<PlaceReader> getPlaces(String s) {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("places");
+        WebTarget target = client.target(BASE).path("places");
 
         Response response = target.queryParam("keyword", s).request(MediaType.APPLICATION_JSON).get();
         if(response.getStatus() == 200) {
@@ -71,7 +73,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public PlaceReader getPlace(String s) {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("places");
+        WebTarget target = client.target(BASE).path("places");
 
         Response response = target.queryParam("placeID", s).request(MediaType.APPLICATION_JSON).get();
         if(response.getStatus() == 200) {
@@ -102,7 +104,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public Set<GateReader> getGates(GateType gateType) {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("places");
+        WebTarget target = client.target(BASE).path("places");
 
         Response response = target.queryParam("admin", 1)
                 .queryParam("type", gateType.value())
@@ -124,7 +126,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public Set<RoadSegmentReader> getRoadSegments(String s) {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("places");
+        WebTarget target = client.target(BASE).path("places");
 
         Response response = target.queryParam("admin", 1)
                 .queryParam("type", "segment")
@@ -147,7 +149,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public Set<ParkingAreaReader> getParkingAreas(Set<String> set) {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("places");
+        WebTarget target = client.target(BASE).path("places");
 
         Response response = target.queryParam("admin", 1)
                 .queryParam("type", "parking")
@@ -169,7 +171,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public Set<ConnectionReader> getConnections() {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("connections");
+        WebTarget target = client.target(BASE).path("connections");
 
         Response response = target.request(MediaType.APPLICATION_JSON).get();
 
@@ -189,7 +191,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public Set<VehicleReader> getVehicles(Calendar calendar, Set<VehicleType> set, VehicleState vehicleState) {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("vehicles");
+        WebTarget target = client.target(BASE).path("vehicles");
 
         Response response = target.queryParam("admin", 1)
                 .queryParam("type", set)
@@ -214,7 +216,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public VehicleReader getVehicle(String s) {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("vehicles");
+        WebTarget target = client.target(BASE).path("vehicles");
 
         Response response;
         if(s != null && !s.isEmpty())

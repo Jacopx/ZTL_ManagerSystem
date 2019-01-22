@@ -21,12 +21,14 @@ import java.util.List;
  * Copyright by Jacopx on 2019-01-21.
  */
 public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
-    private String URL;
+    private String BASE;
 
     public VehClientPersonal newVehClient() {
         if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
-            this.URL = "http://localhost:8080/RnsSystem/rest";
-            System.setProperty("it.polito.dp2.RNS.lab3.URL", URL);
+            this.BASE = "http://localhost:8080/RnsSystem/rest";
+            System.setProperty("it.polito.dp2.RNS.lab3.URL", BASE);
+        } else {
+            BASE = System.getProperty("it.polito.dp2.RNS.lab3.URL");
         }
 
         VehClientPersonal monitor = new VehClientPersonal();
@@ -36,7 +38,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     @Override
     public List<String> enter(String plateId, VehicleType type, String inGate, String destination) throws ServiceException, UnknownPlaceException, WrongPlaceException, EntranceRefusedException {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("vehicles");
+        WebTarget target = client.target(BASE).path("vehicles");
 
         Vehicle vehicle = new Vehicle();
         vehicle.setId(plateId);
