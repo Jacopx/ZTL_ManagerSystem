@@ -276,7 +276,7 @@ public class rnsDB {
         return null;
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, XMLGregorianCalendar entrytime, String position) {
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entrytime, String position) {
         switch (scope) {
             case CAR: {
                 return searchVehicles(vehicles, keyword, state, entrytime, position);
@@ -296,7 +296,7 @@ public class rnsDB {
         }
     }
 
-    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, XMLGregorianCalendar entrytime, String position) {
+    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entrytime, String position) {
         Vehicles list = new Vehicles();
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
@@ -311,8 +311,10 @@ public class rnsDB {
             }
             if(!add) continue;
 
+            XMLGregorianCalendar cal = convertDateTime(entrytime);
+
             if(entrytime != null ) {
-                add = v.getVehicle().getEntryTime().equals(entrytime);
+                add = v.getVehicle().getEntryTime().equals(cal);
             }
             if(!add) continue;
 
@@ -327,6 +329,26 @@ public class rnsDB {
         if (added == 0)
             return null;
         return list;
+    }
+
+    private XMLGregorianCalendar convertDateTime(String entrytime) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSZ");
+
+            // below line converting our string to date
+            Date date = simpleDateFormat.parse(entrytime);
+
+            // here we are getting the object of GregorianCalendar class
+            GregorianCalendar gregorianCalendar =(GregorianCalendar) GregorianCalendar.getInstance();
+
+            // by below we are setting the time of date into gregorianCalendar
+            gregorianCalendar.setTime(date);
+            return DatatypeFactory.newInstance().newXMLGregorianCalendar(gregorianCalendar);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Vehicle getVehicle(long id, String plate) {

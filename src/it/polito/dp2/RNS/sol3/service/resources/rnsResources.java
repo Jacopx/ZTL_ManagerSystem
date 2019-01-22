@@ -168,7 +168,7 @@ public class rnsResources {
                                 @QueryParam("type") String type,
                                 @QueryParam("keyword") String keyword,
                                 @QueryParam("state") String state,
-                                @QueryParam("entrytime") XMLGregorianCalendar entrytime,
+                                @QueryParam("entrytime") String entrytime,
                                 @QueryParam("position") String position,
                                 @QueryParam("plateID") String plateID
     ) {

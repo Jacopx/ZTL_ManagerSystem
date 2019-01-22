@@ -39,7 +39,7 @@ public class rnsService {
         return db.getConnection(id);
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, XMLGregorianCalendar entrytime, String position) {
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entrytime, String position) {
         return db.getVehicles(scope, keyword, state, entrytime, position);
     }
 
