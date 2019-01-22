@@ -24,12 +24,6 @@ import java.util.stream.Collectors;
 public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     private String BASE;
     private RnsReader rnsReader;
-    private Set<PlaceReader> places;
-    private Set<GateReader> gates;
-    private Set<ParkingAreaReader> parkings;
-    private Set<RoadSegmentReader> segments;
-    private Set<ConnectionReader> connections;
-    private Set<VehicleReader> vehicles;
 
     public AdmClientPersonal newAdmClient() {
         if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
@@ -46,31 +40,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         }
         AdmClientPersonal monitor = new AdmClientPersonal();
 
-        places = new HashSet<>();
-        gates = new HashSet<>();
-        parkings = new HashSet<>();
-        segments = new HashSet<>();
-        connections = new HashSet<>();
-        vehicles = new HashSet<>();
-
-        loadDB();
-
         return monitor;
-    }
-
-    private void loadDB() {
-        places = rnsReader.getPlaces(null);
-        System.out.println("Places#"+places.size());
-        gates = rnsReader.getGates(null);
-        System.out.println("gates#"+gates.size());
-        parkings = rnsReader.getParkingAreas(null);
-        System.out.println("parkings#"+parkings.size());
-        segments = rnsReader.getRoadSegments(null);
-        System.out.println("segments#"+segments.size());
-        connections = rnsReader.getConnections();
-        System.out.println("connections#"+connections.size());
-        vehicles = rnsReader.getVehicles(null, null, null);
-        System.out.println("vehicles#"+vehicles.size());
     }
 
     @Override
@@ -120,48 +90,41 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public Set<PlaceReader> getPlaces(String s) {
-        return places.stream().filter(p -> s == null || p.getId().equals(s)).collect(Collectors.toSet());
+        return rnsReader.getPlaces(s);
     }
 
     @Override
     public PlaceReader getPlace(String s) {
-        return places.stream().filter(p -> s == null || p.getId().equals(s)).findFirst().get();
+        return rnsReader.getPlace(s);
     }
 
     @Override
     public Set<GateReader> getGates(GateType gateType) {
-        return gates.stream().filter(g -> gateType == null || g.getType() == gateType).collect(Collectors.toSet());
+        return getGates(gateType);
     }
 
     @Override
     public Set<RoadSegmentReader> getRoadSegments(String s) {
-        return segments.stream().filter(seg -> s == null || seg.getName().equals(s)).collect(Collectors.toSet());
+        return rnsReader.getRoadSegments(s);
     }
 
     @Override
     public Set<ParkingAreaReader> getParkingAreas(Set<String> set) {
-        return parkings.stream().filter(park -> set == null || park.getServices().containsAll(set)).collect(Collectors.toSet());
+        return rnsReader.getParkingAreas(set);
     }
 
     @Override
     public Set<ConnectionReader> getConnections() {
-        return connections;
+        return rnsReader.getConnections();
     }
 
     @Override
     public Set<VehicleReader> getVehicles(Calendar calendar, Set<VehicleType> set, VehicleState vehicleState) {
-        if (calendar == null && set == null && vehicleState == null)
-            return vehicles;
-
-        return vehicles.stream()
-                .filter(v -> set == null || set.contains(v.getType()))
-                .filter(v -> vehicleState == null || vehicleState.equals(v.getState()))
-                .filter(v -> calendar == null || calendar.equals(v.getEntryTime()))
-                .collect(Collectors.toSet());
+        return rnsReader.getVehicles(calendar, set, vehicleState);
     }
 
     @Override
     public VehicleReader getVehicle(String s) {
-        return vehicles.stream().filter(v -> s.equals(v.getId())).findFirst().orElse(null);
+        return rnsReader.getVehicle(s);
     }
 }
