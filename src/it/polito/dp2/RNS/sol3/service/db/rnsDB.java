@@ -333,7 +333,7 @@ public class rnsDB {
 
     private XMLGregorianCalendar convertDateTime(String entrytime) {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSZ");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
             // below line converting our string to date
             Date date = simpleDateFormat.parse(entrytime);
