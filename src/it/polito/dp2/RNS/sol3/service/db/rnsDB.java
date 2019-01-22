@@ -314,7 +314,7 @@ public class rnsDB {
             XMLGregorianCalendar cal = convertDateTime(entryTime);
 
             if(entryTime != null ) {
-                if(v.getVehicle().getEntryTime().compare(cal) != 0)
+                if(v.getVehicle().getEntryTime().toGregorianCalendar().compareTo(cal.toGregorianCalendar()) != 0)
                     add = false;
             }
             if(!add) continue;
