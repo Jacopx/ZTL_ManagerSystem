@@ -167,28 +167,28 @@ public class rnsDB {
             connectionById.putIfAbsent(id, newConnection);
         }
 
-        // VEHICLE for debug
-        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
-            Vehicle v = new Vehicle();
-
-            try {
-                XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) vehicleReader.getEntryTime());
-                v.setEntryTime(cal);
-            } catch (DatatypeConfigurationException e) {
-                e.printStackTrace();
-            }
-
-            v.setId(vehicleReader.getId());
-            v.setFrom(vehicleReader.getOrigin().getId());
-            v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
-            v.setTo(vehicleReader.getDestination().getId());
-            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getDestination().getId())).getPlace().getSelf());
-            v.setPosition(vehicleReader.getPosition().getId());
-            v.setPositionNode(placeExtByNode.get(placeExtById.get(vehicleReader.getPosition().getId())).getPlace().getSelf());
-            v.setState(vehicleReader.getState().value());
-
-            addVehicle(getNextVehicle(), v);
-        }
+//        // VEHICLE for debug
+//        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
+//            Vehicle v = new Vehicle();
+//
+//            try {
+//                XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) vehicleReader.getEntryTime());
+//                v.setEntryTime(cal);
+//            } catch (DatatypeConfigurationException e) {
+//                e.printStackTrace();
+//            }
+//
+//            v.setId(vehicleReader.getId());
+//            v.setFrom(vehicleReader.getOrigin().getId());
+//            v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
+//            v.setTo(vehicleReader.getDestination().getId());
+//            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getDestination().getId())).getPlace().getSelf());
+//            v.setPosition(vehicleReader.getPosition().getId());
+//            v.setPositionNode(placeExtByNode.get(placeExtById.get(vehicleReader.getPosition().getId())).getPlace().getSelf());
+//            v.setState(vehicleReader.getState().value());
+//
+//            addVehicle(getNextVehicle(), v);
+//        }
     }
 
     public Places getPlaces(SearchPlaces scope, String keyword) {
@@ -246,10 +246,23 @@ public class rnsDB {
     }
 
     public Vehicle addVehicle(long id, Vehicle vehicle) {
+
+//        vehicle.setPositionNode(placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf());
+//        vehicle.setFromNode(placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf());
+//        vehicle.setToNode(placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf());
+
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
         vehicle.setSelf(URL + "/vehicles/" + id);
         if (vehicles.putIfAbsent(id, vehicleExt)==null) {
-            vehicleExt.setPaths(convert(computePath(vehicle)));
+            Set<List<String>> computedPath = computePath(vehicle);
+            if(computedPath != null)
+                if(computedPath.size() == 0) {
+                    vehicle.setState("REFUSED");
+                    return vehicle;
+                } else {
+                    vehicleExt.setPaths(convert(computedPath));
+                }
+
             return vehicle;
         } else
             return null;

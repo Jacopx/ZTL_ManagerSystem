@@ -32,7 +32,7 @@ import java.util.TreeSet;
 public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 
 	protected static AdmClient testAdmClient;			// AdmClientPersonal under test
-	protected static VehClient testVehClient;			// VehClient under test
+	protected static VehClient testVehClient;			// VehClientPersonal under test
 
 	protected static URL serviceUrl;
 	
@@ -95,12 +95,12 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		return testAdmClient;
 	}
 	
-	// creates an instance of the VehClient under test
+	// creates an instance of the VehClientPersonal under test
 	VehClient createTestVehClient() throws VehClientException, FactoryConfigurationError {
-		// Create VehClient under test
+		// Create VehClientPersonal under test
 		System.setProperty("it.polito.dp2.RNS.lab3.VehClientFactory", "it.polito.dp2.RNS.sol3.vehClient.VehClientFactory");
 		VehClient testVehClient = VehClientFactory.newInstance().newVehClient();
-		assertNotNull("The implementation under test generated a null VehClient", testVehClient);
+		assertNotNull("The implementation under test generated a null VehClientPersonal", testVehClient);
 		return testVehClient;
 	}
 		

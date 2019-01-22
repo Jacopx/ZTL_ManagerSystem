@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Copyright by Jacopx on 2019-01-21.
@@ -33,7 +34,8 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public Set<VehicleReader> getUpdatedVehicles(String place) throws ServiceException {
-        return null;
+        Set<VehicleReader> vr = getVehicles(null, null, null);
+        return vr.stream().filter(v -> v.getPosition().equals(place)).collect(Collectors.toSet());
     }
 
     @Override

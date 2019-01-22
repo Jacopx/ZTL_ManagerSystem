@@ -8,11 +8,10 @@ import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.service.SearchVehicles;
 import it.polito.dp2.RNS.sol3.service.service.rnsService;
 import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.ws.http.HTTPException;
 import java.net.URI;
 
 /**
@@ -236,19 +235,32 @@ public class rnsResources {
     @ApiOperation(value = "createVehicle", notes = "create a new vehicle"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 201, message = "Created"),
             @ApiResponse(code = 400, message = "Bad Request"),
-            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 406, message = "Unknown Place"),
+            @ApiResponse(code = 409, message = "Not correct gateType"),
+            @ApiResponse(code = 410, message = "Entrance Refused"),
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Response createVehicle(Vehicle vehicle) {
+
+        Places placeFrom = getPlaces(1, "gate", null, vehicle.getFrom());
+        if (placeFrom.getPlace().isEmpty())
+            throw new HTTPException(406);
+        if (!placeFrom.getPlace().get(0).getGate().value().equals("IN") || !placeFrom.getPlace().get(0).getGate().value().equals("INOUT")) {
+            throw new HTTPException(409);
+        }
+
         long id = service.getNextVehicle();
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
         URI self = builder.build();
         vehicle.setSelf(self.toString());
 
         Vehicle created = service.addVehicle(id, vehicle);
+        if(created.getState().equals("REFUSED"))
+            throw new HTTPException(410);
+
         if (created!=null) {
             return Response.created(self).entity(created).build();
         } else
