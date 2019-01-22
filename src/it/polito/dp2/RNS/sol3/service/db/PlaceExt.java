@@ -33,11 +33,11 @@ public class PlaceExt {
 
     public Place getPlace() {
         for(Connection cT:connections.values())
-            if(!place.getConnections().contains(cT.getSelf()))
+            if(!place.getConnections().contains(cT.getToNode()))
                 place.getConnections().add(cT.getToNode());
 
         for(Connection cB:connectedBy.values())
-            if(!place.getConnectedBy().contains(cB.getSelf()))
+            if(!place.getConnectedBy().contains(cB.getFromNode()))
                 place.getConnectedBy().add(cB.getFromNode());
 
         return place;
@@ -51,20 +51,12 @@ public class PlaceExt {
         return connections;
     }
 
-    public Collection<Connection> getConnectionsC() {
-        return connections.values();
-    }
-
     public Connection addConnections(long cid, Connection c) {
         return connections.putIfAbsent(cid, c);
     }
 
     public Map<Long, Connection> getConnectedBy() {
         return connectedBy;
-    }
-
-    public Collection<Connection> getConnectedByC() {
-        return connectedBy.values();
     }
 
     public Connection addConnectedBy(long cid, Connection c) {
