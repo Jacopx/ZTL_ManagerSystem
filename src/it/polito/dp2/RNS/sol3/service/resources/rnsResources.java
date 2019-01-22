@@ -211,8 +211,8 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicle getVehicle(@PathParam("id") long id) {
-        Vehicle vehicle = service.getVehicle(id);
+    public Vehicle getVehicle(@PathParam("id") long id, @QueryParam("plate") String plate) {
+        Vehicle vehicle = service.getVehicle(id, plate);
         if (vehicle==null)
             throw new NotFoundException();
         return vehicle;

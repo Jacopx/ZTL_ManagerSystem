@@ -53,6 +53,7 @@
     <xsd:complexType name="SegmentItem">
         <xsd:sequence>
             <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="roadName" type="xsd:string"/>
         </xsd:sequence>
     </xsd:complexType>
 

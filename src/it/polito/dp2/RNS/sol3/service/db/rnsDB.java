@@ -133,6 +133,7 @@ public class rnsDB {
 
             SegmentItem seg = new SegmentItem();
             seg.setName(roadSegmentReader.getName());
+            seg.setRoadName(roadSegmentReader.getRoadName());
 
             Place newRoadSeg = new Place();
             newRoadSeg.setCapacity(roadSegmentReader.getCapacity());
@@ -248,7 +249,6 @@ public class rnsDB {
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
         vehicle.setSelf(URL + "/vehicles/" + id);
         if (vehicles.putIfAbsent(id, vehicleExt)==null) {
-            //@TODO: From placeID to connectionID
             vehicleExt.setPaths(convert(computePath(vehicle)));
             return vehicle;
         } else
@@ -329,8 +329,12 @@ public class rnsDB {
         return list;
     }
 
-    public Vehicle getVehicle(long id) {
-        return vehicles.get(id).getVehicle();
+    public Vehicle getVehicle(long id, String plate) {
+        if(id >= 0)
+            return vehicles.get(id).getVehicle();
+        if(plate != null && !plate.isEmpty())
+            return vehicles.values().stream().filter(v -> v.getVehicle().getId().equals(plate)).findFirst().get().getVehicle();
+        return null;
     }
 
     public Vehicle updateVehicle(long id, Vehicle vehicle) {
