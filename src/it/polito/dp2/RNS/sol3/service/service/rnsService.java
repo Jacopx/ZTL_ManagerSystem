@@ -41,8 +41,8 @@ public class rnsService {
         return db.getVehicles(scope, keyword, state, entrytime, position);
     }
 
-    public Vehicle getVehicle(long id, String plate) {
-        return db.getVehicle(id, plate);
+    public Vehicle getVehicle(long id, String plateID) {
+        return db.getVehicle(id, plateID);
     }
 
     public Vehicle addVehicle(long id, Vehicle vehicle) {

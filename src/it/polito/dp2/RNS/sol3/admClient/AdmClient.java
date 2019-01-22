@@ -187,7 +187,7 @@ public class AdmClient implements it.polito.dp2.RNS.lab3.AdmClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles");
 
-        Response response = target.queryParam("placeID", s).request(MediaType.APPLICATION_JSON).get();
+        Response response = target.queryParam("plateID", s).request(MediaType.APPLICATION_JSON).get();
         if(response.getStatus() == 200) {
             Vehicle vehicle = response.readEntity(new GenericType<Vehicle>(){});
             return new VehicleReaderPersonal(vehicle.getId(), vehicle.getEntryTime().toGregorianCalendar(), vehicle.getType(), vehicle.getState());

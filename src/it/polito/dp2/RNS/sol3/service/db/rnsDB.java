@@ -168,27 +168,27 @@ public class rnsDB {
         }
 
         // VEHICLE for debug
-//        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
-//            Vehicle v = new Vehicle();
-//
-//            try {
-//                XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) vehicleReader.getEntryTime());
-//                v.setEntryTime(cal);
-//            } catch (DatatypeConfigurationException e) {
-//                e.printStackTrace();
-//            }
-//
-//            v.setId(vehicleReader.getId());
-//            v.setFrom(vehicleReader.getOrigin().getId());
-//            v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
-//            v.setTo(vehicleReader.getDestination().getId());
-//            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getDestination().getId())).getPlace().getSelf());
-//            v.setPosition(vehicleReader.getPosition().getId());
-//            v.setPositionNode(placeExtByNode.get(placeExtById.get(vehicleReader.getPosition().getId())).getPlace().getSelf());
-//            v.setState(vehicleReader.getState().value());
-//
-//            addVehicle(getNextVehicle(), v);
-//        }
+        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
+            Vehicle v = new Vehicle();
+
+            try {
+                XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) vehicleReader.getEntryTime());
+                v.setEntryTime(cal);
+            } catch (DatatypeConfigurationException e) {
+                e.printStackTrace();
+            }
+
+            v.setId(vehicleReader.getId());
+            v.setFrom(vehicleReader.getOrigin().getId());
+            v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
+            v.setTo(vehicleReader.getDestination().getId());
+            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getDestination().getId())).getPlace().getSelf());
+            v.setPosition(vehicleReader.getPosition().getId());
+            v.setPositionNode(placeExtByNode.get(placeExtById.get(vehicleReader.getPosition().getId())).getPlace().getSelf());
+            v.setState(vehicleReader.getState().value());
+
+            addVehicle(getNextVehicle(), v);
+        }
     }
 
     public Places getPlaces(SearchPlaces scope, String keyword) {
@@ -331,9 +331,15 @@ public class rnsDB {
 
     public Vehicle getVehicle(long id, String plate) {
         if(id >= 0)
-            return vehicles.get(id).getVehicle();
-        if(plate != null && !plate.isEmpty())
-            return vehicles.values().stream().filter(v -> v.getVehicle().getId().equals(plate)).findFirst().get().getVehicle();
+            if(vehicles.get(id) != null)
+                return vehicles.get(id).getVehicle();
+            else
+                return null;
+        if(plate != null && !plate.isEmpty()) {
+            Vehicle ve = vehicles.values().stream().filter(v -> v.getVehicle().getId().equals(plate)).findFirst().get().getVehicle();
+            if(ve != null)
+                return ve;
+        }
         return null;
     }
 
