@@ -284,30 +284,37 @@ public class rnsDB {
         return null;
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position) {
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
         switch (scope) {
             case CAR: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position);
+                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
             }
             case TRUCK: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position);
+                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
             }
             case CARAVAN: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position);
+                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
             }
             case SHUTTLE: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position);
+                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
             }
             case ALL: default: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position);
+                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
             }
         }
     }
 
-    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position) {
+    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position, String plateID) {
         Vehicles list = new Vehicles();
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
+            if(plateID != null && !plateID.isEmpty()) {
+                if(v.getVehicle().getId().equals(plateID)) {
+                    list.getVehicle().add(v.getVehicle());
+                } else {
+                    continue;
+                }
+            }
             add = true;
             if(keyword != null && !keyword.isEmpty()) {
                 add = v.getVehicle().getId().contains(keyword);

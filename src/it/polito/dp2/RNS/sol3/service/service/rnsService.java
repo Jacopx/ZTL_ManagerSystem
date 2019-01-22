@@ -39,8 +39,8 @@ public class rnsService {
         return db.getConnection(id);
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position) {
-        return db.getVehicles(scope, keyword, state, entryTime, position);
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
+        return db.getVehicles(scope, keyword, state, entryTime, position, plateID);
     }
 
     public Vehicle getVehicle(long id, String plateID) {
