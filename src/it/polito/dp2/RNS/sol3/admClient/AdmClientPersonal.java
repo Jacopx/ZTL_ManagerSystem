@@ -188,8 +188,9 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             }
 
             return vehiclesSet;
+        } else {
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -199,9 +200,12 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
         Response response = target.queryParam("plateID", s).request(MediaType.APPLICATION_JSON).get();
         if(response.getStatus() == 200) {
+            System.out.println("Vehicle: " + s + "GET 200 OK");
             Vehicle vehicle = response.readEntity(new GenericType<Vehicle>(){});
             return new VehicleReaderPersonal(vehicle.getId(), vehicle.getEntryTime().toGregorianCalendar(), vehicle.getType(), vehicle.getState());
+        } else {
+            System.out.println("Vehicle: " + s + "4xx NOT");
+            return null;
         }
-        return null;
     }
 }
