@@ -247,9 +247,9 @@ public class rnsDB {
 
     public Vehicle addVehicle(long id, Vehicle vehicle) {
 
-//        vehicle.setPositionNode(placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf());
-//        vehicle.setFromNode(placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf());
-//        vehicle.setToNode(placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf());
+        vehicle.setPositionNode(placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf());
+        vehicle.setFromNode(placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf());
+        vehicle.setToNode(placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf());
 
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
         vehicle.setSelf(URL + "/vehicles/" + id);

@@ -50,16 +50,21 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(BASE).path("places");
 
-        Response response = target.queryParam("keyword", s).request(MediaType.APPLICATION_JSON).get();
+        Response response;
+        if(s != null && !s.isEmpty())
+            response = target.queryParam("keyword", s).request(MediaType.APPLICATION_JSON).get();
+        else
+            response = target.request(MediaType.APPLICATION_JSON).get();
+
         if(response.getStatus() == 200) {
             Places places = response.readEntity(new GenericType<Places>(){});
             Set<PlaceReader> placesSet = new HashSet<>();
 
             for(Place p:places.getPlace()) {
-                Set<PlaceReader> placeReaderSet = new HashSet<>();
-                for(String nexPl:p.getConnections())
-                    placeReaderSet.add(getPlaceID(nexPl));
-                placesSet.add(new PlaceReaderPersonal(p.getCapacity(), p.getId(), placeReaderSet));
+//                Set<PlaceReader> placeReaderSet = new HashSet<>();
+//                for(String nexPl:p.getConnections())
+//                    placeReaderSet.add(getPlaceID(nexPl));
+                placesSet.add(new PlaceReaderPersonal(p.getCapacity(), p.getId(), null));
             }
             return placesSet;
         }
@@ -74,10 +79,10 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         Response response = target.queryParam("placeID", s).request(MediaType.APPLICATION_JSON).get();
         if(response.getStatus() == 200) {
             Place place = response.readEntity(new GenericType<Place>(){});
-            Set<PlaceReader> placeReaderSet = new HashSet<>();
-            for(String p:place.getConnections())
-                placeReaderSet.add(getPlaceID(p));
-            return new PlaceReaderPersonal(place.getCapacity(), place.getId(), placeReaderSet);
+//            Set<PlaceReader> placeReaderSet = new HashSet<>();
+//            for(String p:place.getConnections())
+//                placeReaderSet.add(getPlaceID(p));
+            return new PlaceReaderPersonal(place.getCapacity(), place.getId(), null);
         }
         return null;
     }
@@ -102,9 +107,11 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(BASE).path("places");
 
-        Response response = target.queryParam("admin", 1)
-                .queryParam("type", gateType.value())
-                .request(MediaType.APPLICATION_JSON).get();
+        Response response;
+        if(gateType != null)
+            response = target.queryParam("admin", 1).queryParam("type", gateType.value()).request(MediaType.APPLICATION_JSON).get();
+        else
+            response = target.queryParam("admin", 1).request(MediaType.APPLICATION_JSON).get();
 
         if(response.getStatus() == 200) {
             Places places = response.readEntity(new GenericType<Places>(){});
@@ -124,10 +131,11 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(BASE).path("places");
 
-        Response response = target.queryParam("admin", 1)
-                .queryParam("type", "segment")
-                .queryParam("keyword", s)
-                .request(MediaType.APPLICATION_JSON).get();
+        Response response;
+        if(s != null && !s.isEmpty())
+            response= target.queryParam("admin", 1).queryParam("type", "segment").queryParam("keyword", s).request(MediaType.APPLICATION_JSON).get();
+        else
+            response= target.queryParam("admin", 1).queryParam("type", "segment").request(MediaType.APPLICATION_JSON).get();
 
         if(response.getStatus() == 200) {
             Places places = response.readEntity(new GenericType<Places>(){});
