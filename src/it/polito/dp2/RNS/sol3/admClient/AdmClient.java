@@ -21,11 +21,14 @@ import java.util.Set;
 public class AdmClient implements it.polito.dp2.RNS.lab3.AdmClient {
     String URL;
 
-    public void newAdmClient() {
+    public AdmClient newAdmClient() {
         if(System.getProperty("URL") == null) {
             URL = "http://localhost:8080/RnsSystem/rest";
             System.setProperty("URL", URL);
         }
+
+        AdmClient monitor = new AdmClient();
+        return monitor;
     }
 
     @Override

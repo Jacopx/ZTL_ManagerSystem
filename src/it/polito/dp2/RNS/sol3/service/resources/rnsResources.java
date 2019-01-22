@@ -169,7 +169,7 @@ public class rnsResources {
                                 @QueryParam("state") String state,
                                 @QueryParam("entrytime") String entrytime,
                                 @QueryParam("position") String position,
-                                @QueryParam("plate") String plateID
+                                @QueryParam("plateID") String plateID
     ) {
         Vehicles vs = null;
         if(plateID != null && !plateID.isEmpty()) {
