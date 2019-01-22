@@ -46,11 +46,58 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public Set<PlaceReader> getPlaces(String s) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(BASE).path("places");
+
+        Response response = null;
+        if(s != null && !s.isEmpty())
+            response = target.queryParam("keyword", s).request(MediaType.APPLICATION_JSON).get();
+        else
+            response = target.request(MediaType.APPLICATION_JSON).get();
+
+        if(response.getStatus() == 200) {
+            Places placesResponse = response.readEntity(new GenericType<Places>(){});
+            Set<PlaceReader> places = new HashSet<>();
+            Set<PlaceReader> nextPlaces;
+            for(Place pR:placesResponse.getPlace()) {
+                nextPlaces = new HashSet<>();
+                for(String placeID:pR.getConnections()) {
+                    PlaceReader temp = getPlace(placeID);
+                    nextPlaces.add(new PlaceReaderPersonal(temp.getCapacity(), temp.getId(), null));
+                }
+                places.add(new PlaceReaderPersonal(pR.getCapacity(), pR.getId(), nextPlaces));
+                System.out.println("PlaceReader of set: " + pR.getId());
+            }
+            return places;
+        }
         return null;
     }
 
     @Override
     public PlaceReader getPlace(String s) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(BASE).path("places");
+
+        Response response = null;
+        if(s != null && !s.isEmpty())
+            response = target.queryParam("placeID", s).request(MediaType.APPLICATION_JSON).get();
+        else
+            response = target.request(MediaType.APPLICATION_JSON).get();
+
+        if(response.getStatus() == 200) {
+            Places placesResponse = response.readEntity(new GenericType<Places>(){});
+            PlaceReader placeReader = null; Set<PlaceReader> nextPlaces;
+            for(Place pR:placesResponse.getPlace()) {
+                nextPlaces = new HashSet<>();
+                for(String placeID:pR.getConnections()) {
+                    PlaceReader temp = getPlace(placeID);
+                    nextPlaces.add(new PlaceReaderPersonal(temp.getCapacity(), temp.getId(), null));
+                }
+                placeReader = new PlaceReaderPersonal(pR.getCapacity(), pR.getId(), nextPlaces);
+            }
+            System.out.println("PlaceReader: " + placeReader.getId());
+            return placeReader;
+        }
         return null;
     }
 

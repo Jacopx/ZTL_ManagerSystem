@@ -33,12 +33,12 @@ public class PlaceExt {
 
     public Place getPlace() {
         for(Connection cT:connections.values())
-            if(!place.getConnections().contains(cT.getToNode()))
-                place.getConnections().add(cT.getToNode());
+            if(!place.getConnections().contains(cT.getTo()))
+                place.getConnections().add(cT.getTo());
 
         for(Connection cB:connectedBy.values())
-            if(!place.getConnectedBy().contains(cB.getFromNode()))
-                place.getConnectedBy().add(cB.getFromNode());
+            if(!place.getConnectedBy().contains(cB.getFrom()))
+                place.getConnectedBy().add(cB.getFrom());
 
         return place;
     }
