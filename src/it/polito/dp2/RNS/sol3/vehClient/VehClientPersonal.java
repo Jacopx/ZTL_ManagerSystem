@@ -23,7 +23,7 @@ import java.util.List;
 public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     String URL;
 
-    public VehClient newVehClient() {
+    public VehClientPersonal newVehClient() {
         if(System.getProperty("URL") == null) {
             URL = "http://localhost:8080/RnsSystem/rest";
             System.setProperty("URL", URL);
