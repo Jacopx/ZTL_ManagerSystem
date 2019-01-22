@@ -13,7 +13,6 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,7 +28,6 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     private Set<ParkingAreaReader> parkings;
     private Set<RoadSegmentReader> segments;
     private Set<ConnectionReader> connections;
-    private Set<VehicleReader> vehicles;
 
     public AdmClientPersonal newAdmClient() {
         if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
@@ -47,7 +45,6 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         parkings = new HashSet<>();
         segments = new HashSet<>();
         connections = new HashSet<>();
-        vehicles = new HashSet<>();
 
         loadDB();
 
@@ -56,11 +53,15 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     private void loadDB() {
         places = rnsReader.getPlaces(null);
+        System.out.println("Places#"+places.size());
         gates = rnsReader.getGates(null);
+        System.out.println("gates#"+gates.size());
         parkings = rnsReader.getParkingAreas(null);
+        System.out.println("parkings#"+parkings.size());
         segments = rnsReader.getRoadSegments(null);
+        System.out.println("segments#"+segments.size());
         connections = rnsReader.getConnections();
-        vehicles = rnsReader.getVehicles(null, null, null);
+        System.out.println("connections#"+connections.size());
     }
 
     @Override
