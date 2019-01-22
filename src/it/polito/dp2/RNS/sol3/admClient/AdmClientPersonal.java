@@ -214,7 +214,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public VehicleReader getVehicle(String s) {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("vehicles");
+        WebTarget target = client.target("http://localhost:8080/RnsSystem/rest").path("vehicles");
 
         Response response;
         if(s != null && !s.isEmpty())
