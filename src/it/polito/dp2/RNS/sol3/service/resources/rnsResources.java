@@ -243,13 +243,18 @@ public class rnsResources {
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Response createVehicle(Vehicle vehicle) {
+    public Vehicle createVehicle(Vehicle vehicle) {
 
         Places placeFrom = getPlaces(1, "gate", null, vehicle.getFrom());
         if (placeFrom.getPlace().isEmpty())
             throw new HTTPException(406);
-        if (!placeFrom.getPlace().get(0).getGate().value().equals("IN") || !placeFrom.getPlace().get(0).getGate().value().equals("INOUT")) {
-            throw new HTTPException(409);
+
+        for(Place p:placeFrom.getPlace()) {
+            if(p.getId().equals(vehicle.getFrom()) && (p.getGate().value().equals("IN") || p.getGate().value().equals("INTOUT"))) {
+                break;
+            } else {
+                throw new HTTPException(409);
+            }
         }
 
         long id = service.getNextVehicle();
@@ -261,10 +266,7 @@ public class rnsResources {
         if(created.getState().equals("REFUSED"))
             throw new HTTPException(410);
 
-        if (created!=null) {
-            return Response.created(self).entity(created).build();
-        } else
-            throw new InternalServerErrorException();
+        return created;
     }
 
     @PUT
@@ -278,7 +280,7 @@ public class rnsResources {
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicle updateItem(@PathParam("id") long id, Vehicle vehicle) {
+    public Vehicle updateVehicle(@PathParam("id") long id, Vehicle vehicle) {
         Vehicle updated = service.updateVehicle(id, vehicle);
         if (updated==null)
             throw new NotFoundException();
