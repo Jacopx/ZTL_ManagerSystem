@@ -267,7 +267,7 @@ public class rnsDB {
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setFromNode(temp);
             } else {
-                return generateErrorVehicle(2);
+                return generateErrorVehicle(1);
             }
         } else {
             return generateErrorVehicle(1);
@@ -280,13 +280,13 @@ public class rnsDB {
                 GateItem type = placeExt.getPlace().getGate();
                 if(type != null) {
                     if(type.value().isEmpty() || type.value().equals("OUT")) {
-                        return generateErrorVehicle(3);
+                        return generateErrorVehicle(2);
                     }
                 } else {
-                    return generateErrorVehicle(3);
+                    return generateErrorVehicle(1);
                 }
             } else {
-                return generateErrorVehicle(3);
+                return generateErrorVehicle(1);
             }
         } else {
             return generateErrorVehicle(1);
@@ -320,7 +320,7 @@ public class rnsDB {
         System.out.println("error#" + error);
         if(error == 2)
             refused.setState("WRONG_GATE_TYPE");
-        else if(error == 1 || error == 3)
+        else if(error == 1)
             refused.setState("UNKNOWN_PLACE");
         else
             refused.setState("ERROR");
