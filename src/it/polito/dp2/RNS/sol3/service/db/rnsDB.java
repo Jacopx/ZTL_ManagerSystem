@@ -319,7 +319,6 @@ public class rnsDB {
         return refused;
     }
 
-
     private Set<List<String>> convert(Set<List<String>> computePath) {
         Set<List<String>> newPaths = new HashSet<>();
         for(List<String> ps:computePath) {
@@ -333,7 +332,8 @@ public class rnsDB {
     }
 
     private Set<List<String>> computePath(Vehicle vehicle) {
-        System.out.println("PositionComputePath: " + vehicle.getPosition());
+        System.out.println("Position CP: " + vehicle.getPosition());
+        System.out.println("To       CP: " + vehicle.getTo());
         try {
             return pff.findShortestPaths(vehicle.getPosition(), vehicle.getTo(), 999);
         } catch (UnknownIdException | BadStateException | ServiceException e) {
@@ -439,6 +439,7 @@ public class rnsDB {
             return vehicleExt.getVehicle();
         }
 
+        //@TODO: Create new object and assign again with new value updated
         if(move != null && !move.isEmpty()) {
             Vehicle vehicle = vehicleExt.getVehicle();
             if(placeExtById.containsKey(move))
