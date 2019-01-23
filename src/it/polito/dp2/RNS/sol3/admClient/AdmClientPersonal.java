@@ -72,6 +72,9 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             }
             return vehicleReaderSet;
         } else if(response.getStatus() >= 500) {
+            Set<VehicleReader> vehicleReaderSet = new HashSet<>();
+            return vehicleReaderSet;
+        } else if(response.getStatus() >= 500) {
             throw new ServiceException();
         }
         return null;
