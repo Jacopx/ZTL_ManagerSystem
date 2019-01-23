@@ -251,25 +251,39 @@ public class rnsDB {
         int step = 0;
         String temp;
 
-        if((temp = placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace().getSelf()) != null) {
-            vehicle.setPositionNode(temp);
-        } else {
-            good = false; step = 1;
+        if(vehicle.getPosition() != null) {
+            if((temp = placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace().getSelf()) != null) {
+                vehicle.setPositionNode(temp);
+            } else {
+                good = false; step = 1;
+            }
         }
 
-        if((temp = placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf()) != null) {
-            vehicle.setFromNode(temp);
-        } else {
-            good = false; step = 2;
+        if(vehicle.getFrom() != null) {
+            if((temp = placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf()) != null) {
+                vehicle.setFromNode(temp);
+            } else {
+                good = false; step = 2;
+            }
         }
 
-        PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
-        if (placeExt != null) {
-            String gateIN = placeExt.getPlace().getGate().value();
-            if(gateIN.isEmpty() || gateIN.equals("OUT")) {
+        System.out.println("Wrong POS: " + vehicle.getPosition());
+        if(vehicle.getPosition() != null) {
+            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
+            if (placeExt != null) {
+                GateItem type = placeExt.getPlace().getGate();
+                if(type != null) {
+                    if(type.value().isEmpty() || type.value().equals("OUT")) {
+                        good = false; step = 3;
+                    }
+                } else {
+                    good = false; step = 3;
+                }
+            } else {
                 good = false; step = 3;
             }
         }
+
 
         if((temp = placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf()) != null) {
             vehicle.setToNode(temp);
