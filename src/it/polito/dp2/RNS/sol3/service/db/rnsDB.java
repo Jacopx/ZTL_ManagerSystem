@@ -249,6 +249,25 @@ public class rnsDB {
     public Vehicle addVehicle(long id, Vehicle vehicle) {
         String temp;
 
+        // POSITION CHECK
+        if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
+            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
+            if (placeExt != null) {
+                GateItem type = placeExt.getPlace().getGate();
+                if(type != null) {
+                    if(type.value().isEmpty() || type.value().equals("OUT")) {
+                        return generateErrorVehicle(2);
+                    }
+                } else {
+                    return generateErrorVehicle(1);
+                }
+            } else {
+                return generateErrorVehicle(1);
+            }
+        } else {
+            return generateErrorVehicle(1);
+        }
+
         // TO CHECK
         if(vehicle.getTo() != null && placeExtById.containsKey(vehicle.getTo())) {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getTo()));
@@ -266,25 +285,6 @@ public class rnsDB {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getFrom()));
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setFromNode(temp);
-            } else {
-                return generateErrorVehicle(1);
-            }
-        } else {
-            return generateErrorVehicle(1);
-        }
-
-        // POSITION CHECK
-        if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
-            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
-            if (placeExt != null) {
-                GateItem type = placeExt.getPlace().getGate();
-                if(type != null) {
-                    if(type.value().isEmpty() || type.value().equals("OUT")) {
-                        return generateErrorVehicle(2);
-                    }
-                } else {
-                    return generateErrorVehicle(1);
-                }
             } else {
                 return generateErrorVehicle(1);
             }
