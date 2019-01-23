@@ -305,6 +305,7 @@ public class rnsDB {
         }
 
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
+        good = false;
 
         Set<List<String>> computedPath = computePath(vehicle);
         if(computedPath!= null && computedPath.size() != 0) {
