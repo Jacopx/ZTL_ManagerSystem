@@ -234,7 +234,7 @@ public class rnsResources {
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public VehicleResponse createVehicle(Vehicle vehicle) {
+    public Response createVehicle(Vehicle vehicle) {
 
         long id = service.getNextVehicle();
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
@@ -245,13 +245,13 @@ public class rnsResources {
         System.out.println("CreatedS: " + created.getState());
         switch (created.getState()) {
             case "REFUSED":
-                throw new HTTPException(410);
+                return Response.created(self).status(410).build();
             case "WRONG_GATE_TYPE":
-                throw new HTTPException(409);
+                return Response.created(self).status(409).build();
             case "WRONG_PLACE":
-                throw new HTTPException(406);
+                return Response.created(self).status(406).build();
             case "ERROR":
-                throw new HTTPException(400);
+                return Response.created(self).status(400).build();
             default:
                 VehicleResponse v = new VehicleResponse();
                 v.setPlateID(created.getId());
@@ -260,7 +260,7 @@ public class rnsResources {
                     for (SuggPath sgp : sp.getSuggPath())
                         v.getPath().addAll(sgp.getRelation());
                 }
-                return v;
+                return Response.created(self).status(201).entity(v).build();
         }
     }
 

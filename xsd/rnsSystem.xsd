@@ -127,6 +127,7 @@
     <xsd:element name="VehicleResponse">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element name="status" type="xsd:int"/>
                 <xsd:element name="self" type="xsd:anyURI"/>
                 <xsd:element name="plateID" type="xsd:anyURI"/>
                 <xsd:element name="shortPaths" type="ShortPaths" minOccurs="0" maxOccurs="unbounded"/>
