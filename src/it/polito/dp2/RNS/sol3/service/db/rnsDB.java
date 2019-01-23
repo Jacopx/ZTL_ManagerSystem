@@ -249,26 +249,6 @@ public class rnsDB {
     public Vehicle addVehicle(long id, Vehicle vehicle) {
         String temp;
 
-        // POSITION CHECK
-//        if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
-//            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
-//            if (placeExt != null) {
-//                GateItem type = placeExt.getPlace().getGate();
-//                if(type != null) {
-//                    System.out.println("GateValue: " + type.value());
-//                    if(type.value().isEmpty() || type.value().equals("OUT")) {
-//                        return generateErrorVehicle(2);
-//                    }
-//                } else {
-//                    return generateErrorVehicle(1);
-//                }
-//            } else {
-//                return generateErrorVehicle(1);
-//            }
-//        } else {
-//            return generateErrorVehicle(1);
-//        }
-
         // TO CHECK
         if(vehicle.getTo() != null && placeExtById.containsKey(vehicle.getTo())) {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getTo()));
@@ -289,7 +269,6 @@ public class rnsDB {
 
                 GateItem type = placeExt.getPlace().getGate();
                 if(type != null) {
-                    System.out.println("GateValue: " + type.value());
                     if(type.value().isEmpty() || type.value().equals("OUT")) {
                         return generateErrorVehicle(2);
                     }
@@ -466,5 +445,32 @@ public class rnsDB {
         }
 
         return vehicle;
+    }
+
+    public Vehicle deleteVehicle(long id, String outGate) {
+        VehicleExt vehicle = vehicles.get(id);
+        if (vehicle == null) {
+            Vehicle refused = new Vehicle();
+            refused.setState("NULL");
+            return refused;
+        }
+
+        if(outGate != null && placeExtById.contains(outGate)) {
+            PlaceExt gate = placeExtByNode.get(placeExtById.get(outGate));
+            if(gate != null) {
+                GateItem gateItem = gate.getPlace().getGate();
+                if(!gateItem.value().isEmpty() && (gateItem.value().equals("OUT") || gateItem.value().equals("INOUT"))) {
+                    Vehicle refused = new Vehicle();
+                    refused.setState("REMOVED");
+                    return refused;
+                } else {
+                    return generateErrorVehicle(2);
+                }
+            } else {
+                return generateErrorVehicle(1);
+            }
+        } else {
+            return generateErrorVehicle(1);
+        }
     }
 }

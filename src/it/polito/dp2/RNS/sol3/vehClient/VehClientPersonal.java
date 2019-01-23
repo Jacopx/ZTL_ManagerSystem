@@ -29,6 +29,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     private int PORT;
     private String ws;
     private String URL;
+    private Vehicle myself;
 
     public VehClientPersonal newVehClient() {
         if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
@@ -74,6 +75,8 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
         if(response.getStatus() == 201) {
             // CREATED
             VehicleResponse vehicleResponse = response.readEntity(new GenericType<VehicleResponse>(){});
+            myself.setToNode(vehicleResponse.getToNode());
+            myself.setFromNode(vehicleResponse.getFromNode());
             return new ArrayList<>(vehicleResponse.getPath());
         } else if(response.getStatus() == 400) {
             // BAD REQUEST
@@ -105,6 +108,26 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
 
     @Override
     public void exit(String outGate) throws ServiceException, UnknownPlaceException, WrongPlaceException {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL).path("vehicles");
 
+        Response response = target
+                .queryParam("id", myself.getId())
+                .queryParam("outGate", outGate)
+                .request(MediaType.APPLICATION_JSON).delete();
+
+        if(response.getStatus() == 200) {
+            // DELETED
+            myself = null;
+        } else if(response.getStatus() == 406) {
+            // WRONG GATE TYPE
+            throw new UnknownPlaceException();
+        } else if(response.getStatus() == 409) {
+            // UNKNOWN PLACE
+            throw new WrongPlaceException();
+        } else {
+            // OTHER REASONS
+            throw new ServiceException();
+        }
     }
 }

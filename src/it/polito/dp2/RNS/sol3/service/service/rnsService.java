@@ -54,4 +54,6 @@ public class rnsService {
     public Vehicle updateVehicle(long id, Vehicle vehicle) {
         return db.updateVehicle(id, vehicle);
     }
+
+    public Vehicle deleteVehicle(long id, String outGate) { return db.deleteVehicle(id, outGate); }
 }

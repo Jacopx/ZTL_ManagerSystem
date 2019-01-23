@@ -255,6 +255,8 @@ public class rnsResources {
                 VehicleResponse v = new VehicleResponse();
                 v.setPlateID(created.getId());
                 v.setSelf(created.getSelf());
+                v.setFromNode(created.getFromNode());
+                v.setToNode(created.getToNode());
                 for (ShortPaths sp : created.getShortPaths()) {
                     for (SuggPath sgp : sp.getSuggPath())
                         v.getPath().addAll(sgp.getRelation());
@@ -279,6 +281,34 @@ public class rnsResources {
         if (updated==null)
             throw new NotFoundException();
         return updated;
+    }
+
+    @DELETE
+    @Path("/vehicles/{id}")
+    @ApiOperation(value = "deleteVehicle", notes = "delete vehicle"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Deleted"),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 406, message = "Unknown Place"),
+            @ApiResponse(code = 409, message = "Not correct gateType"),
+            @ApiResponse(code = 410, message = "Entrance Refused"),
+    })
+    public Response deleteVehicle(@PathParam("id") long id, @QueryParam("outGate") String outGate) {
+        Vehicle vehicle = service.deleteVehicle(id, outGate);
+
+        switch (vehicle.getState()) {
+            case "NULL":
+                return Response.status(404).build();
+            case "UNKNOWN_PLACE":
+                return Response.status(406).build();
+            case "WRONG_GATE_TYPE":
+                return Response.status(409).build();
+            case "ERROR":
+                return Response.status(400).build();
+            default:
+                return Response.status(200).build();
+        }
     }
 
 }

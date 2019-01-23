@@ -135,11 +135,11 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public Set<VehicleReader> getVehicles(Calendar calendar, Set<VehicleType> set, VehicleState vehicleState) {
-        return rnsReader.getVehicles(calendar, set, vehicleState);
+        return null;
     }
 
     @Override
     public VehicleReader getVehicle(String s) {
-        return rnsReader.getVehicle(s);
+        return null;
     }
 }
