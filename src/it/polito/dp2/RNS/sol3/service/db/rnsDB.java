@@ -284,7 +284,6 @@ public class rnsDB {
             }
         }
 
-
         if((temp = placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf()) != null) {
             vehicle.setToNode(temp);
         } else {
@@ -297,7 +296,7 @@ public class rnsDB {
             if(step == 2)
                 refused.setState("WRONG_GATE_TYPE");
             else if(step == 1 || step == 3)
-                refused.setState("WRONG_PLACE");
+                refused.setState("UNKNOWN_PLACE");
             else
                 refused.setState("ERROR");
             return refused;

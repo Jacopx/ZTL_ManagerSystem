@@ -246,10 +246,10 @@ public class rnsResources {
         switch (created.getState()) {
             case "REFUSED":
                 return Response.created(self).status(410).build();
+            case "UNKNOWN_PLACE":
+                return Response.created(self).status(406).build();
             case "WRONG_GATE_TYPE":
                 return Response.created(self).status(409).build();
-            case "WRONG_PLACE":
-                return Response.created(self).status(406).build();
             case "ERROR":
                 return Response.created(self).status(400).build();
             default:
