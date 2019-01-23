@@ -251,10 +251,11 @@ public class rnsDB {
         int step = 0;
         String temp;
 
-        if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
-            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
+        // TO CHECK
+        if(vehicle.getTo() != null && placeExtById.containsKey(vehicle.getTo())) {
+            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getTo()));
             if((temp = placeExt.getPlace().getSelf()) != null) {
-                vehicle.setPositionNode(temp);
+                vehicle.setToNode(temp);
             } else {
                 good = false; step = 1;
             }
@@ -262,6 +263,7 @@ public class rnsDB {
             good = false; step = 1;
         }
 
+        // FROM CHECK
         if(vehicle.getFrom() != null && placeExtById.containsKey(vehicle.getFrom())) {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getFrom()));
             if((temp = placeExt.getPlace().getSelf()) != null) {
@@ -273,6 +275,7 @@ public class rnsDB {
             good = false; step = 1;
         }
 
+        // POSITION CHECK
         if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
             if (placeExt != null) {
@@ -289,12 +292,6 @@ public class rnsDB {
             }
         } else {
             good = false; step = 1;
-        }
-
-        if((temp = placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf()) != null) {
-            vehicle.setToNode(temp);
-        } else {
-            good = false; step = 4;
         }
 
         if(!good) {
