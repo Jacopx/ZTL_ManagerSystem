@@ -258,6 +258,8 @@ public class rnsDB {
             } else {
                 good = false; step = 1;
             }
+        } else {
+            good = false; step = 1;
         }
 
         if(vehicle.getFrom() != null && placeExtById.containsKey(vehicle.getFrom())) {
@@ -267,6 +269,8 @@ public class rnsDB {
             } else {
                 good = false; step = 2;
             }
+        } else {
+            good = false; step = 1;
         }
 
         if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
@@ -283,6 +287,8 @@ public class rnsDB {
             } else {
                 good = false; step = 3;
             }
+        } else {
+            good = false; step = 1;
         }
 
         if((temp = placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf()) != null) {
