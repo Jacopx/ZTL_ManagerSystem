@@ -252,7 +252,8 @@ public class rnsDB {
         String temp;
 
         if(vehicle.getPosition() != null) {
-            if((temp = placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace().getSelf()) != null) {
+            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
+            if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setPositionNode(temp);
             } else {
                 good = false; step = 1;
@@ -260,7 +261,8 @@ public class rnsDB {
         }
 
         if(vehicle.getFrom() != null) {
-            if((temp = placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf()) != null) {
+            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getFrom()));
+            if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setFromNode(temp);
             } else {
                 good = false; step = 2;
