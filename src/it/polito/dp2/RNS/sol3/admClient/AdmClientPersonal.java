@@ -97,7 +97,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             for(Vehicle v:vehicleResponse.getVehicle()) {
                 return new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState());
             }
-        } else if(response.getStatus() == 400) {
+        } else if(response.getStatus() == 404) {
             new VehicleReaderPersonal(null, null, null, null);
         } else if(response.getStatus() >= 500) {
             throw new ServiceException();
