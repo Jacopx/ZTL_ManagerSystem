@@ -199,6 +199,8 @@ public class rnsResources {
             throw new NotAuthorizedException("Admin privilege required!");
         }
 
+        System.out.println("Vehicles#" + vs.getVehicle().size());
+
         if(vs == null)
             throw new NotFoundException();
         return vs;
