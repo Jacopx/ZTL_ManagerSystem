@@ -294,7 +294,7 @@ public class rnsDB {
                         return generateErrorVehicle(2);
                     }
                 } else {
-                    return generateErrorVehicle(1);
+                    return generateErrorVehicle(2);
                 }
 
             } else {
