@@ -61,7 +61,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         if(place != null && !place.isEmpty())
             response = target.queryParam("admin", 1).queryParam("position", place).request(MediaType.APPLICATION_JSON).get();
         else
-            return null;
+            response = target.queryParam("admin", 1).request(MediaType.APPLICATION_JSON).get();
 
         System.out.println("Plural ERROR#" + response.getStatus());
         if(response.getStatus() == 200) {
