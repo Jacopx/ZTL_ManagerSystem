@@ -248,7 +248,7 @@ public class rnsDB {
 
     public Vehicle addVehicle(long id, Vehicle vehicle) {
         boolean good = true;
-        int error = 0;
+        int step = 0;
         String temp;
 
         // TO CHECK
@@ -257,10 +257,10 @@ public class rnsDB {
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setToNode(temp);
             } else {
-                good = false;
+                good = false; step = 1;
             }
         } else {
-            good = false;
+            good = false; step = 1;
         }
 
         // FROM CHECK
@@ -268,40 +268,43 @@ public class rnsDB {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getFrom()));
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setFromNode(temp);
-                if(placeExt.getPlace().getGate().value().equals("OUT")) {
-                    Vehicle refused = new Vehicle();
-                    refused.setState("WRONG_GATE_TYPE");
-                    return refused;
-                }
             } else {
-                good = false;
+                good = false; step = 2;
             }
         } else {
-            good = false;
+            good = false; step = 1;
+        }
+
+        // POSITION CHECK
+        if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
+            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
+            if (placeExt != null) {
+                GateItem type = placeExt.getPlace().getGate();
+                if(type != null) {
+                    if(type.value().isEmpty() || type.value().equals("OUT")) {
+                        good = false; step = 3;
+                    }
+                } else {
+                    good = false; step = 3;
+                }
+            } else {
+                good = false; step = 3;
+            }
+        } else {
+            good = false; step = 1;
         }
 
         if(!good) {
             Vehicle refused = new Vehicle();
-            refused.setState("UNKNOWN_PLACE");
+            System.out.println("STEP#" + step);
+            if(step == 2)
+                refused.setState("WRONG_GATE_TYPE");
+            else if(step == 1 || step == 3)
+                refused.setState("UNKNOWN_PLACE");
+            else
+                refused.setState("ERROR");
             return refused;
         }
-
-//        // POSITION CHECK
-//        if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
-//            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
-//            if (placeExt != null) {
-//                GateItem type = placeExt.getPlace().getGate();
-//                if(type != null) {
-//                    if(type.value().isEmpty() || type.value().equals("OUT")) {
-//                        good = false; error = 2;
-//                    }
-//                }
-//            } else {
-//                good = false; error = 1;
-//            }
-//        } else {
-//            good = false; error = 1;
-//        }
 
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
         good = false;
