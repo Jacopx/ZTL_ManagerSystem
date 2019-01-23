@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="Reverting">
+    <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="Reordering">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/admClient/AdmClientPersonal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/admClient/AdmClientPersonal.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,14 +23,14 @@
     <fileColor scope="Non-Project Files (Material Oceanic)" color="2E3C43" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.525">
+    <splitter split-orientation="horizontal" split-proportion="0.5421875">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="373">
-                  <caret line="244" column="37" lean-forward="true" selection-start-line="244" selection-start-column="37" selection-end-line="244" selection-end-column="37" />
+                <state relative-caret-position="420">
+                  <caret line="284" column="42" selection-start-line="284" selection-start-column="42" selection-end-line="284" selection-end-column="42" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -41,8 +41,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/service/rnsService.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="381">
-                  <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+                <state relative-caret-position="736">
+                  <caret line="54" column="27" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="method#getVehicles#0;class#rnsService#0" />
@@ -51,29 +51,42 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="624">
-                  <caret line="322" column="26" selection-start-line="322" selection-start-column="26" selection-end-line="322" selection-end-column="26" />
+                <state relative-caret-position="4531">
+                  <caret line="455" column="29" selection-start-line="455" selection-start-column="29" selection-end-line="455" selection-end-column="29" />
                   <folding>
                     <element signature="method#rnsDB#0;class#rnsDB#0" />
                     <element signature="method#searchPlaces#0;class#rnsDB#0" />
                     <element signature="method#getPlace#0;class#rnsDB#0" />
                     <element signature="method#createPlace#0;class#rnsDB#0" />
                     <element signature="method#getConnections#0;class#rnsDB#0" />
+                    <element signature="method#getVehicles#0;class#rnsDB#0" />
+                    <element signature="method#searchVehicles#0;class#rnsDB#0" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol2/PathFinderPersonal.java">
+            <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/lab3/tests/RnsTests.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="607">
-                  <caret line="156" column="12" lean-forward="true" selection-start-line="156" selection-start-column="12" selection-end-line="156" selection-end-column="12" />
+                <state relative-caret-position="3174">
+                  <caret line="212" column="8" selection-start-line="212" selection-start-column="8" selection-end-line="212" selection-end-column="8" />
                   <folding>
                     <element signature="imports" expanded="true" />
+                    <element signature="method#setUpBeforeClass#0;class#RnsTests#0" />
+                    <element signature="method#setUp#0;class#RnsTests#0" />
+                    <element signature="method#createTestAdmClient#0;class#RnsTests#0" />
+                    <element signature="method#createTestVehClient#0;class#RnsTests#0" />
+                    <element signature="method#testUnknownPlace#0;class#RnsTests#0" />
+                    <element signature="method#testWrongPlace#0;class#RnsTests#0" />
+                    <element signature="method#checkExpectedVehNumber#0;class#RnsTests#0" />
+                    <element signature="method#checkVehicle#0;class#RnsTests#0" />
+                    <element signature="method#checkPath#0;class#RnsTests#0" />
+                    <element signature="class#VehicleClientManager#0;class#RnsTests#0" />
+                    <element signature="class#IdentifiedEntityReaderComparator#0" />
                   </folding>
                 </state>
               </provider>
@@ -82,7 +95,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/lab3/AdmClient.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="312">
+                <state relative-caret-position="391">
                   <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
                 </state>
               </provider>
@@ -92,7 +105,7 @@
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/lab3/VehClient.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="460">
-                  <caret line="23" column="90" lean-forward="true" selection-start-line="23" selection-start-column="90" selection-end-line="23" selection-end-column="90" />
+                  <caret line="23" column="90" selection-start-line="23" selection-start-column="90" selection-end-line="23" selection-end-column="90" />
                 </state>
               </provider>
             </entry>
@@ -104,8 +117,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/xsd/rnsSystem.xsd">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="129" column="59" selection-start-line="129" selection-start-column="59" selection-end-line="129" selection-end-column="59" />
+                <state relative-caret-position="2967">
+                  <caret line="129" column="57" selection-start-line="129" selection-start-column="57" selection-end-line="129" selection-end-column="57" />
                 </state>
               </provider>
             </entry>
@@ -113,8 +126,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/xsd/rnsInfo.xsd">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1759">
-                  <caret line="120" column="61" lean-forward="true" selection-start-line="120" selection-start-column="61" selection-end-line="120" selection-end-column="61" />
+                <state relative-caret-position="2760">
+                  <caret line="120" column="61" selection-start-line="120" selection-start-column="61" selection-end-line="120" selection-end-column="61" />
                 </state>
               </provider>
             </entry>
@@ -122,12 +135,24 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/admClient/AdmClientPersonal.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="56" selection-start-line="56" selection-end-line="56" />
+                <state relative-caret-position="494">
+                  <caret line="99" column="45" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="45" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="method#newAdmClient#0;class#AdmClientPersonal#0" />
-                    <element signature="method#getVehicles#0;class#AdmClientPersonal#0" />
+                    <element signature="e#4017#4018#0" expanded="true" />
+                    <element signature="e#4062#4063#0" expanded="true" />
+                    <element signature="e#4121#4122#0" expanded="true" />
+                    <element signature="e#4165#4166#0" expanded="true" />
+                    <element signature="e#4237#4238#0" expanded="true" />
+                    <element signature="e#4278#4279#0" expanded="true" />
+                    <element signature="e#4355#4356#0" expanded="true" />
+                    <element signature="e#4406#4407#0" expanded="true" />
+                    <element signature="e#4490#4491#0" expanded="true" />
+                    <element signature="e#4543#4544#0" expanded="true" />
+                    <element signature="e#4610#4611#0" expanded="true" />
+                    <element signature="e#4659#4660#0" expanded="true" />
+                    <element signature="e#4876#4877#0" expanded="true" />
+                    <element signature="e#4903#4904#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -136,7 +161,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/admClient/AdmClientFactory.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="299">
+                <state relative-caret-position="276">
                   <caret line="13" column="43" selection-start-line="12" selection-start-column="8" selection-end-line="13" selection-end-column="43" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -148,11 +173,13 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/vehClient/VehClientPersonal.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="500">
-                  <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+                <state relative-caret-position="736">
+                  <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="method#newVehClient#0;class#VehClientPersonal#0" />
+                    <element signature="method#move#0;class#VehClientPersonal#0" />
+                    <element signature="method#exit#0;class#VehClientPersonal#0" />
                   </folding>
                 </state>
               </provider>
@@ -205,15 +232,15 @@
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/vehClient/VehClientFactory.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/lab3/tests/RnsTests.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/PlaceExt.java" />
-        <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/service/rnsService.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol2/PathFinderPersonal.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol1/RnsReaderPersonal.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/VehicleExt.java" />
         <option value="$PROJECT_DIR$/xsd/rnsSystem.xsd" />
+        <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/service/rnsService.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java" />
+        <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/vehClient/VehClientPersonal.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/admClient/AdmClientPersonal.java" />
-        <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" />
       </list>
     </option>
   </component>
@@ -228,67 +255,12 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
-              <item name="gen-src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
-              <item name="gen-src" type="462c0819:PsiDirectoryNode" />
-              <item name="RNS" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RNS" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RNS" type="462c0819:PsiDirectoryNode" />
-              <item name="sol2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RNS" type="462c0819:PsiDirectoryNode" />
-              <item name="sol3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
-              <item name="xsd" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548267592658" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548282938931" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -364,91 +336,8 @@
       <workItem from="1548112101424" duration="212000" />
       <workItem from="1548146154932" duration="7082000" />
       <workItem from="1548161084967" duration="20149000" />
-      <workItem from="1548250775237" duration="13140000" />
-    </task>
-    <task id="LOCAL-00090" summary="Error">
-      <created>1548165243860</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1548165243860</updated>
-    </task>
-    <task id="LOCAL-00091" summary="Fixing error around">
-      <created>1548165678836</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1548165678836</updated>
-    </task>
-    <task id="LOCAL-00092" summary="Trying to debug">
-      <created>1548166104651</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1548166104651</updated>
-    </task>
-    <task id="LOCAL-00093" summary="Trying to debug">
-      <created>1548167146699</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1548167146699</updated>
-    </task>
-    <task id="LOCAL-00094" summary="Hardcoding URL">
-      <created>1548167317871</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1548167317871</updated>
-    </task>
-    <task id="LOCAL-00095" summary="Fixing vehicle and URL">
-      <created>1548167836690</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1548167836690</updated>
-    </task>
-    <task id="LOCAL-00096" summary="Fixing URL">
-      <created>1548168292764</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1548168292764</updated>
-    </task>
-    <task id="LOCAL-00097" summary="Fixing URL">
-      <created>1548169330990</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1548169330990</updated>
-    </task>
-    <task id="LOCAL-00098" summary="Correcting POST for vehicle creation">
-      <created>1548170363636</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1548170363636</updated>
-    </task>
-    <task id="LOCAL-00099" summary="Correcting POST for vehicle creation">
-      <created>1548170807488</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1548170807488</updated>
-    </task>
-    <task id="LOCAL-00100" summary="brancolando nel buio">
-      <created>1548171576061</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1548171576061</updated>
-    </task>
-    <task id="LOCAL-00101" summary="brancolando nel buio">
-      <created>1548177410501</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1548177410501</updated>
+      <workItem from="1548250775237" duration="20978000" />
+      <workItem from="1548283457091" duration="230000" />
     </task>
     <task id="LOCAL-00102" summary="Removing lot of waste and restarting client development">
       <created>1548179472207</created>
@@ -709,11 +598,95 @@
       <option name="project" value="LOCAL" />
       <updated>1548267472655</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="Fix">
+      <created>1548267602298</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1548267602298</updated>
+    </task>
+    <task id="LOCAL-00140" summary="Reordering">
+      <created>1548267699919</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1548267699919</updated>
+    </task>
+    <task id="LOCAL-00141" summary="Reordering">
+      <created>1548267933011</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1548267933011</updated>
+    </task>
+    <task id="LOCAL-00142" summary="Reordering">
+      <created>1548268125388</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1548268125388</updated>
+    </task>
+    <task id="LOCAL-00143" summary="Reordering">
+      <created>1548268278415</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1548268278415</updated>
+    </task>
+    <task id="LOCAL-00144" summary="Final Fix">
+      <created>1548268385220</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1548268385220</updated>
+    </task>
+    <task id="LOCAL-00145" summary="Faceoff with other test failed">
+      <created>1548268654178</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1548268654178</updated>
+    </task>
+    <task id="LOCAL-00146" summary="Output">
+      <created>1548268853663</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1548268853663</updated>
+    </task>
+    <task id="LOCAL-00147" summary="Faceoff with last to tests">
+      <created>1548275567660</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1548275567660</updated>
+    </task>
+    <task id="LOCAL-00148" summary="Adding vehicle delete">
+      <created>1548278399799</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1548278399799</updated>
+    </task>
+    <task id="LOCAL-00149" summary="Adding state change">
+      <created>1548282931461</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1548282931461</updated>
+    </task>
+    <task id="LOCAL-00150" summary="fix">
+      <created>1548283502900</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1548283502901</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117165000" />
+    <option name="totallyTimeSpent" value="125233000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -767,14 +740,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correcting POST for vehicle creation" />
-    <MESSAGE value="brancolando nel buio" />
-    <MESSAGE value="Removing lot of waste and restarting client development" />
-    <MESSAGE value="Fix little bug" />
-    <MESSAGE value="Solving other bugs" />
-    <MESSAGE value="Time bug" />
-    <MESSAGE value="plateID" />
-    <MESSAGE value="Fixing plateID" />
     <MESSAGE value="Implementing getPlace and getPlaces" />
     <MESSAGE value="Implementing AdmClient" />
     <MESSAGE value="loading localDB" />
@@ -783,7 +748,6 @@
     <MESSAGE value="Removing localDB" />
     <MESSAGE value="Lot of news about client" />
     <MESSAGE value="Adding some output" />
-    <MESSAGE value="Output" />
     <MESSAGE value="Service Error" />
     <MESSAGE value="Correcting error in gateCheck" />
     <MESSAGE value="Correcting error in while adding Vehicle" />
@@ -792,7 +756,16 @@
     <MESSAGE value="Changing logic flow of controls" />
     <MESSAGE value="Reverting" />
     <MESSAGE value="New flow check" />
-    <option name="LAST_COMMIT_MESSAGE" value="New flow check" />
+    <MESSAGE value="Fix" />
+    <MESSAGE value="Final Fix" />
+    <MESSAGE value="Faceoff with other test failed" />
+    <MESSAGE value="Output" />
+    <MESSAGE value="Reordering" />
+    <MESSAGE value="Faceoff with last to tests" />
+    <MESSAGE value="Adding vehicle delete" />
+    <MESSAGE value="Adding state change" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1081,16 +1054,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/lab3/tests/RnsTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="113" column="54" lean-forward="true" selection-start-line="113" selection-start-column="54" selection-end-line="113" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gen-src/it/polito/dp2/RNS/sol3/rest/service/jaxb/Vehicle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -1119,13 +1082,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/vehClient/VehClientFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" selection-start-line="2" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/custom/basicResponse.xsd">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1143,13 +1099,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xsd/rnsInfo.xsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1759">
-          <caret line="120" column="61" lean-forward="true" selection-start-line="120" selection-start-column="61" selection-end-line="120" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/VehicleExt.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="602">
@@ -1161,17 +1110,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xsd/rnsSystem.xsd">
+    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol2/PathFinderPersonal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="129" column="59" selection-start-line="129" selection-start-column="59" selection-end-line="129" selection-end-column="59" />
+        <state relative-caret-position="584">
+          <caret line="155" column="42" lean-forward="true" selection-start-line="155" selection-start-column="42" selection-end-line="155" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="244" column="37" lean-forward="true" selection-start-line="244" selection-start-column="37" selection-end-line="244" selection-end-column="37" />
+        <state relative-caret-position="420">
+          <caret line="284" column="42" selection-start-line="284" selection-start-column="42" selection-end-line="284" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1180,8 +1132,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/service/rnsService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="736">
+          <caret line="54" column="27" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#getVehicles#0;class#rnsService#0" />
@@ -1189,9 +1141,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4531">
+          <caret line="455" column="29" selection-start-line="455" selection-start-column="29" selection-end-line="455" selection-end-column="29" />
+          <folding>
+            <element signature="method#rnsDB#0;class#rnsDB#0" />
+            <element signature="method#searchPlaces#0;class#rnsDB#0" />
+            <element signature="method#getPlace#0;class#rnsDB#0" />
+            <element signature="method#createPlace#0;class#rnsDB#0" />
+            <element signature="method#getConnections#0;class#rnsDB#0" />
+            <element signature="method#getVehicles#0;class#rnsDB#0" />
+            <element signature="method#searchVehicles#0;class#rnsDB#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/lab3/tests/RnsTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3174">
+          <caret line="212" column="8" selection-start-line="212" selection-start-column="8" selection-end-line="212" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setUpBeforeClass#0;class#RnsTests#0" />
+            <element signature="method#setUp#0;class#RnsTests#0" />
+            <element signature="method#createTestAdmClient#0;class#RnsTests#0" />
+            <element signature="method#createTestVehClient#0;class#RnsTests#0" />
+            <element signature="method#testUnknownPlace#0;class#RnsTests#0" />
+            <element signature="method#testWrongPlace#0;class#RnsTests#0" />
+            <element signature="method#checkExpectedVehNumber#0;class#RnsTests#0" />
+            <element signature="method#checkVehicle#0;class#RnsTests#0" />
+            <element signature="method#checkPath#0;class#RnsTests#0" />
+            <element signature="class#VehicleClientManager#0;class#RnsTests#0" />
+            <element signature="class#IdentifiedEntityReaderComparator#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/lab3/AdmClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/lab3/VehClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="23" column="90" selection-start-line="23" selection-start-column="90" selection-end-line="23" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xsd/rnsSystem.xsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2967">
+          <caret line="129" column="57" selection-start-line="129" selection-start-column="57" selection-end-line="129" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xsd/rnsInfo.xsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2760">
+          <caret line="120" column="61" selection-start-line="120" selection-start-column="61" selection-end-line="120" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/admClient/AdmClientFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
+        <state relative-caret-position="276">
           <caret line="13" column="43" selection-start-line="12" selection-start-column="8" selection-end-line="13" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1201,61 +1218,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/vehClient/VehClientPersonal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="736">
+          <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#newVehClient#0;class#VehClientPersonal#0" />
+            <element signature="method#move#0;class#VehClientPersonal#0" />
+            <element signature="method#exit#0;class#VehClientPersonal#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/vehClient/VehClientFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" selection-start-line="2" selection-end-line="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/admClient/AdmClientPersonal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="494">
+          <caret line="99" column="45" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#newAdmClient#0;class#AdmClientPersonal#0" />
-            <element signature="method#getVehicles#0;class#AdmClientPersonal#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/lab3/AdmClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/lab3/VehClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="23" column="90" lean-forward="true" selection-start-line="23" selection-start-column="90" selection-end-line="23" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol2/PathFinderPersonal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="156" column="12" lean-forward="true" selection-start-line="156" selection-start-column="12" selection-end-line="156" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="322" column="26" selection-start-line="322" selection-start-column="26" selection-end-line="322" selection-end-column="26" />
-          <folding>
-            <element signature="method#rnsDB#0;class#rnsDB#0" />
-            <element signature="method#searchPlaces#0;class#rnsDB#0" />
-            <element signature="method#getPlace#0;class#rnsDB#0" />
-            <element signature="method#createPlace#0;class#rnsDB#0" />
-            <element signature="method#getConnections#0;class#rnsDB#0" />
+            <element signature="e#4017#4018#0" expanded="true" />
+            <element signature="e#4062#4063#0" expanded="true" />
+            <element signature="e#4121#4122#0" expanded="true" />
+            <element signature="e#4165#4166#0" expanded="true" />
+            <element signature="e#4237#4238#0" expanded="true" />
+            <element signature="e#4278#4279#0" expanded="true" />
+            <element signature="e#4355#4356#0" expanded="true" />
+            <element signature="e#4406#4407#0" expanded="true" />
+            <element signature="e#4490#4491#0" expanded="true" />
+            <element signature="e#4543#4544#0" expanded="true" />
+            <element signature="e#4610#4611#0" expanded="true" />
+            <element signature="e#4659#4660#0" expanded="true" />
+            <element signature="e#4876#4877#0" expanded="true" />
+            <element signature="e#4903#4904#0" expanded="true" />
           </folding>
         </state>
       </provider>
