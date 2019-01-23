@@ -297,7 +297,8 @@ public class rnsDB {
         }
 
         if (good && vehicles.putIfAbsent(id, vehicleExt)==null) {
-            vehicleExt.setPaths(convert(computedPath));
+//            vehicleExt.setPaths(convert(computedPath));
+            vehicleExt.setPaths(computedPath);
             return vehicle;
         } else {
             Vehicle refused = new Vehicle();
@@ -456,7 +457,8 @@ public class rnsDB {
                     }
 
                     if (good) {
-                        vehicleExt.setPaths(convert(computedPath));
+//                        vehicleExt.setPaths(convert(computedPath));
+                        vehicleExt.setPaths(computedPath);
                         return vehicle;
                     } else {
                         Vehicle refused = new Vehicle();
