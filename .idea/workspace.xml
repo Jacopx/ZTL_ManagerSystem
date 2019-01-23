@@ -4,7 +4,6 @@
     <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/vehClient/VehClientPersonal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/vehClient/VehClientPersonal.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,8 +57,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="556">
-                  <caret line="259" column="89" selection-start-line="259" selection-start-column="89" selection-end-line="259" selection-end-column="89" />
+                <state relative-caret-position="712">
+                  <caret line="281" column="43" lean-forward="true" selection-start-line="281" selection-start-column="43" selection-end-line="281" selection-end-column="43" />
                   <folding>
                     <element signature="method#getPlace#0;class#rnsDB#0" />
                     <element signature="method#getConnections#0;class#rnsDB#0" />
@@ -252,7 +251,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548258677108" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548259306623" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -328,14 +327,7 @@
       <workItem from="1548112101424" duration="212000" />
       <workItem from="1548146154932" duration="7082000" />
       <workItem from="1548161084967" duration="20149000" />
-      <workItem from="1548250775237" duration="6783000" />
-    </task>
-    <task id="LOCAL-00073" summary="Adding admin also in whole system call">
-      <created>1548088898393</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1548088898393</updated>
+      <workItem from="1548250775237" duration="7333000" />
     </task>
     <task id="LOCAL-00074" summary="Starting AdmClient Development">
       <created>1548111880724</created>
@@ -673,11 +665,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548258283502</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="Correcting error in gateCheck">
+      <created>1548258695800</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1548258695800</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110808000" />
+    <option name="totallyTimeSpent" value="111358000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -721,7 +720,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Enter request for vehicle client" />
     <MESSAGE value="Error" />
     <MESSAGE value="Fixing error around" />
     <MESSAGE value="Trying to debug" />
@@ -746,7 +744,8 @@
     <MESSAGE value="Adding some output" />
     <MESSAGE value="Output" />
     <MESSAGE value="Service Error" />
-    <option name="LAST_COMMIT_MESSAGE" value="Service Error" />
+    <MESSAGE value="Correcting error in gateCheck" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correcting error in gateCheck" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1205,8 +1204,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="259" column="89" selection-start-line="259" selection-start-column="89" selection-end-line="259" selection-end-column="89" />
+        <state relative-caret-position="712">
+          <caret line="281" column="43" lean-forward="true" selection-start-line="281" selection-start-column="43" selection-end-line="281" selection-end-column="43" />
           <folding>
             <element signature="method#getPlace#0;class#rnsDB#0" />
             <element signature="method#getConnections#0;class#rnsDB#0" />

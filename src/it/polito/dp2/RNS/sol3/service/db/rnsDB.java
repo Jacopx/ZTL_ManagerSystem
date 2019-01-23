@@ -247,32 +247,39 @@ public class rnsDB {
     }
 
     public Vehicle addVehicle(long id, Vehicle vehicle) {
-        boolean good = false;
+        boolean good = true;
         int step = 0;
         String temp;
 
         if((temp = placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace().getSelf()) != null) {
             vehicle.setPositionNode(temp);
-            ++step;
-            if((temp = placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf()) != null) {
-                vehicle.setFromNode(temp);
-                ++step;
-                String gateIN = placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace().getGate().value();
-                if( gateIN.equals("IN") || gateIN.equals("INOUT")) {
-                    ++step;
-                    if((temp = placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf()) != null) {
-                        vehicle.setToNode(temp);
-                        ++step;
-                    }
-                }
-            }
+        } else {
+            good = false; step = 1;
         }
 
-        if(step < 4) {
+        if((temp = placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf()) != null) {
+            vehicle.setFromNode(temp);
+        } else {
+            good = false; step = 2;
+        }
+
+        String gateIN = placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace().getGate().value();
+        if(gateIN.isEmpty() || gateIN.equals("OUT")) {
+            good = false; step = 3;
+        }
+
+        if((temp = placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf()) != null) {
+            vehicle.setToNode(temp);
+        } else {
+            good = false; step = 4;
+        }
+
+        if(!good) {
             Vehicle refused = new Vehicle();
+            System.out.println("STEP#" + step);
             if(step == 2)
                 refused.setState("WRONG_GATE_TYPE");
-            else if(step == 0 || step == 3)
+            else if(step == 1 || step == 3)
                 refused.setState("WRONG_PLACE");
             else
                 refused.setState("ERROR");
