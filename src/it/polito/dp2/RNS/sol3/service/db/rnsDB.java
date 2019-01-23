@@ -251,7 +251,7 @@ public class rnsDB {
         int step = 0;
         String temp;
 
-        if(vehicle.getPosition() != null) {
+        if(vehicle.getPosition() != null && placeExtById.get(vehicle.getPosition()) >= 0) {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setPositionNode(temp);
@@ -260,7 +260,7 @@ public class rnsDB {
             }
         }
 
-        if(vehicle.getFrom() != null) {
+        if(vehicle.getFrom() != null && placeExtById.get(vehicle.getFrom()) >= 0) {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getFrom()));
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setFromNode(temp);
@@ -270,7 +270,7 @@ public class rnsDB {
         }
 
         System.out.println("Wrong POS: " + vehicle.getPosition());
-        if(vehicle.getPosition() != null) {
+        if(vehicle.getPosition() != null && placeExtById.get(vehicle.getPosition()) >= 0) {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
             if (placeExt != null) {
                 GateItem type = placeExt.getPlace().getGate();
