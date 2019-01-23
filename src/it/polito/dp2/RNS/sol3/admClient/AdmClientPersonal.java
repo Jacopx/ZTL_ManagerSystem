@@ -60,6 +60,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         else
             return null;
 
+        System.out.println("Plural ERROR#" + response.getStatus());
         if(response.getStatus() == 200) {
             Set<VehicleReader> vehicleReaderSet = new HashSet<>();
             Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
@@ -84,6 +85,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         else
             return null;
 
+        System.out.println("Single ERROR#" + response.getStatus());
         if(response.getStatus() == 200) {
             Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
             for(Vehicle v:vehicleResponse.getVehicle()) {
