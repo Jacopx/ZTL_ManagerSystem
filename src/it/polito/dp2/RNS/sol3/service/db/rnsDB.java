@@ -255,6 +255,7 @@ public class rnsDB {
             if (placeExt != null) {
                 GateItem type = placeExt.getPlace().getGate();
                 if(type != null) {
+                    System.out.println("GateValue: " + type.value());
                     if(type.value().isEmpty() || type.value().equals("OUT")) {
                         return generateErrorVehicle(2);
                     }
