@@ -247,8 +247,6 @@ public class rnsDB {
     }
 
     public Vehicle addVehicle(long id, Vehicle vehicle) {
-        boolean good = true;
-        int step = 0;
         String temp;
 
         // TO CHECK
@@ -257,10 +255,10 @@ public class rnsDB {
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setToNode(temp);
             } else {
-                good = false; step = 1;
+                return generateErrorVehicle(1);
             }
         } else {
-            good = false; step = 1;
+            return generateErrorVehicle(1);
         }
 
         // FROM CHECK
@@ -269,10 +267,10 @@ public class rnsDB {
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setFromNode(temp);
             } else {
-                good = false; step = 2;
+                return generateErrorVehicle(2);
             }
         } else {
-            good = false; step = 1;
+            return generateErrorVehicle(1);
         }
 
         // POSITION CHECK
@@ -282,32 +280,20 @@ public class rnsDB {
                 GateItem type = placeExt.getPlace().getGate();
                 if(type != null) {
                     if(type.value().isEmpty() || type.value().equals("OUT")) {
-                        good = false; step = 3;
+                        return generateErrorVehicle(3);
                     }
                 } else {
-                    good = false; step = 3;
+                    return generateErrorVehicle(3);
                 }
             } else {
-                good = false; step = 3;
+                return generateErrorVehicle(3);
             }
         } else {
-            good = false; step = 1;
-        }
-
-        if(!good) {
-            Vehicle refused = new Vehicle();
-            System.out.println("STEP#" + step);
-            if(step == 2)
-                refused.setState("WRONG_GATE_TYPE");
-            else if(step == 1 || step == 3)
-                refused.setState("UNKNOWN_PLACE");
-            else
-                refused.setState("ERROR");
-            return refused;
+            return generateErrorVehicle(1);
         }
 
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
-        good = false;
+        boolean good = false;
 
         Set<List<String>> computedPath = computePath(vehicle);
         if(computedPath!= null && computedPath.size() != 0) {
@@ -328,6 +314,19 @@ public class rnsDB {
             return refused;
         }
     }
+
+    private Vehicle generateErrorVehicle(int error) {
+        Vehicle refused = new Vehicle();
+        System.out.println("error#" + error);
+        if(error == 2)
+            refused.setState("WRONG_GATE_TYPE");
+        else if(error == 1 || error == 3)
+            refused.setState("UNKNOWN_PLACE");
+        else
+            refused.setState("ERROR");
+        return refused;
+    }
+
 
     private Set<List<String>> convert(Set<List<String>> computePath) {
         Set<List<String>> newPaths = new HashSet<>();
