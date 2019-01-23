@@ -23,14 +23,20 @@ import java.util.stream.Collectors;
  */
 public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     private String BASE;
+    private int PORT;
+    private String ws;
+    private String URL;
     private RnsReader rnsReader;
 
     public AdmClientPersonal newAdmClient() {
         if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
-            this.BASE = "http://localhost:8080/RnsSystem/rest";
-            System.setProperty("it.polito.dp2.RNS.lab3.URL", BASE);
+            this.BASE = "http://localhost:";
+            this.PORT = 8080;
+            this.ws = "/RnsSystem/rest";
+            this.URL = BASE + PORT + ws;
+            System.setProperty("it.polito.dp2.RNS.lab3.URL", URL);
         } else {
-            BASE = System.getProperty("it.polito.dp2.RNS.lab3.URL");
+            URL = System.getProperty("it.polito.dp2.RNS.lab3.URL");
         }
 
         try {
@@ -46,7 +52,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public Set<VehicleReader> getUpdatedVehicles(String place) throws ServiceException {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(BASE).path("vehicles");
+        WebTarget target = client.target(URL).path("vehicles");
 
         Response response = null;
         if(place != null && !place.isEmpty())
@@ -69,7 +75,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     @Override
     public VehicleReader getUpdatedVehicle(String id) throws ServiceException {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(BASE).path("vehicles");
+        WebTarget target = client.target(URL).path("vehicles");
 
         Response response = null;
         if(id != null && !id.isEmpty())

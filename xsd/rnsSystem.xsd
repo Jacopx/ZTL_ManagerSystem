@@ -124,4 +124,19 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="VehicleResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="self" type="xsd:anyURI"/>
+                <xsd:element name="plateID" type="xsd:anyURI"/>
+                <xsd:element name="shortPaths" type="ShortPaths" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="path" type="Path"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="Path">
+        <xsd:list itemType="xsd:string"/>
+    </xsd:simpleType>
+
 </xsd:schema>

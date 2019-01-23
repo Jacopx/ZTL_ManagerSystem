@@ -247,20 +247,59 @@ public class rnsDB {
     }
 
     public Vehicle addVehicle(long id, Vehicle vehicle) {
+        boolean good = false;
+        int step = 0;
+        String temp;
+
+        if((temp = placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace().getSelf()) != null) {
+            vehicle.setPositionNode(temp);
+            ++step;
+            if((temp = placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf()) != null) {
+                vehicle.setFromNode(temp);
+                ++step;
+                String gateIN = placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getGate().value();
+                if( gateIN.equals("IN") || gateIN.equals("INOUT")) {
+                    ++step;
+                    if((temp = placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf()) != null) {
+                        vehicle.setToNode(temp);
+                        ++step;
+                    }
+                }
+
+            }
+        }
+
+        if(step < 4) {
+            Vehicle refused = new Vehicle();
+            if(step == 2)
+                refused.setState("WRONG_GATE_TYPE");
+            else if(step == 0 || step == 3)
+                refused.setState("WRONG_PLACE");
+            else
+                refused.setState("ERROR");
+            return refused;
+        }
 
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
-        vehicle.setSelf(URL + "/vehicles/" + id);
-        if (vehicles.putIfAbsent(id, vehicleExt)==null) {
-            Set<List<String>> computedPath = computePath(vehicle);
-            if(computedPath != null && computedPath.size() == 0) {
-                vehicle.setState("REFUSED");
-                return vehicle;
-            } else {
-                vehicleExt.setPaths(convert(computedPath));
+
+        Set<List<String>> computedPath = computePath(vehicle);
+        if(computedPath!= null && computedPath.size() != 0) {
+            for(List<String> ps:computedPath) {
+                if(ps.size() > 0) {
+                    good = true;
+                    break;
+                }
             }
+        }
+
+        if (good && vehicles.putIfAbsent(id, vehicleExt)==null) {
+            vehicleExt.setPaths(convert(computedPath));
             return vehicle;
-        } else
-            return null;
+        } else {
+            Vehicle refused = new Vehicle();
+            refused.setState("REFUSED");
+            return refused;
+        }
     }
 
     private Set<List<String>> convert(Set<List<String>> computePath) {

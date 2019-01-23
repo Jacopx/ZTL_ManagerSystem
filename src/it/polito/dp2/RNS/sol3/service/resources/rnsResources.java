@@ -233,7 +233,7 @@ public class rnsResources {
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Response createVehicle(Vehicle vehicle) {
+    public VehicleResponse createVehicle(Vehicle vehicle) {
 
         long id = service.getNextVehicle();
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
@@ -241,8 +241,25 @@ public class rnsResources {
         vehicle.setSelf(self.toString());
 
         Vehicle created = service.addVehicle(id, vehicle);
-
-        return Response.created(self).entity(created).build();
+        switch (created.getState()) {
+            case "REFUSED":
+                throw new HTTPException(410);
+            case "WRONG_GATE_TYPE":
+                throw new HTTPException(409);
+            case "WRONG_PLACE":
+                throw new HTTPException(406);
+            case "ERROR":
+                throw new HTTPException(400);
+            default:
+                VehicleResponse v = new VehicleResponse();
+                v.setPlateID(created.getId());
+                v.setSelf(created.getSelf());
+                for (ShortPaths sp : created.getShortPaths()) {
+                    for (SuggPath sgp : sp.getSuggPath())
+                        v.getPath().addAll(sgp.getRelation());
+                }
+                return v;
+        }
     }
 
     @PUT

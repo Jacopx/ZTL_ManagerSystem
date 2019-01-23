@@ -98,7 +98,6 @@ public class RnsReaderPersonal implements RnsReader {
     }
 
     public void addVehicle(VehicleItem vehicle) {
-        // @TODO: Verify that there is enough space to add a vehicle
         vehicles.add(new VehicleReaderPersonal(vehicle.getId(), vehicle.getEntryTime().toGregorianCalendar(), vehicle.getType(), vehicle.getState()));
     }
 
