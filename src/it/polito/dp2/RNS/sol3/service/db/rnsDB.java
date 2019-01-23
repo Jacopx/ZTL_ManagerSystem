@@ -269,7 +269,6 @@ public class rnsDB {
             }
         }
 
-        System.out.println("Wrong POS: " + vehicle.getPosition());
         if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
             if (placeExt != null) {
@@ -340,6 +339,7 @@ public class rnsDB {
     }
 
     private Set<List<String>> computePath(Vehicle vehicle) {
+        System.out.println("PositionComputePath: " + vehicle.getPosition());
         try {
             return pff.findShortestPaths(vehicle.getPosition(), vehicle.getTo(), 999);
         } catch (UnknownIdException | BadStateException | ServiceException e) {

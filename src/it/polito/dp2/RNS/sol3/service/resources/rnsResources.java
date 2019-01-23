@@ -242,7 +242,6 @@ public class rnsResources {
         vehicle.setSelf(self.toString());
 
         Vehicle created = service.addVehicle(id, vehicle);
-        System.out.println("CreatedS: " + created.getState());
         switch (created.getState()) {
             case "REFUSED":
                 return Response.created(self).status(410).build();
