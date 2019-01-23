@@ -257,7 +257,7 @@ public class rnsDB {
             if((temp = placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getSelf()) != null) {
                 vehicle.setFromNode(temp);
                 ++step;
-                String gateIN = placeExtByNode.get(placeExtById.get(vehicle.getFrom())).getPlace().getGate().value();
+                String gateIN = placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace().getGate().value();
                 if( gateIN.equals("IN") || gateIN.equals("INOUT")) {
                     ++step;
                     if((temp = placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf()) != null) {
@@ -265,7 +265,6 @@ public class rnsDB {
                         ++step;
                     }
                 }
-
             }
         }
 
