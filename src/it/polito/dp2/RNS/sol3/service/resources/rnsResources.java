@@ -167,6 +167,7 @@ public class rnsResources {
                                 @QueryParam("plateID") String plateID
     ) {
         Vehicles vs = null;
+        System.out.println("getVehicles: " + position);
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
@@ -241,6 +242,7 @@ public class rnsResources {
         vehicle.setSelf(self.toString());
 
         Vehicle created = service.addVehicle(id, vehicle);
+        System.out.println("CreatedS: " + created.getState());
         switch (created.getState()) {
             case "REFUSED":
                 throw new HTTPException(410);

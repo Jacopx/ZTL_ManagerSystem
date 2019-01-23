@@ -70,6 +70,9 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
         vehicle.setState("IN_TRANSIT");
 
         Response response = target.request(MediaType.APPLICATION_JSON).post(Entity.json(vehicle));
+        System.out.println("RC: " + response.getStatus());
+        System.out.println("Plate: " + vehicle.getId());
+
         if(response.getStatus() == 201) {
             // CREATED
             VehicleResponse vehicleResponse = response.readEntity(new GenericType<VehicleResponse>(){});

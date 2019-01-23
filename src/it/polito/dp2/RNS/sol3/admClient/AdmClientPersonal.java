@@ -56,7 +56,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
         Response response = null;
         if(place != null && !place.isEmpty())
-            response = target.queryParam("position", place).request(MediaType.APPLICATION_JSON).get();
+            response = target.queryParam("admin", 1).queryParam("position", place).request(MediaType.APPLICATION_JSON).get();
         else
             return null;
 
@@ -79,7 +79,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
         Response response = null;
         if(id != null && !id.isEmpty())
-            response = target.queryParam("plateID", id).request(MediaType.APPLICATION_JSON).get();
+            response = target.queryParam("admin", 1).queryParam("plateID", id).request(MediaType.APPLICATION_JSON).get();
         else
             return null;
 
