@@ -69,9 +69,10 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
                vehicleReaderSet.add(new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState()));
             }
             return vehicleReaderSet;
-        } else {
+        } else if(response.getStatus() >= 500) {
             throw new ServiceException();
         }
+        return null;
     }
 
     @Override
@@ -92,7 +93,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             for(Vehicle v:vehicleResponse.getVehicle()) {
                 return new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState());
             }
-        } else {
+        } else if(response.getStatus() >= 500) {
             throw new ServiceException();
         }
         return null;
