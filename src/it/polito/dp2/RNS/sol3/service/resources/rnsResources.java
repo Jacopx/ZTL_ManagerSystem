@@ -167,7 +167,7 @@ public class rnsResources {
                                 @QueryParam("plateID") String plateID
     ) {
         Vehicles vs = null;
-        System.out.println("getVehicles: " + position);
+        System.out.println("getVehicles: " + plateID);
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
