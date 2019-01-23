@@ -263,9 +263,12 @@ public class rnsDB {
             good = false; step = 2;
         }
 
-        String gateIN = placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace().getGate().value();
-        if(gateIN.isEmpty() || gateIN.equals("OUT")) {
-            good = false; step = 3;
+        PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
+        if (placeExt != null) {
+            String gateIN = placeExt.getPlace().getGate().value();
+            if(gateIN.isEmpty() || gateIN.equals("OUT")) {
+                good = false; step = 3;
+            }
         }
 
         if((temp = placeExtByNode.get(placeExtById.get(vehicle.getTo())).getPlace().getSelf()) != null) {
