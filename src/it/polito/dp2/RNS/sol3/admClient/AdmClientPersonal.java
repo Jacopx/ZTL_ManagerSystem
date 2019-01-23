@@ -54,6 +54,8 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles");
 
+        System.out.println("getUpdatedVehicles: " + place);
+
         Response response = null;
         if(place != null && !place.isEmpty())
             response = target.queryParam("admin", 1).queryParam("position", place).request(MediaType.APPLICATION_JSON).get();
@@ -76,6 +78,8 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
     public VehicleReader getUpdatedVehicle(String id) throws ServiceException {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles");
+
+        System.out.println("getUpdatedVehicle: " + id);
 
         Response response = null;
         if(id != null && !id.isEmpty())
