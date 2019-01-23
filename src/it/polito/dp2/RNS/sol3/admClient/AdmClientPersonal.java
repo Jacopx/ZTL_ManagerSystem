@@ -51,6 +51,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public Set<VehicleReader> getUpdatedVehicles(String place) throws ServiceException {
+        System.out.println("# Plural #");
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles");
 
@@ -78,6 +79,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public VehicleReader getUpdatedVehicle(String id) throws ServiceException {
+        System.out.println("# Singular #");
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles");
 

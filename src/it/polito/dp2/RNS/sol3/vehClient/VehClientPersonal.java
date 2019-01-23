@@ -30,6 +30,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     private String ws;
     private String URL;
     private Vehicle myself;
+    private long myselfNumber;
 
     public VehClientPersonal newVehClient() {
         if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
@@ -48,6 +49,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
 
     @Override
     public List<String> enter(String plateId, VehicleType type, String inGate, String destination) throws ServiceException, UnknownPlaceException, WrongPlaceException, EntranceRefusedException {
+        System.out.println("# enter #");
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles");
 
@@ -70,6 +72,8 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
         vehicle.setTo(destination);
         vehicle.setState("IN_TRANSIT");
 
+        myself = vehicle;
+
         Response response = target.request(MediaType.APPLICATION_JSON).post(Entity.json(vehicle));
 
         if(response.getStatus() == 201) {
@@ -77,6 +81,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
             VehicleResponse vehicleResponse = response.readEntity(new GenericType<VehicleResponse>(){});
             myself.setToNode(vehicleResponse.getToNode());
             myself.setFromNode(vehicleResponse.getFromNode());
+            myselfNumber = vehicleResponse.getNum();
             return new ArrayList<>(vehicleResponse.getPath());
         } else if(response.getStatus() == 400) {
             // BAD REQUEST
@@ -98,21 +103,56 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
 
     @Override
     public List<String> move(String newPlace) throws ServiceException, UnknownPlaceException, WrongPlaceException {
+        System.out.println("# move #");
         return null;
+//        Client client = ClientBuilder.newClient();
+//        WebTarget target = client.target(URL).path("vehicles").path(Long.toString(myselfNumber));
+//
+//        Response response = target.queryParam("move", newPlace).request(MediaType.APPLICATION_JSON).put(Entity.json(myself));
+//
+//        if(response.getStatus() == 200) {
+//            // DELETED
+//            myself = null;
+//        } else if(response.getStatus() == 406) {
+//            // WRONG GATE TYPE
+//            throw new UnknownPlaceException();
+//        } else if(response.getStatus() == 409) {
+//            // UNKNOWN PLACE
+//            throw new WrongPlaceException();
+//        } else {
+//            // OTHER REASONS
+//            throw new ServiceException();
+//        }
+//
+//        return null;
     }
 
     @Override
     public void changeState(VehicleState newState) throws ServiceException {
+        System.out.println("# changeState #");
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL).path("vehicles").path(Long.toString(myselfNumber));
 
+        Response response = target.queryParam("state", newState.value()).request(MediaType.APPLICATION_JSON).put(Entity.json(myself));
+
+        if(response.getStatus() == 200) {
+            // CHANGED
+            myself.setState(newState.value());
+        } else if(response.getStatus() == 404) {
+            // NOT FOUND
+            throw new ServiceException();
+        } else {
+            // OTHER REASONS
+            throw new ServiceException();
+        }
     }
 
     @Override
     public void exit(String outGate) throws ServiceException, UnknownPlaceException, WrongPlaceException {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("vehicles");
+        WebTarget target = client.target(URL).path("vehicles").path(Long.toString(myselfNumber));
 
         Response response = target
-                .queryParam("id", myself.getId())
                 .queryParam("outGate", outGate)
                 .request(MediaType.APPLICATION_JSON).delete();
 

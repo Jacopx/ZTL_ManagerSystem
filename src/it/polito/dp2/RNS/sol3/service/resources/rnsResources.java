@@ -276,8 +276,11 @@ public class rnsResources {
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicle updateVehicle(@PathParam("id") long id, Vehicle vehicle) {
-        Vehicle updated = service.updateVehicle(id, vehicle);
+    public Vehicle updateVehicle(@PathParam("id") long id,
+                                 @QueryParam("state") String state,
+                                 @QueryParam("move") String move,
+                                 Vehicle vehicle) {
+        Vehicle updated = service.updateVehicle(id, state, move);
         if (updated==null)
             throw new NotFoundException();
         return updated;

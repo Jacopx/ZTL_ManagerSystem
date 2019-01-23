@@ -429,22 +429,50 @@ public class rnsDB {
         return null;
     }
 
-    public Vehicle updateVehicle(long id, Vehicle vehicle) {
+    public Vehicle updateVehicle(long id, String state, String move) {
+        boolean good = false;
         VehicleExt vehicleExt = vehicles.get(id);
         if(vehicleExt == null)
             return null;
-        Vehicle old = vehicleExt.getVehicle();
-        vehicle.setSelf(old.getSelf());
-        vehicle.setId(old.getId());
-        vehicle.setEntryTime(old.getEntryTime());
-        vehicleExt.setVehicle(vehicle);
 
-        //@TODO: Missing verify goodness
-        if(!vehicle.getPosition().equals(old.getPosition())) {
-            vehicleExt.setPaths(convert(computePath(vehicle)));
+        if(state != null && !state.isEmpty()) {
+            vehicleExt.getVehicle().setState(state);
+            return vehicleExt.getVehicle();
         }
 
-        return vehicle;
+        if(move != null && !move.isEmpty()) {
+            Vehicle vehicle = vehicleExt.getVehicle();
+            if(placeExtById.containsKey(move))
+                if(isReachable(placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace(), placeExtByNode.get(placeExtById.get(move)).getPlace())) {
+                    vehicle.setPosition(move);
+                    vehicle.setPositionNode(placeExtByNode.get(placeExtById.get(move)).getPlace().getSelf());
+
+                    Set<List<String>> computedPath = computePath(vehicle);
+                    if(computedPath!= null && computedPath.size() != 0) {
+                        for(List<String> ps:computedPath) {
+                            if(ps.size() > 0) {
+                                good = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (good) {
+                        vehicleExt.setPaths(convert(computedPath));
+                        return vehicle;
+                    } else {
+                        Vehicle refused = new Vehicle();
+                        refused.setState("REFUSED");
+                        return refused;
+                    }
+                }
+        }
+
+        return null;
+    }
+
+    private boolean isReachable(Place from, Place to) {
+        return from.getConnections().contains(to.getId());
     }
 
     public Vehicle deleteVehicle(long id, String outGate) {
