@@ -409,8 +409,6 @@ public class rnsDB {
             list.getVehicle().add(v.getVehicle());
             ++added;
         }
-        if (added == 0)
-            return null;
         return list;
     }
 
