@@ -166,10 +166,6 @@ public class rnsResources {
                                 @QueryParam("plateID") String plateID
     ) {
         Vehicles vs = null;
-        System.out.println("Admin:"+admin);
-        System.out.println("Position:"+position);
-        System.out.println("plateID:"+plateID);
-
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
@@ -204,7 +200,6 @@ public class rnsResources {
 
         if(vs == null)
             vs = new Vehicles();
-        System.out.println("vsSize#" + vs.getVehicle().size());
         return vs;
     }
 
@@ -239,7 +234,6 @@ public class rnsResources {
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Response createVehicle(Vehicle vehicle) {
-        System.out.println("POST ADD Vehicle: " + vehicle.getId() + "/" + vehicle.getPosition());
         long id = service.getNextVehicle();
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
         URI self = builder.build();
