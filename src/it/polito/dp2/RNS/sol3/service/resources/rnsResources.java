@@ -93,7 +93,7 @@ public class rnsResources {
         }
 
         if (places==null)
-            places = new Places();
+            throw new NotFoundException();
         return places;
     }
 

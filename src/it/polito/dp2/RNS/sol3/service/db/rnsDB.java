@@ -213,9 +213,10 @@ public class rnsDB {
         for(PlaceExt p:place.values()) {
             if(placeID != null && !placeID.isEmpty()) {
                 System.out.println(p.getPlace().getId() + " == " + placeID);
-                if (p.getPlace().getId().equals(placeID))
+                if (p.getPlace().getId().equals(placeID)) {
                     list.getPlace().add(p.getPlace());
-                break;
+                    break;
+                }
             } else if (keyword != null && !keyword.isEmpty()) {
                 if (p.getPlace().getId().contains(keyword))
                     list.getPlace().add(p.getPlace());
