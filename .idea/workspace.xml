@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="Fixing ingress gate">
+    <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" afterDir="false" />
     </list>
@@ -54,8 +54,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="434">
-                  <caret line="308" column="97" lean-forward="true" selection-start-line="308" selection-start-column="97" selection-end-line="308" selection-end-column="97" />
+                <state relative-caret-position="388">
+                  <caret line="306" column="42" selection-start-line="306" selection-start-column="42" selection-end-line="306" selection-end-column="42" />
                   <folding>
                     <element signature="method#getPlaces#0;class#rnsDB#0" />
                     <element signature="method#searchPlaces#0;class#rnsDB#0" />
@@ -70,7 +70,7 @@
                     <element signature="method#getVehicle#0;class#rnsDB#0" />
                     <element signature="method#updateVehicle#0;class#rnsDB#0" />
                     <element signature="e#18264#18330#1" />
-                    <element signature="e#18080#18081#0" expanded="true" />
+                    <element signature="e#18181#18182#0" expanded="true" />
                     <element signature="method#cloneVehicle#0;class#rnsDB#0" />
                   </folding>
                 </state>
@@ -328,21 +328,7 @@
       <workItem from="1548161084967" duration="20149000" />
       <workItem from="1548250775237" duration="20978000" />
       <workItem from="1548283457091" duration="1592000" />
-      <workItem from="1548314520036" duration="6699000" />
-    </task>
-    <task id="LOCAL-00127" summary="Correcting error in while adding Vehicle">
-      <created>1548261947639</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1548261947639</updated>
-    </task>
-    <task id="LOCAL-00128" summary="Correcting error in while adding Vehicle">
-      <created>1548262554868</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1548262554868</updated>
+      <workItem from="1548314520036" duration="7142000" />
     </task>
     <task id="LOCAL-00129" summary="Correcting error in while adding Vehicle">
       <created>1548263184393</created>
@@ -673,11 +659,25 @@
       <option name="project" value="LOCAL" />
       <updated>1548322881799</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="Fixing ingress gate">
+      <created>1548323106651</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1548323106651</updated>
+    </task>
+    <task id="LOCAL-00177" summary="Map remove and add">
+      <created>1548323410739</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1548323410739</updated>
+    </task>
+    <option name="localTasksCounter" value="178" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="133294000" />
+    <option name="totallyTimeSpent" value="133737000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -731,7 +731,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Another check over presence" />
     <MESSAGE value="Changing logic flow of controls" />
     <MESSAGE value="Reverting" />
     <MESSAGE value="New flow check" />
@@ -756,7 +755,8 @@
     <MESSAGE value="Adding output to tests" />
     <MESSAGE value="Adding position test" />
     <MESSAGE value="Fixing ingress gate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing ingress gate" />
+    <MESSAGE value="Map remove and add" />
+    <option name="LAST_COMMIT_MESSAGE" value="Map remove and add" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1223,8 +1223,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="308" column="97" lean-forward="true" selection-start-line="308" selection-start-column="97" selection-end-line="308" selection-end-column="97" />
+        <state relative-caret-position="388">
+          <caret line="306" column="42" selection-start-line="306" selection-start-column="42" selection-end-line="306" selection-end-column="42" />
           <folding>
             <element signature="method#getPlaces#0;class#rnsDB#0" />
             <element signature="method#searchPlaces#0;class#rnsDB#0" />
@@ -1239,7 +1239,7 @@
             <element signature="method#getVehicle#0;class#rnsDB#0" />
             <element signature="method#updateVehicle#0;class#rnsDB#0" />
             <element signature="e#18264#18330#1" />
-            <element signature="e#18080#18081#0" expanded="true" />
+            <element signature="e#18181#18182#0" expanded="true" />
             <element signature="method#cloneVehicle#0;class#rnsDB#0" />
           </folding>
         </state>
