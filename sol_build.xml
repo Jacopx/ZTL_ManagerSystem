@@ -9,6 +9,7 @@
 	<property name="schema.dir" location="${basedir}/xsd" />
 	<property name="src.dir" location="${basedir}/src" />
 	<property name="build.dir" location="${basedir}/build" />
+	<property name="custom.dir" location="${basedir}/custom" />
 
 	<property name="lib.dir" location="${basedir}/lib" />
 	<property name="lib.src.dir" location="${basedir}/lib-src" />
@@ -47,11 +48,21 @@
 		</exec>
 	</target>
 
-	<target name="build-service">
+	<target name="generate-artifacts2" unless="generate-artifacts.notRequired" description="Generate bindings from schema">
+		<exec executable="xjc" failonerror="true" >
+			<arg value="-d" />
+			<arg value="${gen.dir}" />
+			<arg value="-p" />
+			<arg value="it.polito.dp2.RNS.sol2.jaxb" />
+			<!--<arg value="${schema.dir}/RNSinfo.xsd" />-->
+			<arg value="${custom.dir}/ObjectFactory.xsd" />
+			<arg value="${custom.dir}/pathResponse.xsd" />
+			<arg value="${custom.dir}/basicResponse.xsd" />
+		</exec>
+	</target>
+
+	<target name="build-service" depends="init, generate-bindings, generate-artifacts, generate-artifacts2, buildClient">
 		<echo>Building... (build-service)</echo>
-		<ant antfile="${basedir}/build2.xml" target="buildClient"></ant>
-		<ant antfile="${basedir}/build1.xml" target="build"></ant>
-		<ant antfile="${basedir}/sol_build.xml" target="generate-artifacts"></ant>
 		<javac
 				destdir="${build.dir}"
 				debug="${debug}"
@@ -61,6 +72,32 @@
 			<src path="${src.dir}" />
 			<src path="${gen.dir}" />
 			<include name="it/polito/dp2/RNS/sol3/**" />
+			<classpath>
+				<path refid="sol.classpath" />
+			</classpath>
+		</javac>
+		<echo>Done.</echo>
+	</target>
+
+	<!-- Target generate-bindings -->
+	<target name="generate-bindings" unless="generate-bindings.notRequired" depends="init" description="Generate bindings from schema">
+		<exec executable="xjc" failonerror="true" >
+			<arg value="-d" />
+			<arg value="${gen.dir}" />
+			<arg value="-p" />
+			<arg value="it.polito.dp2.RNS.sol1.jaxb" />
+			<arg value="./xsd/rnsInfo.xsd" />
+		</exec>
+		<touch file="${gen.dir}/.flagfile" />
+	</target>
+
+	<!-- Target buildClient -->
+	<target name="buildClient" depends="init" description="Build your solution">
+		<echo>Building the submitted solution (if needed)...</echo>
+		<javac destdir="${build.dir}" debug="${debug}" source="${source}" target="${target}" includeantruntime="false">
+			<src path="${src.dir}"/>
+			<src path="${gen.dir}"/>
+			<include name="it/polito/dp2/RNS/sol2/**" />
 			<classpath>
 				<path refid="sol.classpath" />
 			</classpath>
