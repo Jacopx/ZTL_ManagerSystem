@@ -12,6 +12,9 @@ public class personalTest {
     VehClient vehClient;
 
     {
+        System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.admClient.AdmClientFactory");
+        System.setProperty("it.polito.dp2.RNS.lab3.VehClientFactory", "it.polito.dp2.RNS.sol3.vehClient.VehClientFactory");
+
         try {
             admClient = AdmClientFactory.newInstance().newAdmClient();
             System.out.println("PLACES::");
