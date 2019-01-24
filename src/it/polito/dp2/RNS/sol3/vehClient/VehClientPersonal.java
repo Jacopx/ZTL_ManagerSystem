@@ -52,6 +52,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
         System.out.println("# enter #");
         Client client = ClientBuilder.newClient();
         System.out.println("URL: " + URL);
+        System.out.println("Plate: " + plateId + " " + type.value() + " " + inGate + " " + destination);
         WebTarget target = client.target(URL).path("vehicles");
 
         Vehicle vehicle = new Vehicle();
@@ -77,6 +78,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
 
         Response response = target.request(MediaType.APPLICATION_JSON).post(Entity.json(vehicle));
 
+        System.out.println("enter CODE#" + response.getStatus());
         if(response.getStatus() == 201) {
             // CREATED
             VehicleResponse vehicleResponse = response.readEntity(new GenericType<VehicleResponse>(){});
