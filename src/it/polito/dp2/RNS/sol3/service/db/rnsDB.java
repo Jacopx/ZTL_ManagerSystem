@@ -282,19 +282,13 @@ public class rnsDB {
 
                 GateItem type = placeExt.getPlace().getGate();
                 if(type != null) {
-                    System.out.println("GateValue: " + type.value());
-                    switch (type.value()) {
-                        case "IN":
-                            System.out.println("ALLOWED1");
-                            break;
-                        case "INOUT":
-                            System.out.println("ALLOWED2");
-                            break;
-                        case "OUT":
-                            System.out.println("WRONG_GATE");
-                            return generateErrorVehicle(2);
+                    if(type.value().equals("OUT")) {
+                        return generateErrorVehicle(2);
                     }
+                } else {
+                    return generateErrorVehicle(2);
                 }
+
             } else {
                 return generateErrorVehicle(1);
             }
@@ -308,6 +302,7 @@ public class rnsDB {
 
         if (computedPath!= null && vehicles.putIfAbsent(id, vehicleExt)==null) {
 //            vehicleExt.setPaths(convert(computedPath));
+            System.out.println("CORRECT");
             vehicleExt.setPaths(computedPath);
             return vehicle;
         } else {
@@ -512,6 +507,7 @@ public class rnsDB {
             if(gate != null) {
                 GateItem gateItem = gate.getPlace().getGate();
                 if(!gateItem.value().isEmpty() && (gateItem.value().equals("OUT") || gateItem.value().equals("INOUT"))) {
+                    vehicles.remove(vehicle);
                     Vehicle refused = new Vehicle();
                     refused.setState("REMOVED");
                     return refused;
