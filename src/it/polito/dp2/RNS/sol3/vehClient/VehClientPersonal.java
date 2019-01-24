@@ -104,27 +104,30 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     @Override
     public List<String> move(String newPlace) throws ServiceException, UnknownPlaceException, WrongPlaceException {
         System.out.println("# move #");
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL).path("vehicles").path(Long.toString(myselfNumber));
+
+        Response response;
+        if(newPlace != null && !newPlace.isEmpty())
+            response = target.queryParam("move", newPlace).request(MediaType.APPLICATION_JSON).put(Entity.json(myself));
+        else
+            return null;
+
+        if(response.getStatus() == 200) {
+            // DELETED
+            myself = null;
+        } else if(response.getStatus() == 406) {
+            // WRONG GATE TYPE
+            throw new UnknownPlaceException();
+        } else if(response.getStatus() == 409) {
+            // UNKNOWN PLACE
+            throw new WrongPlaceException();
+        } else {
+            // OTHER REASONS
+            throw new ServiceException();
+        }
+
         return null;
-//        Client client = ClientBuilder.newClient();
-//        WebTarget target = client.target(URL).path("vehicles").path(Long.toString(myselfNumber));
-//
-//        Response response = target.queryParam("move", newPlace).request(MediaType.APPLICATION_JSON).put(Entity.json(myself));
-//
-//        if(response.getStatus() == 200) {
-//            // DELETED
-//            myself = null;
-//        } else if(response.getStatus() == 406) {
-//            // WRONG GATE TYPE
-//            throw new UnknownPlaceException();
-//        } else if(response.getStatus() == 409) {
-//            // UNKNOWN PLACE
-//            throw new WrongPlaceException();
-//        } else {
-//            // OTHER REASONS
-//            throw new ServiceException();
-//        }
-//
-//        return null;
     }
 
     @Override
@@ -133,7 +136,11 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles").path(Long.toString(myselfNumber));
 
-        Response response = target.queryParam("state", newState.value()).request(MediaType.APPLICATION_JSON).put(Entity.json(myself));
+        Response response;
+        if(newState != null && !newState.value().isEmpty())
+            response = target.queryParam("state", newState.value()).request(MediaType.APPLICATION_JSON).put(Entity.json(myself));
+        else
+            return;
 
         if(response.getStatus() == 200) {
             // CHANGED

@@ -279,6 +279,8 @@ public class rnsResources {
                                  @QueryParam("state") String state,
                                  @QueryParam("move") String move,
                                  Vehicle vehicle) {
+        System.out.println("State: "+state);
+        System.out.println("Move: "+move);
         Vehicle updated = service.updateVehicle(id, state, move);
         if (updated==null)
             throw new NotFoundException();
