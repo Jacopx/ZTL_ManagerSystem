@@ -11,7 +11,6 @@ import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import javax.xml.ws.http.HTTPException;
 import java.net.URI;
 
 /**
@@ -166,7 +165,6 @@ public class rnsResources {
                                 @QueryParam("position") String position,
                                 @QueryParam("plateID") String plateID
     ) {
-        System.out.println("vs IN:"+admin + "/" + type + "/" + keyword + "/" + state + "/" + entryTime + "/" + position + "/" + plateID);
         Vehicles vs = null;
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
@@ -198,8 +196,7 @@ public class rnsResources {
         } else {
             throw new NotAuthorizedException("Admin privilege required!");
         }
-        System.out.println("vs = " + vs);
-        System.out.println("vsOUT#"+ vs.getVehicle().size());
+
         if(vs == null)
             throw new NotFoundException();
         return vs;
@@ -312,7 +309,7 @@ public class rnsResources {
                 return Response.status(409).build();
             case "ERROR":
                 return Response.status(400).build();
-            default:
+            default: case "REMOVED":
                 return Response.status(200).build();
         }
     }

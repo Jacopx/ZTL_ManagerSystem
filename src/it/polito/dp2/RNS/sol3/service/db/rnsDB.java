@@ -306,6 +306,7 @@ public class rnsDB {
             vehicleExt.setPaths(computedPath);
             return vehicle;
         } else {
+            System.out.println("REFUSED");
             Vehicle refused = new Vehicle();
             refused.setState("REFUSED");
             return refused;
@@ -506,18 +507,22 @@ public class rnsDB {
             PlaceExt gate = placeExtByNode.get(placeExtById.get(outGate));
             if(gate != null) {
                 GateItem gateItem = gate.getPlace().getGate();
-                if(!gateItem.value().isEmpty() && (gateItem.value().equals("OUT") || gateItem.value().equals("INOUT"))) {
+                if(!gateItem.value().isEmpty() && !gateItem.value().equals("IN")) {
                     vehicles.remove(vehicle);
                     Vehicle refused = new Vehicle();
                     refused.setState("REMOVED");
+                    System.out.println("REMOVED");
                     return refused;
                 } else {
+                    System.out.println("NOT DELETE");
                     return generateErrorVehicle(2);
                 }
             } else {
+                System.out.println("NOT DELETE");
                 return generateErrorVehicle(1);
             }
         } else {
+            System.out.println("NOT DELETE");
             return generateErrorVehicle(1);
         }
     }

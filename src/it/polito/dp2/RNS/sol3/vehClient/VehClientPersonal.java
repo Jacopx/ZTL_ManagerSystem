@@ -156,6 +156,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
 
     @Override
     public void exit(String outGate) throws ServiceException, UnknownPlaceException, WrongPlaceException {
+        System.out.println("# exit #");
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles").path(Long.toString(myselfNumber));
 
