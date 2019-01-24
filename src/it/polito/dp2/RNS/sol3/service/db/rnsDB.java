@@ -208,6 +208,7 @@ public class rnsDB {
     }
 
     private Places searchPlaces(ConcurrentHashMap<Long, PlaceExt> place, String keyword, String placeID) {
+        System.out.println("PlaceID: " + placeID);
         Places list = new Places();
         for(PlaceExt p:place.values()) {
             if(placeID != null && !placeID.isEmpty()) {
