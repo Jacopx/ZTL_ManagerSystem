@@ -201,7 +201,7 @@ public class rnsResources {
         }
 
         if(vs == null)
-            throw new NotFoundException();
+            vs = new Vehicles();
         return vs;
     }
 
