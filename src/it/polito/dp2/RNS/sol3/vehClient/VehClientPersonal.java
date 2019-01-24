@@ -51,6 +51,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     public List<String> enter(String plateId, VehicleType type, String inGate, String destination) throws ServiceException, UnknownPlaceException, WrongPlaceException, EntranceRefusedException {
         System.out.println("# enter #");
         Client client = ClientBuilder.newClient();
+        System.out.println("URL: " + URL);
         WebTarget target = client.target(URL).path("vehicles");
 
         Vehicle vehicle = new Vehicle();
