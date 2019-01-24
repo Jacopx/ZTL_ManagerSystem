@@ -31,6 +31,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     private String URL;
     private Vehicle myself;
     private long myselfNumber;
+    private ArrayList<String> myselfPath;
 
     public VehClientPersonal newVehClient() {
         if(System.getProperty("it.polito.dp2.RNS.lab3.URL") == null) {
@@ -85,7 +86,8 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
             myself.setToNode(vehicleResponse.getToNode());
             myself.setFromNode(vehicleResponse.getFromNode());
             myselfNumber = vehicleResponse.getNum();
-            return new ArrayList<>(vehicleResponse.getPath());
+            myselfPath = new ArrayList<>(vehicleResponse.getPath());
+            return myselfPath;
         } else if(response.getStatus() == 400) {
             // BAD REQUEST
             return null;

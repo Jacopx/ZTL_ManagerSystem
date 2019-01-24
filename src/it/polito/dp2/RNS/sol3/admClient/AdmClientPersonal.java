@@ -49,9 +49,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public Set<VehicleReader> getUpdatedVehicles(String place) throws ServiceException {
-        System.out.println("# Plural #");
         Client client = ClientBuilder.newClient();
-        System.out.println("URL: " + URL);
         WebTarget target = client.target(URL).path("vehicles");
 
         System.out.println("Plural ID: " + place);
@@ -71,8 +69,6 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             }
             return vehicleReaderSet;
         } else if(response.getStatus() >= 500) {
-            return new HashSet<>();
-        } else if(response.getStatus() >= 500) {
             throw new ServiceException();
         }
         return null;
@@ -80,9 +76,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public VehicleReader getUpdatedVehicle(String id) throws ServiceException {
-        System.out.println("# Singular #");
         Client client = ClientBuilder.newClient();
-        System.out.println("URL: " + URL);
         WebTarget target = client.target(URL).path("vehicles");
 
         System.out.println("Single ID: " + id);

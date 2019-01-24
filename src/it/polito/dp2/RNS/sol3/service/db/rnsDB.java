@@ -191,7 +191,7 @@ public class rnsDB {
 //            addVehicle(getNextVehicle(), v);
 //        }
 
-//        personalTest pt = new personalTest();
+        personalTest pt = new personalTest();
     }
 
     public Places getPlaces(SearchPlaces scope, String keyword, String placeID) {
