@@ -426,6 +426,8 @@ public class rnsDB {
             list.getVehicle().add(v.getVehicle());
             ++added;
         }
+        System.out.println("added#"+added);
+        System.out.println("size#"+list.getVehicle().size());
         return list;
     }
 
