@@ -284,19 +284,10 @@ public class rnsDB {
         }
 
         VehicleExt vehicleExt = new VehicleExt(id, vehicle);
-        boolean good = false;
 
         Set<List<String>> computedPath = computePath(vehicle);
-        if(computedPath!= null && computedPath.size() != 0) {
-            for(List<String> ps:computedPath) {
-                if(ps.size() > 0) {
-                    good = true;
-                    break;
-                }
-            }
-        }
 
-        if (good && vehicles.putIfAbsent(id, vehicleExt)==null) {
+        if (computedPath!= null && vehicles.putIfAbsent(id, vehicleExt)==null) {
 //            vehicleExt.setPaths(convert(computedPath));
             vehicleExt.setPaths(computedPath);
             return vehicle;
@@ -340,7 +331,15 @@ public class rnsDB {
             for (List<String> s:computed) {
                 System.out.println("SingleList#"+s.size());
             }
-            return computed;
+            if(computed.size() > 0) {
+                for (List<String> s:computed) {
+                    if(s.size() > 0)
+                        return computed;
+                }
+            } else {
+                return null;
+            }
+
         } catch (UnknownIdException | BadStateException | ServiceException e) {
             e.printStackTrace();
         }
@@ -455,19 +454,11 @@ public class rnsDB {
                     newVehicle.setPositionNode(placeExtByNode.get(placeExtById.get(move)).getPlace().getSelf());
 
                     Set<List<String>> computedPath = computePath(newVehicle);
-                    if(computedPath!= null && computedPath.size() != 0) {
-                        for(List<String> ps:computedPath) {
-                            if(ps.size() > 0) {
-                                good = true;
-                                break;
-                            }
-                        }
-                    }
 
-                    if (good) {
+                    if (computedPath!= null) {
 //                        vehicleExt.setPaths(convert(computedPath));
-                        vehicleExt.setVehicle(newVehicle);
                         vehicleExt.setPaths(computedPath);
+                        vehicleExt.setVehicle(newVehicle);
                         return newVehicle;
                     } else {
                         Vehicle refused = new Vehicle();
