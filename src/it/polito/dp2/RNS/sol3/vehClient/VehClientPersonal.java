@@ -117,8 +117,10 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
             return null;
 
         if(response.getStatus() == 200) {
-            // DELETED
-            myself = null;
+            Vehicle vehicleUpdated = response.readEntity(new GenericType<Vehicle>(){});
+            // MOVE
+            myself.setPosition(vehicleUpdated.getPosition());
+            myself.setPositionNode(vehicleUpdated.getPositionNode());
         } else if(response.getStatus() == 406) {
             // WRONG GATE TYPE
             throw new UnknownPlaceException();

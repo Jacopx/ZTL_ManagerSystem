@@ -168,7 +168,6 @@ public class rnsDB {
         }
 
 //        // VEHICLE for debug
-//        //@TODO: Why I need other vehicles?
 //        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
 //            Vehicle v = new Vehicle();
 //
@@ -192,7 +191,7 @@ public class rnsDB {
 //            addVehicle(getNextVehicle(), v);
 //        }
 
-        personalTest pt = new personalTest();
+//        personalTest pt = new personalTest();
     }
 
     public Places getPlaces(SearchPlaces scope, String keyword, String placeID) {
