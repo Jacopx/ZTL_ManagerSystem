@@ -110,34 +110,34 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		String plateId = "AB123CD";
 		VehicleType type = VehicleType.CAR;
 
-		System.out.println("#1");
+		System.err.println("#1");
 		
 		// initialize the test object that manages the vehicle lifecycle
 		VehicleClientManager vcm = new VehicleClientManager(plateId, type, referenceInputGate.getId());
-		System.out.println("#2");
+		System.err.println("#2");
 		// get initial number of vehicles seen by the admin client
 		int numberOfVehicles = getVehNumber(ac.getUpdatedVehicles(null));
-		System.out.println("#3");
+		System.err.println("#3");
 		
 		// check that initially the admin client does not find the vehicle
 		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
-		System.out.println("#4");
+		System.err.println("#4");
 		// perform first step (enter)
 		vcm.nextStep();
-		System.out.println("#5");
+		System.err.println("#5");
 		// check the number of vehicles seen by the admin client has been increased by one
 		checkExpectedVehNumber(ac.getUpdatedVehicles(null), numberOfVehicles+1);
-		System.out.println("#6");
+		System.err.println("#6");
 		// perform next steps (follow suggested path)
 		while(!vcm.isExited())
 			vcm.nextStep();
-		System.out.println("#7");
+		System.err.println("#7");
 		// check that finally admin client does not find the vehicle
 		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
-		System.out.println("#8");
+		System.err.println("#8");
 		// and that the number of vehicles seen by the admin client is as expected
 		checkExpectedVehNumber(ac.getUpdatedVehicles(null), numberOfVehicles);
-		System.out.println("#9");
+		System.err.println("#9");
 
     }
     
@@ -228,11 +228,11 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 	void checkVehicle(VehicleReader vehicle, String plateId, VehicleType type, VehicleState state, String source, String position,
 			String dest) {
 
-		System.out.println("Vehicle = " + vehicle);
-		System.out.println("checkVehicleID: #"+vehicle.getId() + "/" + plateId);
-		System.out.println("checkVehicleSRC: #"+vehicle.getOrigin().getId() + "/" + source);
-		System.out.println("checkVehiclePOS: #"+vehicle.getPosition().getId() + "/" + position);
-		System.out.println("checkVehicleDST: #"+vehicle.getDestination().getId() + "/" + dest);
+		System.err.println("Vehicle = " + vehicle);
+		System.err.println("checkVehicleID: #"+vehicle.getId() + "/" + plateId);
+		System.err.println("checkVehicleSRC: #"+vehicle.getOrigin().getId() + "/" + source);
+		System.err.println("checkVehiclePOS: #"+vehicle.getPosition().getId() + "/" + position);
+		System.err.println("checkVehicleDST: #"+vehicle.getDestination().getId() + "/" + dest);
 
 		assertNotNull("AdmClientPersonal returned null VehicleReader while a non-null one was expected", vehicle);
 		compareString(plateId, vehicle.getId(), "Plate id of returned vehicle");
