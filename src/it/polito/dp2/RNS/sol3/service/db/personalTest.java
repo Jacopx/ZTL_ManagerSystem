@@ -20,7 +20,7 @@ public class personalTest {
             System.out.println("PLACES::");
             admClient.getPlaces(null).forEach(p -> System.out.println(p.getId()));
             System.out.println("CONNECTIONS::");
-            admClient.getConnections().forEach(c -> System.out.println(c.getFrom() + "-->" + c.getTo()));
+            admClient.getConnections().forEach(c -> System.out.println(c.getFrom().getId() + "-->" + c.getTo().getId()));
             System.out.println("VEHICLES::");
             admClient.getUpdatedVehicles(null).forEach(v -> System.out.println(v.getId()));
 
