@@ -282,7 +282,8 @@ public class rnsDB {
 
                 GateItem type = placeExt.getPlace().getGate();
                 if(type != null) {
-                    if(!type.value().equals("INOUT") || !type.value().equals("IN")) {
+                    System.out.println("GateValue: " + type.value());
+                    if(type.value().equals("OUT")) {
                         return generateErrorVehicle(2);
                     }
                 } else {
