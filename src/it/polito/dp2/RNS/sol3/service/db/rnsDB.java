@@ -212,6 +212,7 @@ public class rnsDB {
         Places list = new Places();
         for(PlaceExt p:place.values()) {
             if(placeID != null && !placeID.isEmpty()) {
+                System.out.println(p.getPlace().getId() + " == " + placeID);
                 if (p.getPlace().getId().equals(placeID))
                     list.getPlace().add(p.getPlace());
                 break;
