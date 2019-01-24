@@ -22,7 +22,7 @@ public class personalTest {
             System.out.println("CONNECTIONS::");
             admClient.getConnections().forEach(c -> System.out.println(c.getFrom().getId() + "-->" + c.getTo().getId()));
             System.out.println("VEHICLES::");
-            admClient.getUpdatedVehicles(null).forEach(v -> System.out.println(v.getId()));
+            admClient.getUpdatedVehicles("Gate0").forEach(v -> System.out.println(v.getId()));
 
             vehClient = VehClientFactory.newInstance().newVehClient();
 

@@ -166,6 +166,8 @@ public class rnsResources {
                                 @QueryParam("plateID") String plateID
     ) {
         Vehicles vs = null;
+        System.out.println("Admin:"+admin);
+        System.out.println("Position:"+position);
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
@@ -186,6 +188,7 @@ public class rnsResources {
                         break;
                     }
                     default: {
+                        System.out.println("DEFAULT");
                         vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position, plateID);
                         break;
                     }
