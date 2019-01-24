@@ -261,6 +261,18 @@ public class rnsDB {
             return generateErrorVehicle(1);
         }
 
+        // POSITION CHECK
+        if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
+            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
+            if((temp = placeExt.getPlace().getSelf()) != null) {
+                vehicle.setPositionNode(temp);
+            } else {
+                return generateErrorVehicle(1);
+            }
+        } else {
+            return generateErrorVehicle(1);
+        }
+
         // FROM CHECK
         if(vehicle.getFrom() != null && placeExtById.containsKey(vehicle.getFrom())) {
             PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getFrom()));

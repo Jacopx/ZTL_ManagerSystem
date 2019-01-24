@@ -110,34 +110,24 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		String plateId = "AB123CD";
 		VehicleType type = VehicleType.CAR;
 
-		System.err.println("#1");
-		
 		// initialize the test object that manages the vehicle lifecycle
 		VehicleClientManager vcm = new VehicleClientManager(plateId, type, referenceInputGate.getId());
-		System.err.println("#2");
 		// get initial number of vehicles seen by the admin client
 		int numberOfVehicles = getVehNumber(ac.getUpdatedVehicles(null));
-		System.err.println("#3");
-		
+
 		// check that initially the admin client does not find the vehicle
 		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
-		System.err.println("#4");
 		// perform first step (enter)
 		vcm.nextStep();
-		System.err.println("#5");
 		// check the number of vehicles seen by the admin client has been increased by one
 		checkExpectedVehNumber(ac.getUpdatedVehicles(null), numberOfVehicles+1);
-		System.err.println("#6");
 		// perform next steps (follow suggested path)
 		while(!vcm.isExited())
 			vcm.nextStep();
-		System.err.println("#7");
 		// check that finally admin client does not find the vehicle
 		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
-		System.err.println("#8");
 		// and that the number of vehicles seen by the admin client is as expected
 		checkExpectedVehNumber(ac.getUpdatedVehicles(null), numberOfVehicles);
-		System.err.println("#9");
 
     }
     

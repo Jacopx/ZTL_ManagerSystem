@@ -61,7 +61,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         else
             response = target.queryParam("admin", 1).request(MediaType.APPLICATION_JSON).get();
 
-        System.out.println("Plural#" + response.getStatus());
+        System.out.println("Plural CODE#" + response.getStatus());
         if(response.getStatus() == 200) {
             Set<VehicleReader> vehicleReaderSet = new HashSet<>();
             Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
@@ -91,7 +91,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         else
             return null;
 
-        System.out.println("Single ERROR#" + response.getStatus());
+        System.out.println("Single CODE#" + response.getStatus());
         if(response.getStatus() == 200) {
             Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
             for(Vehicle v:vehicleResponse.getVehicle()) {
