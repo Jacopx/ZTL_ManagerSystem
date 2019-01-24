@@ -306,6 +306,7 @@ public class rnsDB {
             vehicleExt.setPaths(computedPath);
             return vehicle;
         } else {
+            System.out.println("ComPath:" + computedPath + "//vehicles.get:" + vehicles.get(id));
             System.out.println("REFUSED");
             Vehicle refused = new Vehicle();
             refused.setState("REFUSED");
