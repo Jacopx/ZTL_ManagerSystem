@@ -296,24 +296,18 @@ public class rnsDB {
             return generateErrorVehicle(1);
         }
 
-        VehicleExt vehicleExt = new VehicleExt(id, vehicle);
-
         Set<List<String>> computedPath = computePath(vehicle);
-
-        if (computedPath!= null) {
-            System.out.println("CORRECT PATH");
-            vehicleExt.setPaths(computedPath);
+        if(computedPath != null) {
             if(vehicles.contains(id)) {
-                System.out.println("RE-ADD");
-                vehicles.remove(id);
-                vehicles.put(id, vehicleExt);
+                System.out.println("UPDATE");
+                VehicleExt vehicleExt = vehicles.get(id);
+                vehicleExt.setPaths(computedPath);
             } else {
                 System.out.println("ADD");
+                VehicleExt vehicleExt = new VehicleExt(id, vehicle);
                 vehicles.put(id, vehicleExt);
             }
-
             return vehicle;
-
         } else {
             System.out.println("ComPath:" + computedPath + "//vehicles.get:" + vehicles.get(id));
             System.out.println("REFUSED");
