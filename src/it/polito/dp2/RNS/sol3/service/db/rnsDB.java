@@ -301,13 +301,17 @@ public class rnsDB {
         Set<List<String>> computedPath = computePath(vehicle);
 
         if (computedPath!= null) {
-            System.out.println("CORRECT");
+            System.out.println("CORRECT PATH");
             vehicleExt.setPaths(computedPath);
-            if(vehicles.putIfAbsent(id, vehicleExt)!=null) {
+            if(vehicles.contains(id)) {
                 System.out.println("RE-ADD");
                 vehicles.remove(id);
                 vehicles.put(id, vehicleExt);
+            } else {
+                System.out.println("ADD");
+                vehicles.put(id, vehicleExt);
             }
+
             return vehicle;
 
         } else {
