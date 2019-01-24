@@ -300,7 +300,6 @@ public class rnsDB {
 
     private Vehicle generateErrorVehicle(int error) {
         Vehicle refused = new Vehicle();
-        System.out.println("error#" + error);
         if(error == 2)
             refused.setState("WRONG_GATE_TYPE");
         else if(error == 1)
@@ -325,10 +324,6 @@ public class rnsDB {
     private Set<List<String>> computePath(Vehicle vehicle) {
         try {
             Set<List<String>> computed = pff.findShortestPaths(vehicle.getPosition(), vehicle.getTo(), 999);
-            System.out.println("SetLen#"+computed.size());
-            for (List<String> s:computed) {
-                System.out.println("SingleList#"+s.size());
-            }
             if(computed.size() > 0) {
                 for (List<String> s:computed) {
                     if(s.size() > 0)

@@ -166,7 +166,7 @@ public class rnsResources {
                                 @QueryParam("position") String position,
                                 @QueryParam("plateID") String plateID
     ) {
-        System.out.println("vs:"+admin + "/" + type + "/" + keyword + "/" + state + "/" + entryTime + "/" + position + "/" + plateID);
+        System.out.println("vs IN:"+admin + "/" + type + "/" + keyword + "/" + state + "/" + entryTime + "/" + position + "/" + plateID);
         Vehicles vs = null;
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
@@ -198,7 +198,8 @@ public class rnsResources {
         } else {
             throw new NotAuthorizedException("Admin privilege required!");
         }
-
+        System.out.println("vs = " + vs);
+        System.out.println("vsOUT#"+ vs.getVehicle().size());
         if(vs == null)
             throw new NotFoundException();
         return vs;
