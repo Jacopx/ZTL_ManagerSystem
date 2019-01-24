@@ -168,6 +168,7 @@ public class rnsDB {
         }
 
 //        // VEHICLE for debug
+        //@TODO: Why I need other vehicles?
         for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
             Vehicle v = new Vehicle();
 
@@ -281,7 +282,7 @@ public class rnsDB {
 
                 GateItem type = placeExt.getPlace().getGate();
                 if(type != null) {
-                    if(type.value().isEmpty() || type.value().equals("OUT")) {
+                    if(!type.value().equals("INOUT") || !type.value().equals("IN")) {
                         return generateErrorVehicle(2);
                     }
                 } else {
