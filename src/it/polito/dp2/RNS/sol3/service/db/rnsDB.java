@@ -300,11 +300,15 @@ public class rnsDB {
 
         Set<List<String>> computedPath = computePath(vehicle);
 
-        if (computedPath!= null && vehicles.putIfAbsent(id, vehicleExt)==null) {
-//            vehicleExt.setPaths(convert(computedPath));
+        if (computedPath!= null) {
+            if(vehicles.putIfAbsent(id, vehicleExt)!=null) {
+                vehicles.remove(id);
+                vehicles.put(id, vehicleExt);
+            }
             System.out.println("CORRECT");
             vehicleExt.setPaths(computedPath);
             return vehicle;
+
         } else {
             System.out.println("ComPath:" + computedPath + "//vehicles.get:" + vehicles.get(id));
             System.out.println("REFUSED");
