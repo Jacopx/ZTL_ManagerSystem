@@ -4,7 +4,6 @@ import it.polito.dp2.RNS.*;
 import it.polito.dp2.RNS.RnsReaderFactory;
 import it.polito.dp2.RNS.lab3.ServiceException;
 import it.polito.dp2.RNS.sol1.*;
-import it.polito.dp2.RNS.sol1.jaxb.Roads;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 
 import javax.ws.rs.client.Client;
@@ -16,7 +15,6 @@ import javax.ws.rs.core.Response;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Copyright by Jacopx on 2019-01-21.
@@ -63,7 +61,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         else
             response = target.queryParam("admin", 1).request(MediaType.APPLICATION_JSON).get();
 
-        System.out.println("Plural ERROR#" + response.getStatus());
+        System.out.println("Plural#" + response.getStatus());
         if(response.getStatus() == 200) {
             Set<VehicleReader> vehicleReaderSet = new HashSet<>();
             Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
@@ -72,8 +70,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             }
             return vehicleReaderSet;
         } else if(response.getStatus() >= 500) {
-            Set<VehicleReader> vehicleReaderSet = new HashSet<>();
-            return vehicleReaderSet;
+            return new HashSet<>();
         } else if(response.getStatus() >= 500) {
             throw new ServiceException();
         }
@@ -101,7 +98,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
                 return new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState());
             }
         } else if(response.getStatus() == 400) {
-            new VehicleReaderPersonal(null, null, null, null);
+            return null;
         } else if(response.getStatus() >= 500) {
             throw new ServiceException();
         }
@@ -120,7 +117,7 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
 
     @Override
     public Set<GateReader> getGates(GateType gateType) {
-        return getGates(gateType);
+        return rnsReader.getGates(gateType);
     }
 
     @Override

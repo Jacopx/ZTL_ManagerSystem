@@ -166,6 +166,7 @@ public class rnsResources {
                                 @QueryParam("position") String position,
                                 @QueryParam("plateID") String plateID
     ) {
+        System.out.print("vs:"+admin + "/" + type + "/" + keyword + "/" + state + "/" + entryTime + "/" + position + "/" + plateID);
         Vehicles vs = null;
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
