@@ -69,24 +69,24 @@ public class rnsResources {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
                     case "gate": {
-                        places = service.getPlaces(SearchPlaces.GATE, keyword);
+                        places = service.getPlaces(SearchPlaces.GATE, keyword, placeID);
                         break;
                     }
                     case "segment": {
-                        places = service.getPlaces(SearchPlaces.SEGMENT, keyword);
+                        places = service.getPlaces(SearchPlaces.SEGMENT, keyword, placeID);
                         break;
                     }
                     case "parking": {
-                        places = service.getPlaces(SearchPlaces.PARKING, keyword);
+                        places = service.getPlaces(SearchPlaces.PARKING, keyword, placeID);
                         break;
                     }
                     default: {
-                        places = service.getPlaces(SearchPlaces.ALL, keyword);
+                        places = service.getPlaces(SearchPlaces.ALL, keyword, placeID);
                         break;
                     }
                 }
             } else {
-                places = service.getPlaces(SearchPlaces.ALL, keyword);
+                places = service.getPlaces(SearchPlaces.ALL, keyword, placeID);
             }
         } else {
             throw new NotAuthorizedException("Admin privilege required!");

@@ -193,27 +193,31 @@ public class rnsDB {
 //        }
     }
 
-    public Places getPlaces(SearchPlaces scope, String keyword) {
+    public Places getPlaces(SearchPlaces scope, String keyword, String placeID) {
         switch (scope) {
             case SEGMENT: {
-                return searchPlaces(segments, keyword);
+                return searchPlaces(segments, keyword, placeID);
             } case PARKING: {
-                return searchPlaces(parkings, keyword);
+                return searchPlaces(parkings, keyword, placeID);
             } case GATE: {
-                return searchPlaces(gates, keyword);
+                return searchPlaces(gates, keyword, placeID);
             } case ALL: default: {
-                return searchPlaces(placeExtByNode, keyword);
+                return searchPlaces(placeExtByNode, keyword, placeID);
             }
         }
     }
 
-    private Places searchPlaces(ConcurrentHashMap<Long, PlaceExt> place, String keyword) {
+    private Places searchPlaces(ConcurrentHashMap<Long, PlaceExt> place, String keyword, String placeID) {
         Places list = new Places();
         for(PlaceExt p:place.values()) {
-            if(keyword != null && !keyword.isEmpty()) {
-                if(p.getPlace().getId().contains(keyword))
+            if(placeID != null && !placeID.isEmpty()) {
+                if (p.getPlace().getId().equals(placeID))
                     list.getPlace().add(p.getPlace());
-            } else {
+                break;
+            } else if (keyword != null && !keyword.isEmpty()) {
+                if (p.getPlace().getId().contains(keyword))
+                    list.getPlace().add(p.getPlace());
+            }  else {
                 list.getPlace().add(p.getPlace());
             }
         }

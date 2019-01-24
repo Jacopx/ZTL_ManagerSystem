@@ -23,8 +23,8 @@ public class rnsService {
         return rnsDB.getNextVehicle();
     }
 
-    public Places getPlaces(SearchPlaces scope, String keyword) {
-        return db.getPlaces(scope, keyword);
+    public Places getPlaces(SearchPlaces scope, String keyword, String placeID) {
+        return db.getPlaces(scope, keyword, placeID);
     }
 
     public Place getPlace(long id, String placeID) {
