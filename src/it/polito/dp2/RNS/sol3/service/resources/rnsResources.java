@@ -168,6 +168,7 @@ public class rnsResources {
         Vehicles vs = null;
         System.out.println("Admin:"+admin);
         System.out.println("Position:"+position);
+        System.out.println("plateID:"+plateID);
 
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
