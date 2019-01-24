@@ -14,6 +14,11 @@ public class personalTest {
     {
         System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.admClient.AdmClientFactory");
         System.setProperty("it.polito.dp2.RNS.lab3.VehClientFactory", "it.polito.dp2.RNS.sol3.vehClient.VehClientFactory");
+        String BASE = "http://localhost:";
+        int PORT = 8080;
+        String ws = "/RnsSystem/rest";
+        String URL = BASE + PORT + ws;
+        System.setProperty("it.polito.dp2.RNS.lab3.URL", URL);
 
         try {
             admClient = AdmClientFactory.newInstance().newAdmClient();
@@ -22,7 +27,7 @@ public class personalTest {
             System.out.println("CONNECTIONS::");
             admClient.getConnections().forEach(c -> System.out.println(c.getFrom().getId() + "-->" + c.getTo().getId()));
             System.out.println("VEHICLES::");
-            admClient.getUpdatedVehicles("Gate0").forEach(v -> System.out.println(v.getId()));
+            admClient.getUpdatedVehicles(null).forEach(v -> System.out.println(v.getId()));
 
             vehClient = VehClientFactory.newInstance().newVehClient();
 
