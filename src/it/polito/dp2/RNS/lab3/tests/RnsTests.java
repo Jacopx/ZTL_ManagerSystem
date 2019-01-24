@@ -217,6 +217,13 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 
 	void checkVehicle(VehicleReader vehicle, String plateId, VehicleType type, VehicleState state, String source, String position,
 			String dest) {
+
+		System.out.println("Vehicle = " + vehicle);
+		System.out.println("checkVehicleID: #"+vehicle.getId() + "/" + plateId);
+		System.out.println("checkVehicleSRC: #"+vehicle.getOrigin().getId() + "/" + source);
+		System.out.println("checkVehiclePOS: #"+vehicle.getPosition().getId() + "/" + position);
+		System.out.println("checkVehicleDST: #"+vehicle.getDestination().getId() + "/" + dest);
+
 		assertNotNull("AdmClientPersonal returned null VehicleReader while a non-null one was expected", vehicle);
 		compareString(plateId, vehicle.getId(), "Plate id of returned vehicle");
 		assertEquals("Wrong vehicle type in returned vehicle",type,vehicle.getType());
