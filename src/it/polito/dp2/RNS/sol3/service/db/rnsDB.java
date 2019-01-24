@@ -305,6 +305,7 @@ public class rnsDB {
             } else {
                 System.out.println("ADD");
                 VehicleExt vehicleExt = new VehicleExt(id, vehicle);
+                vehicleExt.setPaths(computedPath);
                 vehicles.put(id, vehicleExt);
             }
             return vehicle;
