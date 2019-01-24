@@ -53,7 +53,7 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
         System.setProperty("it.polito.dp2.RNS.lab3.AdmClientFactory", "it.polito.dp2.RNS.sol3.admClient.AdmClientFactory");
         // Create implementation under test       
         testRnsReader = AdmClientFactory.newInstance().newAdmClient();
-        
+
         // read testcase property
         Long testcaseObj = Long.getLong("it.polito.dp2.RNS.Random.testcase");
         if (testcaseObj == null)
@@ -110,10 +110,13 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		String plateId = "AB123CD";
 		VehicleType type = VehicleType.CAR;
 
+		System.out.println("LifeCycle#1");
+
 		// initialize the test object that manages the vehicle lifecycle
 		VehicleClientManager vcm = new VehicleClientManager(plateId, type, referenceInputGate.getId());
 		// get initial number of vehicles seen by the admin client
 		int numberOfVehicles = getVehNumber(ac.getUpdatedVehicles(null));
+		System.out.println("#ofVehicles: " + numberOfVehicles);
 
 		// check that initially the admin client does not find the vehicle
 		assertNull("AdmClientPersonal returned non-null VehicleReader while null was expected", ac.getUpdatedVehicle(plateId));
