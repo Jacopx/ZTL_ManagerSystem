@@ -323,8 +323,6 @@ public class rnsDB {
     }
 
     private Set<List<String>> computePath(Vehicle vehicle) {
-        System.out.println("Position CP: " + vehicle.getPosition());
-        System.out.println("To       CP: " + vehicle.getTo());
         try {
             Set<List<String>> computed = pff.findShortestPaths(vehicle.getPosition(), vehicle.getTo(), 999);
             System.out.println("SetLen#"+computed.size());
@@ -443,7 +441,6 @@ public class rnsDB {
             return vehicleExt.getVehicle();
         }
 
-        //@TODO: Create new object and assign again with new value updated
         if(move != null && !move.isEmpty()) {
             Vehicle vehicle = vehicleExt.getVehicle();
             Vehicle newVehicle = cloneVehicle(vehicle);
