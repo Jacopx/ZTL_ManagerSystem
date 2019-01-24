@@ -335,7 +335,12 @@ public class rnsDB {
         System.out.println("Position CP: " + vehicle.getPosition());
         System.out.println("To       CP: " + vehicle.getTo());
         try {
-            return pff.findShortestPaths(vehicle.getPosition(), vehicle.getTo(), 999);
+            Set<List<String>> computed = pff.findShortestPaths(vehicle.getPosition(), vehicle.getTo(), 999);
+            System.out.println("SetLen#"+computed.size());
+            for (List<String> s:computed) {
+                System.out.println("SingleList#"+s.size());
+            }
+            return computed;
         } catch (UnknownIdException | BadStateException | ServiceException e) {
             e.printStackTrace();
         }
