@@ -204,6 +204,7 @@ public class rnsResources {
 
         if(vs == null)
             vs = new Vehicles();
+        System.out.println("vsSize#" + vs.getVehicle().size());
         return vs;
     }
 
