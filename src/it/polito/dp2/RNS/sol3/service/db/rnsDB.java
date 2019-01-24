@@ -168,29 +168,29 @@ public class rnsDB {
         }
 
 //        // VEHICLE for debug
-        //@TODO: Why I need other vehicles?
-        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
-            Vehicle v = new Vehicle();
-
-            try {
-                XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) vehicleReader.getEntryTime());
-                v.setEntryTime(cal);
-            } catch (DatatypeConfigurationException e) {
-                e.printStackTrace();
-            }
-
-            v.setId(vehicleReader.getId());
-            v.setType(vehicleReader.getType().value());
-            v.setFrom(vehicleReader.getOrigin().getId());
-            v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
-            v.setTo(vehicleReader.getDestination().getId());
-            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getDestination().getId())).getPlace().getSelf());
-            v.setPosition(vehicleReader.getPosition().getId());
-            v.setPositionNode(placeExtByNode.get(placeExtById.get(vehicleReader.getPosition().getId())).getPlace().getSelf());
-            v.setState(vehicleReader.getState().value());
-
-            addVehicle(getNextVehicle(), v);
-        }
+//        //@TODO: Why I need other vehicles?
+//        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
+//            Vehicle v = new Vehicle();
+//
+//            try {
+//                XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) vehicleReader.getEntryTime());
+//                v.setEntryTime(cal);
+//            } catch (DatatypeConfigurationException e) {
+//                e.printStackTrace();
+//            }
+//
+//            v.setId(vehicleReader.getId());
+//            v.setType(vehicleReader.getType().value());
+//            v.setFrom(vehicleReader.getOrigin().getId());
+//            v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
+//            v.setTo(vehicleReader.getDestination().getId());
+//            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getDestination().getId())).getPlace().getSelf());
+//            v.setPosition(vehicleReader.getPosition().getId());
+//            v.setPositionNode(placeExtByNode.get(placeExtById.get(vehicleReader.getPosition().getId())).getPlace().getSelf());
+//            v.setState(vehicleReader.getState().value());
+//
+//            addVehicle(getNextVehicle(), v);
+//        }
     }
 
     public Places getPlaces(SearchPlaces scope, String keyword) {
@@ -299,11 +299,9 @@ public class rnsDB {
         Set<List<String>> computedPath = computePath(vehicle);
         if(computedPath != null) {
             if(vehicles.contains(id)) {
-                System.out.println("UPDATE");
                 VehicleExt vehicleExt = vehicles.get(id);
                 vehicleExt.setPaths(computedPath);
             } else {
-                System.out.println("ADD");
                 VehicleExt vehicleExt = new VehicleExt(id, vehicle);
                 vehicleExt.setPaths(computedPath);
                 vehicles.put(id, vehicleExt);
