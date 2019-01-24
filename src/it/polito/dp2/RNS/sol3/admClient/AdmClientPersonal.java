@@ -52,15 +52,13 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles");
 
-        System.out.println("Plural ID: " + place);
-
         Response response = null;
         if(place != null && !place.isEmpty())
             response = target.queryParam("admin", 1).queryParam("position", place).request(MediaType.APPLICATION_JSON).get();
         else
             response = target.queryParam("admin", 1).request(MediaType.APPLICATION_JSON).get();
 
-        System.out.println("Plural CODE#" + response.getStatus());
+        System.out.println("Plural [" + place + "] CODE#" + response.getStatus());
         if(response.getStatus() == 200) {
             Set<VehicleReader> vehicleReaderSet = new HashSet<>();
             Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
@@ -79,15 +77,13 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL).path("vehicles");
 
-        System.out.println("Single ID: " + id);
-
         Response response = null;
         if(id != null && !id.isEmpty())
             response = target.queryParam("admin", 1).queryParam("plateID", id).request(MediaType.APPLICATION_JSON).get();
         else
             return null;
 
-        System.out.println("Single CODE#" + response.getStatus());
+        System.out.println("Single [" + id + "] CODE#" + response.getStatus());
         if(response.getStatus() == 200) {
             Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
             if(vehicleResponse.getVehicle().size() == 1) {

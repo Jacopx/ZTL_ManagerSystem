@@ -274,16 +274,32 @@ public class rnsResources {
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicle updateVehicle(@PathParam("id") long id,
+    public Response updateVehicle(@PathParam("id") long id,
                                  @QueryParam("state") String state,
                                  @QueryParam("move") String move,
                                  Vehicle vehicle) {
         System.out.println("State: "+state);
         System.out.println("Move: "+move);
         Vehicle updated = service.updateVehicle(id, state, move);
+
         if (updated==null)
             throw new NotFoundException();
-        return updated;
+
+        UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
+        URI self = builder.build();
+        vehicle.setSelf(self.toString());
+
+        VehicleResponse v = new VehicleResponse();
+        v.setPlateID(updated.getId());
+        v.setSelf(updated.getSelf());
+        v.setPositionNode(updated.getPositionNode());
+        v.setFromNode(updated.getFromNode());
+        v.setToNode(updated.getToNode());
+        for (ShortPaths sp : updated.getShortPaths()) {
+            for (SuggPath sgp : sp.getSuggPath())
+                v.getPath().addAll(sgp.getRelation());
+        }
+        return Response.created(self).status(200).entity(v).build();
     }
 
     @DELETE

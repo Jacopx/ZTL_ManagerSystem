@@ -51,8 +51,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     public List<String> enter(String plateId, VehicleType type, String inGate, String destination) throws ServiceException, UnknownPlaceException, WrongPlaceException, EntranceRefusedException {
         System.out.println("# enter #");
         Client client = ClientBuilder.newClient();
-        System.out.println("URL: " + URL);
-        System.out.println("Plate: " + plateId + " " + type.value() + " " + inGate + " " + destination);
+        System.out.println(plateId + " " + type.value() + " " + inGate + " " + destination);
         WebTarget target = client.target(URL).path("vehicles");
 
         Vehicle vehicle = new Vehicle();
@@ -118,10 +117,11 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
             return null;
 
         if(response.getStatus() == 200) {
-            Vehicle vehicleUpdated = response.readEntity(new GenericType<Vehicle>(){});
+            VehicleResponse vehicleUpdated = response.readEntity(new GenericType<VehicleResponse>(){});
             // MOVE
-            myself.setPosition(vehicleUpdated.getPosition());
+            myself.setPosition(newPlace);
             myself.setPositionNode(vehicleUpdated.getPositionNode());
+            return new ArrayList<String>(vehicleUpdated.getPath());
         } else if(response.getStatus() == 406) {
             // WRONG GATE TYPE
             throw new UnknownPlaceException();
@@ -132,8 +132,6 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
             // OTHER REASONS
             throw new ServiceException();
         }
-
-        return null;
     }
 
     @Override
