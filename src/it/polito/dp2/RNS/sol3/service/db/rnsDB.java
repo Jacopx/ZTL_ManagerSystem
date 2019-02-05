@@ -329,7 +329,7 @@ public class rnsDB {
 
     private Set<List<String>> computePath(Vehicle vehicle) {
         try {
-            Set<List<String>> computed = pff.findShortestPaths(vehicle.getPosition(), vehicle.getTo(), 999);
+            Set<List<String>> computed = pff.findShortestPaths(vehicle.getFrom(), vehicle.getTo(), 999);
             if(computed.size() > 0) {
                 for (List<String> s:computed) {
                     if(s.size() > 0)
