@@ -291,7 +291,9 @@ public class RnsTests extends it.polito.dp2.RNS.lab1.tests.RnsTests {
 		    			// permission accepted. Check suggested path
 		    			checkPath(source, dest,suggestedPath);
 		    			// Suggested path ok. Check admin returns right data for vehicle
-		    			checkVehicle(ac.getUpdatedVehicle(plateId), plateId, type, state, source, source, dest);
+						VehicleReader vr = ac.getUpdatedVehicle(plateId);
+						System.out.println("VR: " + vr);
+		    			checkVehicle(vr, plateId, type, state, source, source, dest);
 		    			position = source;
 		    			pathIterator = suggestedPath.iterator();
 		    			pathIterator.next(); // skip source (vehicle should be in source already)
