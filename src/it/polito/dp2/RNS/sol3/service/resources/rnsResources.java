@@ -109,7 +109,7 @@ public class rnsResources {
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Place getPlace(@PathParam("id") String id) {
-        System.out.println("@GET_PLACE");
+        System.out.println("@GET_PLACE#" + id);
         Place place = service.getPlace(id);
         if (place==null)
             throw new NotFoundException();
@@ -169,7 +169,7 @@ public class rnsResources {
                                 @QueryParam("position") String position,
                                 @QueryParam("plateID") String plateID
     ) {
-        System.out.println("@GET_VEHICLESSSS");
+        System.out.println("@GET_VEHICLESSSS#"+position);
         Vehicles vs = null;
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
@@ -219,8 +219,9 @@ public class rnsResources {
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Vehicle getVehicle(@PathParam("id") String id) {
-        System.out.println("@GET_VEHICLE");
+        System.out.println("@GET_VEHICLE#" + id);
         Vehicle vehicle = service.getVehicle(id);
+        System.out.println(vehicle);
         if (vehicle==null)
             throw new NotFoundException();
         return vehicle;

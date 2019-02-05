@@ -360,7 +360,6 @@ public class rnsDB {
     }
 
     private Vehicles searchVehicles(ConcurrentHashMap<String, VehicleExt> vehicles, String keyword, String state, String entryTime, String position) {
-        System.out.println("# search Vehicles#");
         Vehicles list = new Vehicles();
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
