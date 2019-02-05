@@ -243,6 +243,13 @@ public class rnsDB {
 
         System.out.println(vehicle.getId() + "/" + vehicle.getPosition());
 
+        if(vehicles.contains(vehicle.getId())) {
+            System.out.println("REFUSED");
+            Vehicle refused = new Vehicle();
+            refused.setState("REFUSED");
+            return refused;
+        }
+
         // TO CHECK
         if(vehicle.getTo() != null && placeExtById.containsKey(vehicle.getTo())) {
             PlaceExt placeExt = placeExtById.get(vehicle.getTo());
