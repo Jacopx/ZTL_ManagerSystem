@@ -64,6 +64,7 @@ public class rnsResources {
                             @QueryParam("keyword") String keyword,
                             @QueryParam("placeID") String placeID
     ) {
+        System.out.println("@GET_PLACESSSSS");
         Places places;
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
@@ -108,6 +109,7 @@ public class rnsResources {
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Place getPlace(@PathParam("id") long id) {
+        System.out.println("@GET_PLACE");
         Place place = service.getPlace(id, null);
         if (place==null)
             throw new NotFoundException();
@@ -124,6 +126,7 @@ public class rnsResources {
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Connections getConnections() {
+        System.out.println("@GET_CONNECTIONSSSSSS");
         Connections conns = service.getConnections();
         if(conns == null)
             throw new NotFoundException();
@@ -141,6 +144,7 @@ public class rnsResources {
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Connection getConnection(@PathParam("id") long id) {
+        System.out.println("@GET_CONNECTION");
         Connection connection = service.getConnection(id);
         if (connection==null)
             throw new NotFoundException();
@@ -165,6 +169,7 @@ public class rnsResources {
                                 @QueryParam("position") String position,
                                 @QueryParam("plateID") String plateID
     ) {
+        System.out.println("@GET_VEHICLESSSS");
         Vehicles vs = null;
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
@@ -214,6 +219,7 @@ public class rnsResources {
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Vehicle getVehicle(@PathParam("id") long id) {
+        System.out.println("@GET_VEHICLE");
         Vehicle vehicle = service.getVehicle(id, null);
         if (vehicle==null)
             throw new NotFoundException();
@@ -234,6 +240,7 @@ public class rnsResources {
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Response createVehicle(Vehicle vehicle) {
+        System.out.println("@CREATE_VEHICLE");
         long id = service.getNextVehicle();
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
         URI self = builder.build();
@@ -278,6 +285,7 @@ public class rnsResources {
                                  @QueryParam("state") String state,
                                  @QueryParam("move") String move,
                                  Vehicle vehicle) {
+        System.out.println("@UPDATE_VEHICLE");
         System.out.println("State: "+state);
         System.out.println("Move: "+move);
         Vehicle updated = service.updateVehicle(id, state, move);
