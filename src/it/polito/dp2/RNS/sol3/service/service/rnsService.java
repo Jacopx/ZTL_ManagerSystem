@@ -11,10 +11,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class rnsService {
     private rnsDB db = rnsDB.getRnsDB();
 
-    public long getNextId() {
-        return rnsDB.getNextId();
-    }
-
     public long getNextConn() {
         return rnsDB.getNextConn();
     }
@@ -23,8 +19,8 @@ public class rnsService {
         return db.getPlaces(scope, keyword, placeID);
     }
 
-    public Place getPlace(long id, String placeID) {
-        return db.getPlace(id, placeID);
+    public Place getPlace(String placeID) {
+        return db.getPlace(placeID);
     }
 
     public Connections getConnections() {

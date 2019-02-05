@@ -30,20 +30,15 @@ public class rnsDB {
     PathFinder pff = null;
     RnsReader monitor = null;
 
-    private ConcurrentHashMap<Long, PlaceExt> placeExtByNode;
-    private ConcurrentHashMap<String, Long> placeExtById;
+    private ConcurrentHashMap<String, PlaceExt> placeExtById;
     private ConcurrentHashMap<Long, Connection> connectionById;
-    private ConcurrentHashMap<Long, PlaceExt> parkings;
-    private ConcurrentHashMap<Long, PlaceExt> segments;
-    private ConcurrentHashMap<Long, PlaceExt> gates;
+    private ConcurrentHashMap<String, PlaceExt> parkings;
+    private ConcurrentHashMap<String, PlaceExt> segments;
+    private ConcurrentHashMap<String, PlaceExt> gates;
     private ConcurrentHashMap<String, VehicleExt> vehicles;
 
     public static rnsDB getRnsDB() {
         return rnsDB;
-    }
-
-    public static synchronized long getNextId() {
-        return ++lastId;
     }
 
     public static synchronized long getNextConn() {
@@ -80,7 +75,6 @@ public class rnsDB {
             e.printStackTrace();
         }
 
-        placeExtByNode = new ConcurrentHashMap<>();
         placeExtById = new ConcurrentHashMap<>();
         connectionById = new ConcurrentHashMap<>();
         parkings = new ConcurrentHashMap<>();
@@ -100,11 +94,11 @@ public class rnsDB {
                 newGate.setGate(GateItem.OUT);
             }
             newGate.setId(gateReader.getId());
-            long id = getNextId();
+            String id = gateReader.getId();
             newGate.setSelf(URL + "/places/" + id);
 
             createPlace(id, newGate);
-            gates.putIfAbsent(id, placeExtByNode.get(id));
+            gates.putIfAbsent(id, placeExtById.get(id));
         }
 
         // PLACE PARKING AREA
@@ -117,11 +111,11 @@ public class rnsDB {
             newPark.setCapacity(parkingAreaReader.getCapacity());
             newPark.setId(parkingAreaReader.getId());
             newPark.setParking(park);
-            long id = getNextId();
+            String id = parkingAreaReader.getId();
             newPark.setSelf(URL + "/places/" + id);
 
             createPlace(id, newPark);
-            parkings.putIfAbsent(id, placeExtByNode.get(id));
+            parkings.putIfAbsent(id, placeExtById.get(id));
         }
 
         // ROAD SEGMENT
@@ -135,11 +129,11 @@ public class rnsDB {
             newRoadSeg.setCapacity(roadSegmentReader.getCapacity());
             newRoadSeg.setId(roadSegmentReader.getId());
             newRoadSeg.setSegment(seg);
-            long id = getNextId();
+            String id = roadSegmentReader.getId();
             newRoadSeg.setSelf(URL + "/places/" + id);
 
             createPlace(id, newRoadSeg);
-            segments.putIfAbsent(id, placeExtByNode.get(id));
+            segments.putIfAbsent(id, placeExtById.get(id));
         }
 
         // CONNECTIONS
@@ -148,14 +142,12 @@ public class rnsDB {
             long id = getNextConn();
 
             newConnection.setSelf(URL + "/connections/" + id);
-            long FROM = placeExtById.get(connectionReader.getFrom().getId());
-            PlaceExt placeFrom = placeExtByNode.get(FROM);
+            PlaceExt placeFrom = placeExtById.get(connectionReader.getFrom().getId());
             newConnection.setFrom(placeFrom.getPlace().getId());
             newConnection.setFromNode(placeFrom.getPlace().getSelf());
             placeFrom.addConnections(id, newConnection);
 
-            long TO = placeExtById.get(connectionReader.getTo().getId());
-            PlaceExt placeTo = placeExtByNode.get(TO);
+            PlaceExt placeTo = placeExtById.get(connectionReader.getTo().getId());
             newConnection.setTo(placeTo.getPlace().getId());
             newConnection.setToNode(placeTo.getPlace().getSelf());
             placeTo.addConnectedBy(id, newConnection);
@@ -199,12 +191,12 @@ public class rnsDB {
             } case GATE: {
                 return searchPlaces(gates, keyword, placeID);
             } case ALL: default: {
-                return searchPlaces(placeExtByNode, keyword, placeID);
+                return searchPlaces(placeExtById, keyword, placeID);
             }
         }
     }
 
-    private Places searchPlaces(ConcurrentHashMap<Long, PlaceExt> place, String keyword, String placeID) {
+    private Places searchPlaces(ConcurrentHashMap<String, PlaceExt> place, String keyword, String placeID) {
         Places list = new Places();
         for(PlaceExt p:place.values()) {
             if(placeID != null && !placeID.isEmpty()) {
@@ -222,18 +214,13 @@ public class rnsDB {
         return list;
     }
 
-    public Place getPlace(long node, String placeID) {
-        if(node >= 0)
-            return placeExtByNode.get(node).getPlace();
-        if(placeID != null && !placeID.isEmpty())
-            return placeExtByNode.get(placeExtById.get(placeID)).getPlace();
-        return null;
+    public Place getPlace(String placeID) {
+        return placeExtById.get(placeID).getPlace();
     }
 
-    public Place createPlace(long node, Place place) {
-        PlaceExt itemExt = new PlaceExt(node, place);
-        if (placeExtByNode.putIfAbsent(node, itemExt)==null) {
-            placeExtById.putIfAbsent(place.getId(), node);
+    public Place createPlace(String placeID, Place place) {
+        PlaceExt placeExt = new PlaceExt(placeID, place);
+        if (placeExtById.putIfAbsent(place.getId(), placeExt)==null) {
             return place;
         } else
             return null;
@@ -256,7 +243,7 @@ public class rnsDB {
 
         // TO CHECK
         if(vehicle.getTo() != null && placeExtById.containsKey(vehicle.getTo())) {
-            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getTo()));
+            PlaceExt placeExt = placeExtById.get(vehicle.getTo());
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setToNode(temp);
             } else {
@@ -268,7 +255,7 @@ public class rnsDB {
 
         // POSITION CHECK
         if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
-            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getPosition()));
+            PlaceExt placeExt = placeExtById.get(vehicle.getPosition());
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setPositionNode(temp);
             } else {
@@ -280,7 +267,7 @@ public class rnsDB {
 
         // FROM CHECK
         if(vehicle.getFrom() != null && placeExtById.containsKey(vehicle.getFrom())) {
-            PlaceExt placeExt = placeExtByNode.get(placeExtById.get(vehicle.getFrom()));
+            PlaceExt placeExt = placeExtById.get(vehicle.getFrom());
             if((temp = placeExt.getPlace().getSelf()) != null) {
                 vehicle.setFromNode(temp);
 
@@ -439,9 +426,9 @@ public class rnsDB {
             Vehicle newVehicle = cloneVehicle(vehicle);
 
             if(placeExtById.containsKey(move))
-                if(isReachable(placeExtByNode.get(placeExtById.get(vehicle.getPosition())).getPlace(), placeExtByNode.get(placeExtById.get(move)).getPlace())) {
+                if(isReachable(placeExtById.get(vehicle.getPosition()).getPlace(), placeExtById.get(move).getPlace())) {
                     newVehicle.setPosition(move);
-                    newVehicle.setPositionNode(placeExtByNode.get(placeExtById.get(move)).getPlace().getSelf());
+                    newVehicle.setPositionNode(placeExtById.get(move).getPlace().getSelf());
 
                     Set<List<String>> computedPath = computePath(newVehicle);
 
@@ -490,7 +477,7 @@ public class rnsDB {
         System.out.println("plate:" + plateID + " - gate:" + outGate);
 
         if(outGate != null && placeExtById.contains(outGate)) {
-            PlaceExt gate = placeExtByNode.get(placeExtById.get(outGate));
+            PlaceExt gate = placeExtById.get(outGate);
             if(gate != null) {
                 GateItem gateItem = gate.getPlace().getGate();
                 if(!gateItem.value().isEmpty() && !gateItem.value().equals("IN")) {

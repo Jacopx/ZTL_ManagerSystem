@@ -11,23 +11,23 @@ import java.util.Map;
  * Copyright by Jacopx on 2019-01-17.
  */
 public class PlaceExt {
-    private long id;
+    private String id;
     private Place place;
     private Map<Long, Connection> connections;
     private Map<Long, Connection> connectedBy;
 
-    public PlaceExt(long id, Place place) {
+    public PlaceExt(String id, Place place) {
         this.id = id;
         this.place = place;
         connections = new HashMap<>();
         connectedBy = new HashMap<>();
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
