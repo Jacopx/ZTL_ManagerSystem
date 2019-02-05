@@ -375,20 +375,16 @@ public class rnsDB {
     }
 
     private List<Vehicle> searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position, String plateID) {
+        List<Vehicle> vl = new ArrayList<>();
 
-        List<Vehicle> list = new ArrayList<>();
-        for (VehicleExt v : vehicles.values()) {
-            if (entryTime == null || v.getVehicle().getEntryTime().toGregorianCalendar().after(entryTime)) {
-                if (state == null || v.getVehicle().getState().equals(state)) {
-                    if (position == null || position.equals(v.getVehicle().getPosition())) {
-                        Vehicle vehicle = v.getVehicle();
-                        list.add(vehicle);
-                    }
-                }
-            }
-        }
+        vl.addAll(vehicles.values().stream()
+                .filter(v -> entryTime == null || v.getVehicle().getEntryTime().toGregorianCalendar().after(entryTime))
+                .filter(v -> state == null || v.getVehicle().getState().equals(state))
+                .filter(v -> position == null || position.equals(v.getVehicle().getPosition()))
+                .map(vehicleExt -> vehicleExt.getVehicle()).collect(Collectors.toList())
+        );
 
-        return list;
+        return vl;
     }
 
     public Vehicle getVehicle(long id, String plate) {
