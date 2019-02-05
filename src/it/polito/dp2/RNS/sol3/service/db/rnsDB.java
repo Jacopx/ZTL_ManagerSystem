@@ -440,21 +440,16 @@ public class rnsDB {
                     newVehicle.setPosition(move);
                     newVehicle.setPositionNode(placeExtById.get(move).getPlace().getSelf());
 
-                    Set<List<String>> computedPath;
-                    if(!vehicleExt.getPaths().contains(move)) {
-                        computedPath = computePath(newVehicle);
-                        if (computedPath!= null) {
-                            vehicleExt.setPaths(computedPath);
-                            vehicleExt.setVehicle(newVehicle);
-                            return newVehicle;
-                        } else {
-                            Vehicle refused = new Vehicle();
-                            refused.setState("REFUSED");
-                            return refused;
-                        }
-                    } else {
+                    Set<List<String>> computedPath = computePath(newVehicle);
+
+                    if (computedPath!= null) {
+                        vehicleExt.setPaths(computedPath);
                         vehicleExt.setVehicle(newVehicle);
                         return newVehicle;
+                    } else {
+                        Vehicle refused = new Vehicle();
+                        refused.setState("REFUSED");
+                        return refused;
                     }
                 }
         }
