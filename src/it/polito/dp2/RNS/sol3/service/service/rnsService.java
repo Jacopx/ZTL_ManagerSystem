@@ -40,6 +40,11 @@ public class rnsService {
     }
 
     public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
+        if(plateID != null) {
+            Vehicles vs = new Vehicles();
+            vs.getVehicle().add(db.getVehicle(-1, plateID));
+            return vs;
+        }
         return db.getVehicles(scope, keyword, state, entryTime, position, plateID);
     }
 
