@@ -175,29 +175,29 @@ public class rnsResources {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
                     case "car": {
-                        vs = service.getVehicles(SearchVehicles.CAR, keyword, state, entryTime, position, plateID);
+                        vs = service.getVehicles(SearchVehicles.CAR, keyword, state, entryTime, position);
                         break;
                     }
                     case "truck": {
-                        vs = service.getVehicles(SearchVehicles.TRUCK, keyword, state, entryTime, position, plateID);
+                        vs = service.getVehicles(SearchVehicles.TRUCK, keyword, state, entryTime, position);
                         break;
                     }
                     case "caravan": {
-                        vs = service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entryTime, position, plateID);
+                        vs = service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entryTime, position);
                         break;
                     }
                     case "shuttle": {
-                        vs = service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entryTime, position, plateID);
+                        vs = service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entryTime, position);
                         break;
                     }
                     default: {
                         System.out.println("DEFAULT");
-                        vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position, plateID);
+                        vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position);
                         break;
                     }
                 }
             } else {
-                vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position, plateID);
+                vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position);
             }
         } else {
             throw new NotAuthorizedException("Admin privilege required!");
@@ -218,9 +218,9 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicle getVehicle(@PathParam("id") long id) {
+    public Vehicle getVehicle(@PathParam("id") String id) {
         System.out.println("@GET_VEHICLE");
-        Vehicle vehicle = service.getVehicle(id, null);
+        Vehicle vehicle = service.getVehicle(id);
         if (vehicle==null)
             throw new NotFoundException();
         return vehicle;
@@ -241,12 +241,12 @@ public class rnsResources {
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Response createVehicle(Vehicle vehicle) {
         System.out.println("@CREATE_VEHICLE");
-        long id = service.getNextVehicle();
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
+        String id = vehicle.getId();
+        UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(id);
         URI self = builder.build();
         vehicle.setSelf(self.toString());
 
-        Vehicle created = service.addVehicle(id, vehicle);
+        Vehicle created = service.addVehicle(vehicle);
         switch (created.getState()) {
             case "REFUSED":
                 return Response.created(self).status(410).build();
@@ -281,7 +281,7 @@ public class rnsResources {
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Response updateVehicle(@PathParam("id") long id,
+    public Response updateVehicle(@PathParam("id") String id,
                                  @QueryParam("state") String state,
                                  @QueryParam("move") String move,
                                  Vehicle vehicle) {
@@ -293,7 +293,7 @@ public class rnsResources {
         if (updated==null)
             throw new NotFoundException();
 
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(id));
+        UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(id);
         URI self = builder.build();
         vehicle.setSelf(self.toString());
 
@@ -321,7 +321,7 @@ public class rnsResources {
             @ApiResponse(code = 409, message = "Not correct gateType"),
             @ApiResponse(code = 410, message = "Entrance Refused"),
     })
-    public Response deleteVehicle(@PathParam("id") long id, @QueryParam("outGate") String outGate) {
+    public Response deleteVehicle(@PathParam("id") String id, @QueryParam("outGate") String outGate) {
         Vehicle vehicle = service.deleteVehicle(id, outGate);
 
         switch (vehicle.getState()) {

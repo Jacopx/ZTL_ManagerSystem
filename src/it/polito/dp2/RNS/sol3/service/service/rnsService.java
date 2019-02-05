@@ -19,10 +19,6 @@ public class rnsService {
         return rnsDB.getNextConn();
     }
 
-    public long getNextVehicle() {
-        return rnsDB.getNextVehicle();
-    }
-
     public Places getPlaces(SearchPlaces scope, String keyword, String placeID) {
         return db.getPlaces(scope, keyword, placeID);
     }
@@ -39,21 +35,21 @@ public class rnsService {
         return db.getConnection(id);
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
-        return db.getVehicles(scope, keyword, state, entryTime, position, plateID);
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position) {
+        return db.getVehicles(scope, keyword, state, entryTime, position);
     }
 
-    public Vehicle getVehicle(long id, String plateID) {
-        return db.getVehicle(id, plateID);
+    public Vehicle getVehicle(String plateID) {
+        return db.getVehicle(plateID);
     }
 
-    public Vehicle addVehicle(long id, Vehicle vehicle) {
-        return db.addVehicle(id, vehicle);
+    public Vehicle addVehicle(Vehicle vehicle) {
+        return db.addVehicle(vehicle);
     }
 
-    public Vehicle updateVehicle(long id, String state, String move) {
-        return db.updateVehicle(id, state, move);
+    public Vehicle updateVehicle(String plateID, String state, String move) {
+        return db.updateVehicle(plateID, state, move);
     }
 
-    public Vehicle deleteVehicle(long id, String outGate) { return db.deleteVehicle(id, outGate); }
+    public Vehicle deleteVehicle(String plateID, String outGate) { return db.deleteVehicle(plateID, outGate); }
 }

@@ -36,7 +36,7 @@ public class rnsDB {
     private ConcurrentHashMap<Long, PlaceExt> parkings;
     private ConcurrentHashMap<Long, PlaceExt> segments;
     private ConcurrentHashMap<Long, PlaceExt> gates;
-    private ConcurrentHashMap<Long, VehicleExt> vehicles;
+    private ConcurrentHashMap<String, VehicleExt> vehicles;
 
     public static rnsDB getRnsDB() {
         return rnsDB;
@@ -48,10 +48,6 @@ public class rnsDB {
 
     public static synchronized long getNextConn() {
         return ++lastConn;
-    }
-
-    public static synchronized long getNextVehicle() {
-        return ++lastVehicle;
     }
 
     private rnsDB() {
@@ -253,7 +249,7 @@ public class rnsDB {
         return connectionById.get(id);
     }
 
-    public Vehicle addVehicle(long id, Vehicle vehicle) {
+    public Vehicle addVehicle(Vehicle vehicle) {
         String temp;
 
         System.out.println("New Vehicle: " + vehicle.getId() + "/" + vehicle.getPosition());
@@ -306,17 +302,17 @@ public class rnsDB {
 
         Set<List<String>> computedPath = computePath(vehicle);
         if(computedPath != null) {
-            if(vehicles.contains(id)) {
-                VehicleExt vehicleExt = vehicles.get(id);
+            if(vehicles.contains(vehicle.getId())) {
+                VehicleExt vehicleExt = vehicles.get(vehicle.getId());
                 vehicleExt.setPaths(computedPath);
             } else {
-                VehicleExt vehicleExt = new VehicleExt(id, vehicle);
+                VehicleExt vehicleExt = new VehicleExt(vehicle.getId(), vehicle);
                 vehicleExt.setPaths(computedPath);
-                vehicles.put(id, vehicleExt);
+                vehicles.put(vehicle.getId(), vehicleExt);
             }
             return vehicle;
         } else {
-            System.out.println("ComPath:" + computedPath + "//vehicles.get:" + vehicles.get(id));
+            System.out.println("ComPath:" + computedPath + "//vehicles.get:" + vehicles.get(vehicle.getId()));
             System.out.println("REFUSED");
             Vehicle refused = new Vehicle();
             refused.setState("REFUSED");
@@ -333,18 +329,6 @@ public class rnsDB {
         else
             refused.setState("ERROR");
         return refused;
-    }
-
-    private Set<List<String>> convert(Set<List<String>> computePath) {
-        Set<List<String>> newPaths = new HashSet<>();
-        for(List<String> ps:computePath) {
-            List<String> newList = new ArrayList<>();
-            for(String node:ps) {
-                newList.add(placeExtByNode.get(placeExtById.get(node)).getPlace().getSelf());
-            }
-            newPaths.add(newList);
-        }
-        return newPaths;
     }
 
     private Set<List<String>> computePath(Vehicle vehicle) {
@@ -365,40 +349,32 @@ public class rnsDB {
         return null;
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
+    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position) {
         if(vehicles.isEmpty()) return null;
         switch (scope) {
             case CAR: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case TRUCK: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case CARAVAN: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case SHUTTLE: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case ALL: default: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
         }
     }
 
-    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position, String plateID) {
+    private Vehicles searchVehicles(ConcurrentHashMap<String, VehicleExt> vehicles, String keyword, String state, String entryTime, String position) {
         Vehicles list = new Vehicles();
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
             add = true;
-            if(plateID != null && !plateID.isEmpty()) {
-                if(v.getVehicle().getId().equals(plateID)) {
-                    list.getVehicle().add(v.getVehicle());
-                    return list;
-                } else {
-                    continue;
-                }
-            }
 
             if(keyword != null && !keyword.isEmpty()) {
                 add = v.getVehicle().getId().contains(keyword);
@@ -437,12 +413,7 @@ public class rnsDB {
         return list;
     }
 
-    public Vehicle getVehicle(long id, String plate) {
-        if(id >= 0)
-            if(vehicles.get(id) != null)
-                return vehicles.get(id).getVehicle();
-            else
-                return null;
+    public Vehicle getVehicle(String plate) {
         if(plate != null && !plate.isEmpty()) {
             for(VehicleExt ve:vehicles.values()) {
                 if(ve.getVehicle().getId().equals(plate))
@@ -452,9 +423,9 @@ public class rnsDB {
         return null;
     }
 
-    public Vehicle updateVehicle(long id, String state, String move) {
+    public Vehicle updateVehicle(String plateID, String state, String move) {
         boolean good = false;
-        VehicleExt vehicleExt = vehicles.get(id);
+        VehicleExt vehicleExt = vehicles.get(plateID);
         if(vehicleExt == null)
             return null;
 
@@ -507,8 +478,8 @@ public class rnsDB {
         return clone;
     }
 
-    public Vehicle deleteVehicle(long id, String outGate) {
-        VehicleExt vehicle = vehicles.get(id);
+    public Vehicle deleteVehicle(String plateID, String outGate) {
+        VehicleExt vehicle = vehicles.get(plateID);
         if (vehicle == null) {
             Vehicle refused = new Vehicle();
             refused.setState("NULL");

@@ -11,21 +11,21 @@ import java.util.Set;
  * Copyright by Jacopx on 2019-01-18.
  */
 public class VehicleExt {
-    private long id;
+    private String id;
     private Vehicle vehicle;
     private Set<List<String>> paths;
     private ShortPaths shortPaths;
 
-    public VehicleExt(long id, Vehicle vehicle) {
+    public VehicleExt(String id, Vehicle vehicle) {
         this.id = id;
         this.vehicle = vehicle;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
