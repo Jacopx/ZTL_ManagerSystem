@@ -443,7 +443,8 @@ public class rnsDB {
                     Set<List<String>> computedPath = computePath(newVehicle);
 
                     if (computedPath!= null) {
-                        vehicleExt.setPaths(computedPath);
+                        if(!vehicleExt.getPaths().containsAll(computedPath))
+                            vehicleExt.setPaths(computedPath);
                         vehicleExt.setVehicle(newVehicle);
                         return newVehicle;
                     } else {
