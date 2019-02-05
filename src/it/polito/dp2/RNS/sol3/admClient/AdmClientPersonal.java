@@ -86,8 +86,6 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         System.out.println("Single [" + id + "] CODE#" + response.getStatus());
         if(response.getStatus() == 200) {
             Vehicle v = response.readEntity(new GenericType<Vehicle>(){});
-
-            System.out.println("ReaderReturned: " + v.getId() + "/" + v.getPosition());
             return new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState());
 
         } else if(response.getStatus() == 400) {

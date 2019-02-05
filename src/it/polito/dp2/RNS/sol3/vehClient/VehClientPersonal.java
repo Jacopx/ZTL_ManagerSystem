@@ -76,7 +76,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
 
         Response response = target.request(MediaType.APPLICATION_JSON).post(Entity.json(vehicle));
 
-        System.out.println("enter CODE#" + response.getStatus());
+        System.out.println("# " + response.getStatus() + " #");
         if(response.getStatus() == 201) {
             // CREATED
             VehicleResponse vehicleResponse = response.readEntity(new GenericType<VehicleResponse>(){});
@@ -114,6 +114,8 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
         else
             return null;
 
+        System.out.println("# " + response.getStatus() + " #");
+
         if(response.getStatus() == 200) {
             VehicleResponse vehicleUpdated = response.readEntity(new GenericType<VehicleResponse>(){});
             // MOVE
@@ -144,6 +146,8 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
         else
             return;
 
+        System.out.println("# " + response.getStatus() + " #");
+
         if(response.getStatus() == 200) {
             // CHANGED
             myself.setState(newState.value());
@@ -166,6 +170,8 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
                 .queryParam("outGate", outGate)
                 .request(MediaType.APPLICATION_JSON)
                 .delete();
+
+        System.out.println("# " + response.getStatus() + " #");
 
         if(response.getStatus() == 200) {
             // DELETED

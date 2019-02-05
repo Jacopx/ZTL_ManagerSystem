@@ -239,7 +239,9 @@ public class rnsDB {
     public Vehicle addVehicle(Vehicle vehicle) {
         String temp;
 
-        System.out.println("New Vehicle: " + vehicle.getId() + "/" + vehicle.getPosition());
+        System.out.println("# add Vehicle #");
+
+        System.out.println(vehicle.getId() + "/" + vehicle.getPosition());
 
         // TO CHECK
         if(vehicle.getTo() != null && placeExtById.containsKey(vehicle.getTo())) {
@@ -358,6 +360,7 @@ public class rnsDB {
     }
 
     private Vehicles searchVehicles(ConcurrentHashMap<String, VehicleExt> vehicles, String keyword, String state, String entryTime, String position) {
+        System.out.println("# search Vehicles#");
         Vehicles list = new Vehicles();
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
@@ -411,6 +414,7 @@ public class rnsDB {
     }
 
     public Vehicle updateVehicle(String plateID, String state, String move) {
+        System.out.println("# update Vehicle #");
         boolean good = false;
         VehicleExt vehicleExt = vehicles.get(plateID);
         if(vehicleExt == null)
@@ -433,7 +437,6 @@ public class rnsDB {
                     Set<List<String>> computedPath = computePath(newVehicle);
 
                     if (computedPath!= null) {
-//                        vehicleExt.setPaths(convert(computedPath));
                         vehicleExt.setPaths(computedPath);
                         vehicleExt.setVehicle(newVehicle);
                         return newVehicle;
@@ -473,8 +476,6 @@ public class rnsDB {
             refused.setState("NULL");
             return refused;
         }
-
-        System.out.println("plate:" + plateID + " - gate:" + outGate);
 
         if(outGate != null) {
             PlaceExt gate = placeExtById.get(outGate);
