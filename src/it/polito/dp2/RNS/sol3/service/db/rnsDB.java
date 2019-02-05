@@ -476,7 +476,7 @@ public class rnsDB {
 
         System.out.println("plate:" + plateID + " - gate:" + outGate);
 
-        if(outGate != null && placeExtById.contains(outGate)) {
+        if(outGate != null) {
             PlaceExt gate = placeExtById.get(outGate);
             if(gate != null) {
                 GateItem gateItem = gate.getPlace().getGate();
