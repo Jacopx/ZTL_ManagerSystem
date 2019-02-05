@@ -353,38 +353,65 @@ public class rnsDB {
         return null;
     }
 
-    public List<Vehicle> getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
+    public List<Vehicle> getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position) {
         if(vehicles.isEmpty()) return null;
         switch (scope) {
             case CAR: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case TRUCK: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case CARAVAN: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case SHUTTLE: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
             case ALL: default: {
-                return searchVehicles(vehicles, keyword, state, entryTime, position, plateID);
+                return searchVehicles(vehicles, keyword, state, entryTime, position);
             }
         }
     }
 
-    private List<Vehicle> searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position, String plateID) {
-        List<Vehicle> vl = new ArrayList<>();
+    private List<Vehicle> searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position) {
+        List<Vehicle> list = new ArrayList<>();
+        boolean add = false;
 
-        vl.addAll(vehicles.values().stream()
-                .filter(v -> entryTime == null || v.getVehicle().getEntryTime().toGregorianCalendar().after(entryTime))
-                .filter(v -> state == null || v.getVehicle().getState().equals(state))
-                .filter(v -> position == null || position.equals(v.getVehicle().getPosition()))
-                .map(vehicleExt -> vehicleExt.getVehicle()).collect(Collectors.toList())
-        );
+        for (VehicleExt vehicle:vehicles.values()) {
+            if(keyword != null) {
+                add = vehicle.getVehicle().getId().contains(keyword);
+            }
+            if(state != null) {
+                add = vehicle.getVehicle().getState().equals(state);
+            }
 
-        return vl;
+            if(entryTime != null) {
+                GregorianCalendar calendar = null;
+
+                try {
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                    calendar = new GregorianCalendar();
+                    calendar.setTime(format.parse(entryTime));
+
+                    add = vehicle.getVehicle().getEntryTime().toGregorianCalendar().after(calendar);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            if(position != null) {
+                add = vehicle.getVehicle().getPosition().equals(position);
+            }
+
+            if(add)
+                list.add(vehicle.getVehicle());
+
+        }
+
+        return list;
     }
 
     public Vehicle getVehicle(long id, String plate) {

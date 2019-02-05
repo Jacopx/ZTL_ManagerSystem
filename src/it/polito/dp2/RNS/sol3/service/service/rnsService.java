@@ -41,7 +41,9 @@ public class rnsService {
     }
 
     public List<Vehicle> getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
-        return db.getVehicles(scope, keyword, state, entryTime, position, plateID);
+        if(plateID != null)
+            db.getVehicle(-1, plateID);
+        return db.getVehicles(scope, keyword, state, entryTime, position);
     }
 
     public Vehicle getVehicle(long id, String plateID) {
