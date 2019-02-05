@@ -479,12 +479,15 @@ public class rnsDB {
     }
 
     public Vehicle deleteVehicle(String plateID, String outGate) {
+        System.out.println("# DELETE #");
         VehicleExt vehicle = vehicles.get(plateID);
         if (vehicle == null) {
             Vehicle refused = new Vehicle();
             refused.setState("NULL");
             return refused;
         }
+
+        System.out.println("plate:" + plateID + " - gate:" + outGate);
 
         if(outGate != null && placeExtById.contains(outGate)) {
             PlaceExt gate = placeExtByNode.get(placeExtById.get(outGate));
@@ -497,15 +500,15 @@ public class rnsDB {
                     System.out.println("REMOVED");
                     return refused;
                 } else {
-                    System.out.println("NOT DELETE");
+                    System.out.println("NOT DELETE 1");
                     return generateErrorVehicle(2);
                 }
             } else {
-                System.out.println("NOT DELETE");
+                System.out.println("NOT DELETE 2");
                 return generateErrorVehicle(1);
             }
         } else {
-            System.out.println("NOT DELETE");
+            System.out.println("NOT DELETE 3");
             return generateErrorVehicle(1);
         }
     }

@@ -164,7 +164,8 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
 
         Response response = target
                 .queryParam("outGate", outGate)
-                .request(MediaType.APPLICATION_JSON).delete();
+                .request(MediaType.APPLICATION_JSON)
+                .delete();
 
         if(response.getStatus() == 200) {
             // DELETED
