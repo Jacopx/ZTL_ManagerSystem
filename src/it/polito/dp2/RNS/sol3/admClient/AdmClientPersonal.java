@@ -63,7 +63,9 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             Set<VehicleReader> vehicleReaderSet = new HashSet<>();
             Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
             for(Vehicle v:vehicleResponse.getVehicle()) {
-               vehicleReaderSet.add(new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState()));
+                VehicleReaderPersonal vr = new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState());
+                vr.addPlace(getPlace(v.getTo()), getPlace(v.getFrom()), getPlace(v.getPosition()));
+               vehicleReaderSet.add(vr);
             }
             return vehicleReaderSet;
         } else if(response.getStatus() >= 500) {
@@ -86,7 +88,9 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
         System.out.println("Single [" + id + "] CODE#" + response.getStatus());
         if(response.getStatus() == 200) {
             Vehicle v = response.readEntity(new GenericType<Vehicle>(){});
-            return new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState());
+            VehicleReaderPersonal vr = new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState());
+            vr.addPlace(getPlace(v.getTo()), getPlace(v.getFrom()), getPlace(v.getPosition()));
+            return vr;
 
         } else if(response.getStatus() == 400) {
             return null;

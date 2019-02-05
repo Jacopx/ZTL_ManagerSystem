@@ -244,7 +244,7 @@ public class rnsDB {
         System.out.println(vehicle.getId() + "/" + vehicle.getPosition());
 
         if(vehicles.contains(vehicle.getId())) {
-            System.out.println("REFUSED");
+            System.out.println("REFUSED - PRESENT");
             Vehicle refused = new Vehicle();
             refused.setState("REFUSED");
             return refused;
