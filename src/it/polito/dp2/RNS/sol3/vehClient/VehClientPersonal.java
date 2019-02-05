@@ -29,7 +29,6 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     private String ws;
     private String URL;
     private Vehicle myself;
-    private long myselfNumber;
     private ArrayList<String> myselfPath;
 
     public VehClientPersonal newVehClient() {
@@ -83,7 +82,6 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
             VehicleResponse vehicleResponse = response.readEntity(new GenericType<VehicleResponse>(){});
             myself.setToNode(vehicleResponse.getToNode());
             myself.setFromNode(vehicleResponse.getFromNode());
-            myselfNumber = vehicleResponse.getNum();
             myselfPath = new ArrayList<>(vehicleResponse.getPath());
             return myselfPath;
         } else if(response.getStatus() == 400) {
@@ -108,7 +106,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     public List<String> move(String newPlace) throws ServiceException, UnknownPlaceException, WrongPlaceException {
         System.out.println("# move #");
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("vehicles").path(Long.toString(myselfNumber));
+        WebTarget target = client.target(URL).path("vehicles").path(myself.getId());
 
         Response response;
         if(newPlace != null && !newPlace.isEmpty())
@@ -138,7 +136,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     public void changeState(VehicleState newState) throws ServiceException {
         System.out.println("# changeState #");
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("vehicles").path(Long.toString(myselfNumber));
+        WebTarget target = client.target(URL).path("vehicles").path(myself.getId());
 
         Response response;
         if(newState != null && !newState.value().isEmpty())
@@ -162,7 +160,7 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
     public void exit(String outGate) throws ServiceException, UnknownPlaceException, WrongPlaceException {
         System.out.println("# exit #");
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL).path("vehicles").path(Long.toString(myselfNumber));
+        WebTarget target = client.target(URL).path("vehicles").path(myself.getId());
 
         Response response = target
                 .queryParam("outGate", outGate)
