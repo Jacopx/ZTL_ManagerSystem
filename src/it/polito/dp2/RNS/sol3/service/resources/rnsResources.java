@@ -170,34 +170,34 @@ public class rnsResources {
                                 @QueryParam("plateID") String plateID
     ) {
         System.out.println("@GET_VEHICLESSSS");
-        Vehicles vs = null;
+        Vehicles vs = new Vehicles();
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
                 switch (type.toLowerCase()) {
                     case "car": {
-                        vs = service.getVehicles(SearchVehicles.CAR, keyword, state, entryTime, position, plateID);
+                        vs.getVehicle().addAll(service.getVehicles(SearchVehicles.CAR, keyword, state, entryTime, position, plateID));
                         break;
                     }
                     case "truck": {
-                        vs = service.getVehicles(SearchVehicles.TRUCK, keyword, state, entryTime, position, plateID);
+                        vs.getVehicle().addAll(service.getVehicles(SearchVehicles.TRUCK, keyword, state, entryTime, position, plateID));
                         break;
                     }
                     case "caravan": {
-                        vs = service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entryTime, position, plateID);
+                        vs.getVehicle().addAll(service.getVehicles(SearchVehicles.CARAVAN, keyword, state, entryTime, position, plateID));
                         break;
                     }
                     case "shuttle": {
-                        vs = service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entryTime, position, plateID);
+                        vs.getVehicle().addAll(service.getVehicles(SearchVehicles.SHUTTLE, keyword, state, entryTime, position, plateID));
                         break;
                     }
                     default: {
                         System.out.println("DEFAULT");
-                        vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position, plateID);
+                        vs.getVehicle().addAll(service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position, plateID));
                         break;
                     }
                 }
             } else {
-                vs = service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position, plateID);
+                vs.getVehicle().addAll(service.getVehicles(SearchVehicles.ALL, keyword, state, entryTime, position, plateID));
             }
         } else {
             throw new NotAuthorizedException("Admin privilege required!");

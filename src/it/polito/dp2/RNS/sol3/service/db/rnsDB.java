@@ -365,7 +365,7 @@ public class rnsDB {
         return null;
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
+    public List<Vehicle> getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
         if(vehicles.isEmpty()) return null;
         switch (scope) {
             case CAR: {
@@ -386,55 +386,13 @@ public class rnsDB {
         }
     }
 
-    private Vehicles searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position, String plateID) {
-        Vehicles list = new Vehicles();
-        boolean add; int added=0;
-        for(VehicleExt v:vehicles.values()) {
-            add = true;
-            if(plateID != null && !plateID.isEmpty()) {
-                if(v.getVehicle().getId().equals(plateID)) {
-                    list.getVehicle().add(v.getVehicle());
-                    return list;
-                } else {
-                    continue;
-                }
-            }
-
-            if(keyword != null && !keyword.isEmpty()) {
-                add = v.getVehicle().getId().contains(keyword);
-            }
-            if(!add) continue;
-
-            if(state != null && !state.isEmpty()) {
-                add = v.getVehicle().getState().equals(state);
-            }
-            if(!add) continue;
-
-            if(entryTime != null && !entryTime.isEmpty()) {
-                Date date = null;
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-                    date = sdf.parse(entryTime);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
-                if(date != null) cal.setTime(date);
-
-                add = v.getVehicle().getEntryTime().toGregorianCalendar().compareTo(cal) == 0;
-                if(!add) continue;
-            }
-
-            if(position != null && !position.isEmpty()) {
-                add = v.getVehicle().getPosition().equals(position);
-            }
-            if(!add) continue;
-
-            list.getVehicle().add(v.getVehicle());
-            ++added;
-        }
-        return list;
+    private List<Vehicle> searchVehicles(ConcurrentHashMap<Long, VehicleExt> vehicles, String keyword, String state, String entryTime, String position, String plateID) {
+        return vehicles.values().stream()
+                .filter(v -> entryTime == null || v.getVehicle().getEntryTime().toGregorianCalendar().after(entryTime))
+                .filter(v -> state == null || v.getVehicle().getState().equals(state))
+                .filter(v -> position == null || position.equals(v.getVehicle().getPosition()))
+                .map(v -> v.getVehicle())
+                .collect(Collectors.toList());
     }
 
     public Vehicle getVehicle(long id, String plate) {

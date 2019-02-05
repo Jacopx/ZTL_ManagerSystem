@@ -4,6 +4,7 @@ import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.db.rnsDB;
 
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.List;
 
 /**
  * Copyright by Jacopx on 2019-01-16.
@@ -39,7 +40,7 @@ public class rnsService {
         return db.getConnection(id);
     }
 
-    public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
+    public List<Vehicle> getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position, String plateID) {
         return db.getVehicles(scope, keyword, state, entryTime, position, plateID);
     }
 
