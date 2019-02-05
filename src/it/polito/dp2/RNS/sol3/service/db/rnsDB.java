@@ -411,6 +411,8 @@ public class rnsDB {
 
         }
 
+        System.out.println("SIZE: " + list.size());
+
         return list;
     }
 
