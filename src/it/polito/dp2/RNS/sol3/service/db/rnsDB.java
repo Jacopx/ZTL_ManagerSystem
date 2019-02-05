@@ -441,10 +441,12 @@ public class rnsDB {
                     newVehicle.setPositionNode(placeExtById.get(move).getPlace().getSelf());
 
                     Set<List<String>> computedPath = computePath(newVehicle);
+                    if(vehicle.getShortPaths().containsAll(computedPath)) {
+                        newVehicle.getShortPaths().clear();
+                    }
 
                     if (computedPath!= null) {
-                        if(!vehicleExt.getPaths().containsAll(computedPath))
-                            vehicleExt.setPaths(computedPath);
+                        vehicleExt.setPaths(computedPath);
                         vehicleExt.setVehicle(newVehicle);
                         return newVehicle;
                     } else {
