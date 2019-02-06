@@ -63,9 +63,10 @@ public class AdmClientPersonal implements it.polito.dp2.RNS.lab3.AdmClient {
             Set<VehicleReader> vehicleReaderSet = new HashSet<>();
             Vehicles vehicleResponse = response.readEntity(new GenericType<Vehicles>(){});
             for(Vehicle v:vehicleResponse.getVehicle()) {
+                System.out.println("STATE:"+v.getState());
                 VehicleReaderPersonal vr = new VehicleReaderPersonal(v.getId(), v.getEntryTime().toGregorianCalendar(), v.getType(), v.getState());
                 vr.addPlace(getPlace(v.getTo()), getPlace(v.getFrom()), getPlace(v.getPosition()));
-               vehicleReaderSet.add(vr);
+                vehicleReaderSet.add(vr);
             }
             return vehicleReaderSet;
         } else if(response.getStatus() >= 500) {
