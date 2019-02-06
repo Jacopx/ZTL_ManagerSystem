@@ -240,6 +240,7 @@ public class rnsDB {
         String temp;
 
         System.out.println("# add Vehicle #");
+        System.out.println("STATE:"+vehicle.getState());
 
         System.out.println(vehicle.getId() + "/" + vehicle.getPosition());
 
@@ -464,6 +465,7 @@ public class rnsDB {
     private Vehicle cloneVehicle(Vehicle vehicle) {
         Vehicle clone = new Vehicle();
         clone.setId(vehicle.getId());
+        clone.setState(vehicle.getState());
         clone.setSelf(vehicle.getSelf());
         clone.setType(vehicle.getType());
         clone.setEntryTime(vehicle.getEntryTime());
