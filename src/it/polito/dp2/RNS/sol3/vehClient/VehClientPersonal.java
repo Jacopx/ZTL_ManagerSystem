@@ -121,6 +121,8 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
             // MOVE
             myself.setPosition(newPlace);
             myself.setPositionNode(vehicleUpdated.getPositionNode());
+            if(vehicleUpdated.getPath().size() == 0)
+                return null;
             return new ArrayList<String>(vehicleUpdated.getPath());
         } else if(response.getStatus() == 406) {
             // WRONG GATE TYPE
