@@ -12,7 +12,7 @@
 	<property name="RnsInfo.RnsReaderFactory" value="it.polito.dp2.RNS.Random.RnsReaderFactoryImpl" />
 
 	<!-- The default test case -->
-	<property name="testcase" value="0" />
+	<property name="testcase" value="1" />
 	<!-- The default test class -->
 	<property name="test.class" value="it.polito.dp2.RNS.lab3.tests.RnsTests" />
 	<!-- The default port for Tomcat -->
