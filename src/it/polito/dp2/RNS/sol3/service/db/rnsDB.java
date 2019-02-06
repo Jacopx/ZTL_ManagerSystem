@@ -238,7 +238,6 @@ public class rnsDB {
         String temp;
 
         System.out.println("# add Vehicle #");
-        System.out.println("STATE:"+vehicle.getState());
 
         System.out.println(vehicle.getId() + "/" + vehicle.getPosition());
 
@@ -453,49 +452,11 @@ public class rnsDB {
             vehicle.getShortPaths().clear();
             return vehicle;
         }
-
-//        if(move != null && !move.isEmpty()) {
-//            Vehicle vehicle = vehicleExt.getVehicle();
-//            Vehicle newVehicle = cloneVehicle(vehicle);
-//
-//            if(placeExtById.containsKey(move))
-//                if(isReachable(placeExtById.get(vehicle.getPosition()).getPlace(), placeExtById.get(move).getPlace())) {
-//                    newVehicle.setPosition(move);
-//                    newVehicle.setPositionNode(placeExtById.get(move).getPlace().getSelf());
-//
-//                    Set<List<String>> computedPath = computePath(newVehicle);
-//
-//                    if (computedPath!= null) {
-//                        vehicleExt.setPaths(computedPath);
-//                        vehicleExt.setVehicle(newVehicle);
-//                        return newVehicle;
-//                    } else {
-//                        Vehicle refused = new Vehicle();
-//                        refused.setState("REFUSED");
-//                        return refused;
-//                    }
-//                }
-//        }
-
         return null;
     }
 
     private boolean isReachable(Place from, Place to) {
         return from.getConnections().contains(to.getId());
-    }
-
-    private Vehicle cloneVehicle(Vehicle vehicle) {
-        Vehicle clone = new Vehicle();
-        clone.setId(vehicle.getId());
-        clone.setState(vehicle.getState());
-        clone.setSelf(vehicle.getSelf());
-        clone.setType(vehicle.getType());
-        clone.setEntryTime(vehicle.getEntryTime());
-        clone.setFrom(vehicle.getFrom());
-        clone.setFromNode(vehicle.getFromNode());
-        clone.setTo(vehicle.getTo());
-        clone.setToNode(vehicle.getToNode());
-        return clone;
     }
 
     public Vehicle deleteVehicle(String plateID, String outGate) {
@@ -512,11 +473,11 @@ public class rnsDB {
             if(gate != null) {
                 GateItem gateItem = gate.getPlace().getGate();
                 if(!gateItem.value().isEmpty() && !gateItem.value().equals("IN")) {
-                    vehicles.remove(vehicle);
-                    Vehicle refused = new Vehicle();
-                    refused.setState("REMOVED");
+                    vehicles.remove(plateID);
+                    Vehicle removed = new Vehicle();
+                    removed.setState("REMOVED");
                     System.out.println("REMOVED");
-                    return refused;
+                    return removed;
                 } else {
                     System.out.println("NOT DELETE 1");
                     return generateErrorVehicle(2);
