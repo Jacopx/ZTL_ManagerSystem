@@ -450,7 +450,7 @@ public class rnsDB {
                     }
                 }
             }
-            vehicle.getShortPaths().clear();
+            vehicle.deleteShortPaths();
             return vehicle;
         }
 
