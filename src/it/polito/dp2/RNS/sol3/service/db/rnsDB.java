@@ -22,9 +22,7 @@ import java.util.stream.Collectors;
  */
 public class rnsDB {
     private static rnsDB rnsDB = new rnsDB();
-    private static long lastId=0;
     private static long lastConn=0;
-    private static long lastVehicle=0;
     private static String URL;
 
     PathFinder pff = null;
@@ -434,26 +432,49 @@ public class rnsDB {
 
         if(move != null && !move.isEmpty()) {
             Vehicle vehicle = vehicleExt.getVehicle();
-            Vehicle newVehicle = cloneVehicle(vehicle);
+            vehicle.setPosition(move);
 
-            if(placeExtById.containsKey(move))
+            if(!vehicle.getShortPaths().contains(move)) {
                 if(isReachable(placeExtById.get(vehicle.getPosition()).getPlace(), placeExtById.get(move).getPlace())) {
-                    newVehicle.setPosition(move);
-                    newVehicle.setPositionNode(placeExtById.get(move).getPlace().getSelf());
+                    vehicle.setPositionNode(placeExtById.get(move).getPlace().getSelf());
 
-                    Set<List<String>> computedPath = computePath(newVehicle);
+                    Set<List<String>> computedPath = computePath(vehicle);
 
                     if (computedPath!= null) {
                         vehicleExt.setPaths(computedPath);
-                        vehicleExt.setVehicle(newVehicle);
-                        return newVehicle;
+                        return vehicle;
                     } else {
                         Vehicle refused = new Vehicle();
                         refused.setState("REFUSED");
                         return refused;
                     }
                 }
+            }
+            return vehicle;
         }
+
+//        if(move != null && !move.isEmpty()) {
+//            Vehicle vehicle = vehicleExt.getVehicle();
+//            Vehicle newVehicle = cloneVehicle(vehicle);
+//
+//            if(placeExtById.containsKey(move))
+//                if(isReachable(placeExtById.get(vehicle.getPosition()).getPlace(), placeExtById.get(move).getPlace())) {
+//                    newVehicle.setPosition(move);
+//                    newVehicle.setPositionNode(placeExtById.get(move).getPlace().getSelf());
+//
+//                    Set<List<String>> computedPath = computePath(newVehicle);
+//
+//                    if (computedPath!= null) {
+//                        vehicleExt.setPaths(computedPath);
+//                        vehicleExt.setVehicle(newVehicle);
+//                        return newVehicle;
+//                    } else {
+//                        Vehicle refused = new Vehicle();
+//                        refused.setState("REFUSED");
+//                        return refused;
+//                    }
+//                }
+//        }
 
         return null;
     }
