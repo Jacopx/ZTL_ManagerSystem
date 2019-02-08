@@ -152,34 +152,9 @@ public class rnsDB {
 
             connectionById.putIfAbsent(id, newConnection);
         }
-
-//        // VEHICLE for debug
-//        for(VehicleReader vehicleReader:monitor.getVehicles(null, null, null)) {
-//            Vehicle v = new Vehicle();
-//
-//            try {
-//                XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) vehicleReader.getEntryTime());
-//                v.setEntryTime(cal);
-//            } catch (DatatypeConfigurationException e) {
-//                e.printStackTrace();
-//            }
-//
-//            v.setId(vehicleReader.getId());
-//            v.setType(vehicleReader.getType().value());
-//            v.setFrom(vehicleReader.getOrigin().getId());
-//            v.setFromNode(placeExtByNode.get(placeExtById.get(vehicleReader.getOrigin().getId())).getPlace().getSelf());
-//            v.setTo(vehicleReader.getDestination().getId());
-//            v.setToNode(placeExtByNode.get(placeExtById.get(vehicleReader.getDestination().getId())).getPlace().getSelf());
-//            v.setPosition(vehicleReader.getPosition().getId());
-//            v.setPositionNode(placeExtByNode.get(placeExtById.get(vehicleReader.getPosition().getId())).getPlace().getSelf());
-//            v.setState(vehicleReader.getState().value());
-//
-//            addVehicle(getNextVehicle(), v);
-//        }
-
-//        personalTest pt = new personalTest();
     }
 
+    // Searching places by different place type
     public Places getPlaces(SearchPlaces scope, String keyword, String placeID) {
         switch (scope) {
             case SEGMENT: {
@@ -194,6 +169,7 @@ public class rnsDB {
         }
     }
 
+    // Searching function for places
     private Places searchPlaces(ConcurrentHashMap<String, PlaceExt> place, String keyword, String placeID) {
         Places list = new Places();
         for(PlaceExt p:place.values()) {
@@ -212,10 +188,12 @@ public class rnsDB {
         return list;
     }
 
+    // Get back single place
     public Place getPlace(String placeID) {
         return placeExtById.get(placeID).getPlace();
     }
 
+    // Adding a new created place
     public Place createPlace(String placeID, Place place) {
         PlaceExt placeExt = new PlaceExt(placeID, place);
         if (placeExtById.putIfAbsent(place.getId(), placeExt)==null) {
@@ -224,22 +202,20 @@ public class rnsDB {
             return null;
     }
 
+    // Get back all the connections
     public Connections getConnections() {
         Connections list = new Connections();
         list.getConnection().addAll(connectionById.values());
         return list;
     }
 
+    // Get single connection
     public Connection getConnection(long id) {
         return connectionById.get(id);
     }
 
+    // Adding a vehicle to the system
     public Vehicle addVehicle(Vehicle vehicle) {
-        String temp;
-
-        System.out.println("# add Vehicle #");
-
-        System.out.println(vehicle.getId() + "/" + vehicle.getPosition());
 
         if(vehicles.contains(vehicle.getId())) {
             System.out.println("REFUSED - PRESENT");
@@ -248,6 +224,7 @@ public class rnsDB {
             return refused;
         }
 
+        String temp;
         // TO CHECK
         if(vehicle.getTo() != null && placeExtById.containsKey(vehicle.getTo())) {
             PlaceExt placeExt = placeExtById.get(vehicle.getTo());
@@ -306,7 +283,6 @@ public class rnsDB {
             }
             return vehicle;
         } else {
-            System.out.println("ComPath:" + computedPath + "//vehicles.get:" + vehicles.get(vehicle.getId()));
             System.out.println("REFUSED");
             Vehicle refused = new Vehicle();
             refused.setState("REFUSED");
@@ -314,6 +290,7 @@ public class rnsDB {
         }
     }
 
+    // Generating an error for different case
     private Vehicle generateErrorVehicle(int error) {
         Vehicle refused = new Vehicle();
         if(error == 2)
@@ -325,6 +302,7 @@ public class rnsDB {
         return refused;
     }
 
+    // Calling the service to computing the path
     private Set<List<String>> computePath(Vehicle vehicle) {
         try {
             Set<List<String>> computed = pff.findShortestPaths(vehicle.getFrom(), vehicle.getTo(), 999);
@@ -343,6 +321,7 @@ public class rnsDB {
         return null;
     }
 
+    // Calling the searching functions by vehicles type discrimination
     public Vehicles getVehicles(SearchVehicles scope, String keyword, String state, String entryTime, String position) {
         if(vehicles.isEmpty()) return null;
         switch (scope) {
@@ -364,6 +343,7 @@ public class rnsDB {
         }
     }
 
+    // Proper function for searching vehicles
     private Vehicles searchVehicles(ConcurrentHashMap<String, VehicleExt> vehicles, String keyword, String state, String entryTime, String position) {
         Vehicles list = new Vehicles();
         boolean add; int added=0;
@@ -407,6 +387,7 @@ public class rnsDB {
         return list;
     }
 
+    // Get single vehicle
     public Vehicle getVehicle(String plate) {
         if(plate != null && !plate.isEmpty()) {
             for(VehicleExt ve:vehicles.values()) {
@@ -417,9 +398,10 @@ public class rnsDB {
         return null;
     }
 
+    // Update an existent vehicle by changing the state or making a move
     public Vehicle updateVehicle(String plateID, String state, String move) {
         System.out.println("# update Vehicle #");
-        boolean good = false;
+
         VehicleExt vehicleExt = vehicles.get(plateID);
         if(vehicleExt == null)
             return null;
@@ -459,6 +441,7 @@ public class rnsDB {
         return from.getConnections().contains(to.getId());
     }
 
+    // Removing a vehicle from the system
     public Vehicle deleteVehicle(String plateID, String outGate) {
         System.out.println("# DELETE #");
         VehicleExt vehicle = vehicles.get(plateID);

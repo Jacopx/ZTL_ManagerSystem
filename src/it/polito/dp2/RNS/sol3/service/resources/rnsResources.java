@@ -1,9 +1,6 @@
 package it.polito.dp2.RNS.sol3.service.resources;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import it.polito.dp2.RNS.sol3.rest.service.jaxb.*;
 import it.polito.dp2.RNS.sol3.service.service.SearchVehicles;
 import it.polito.dp2.RNS.sol3.service.service.rnsService;
@@ -33,7 +30,7 @@ public class rnsResources {
             @ApiResponse(code = 200, message = "OK"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public RnsSystem getRnsSystem(@QueryParam("admin") int admin) {
+    public RnsSystem getRnsSystem(@ApiParam(value = "Used for make admin request") @QueryParam("admin") int admin) {
         RnsSystem rns = new RnsSystem();
         UriBuilder root = uriInfo.getAbsolutePathBuilder();
         UriBuilder places = root.clone().path("places");
@@ -54,15 +51,14 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 400, message = "Bad Request"),
-            @ApiResponse(code = 401, message = "Not Auth"),
-            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 401, message = "Not Authorized - Admin parameters required"),
+            @ApiResponse(code = 404, message = "Not Found - No vehicles found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Places getPlaces(@QueryParam("admin") int admin,
-                            @QueryParam("type") String type,
-                            @QueryParam("keyword") String keyword,
-                            @QueryParam("placeID") String placeID
+    public Places getPlaces(@ApiParam(value = "Used for make admin request") @QueryParam("admin") int admin,
+                            @ApiParam(value = "Parameter for choosing the place type") @QueryParam("type") String type,
+                            @ApiParam(value = "String for searching places with a keyword on placeID") @QueryParam("keyword") String keyword,
+                            @ApiParam(value = "Searching by placeID") @QueryParam("placeID") String placeID
     ) {
         System.out.println("@GET_PLACESSSSS");
         Places places;
@@ -104,11 +100,10 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Place getPlace(@PathParam("id") String id) {
+    public Place getPlace(@ApiParam(value = "Searching by placeID") @PathParam("id") String id) {
         System.out.println("@GET_PLACE#" + id);
         Place place = service.getPlace(id);
         if (place==null)
@@ -161,13 +156,13 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicles getVehicles(@QueryParam("admin") int admin,
-                                @QueryParam("type") String type,
-                                @QueryParam("keyword") String keyword,
-                                @QueryParam("state") String state,
-                                @QueryParam("entryTime") String entryTime,
-                                @QueryParam("position") String position,
-                                @QueryParam("plateID") String plateID
+    public Vehicles getVehicles(@ApiParam(value = "Used for make admin request") @QueryParam("admin") int admin,
+                                @ApiParam(value = "Parameter for choosing the vehicle type") @QueryParam("type") String type,
+                                @ApiParam(value = "String for searching vehicles with a keyword on plate") @QueryParam("keyword") String keyword,
+                                @ApiParam(value = "State of the vehicle available in the system") @QueryParam("state") String state,
+                                @ApiParam(value = "All the vehicle available entered after this time") @QueryParam("entryTime") String entryTime,
+                                @ApiParam(value = "Position of the vehicle") @QueryParam("position") String position,
+                                @ApiParam(value = "Searching by plate") @QueryParam("plateID") String plateID
     ) {
         System.out.println("@GET_VEHICLESSSS#"+position);
         Vehicles vs = null;
@@ -218,7 +213,7 @@ public class rnsResources {
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Vehicle getVehicle(@PathParam("id") String id) {
+    public Vehicle getVehicle(@ApiParam(value = "Searching by plate") @PathParam("id") String id) {
         System.out.println("@GET_VEHICLE#" + id);
         Vehicle vehicle = service.getVehicle(id);
         System.out.println(vehicle);
@@ -240,7 +235,7 @@ public class rnsResources {
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Response createVehicle(Vehicle vehicle) {
+    public Response createVehicle(@ApiParam(value = "Create a Vehicle object to be added") Vehicle vehicle) {
         System.out.println("@CREATE_VEHICLE");
         String id = vehicle.getId();
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(id);
@@ -278,17 +273,14 @@ public class rnsResources {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "Bad Request"),
-            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 409, message = "Conflict - Already available in the system"),
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public Response updateVehicle(@PathParam("id") String id,
-                                 @QueryParam("state") String state,
-                                 @QueryParam("move") String move,
-                                 Vehicle vehicle) {
+    public Response updateVehicle(@ApiParam(value = "Searching by plate") @PathParam("id") String id,
+                                  @ApiParam(value = "State of the vehicle available in the system") @QueryParam("state") String state,
+                                  @ApiParam(value = "New position of the move") @QueryParam("move") String move) {
         System.out.println("@UPDATE_VEHICLE");
-        System.out.println("State: "+state);
-        System.out.println("Move: "+move);
         Vehicle updated = service.updateVehicle(id, state, move);
 
         if (updated==null)
@@ -296,8 +288,8 @@ public class rnsResources {
 
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(id);
         URI self = builder.build();
-        vehicle.setSelf(self.toString());
 
+        //@TODO: Adding error response validation
         VehicleResponse v = new VehicleResponse();
         v.setPlateID(updated.getId());
         v.setSelf(updated.getSelf());
@@ -318,11 +310,13 @@ public class rnsResources {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Deleted"),
             @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 406, message = "Unknown Place"),
             @ApiResponse(code = 409, message = "Not correct gateType"),
             @ApiResponse(code = 410, message = "Entrance Refused"),
     })
-    public Response deleteVehicle(@PathParam("id") String id, @QueryParam("outGate") String outGate) {
+    public Response deleteVehicle(@ApiParam(value = "Searching by plate") @PathParam("id") String id,
+                                  @ApiParam(value = "Gate ID for the exiting") @QueryParam("outGate") String outGate) {
         Vehicle vehicle = service.deleteVehicle(id, outGate);
 
         switch (vehicle.getState()) {
