@@ -109,7 +109,7 @@ public class rnsResources {
     public Place getPlace(@ApiParam(value = "Searching by placeID") @PathParam("id") String id) {
         System.out.println("@GET_PLACE#" + id);
         Place place = service.getPlace(id);
-        UriBuilder root = uriInfo.getAbsolutePathBuilder();
+        UriBuilder root = uriInfo.getBaseUriBuilder().path("places");
         place.setSelf(root.path(place.getId()).toTemplate());
         if (place==null)
             throw new NotFoundException();
