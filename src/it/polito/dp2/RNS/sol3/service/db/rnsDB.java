@@ -137,6 +137,7 @@ public class rnsDB {
             Connection newConnection = new Connection();
             long id = getNextConn();
 
+            newConnection.setId(BigInteger.valueOf(id));
             PlaceExt placeFrom = placeExtById.get(connectionReader.getFrom().getId());
             newConnection.setFrom(placeFrom.getPlace().getId());
             newConnection.setFromNode(placeFrom.getPlace().getSelf());
