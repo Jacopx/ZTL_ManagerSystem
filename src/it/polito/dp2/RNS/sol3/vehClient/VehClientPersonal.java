@@ -175,15 +175,15 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
 
         System.out.println("# " + response.getStatus() + " #");
 
-        if(response.getStatus() == 200) {
+        if(response.getStatus() == 204) {
             // DELETED
             myself = null;
-        } else if(response.getStatus() == 406) {
-            // WRONG GATE TYPE
-            throw new UnknownPlaceException();
         } else if(response.getStatus() == 409) {
-            // UNKNOWN PLACE
+            // WRONG GATE
             throw new WrongPlaceException();
+        } else if(response.getStatus() == 422) {
+            // UNKNOWN PLACE
+            throw new UnknownPlaceException();
         } else {
             // OTHER REASONS
             throw new ServiceException();

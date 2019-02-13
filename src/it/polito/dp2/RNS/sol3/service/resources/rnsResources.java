@@ -317,28 +317,24 @@ public class rnsResources {
     @ApiOperation(value = "deleteVehicle", notes = "delete vehicle"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Deleted"),
-            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 204, message = "No content"),
+            @ApiResponse(code = 403, message = "Forbidden: Not exit gate type"),
             @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 406, message = "Unknown Place"),
-            @ApiResponse(code = 409, message = "Not correct gateType"),
-            @ApiResponse(code = 410, message = "Entrance Refused"),
+            @ApiResponse(code = 422, message = "Unknown Place"),
     })
     public Response deleteVehicle(@ApiParam(value = "Searching by plate") @PathParam("id") String id,
                                   @ApiParam(value = "Gate ID for the exiting") @QueryParam("outGate") String outGate) {
         Vehicle vehicle = service.deleteVehicle(id, outGate);
 
         switch (vehicle.getState()) {
+            case "WRONG_GATE_TYPE":
+                return Response.status(403).build();
             case "NULL":
                 return Response.status(404).build();
             case "UNKNOWN_PLACE":
-                return Response.status(406).build();
-            case "WRONG_GATE_TYPE":
-                return Response.status(409).build();
-            case "ERROR":
-                return Response.status(400).build();
+                return Response.status(422).build();
             default: case "REMOVED":
-                return Response.status(200).build();
+                return Response.status(204).build();
         }
     }
 
