@@ -128,6 +128,7 @@
     <xsd:element name="connection">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element name="id" type="xsd:integer"/>
                 <xsd:element name="self" type="xsd:anyURI"/>
                 <xsd:element name="from" type="xsd:anyURI"/>
                 <xsd:element name="fromNode" type="xsd:anyURI"/>

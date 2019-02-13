@@ -89,7 +89,7 @@ public class rnsResources {
 
         // Translate with correct URI
         for (Place p:places.getPlace())
-            p.setSelf(root.path(p.getSelf()).toTemplate());
+            p.setSelf(root.path(p.getId()).toTemplate());
 
         if (places==null)
             throw new NotFoundException();
@@ -109,7 +109,7 @@ public class rnsResources {
         System.out.println("@GET_PLACE#" + id);
         Place place = service.getPlace(id);
         UriBuilder root = uriInfo.getAbsolutePathBuilder();
-        place.setSelf(root.path(place.getSelf()).toTemplate());
+        place.setSelf(root.path(place.getId()).toTemplate());
         if (place==null)
             throw new NotFoundException();
         return place;
@@ -131,9 +131,9 @@ public class rnsResources {
 
         // Translate with correct URI
         for (Connection c:conns.getConnection()) {
-            c.setSelf(root.path(c.getSelf()).toTemplate());
-            c.setFromNode(root.path(c.getFromNode()).toTemplate());
-            c.setToNode(root.path(c.getToNode()).toTemplate());
+            c.setSelf(root.path(String.valueOf(c.getId())).toTemplate());
+            c.setFromNode(root.path(c.getFrom()).toTemplate());
+            c.setToNode(root.path(c.getTo()).toTemplate());
         }
 
         if(conns == null)
@@ -155,9 +155,9 @@ public class rnsResources {
         System.out.println("@GET_CONNECTION");
         Connection connection = service.getConnection(id);
         UriBuilder root = uriInfo.getAbsolutePathBuilder();
-        connection.setSelf(root.path(connection.getSelf()).toTemplate());
-        connection.setFromNode(root.path(connection.getFromNode()).toTemplate());
-        connection.setToNode(root.path(connection.getToNode()).toTemplate());
+        connection.setSelf(root.path(String.valueOf(connection.getId())).toTemplate());
+        connection.setFromNode(root.path(connection.getFrom()).toTemplate());
+        connection.setToNode(root.path(connection.getTo()).toTemplate());
 
         if (connection==null)
             throw new NotFoundException();
