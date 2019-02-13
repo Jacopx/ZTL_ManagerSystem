@@ -162,9 +162,9 @@ public class rnsResources {
 
         UriBuilder root = uriInfo.getAbsolutePathBuilder();
         connection.setSelf(root.path(String.valueOf(connection.getId())).toTemplate());
-        UriBuilder from = main.clone().path("places");
+        UriBuilder from = uriInfo.getBaseUriBuilder().clone().path("places");
         connection.setFromNode(from.path(connection.getFrom()).toTemplate());
-        UriBuilder to = main.clone().path("places");
+        UriBuilder to = uriInfo.getBaseUriBuilder().clone().path("places");
         connection.setToNode(to.path(connection.getTo()).toTemplate());
 
         if (connection==null)
