@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="Removing URI problem">
+    <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" afterDir="false" />
     </list>
@@ -39,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="610">
-              <caret line="304" column="42" lean-forward="true" selection-start-line="304" selection-start-column="42" selection-end-line="304" selection-end-column="42" />
+            <state relative-caret-position="573">
+              <caret line="274" column="36" lean-forward="true" selection-start-line="274" selection-start-column="36" selection-end-line="274" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -200,7 +200,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550069157894" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550069444565" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -282,14 +282,7 @@
       <workItem from="1549365480653" duration="485000" />
       <workItem from="1549371774084" duration="13826000" />
       <workItem from="1549466266608" duration="2018000" />
-      <workItem from="1550050943394" duration="10077000" />
-    </task>
-    <task id="LOCAL-00214" summary="Nuovamente bracolando nel buio!">
-      <created>1548340827479</created>
-      <option name="number" value="00214" />
-      <option name="presentableId" value="LOCAL-00214" />
-      <option name="project" value="LOCAL" />
-      <updated>1548340827479</updated>
+      <workItem from="1550050943394" duration="10314000" />
     </task>
     <task id="LOCAL-00215" summary="Nuovamente bracolando nel buio!">
       <created>1548341633223</created>
@@ -627,11 +620,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550068203262</updated>
     </task>
-    <option name="localTasksCounter" value="263" />
+    <task id="LOCAL-00263" summary="Error in vehicle with self value">
+      <created>1550069172169</created>
+      <option name="number" value="00263" />
+      <option name="presentableId" value="LOCAL-00263" />
+      <option name="project" value="LOCAL" />
+      <updated>1550069172169</updated>
+    </task>
+    <option name="localTasksCounter" value="264" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173018000" />
+    <option name="totallyTimeSpent" value="173255000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -685,7 +685,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="New build file" />
     <MESSAGE value="Nuovamente bracolando nel buio!" />
     <MESSAGE value="STOP, need a refresh" />
     <MESSAGE value="Adding output" />
@@ -710,7 +709,8 @@
     <MESSAGE value="New error in UPDATE VEHICLE (PUT)" />
     <MESSAGE value="New error in DELETE VEHICLE (DELETE)" />
     <MESSAGE value="Removing URI problem" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removing URI problem" />
+    <MESSAGE value="Error in vehicle with self value" />
+    <option name="LAST_COMMIT_MESSAGE" value="Error in vehicle with self value" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1176,8 +1176,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="304" column="42" lean-forward="true" selection-start-line="304" selection-start-column="42" selection-end-line="304" selection-end-column="42" />
+        <state relative-caret-position="573">
+          <caret line="274" column="36" lean-forward="true" selection-start-line="274" selection-start-column="36" selection-end-line="274" selection-end-column="36" />
         </state>
       </provider>
     </entry>

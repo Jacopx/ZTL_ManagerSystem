@@ -252,7 +252,7 @@ public class rnsDB {
         // TO CHECK
         if(vehicle.getTo() != null && placeExtById.containsKey(vehicle.getTo())) {
             PlaceExt placeExt = placeExtById.get(vehicle.getTo());
-            if(placeExt.getPlace().getSelf() == null) {
+            if(placeExt.getPlace() == null) {
                 return generateErrorVehicle(1);
             }
         } else {
@@ -262,7 +262,7 @@ public class rnsDB {
         // POSITION CHECK
         if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
             PlaceExt placeExt = placeExtById.get(vehicle.getPosition());
-            if(placeExt.getPlace().getSelf() == null) {
+            if(placeExt.getPlace() == null) {
                 return generateErrorVehicle(1);
             }
         } else {
