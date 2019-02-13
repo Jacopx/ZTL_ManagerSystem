@@ -252,9 +252,7 @@ public class rnsDB {
         // TO CHECK
         if(vehicle.getTo() != null && placeExtById.containsKey(vehicle.getTo())) {
             PlaceExt placeExt = placeExtById.get(vehicle.getTo());
-            if((temp = placeExt.getPlace().getSelf()) != null) {
-                vehicle.setToNode(temp);
-            } else {
+            if(placeExt.getPlace().getSelf() == null) {
                 return generateErrorVehicle(1);
             }
         } else {
@@ -264,9 +262,7 @@ public class rnsDB {
         // POSITION CHECK
         if(vehicle.getPosition() != null && placeExtById.containsKey(vehicle.getPosition())) {
             PlaceExt placeExt = placeExtById.get(vehicle.getPosition());
-            if((temp = placeExt.getPlace().getSelf()) != null) {
-                vehicle.setPositionNode(temp);
-            } else {
+            if(placeExt.getPlace().getSelf() == null) {
                 return generateErrorVehicle(1);
             }
         } else {
@@ -276,8 +272,7 @@ public class rnsDB {
         // FROM CHECK
         if(vehicle.getFrom() != null && placeExtById.containsKey(vehicle.getFrom())) {
             PlaceExt placeExt = placeExtById.get(vehicle.getFrom());
-            if((temp = placeExt.getPlace().getSelf()) != null) {
-                vehicle.setFromNode(temp);
+            if(placeExt.getPlace() != null) {
 
                 GateItem type = placeExt.getPlace().getGate();
                 if(type != null) {
@@ -316,6 +311,7 @@ public class rnsDB {
 
     // Generating an error for different case
     private Vehicle generateErrorVehicle(int error) {
+        System.out.println("ERROR VEHICLE: " + error);
         Vehicle refused = new Vehicle();
         if(error == 2)
             refused.setState("WRONG_GATE_TYPE");
