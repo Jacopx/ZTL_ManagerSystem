@@ -229,6 +229,17 @@ public class rnsResources {
 
         if(vs == null)
             vs = new Vehicles();
+
+        UriBuilder root = uriInfo.getBaseUriBuilder().path("vehicles");
+        UriBuilder from = uriInfo.getBaseUriBuilder().clone().path("places");
+        UriBuilder to = uriInfo.getBaseUriBuilder().clone().path("places");
+
+        for(Vehicle vehicle:vs.getVehicle()) {
+            vehicle.setSelf(root.clone().path(vehicle.getId()).toTemplate());
+            vehicle.setFromNode(from.clone().path(vehicle.getFrom()).toTemplate());
+            vehicle.setToNode(to.clone().path(vehicle.getTo()).toTemplate());
+            vehicle.setPositionNode(to.clone().path(vehicle.getPosition()).toTemplate());
+        }
         return vs;
     }
 
@@ -248,6 +259,14 @@ public class rnsResources {
         System.out.println(vehicle);
         if (vehicle==null)
             throw new NotFoundException();
+        UriBuilder root = uriInfo.getBaseUriBuilder().path("vehicles");
+        UriBuilder from = uriInfo.getBaseUriBuilder().clone().path("places");
+        UriBuilder to = uriInfo.getBaseUriBuilder().clone().path("places");
+
+        vehicle.setSelf(root.path(vehicle.getId()).toTemplate());
+        vehicle.setFromNode(from.clone().path(vehicle.getFrom()).toTemplate());
+        vehicle.setToNode(to.clone().path(vehicle.getTo()).toTemplate());
+        vehicle.setPositionNode(to.clone().path(vehicle.getPosition()).toTemplate());
         return vehicle;
     }
 
@@ -269,7 +288,6 @@ public class rnsResources {
         String id = vehicle.getId();
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(id);
         URI self = builder.build();
-        vehicle.setSelf(self.toString());
 
         Vehicle created = service.addVehicle(vehicle);
         switch (created.getState()) {
@@ -286,7 +304,7 @@ public class rnsResources {
             default:
                 VehicleResponse v = new VehicleResponse();
                 v.setPlateID(created.getId());
-                v.setSelf(created.getSelf());
+                v.setSelf(self.toString());
                 v.setFromNode(created.getFromNode());
                 v.setToNode(created.getToNode());
                 for (ShortPaths sp : created.getShortPaths()) {
@@ -329,7 +347,7 @@ public class rnsResources {
             default:
                 VehicleResponse v = new VehicleResponse();
                 v.setPlateID(updated.getId());
-                v.setSelf(updated.getSelf());
+                v.setSelf(builder.toTemplate());
                 v.setPositionNode(updated.getPositionNode());
                 v.setFromNode(updated.getFromNode());
                 v.setToNode(updated.getToNode());
