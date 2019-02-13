@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cee0de77-be48-4f58-be06-f331a98bff6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -27,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="627">
-              <caret line="89" selection-start-line="89" selection-start-column="2" selection-end-line="91" selection-end-column="61" />
+            <state relative-caret-position="-307">
+              <caret line="93" column="25" lean-forward="true" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -39,8 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1026">
-              <caret line="146" column="34" lean-forward="true" selection-start-line="146" selection-start-column="34" selection-end-line="146" selection-end-column="34" />
+            <state relative-caret-position="396">
+              <caret line="146" column="52" selection-start-line="146" selection-start-column="52" selection-end-line="146" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -112,8 +113,8 @@
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/ConnectionsResources.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/vehClient/VehClientPersonal.java" />
         <option value="$PROJECT_DIR$/xsd/rnsSystem.xsd" />
-        <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" />
         <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java" />
+        <option value="$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java" />
       </list>
     </option>
   </component>
@@ -187,7 +188,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550063505932" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550063663026" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -269,14 +270,7 @@
       <workItem from="1549365480653" duration="485000" />
       <workItem from="1549371774084" duration="13826000" />
       <workItem from="1549466266608" duration="2018000" />
-      <workItem from="1550050943394" duration="5511000" />
-    </task>
-    <task id="LOCAL-00200" summary="Adding placeID search">
-      <created>1548335130945</created>
-      <option name="number" value="00200" />
-      <option name="presentableId" value="LOCAL-00200" />
-      <option name="project" value="LOCAL" />
-      <updated>1548335130946</updated>
+      <workItem from="1550050943394" duration="5667000" />
     </task>
     <task id="LOCAL-00201" summary="Adding placeID search">
       <created>1548335452257</created>
@@ -614,11 +608,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550063132899</updated>
     </task>
-    <option name="localTasksCounter" value="249" />
+    <task id="LOCAL-00249" summary="Removing URI problem">
+      <created>1550063513731</created>
+      <option name="number" value="00249" />
+      <option name="presentableId" value="LOCAL-00249" />
+      <option name="project" value="LOCAL" />
+      <updated>1550063513731</updated>
+    </task>
+    <option name="localTasksCounter" value="250" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="168452000" />
+    <option name="totallyTimeSpent" value="168608000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -1153,15 +1154,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/db/rnsDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1026">
-          <caret line="146" column="34" lean-forward="true" selection-start-line="146" selection-start-column="34" selection-end-line="146" selection-end-column="34" />
+        <state relative-caret-position="396">
+          <caret line="146" column="52" selection-start-line="146" selection-start-column="52" selection-end-line="146" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/polito/dp2/RNS/sol3/service/resources/rnsResources.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="89" selection-start-line="89" selection-start-column="2" selection-end-line="91" selection-end-column="61" />
+        <state relative-caret-position="-307">
+          <caret line="93" column="25" lean-forward="true" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -95,7 +95,7 @@ public class rnsDB {
             newGate.setId(gateReader.getId());
             String id = gateReader.getId();
 //            newGate.setSelf(URL + "/places/" + id);
-            newGate.setSelf("/places/" + id);
+            newGate.setSelf(id);
 
             createPlace(id, newGate);
             gates.putIfAbsent(id, placeExtById.get(id));
@@ -113,7 +113,7 @@ public class rnsDB {
             newPark.setParking(park);
             String id = parkingAreaReader.getId();
 //            newPark.setSelf(URL + "/places/" + id);
-            newPark.setSelf("/places/" + id);
+            newPark.setSelf(id);
 
             createPlace(id, newPark);
             parkings.putIfAbsent(id, placeExtById.get(id));
@@ -132,7 +132,7 @@ public class rnsDB {
             newRoadSeg.setSegment(seg);
             String id = roadSegmentReader.getId();
 //            newRoadSeg.setSelf(URL + "/places/" + id);
-            newRoadSeg.setSelf("/places/" + id);
+            newRoadSeg.setSelf(id);
 
             createPlace(id, newRoadSeg);
             segments.putIfAbsent(id, placeExtById.get(id));
@@ -144,7 +144,7 @@ public class rnsDB {
             long id = getNextConn();
 
 //            newConnection.setSelf(URL + "/connections/" + id);
-            newConnection.setSelf("/connections/" + id);
+            newConnection.setSelf(String.valueOf(id));
             PlaceExt placeFrom = placeExtById.get(connectionReader.getFrom().getId());
             newConnection.setFrom(placeFrom.getPlace().getId());
             newConnection.setFromNode(placeFrom.getPlace().getSelf());
