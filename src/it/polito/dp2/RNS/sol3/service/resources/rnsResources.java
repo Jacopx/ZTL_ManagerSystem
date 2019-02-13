@@ -24,6 +24,7 @@ public class rnsResources {
 
     public rnsResources(@Context UriInfo uriInfo) {
         this.uriInfo = uriInfo;
+        main = uriInfo.getAbsolutePathBuilder();
     }
 
     @GET
