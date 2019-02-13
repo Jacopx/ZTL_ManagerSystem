@@ -87,9 +87,9 @@ public class rnsResources {
             throw new NotAuthorizedException("Admin privilege required!");
         }
 
-        // Translate with correct URI
-        for (Place p:places.getPlace())
-            p.setSelf(root.path(p.getSelf()).toTemplate());
+//        // Translate with correct URI
+//        for (Place p:places.getPlace())
+//            p.setSelf(root.path(p.getSelf()).toTemplate());
 
         if (places==null)
             throw new NotFoundException();
