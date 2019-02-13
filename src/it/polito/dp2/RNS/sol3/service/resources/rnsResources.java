@@ -28,7 +28,7 @@ public class rnsResources {
     @GET
     @ApiOperation(value = "getRnsSystem", notes = "reads main resource")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 200, message = "OK", response = RnsSystem.class),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public RnsSystem getRnsSystem(@ApiParam(value = "Used for make admin request") @QueryParam("admin") int admin) {
@@ -48,7 +48,7 @@ public class rnsResources {
     @ApiOperation(value = "getPlaces", notes = "searches places"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 200, message = "OK", response = Places.class),
             @ApiResponse(code = 401, message = "Not Authorized: Admin parameters required"),
             @ApiResponse(code = 404, message = "Not Found: No place found"),
     })
@@ -102,7 +102,7 @@ public class rnsResources {
     @ApiOperation(value = "getPlace", notes = "read single place"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 200, message = "OK", response = Place.class),
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -122,7 +122,7 @@ public class rnsResources {
     @ApiOperation(value = "getConnections", notes = "searches connections"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 200, message = "OK", response = Connections.class),
             @ApiResponse(code = 404, message = "Not Found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -153,7 +153,7 @@ public class rnsResources {
     @ApiOperation(value = "getConnection", notes = "read single connection"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 200, message = "OK", response = Connection.class),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found"),
     })
@@ -180,7 +180,7 @@ public class rnsResources {
     @ApiOperation(value = "getVehicles", notes = "searches vehicles"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 200, message = "OK", response = Vehicles.class),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found"),
     })
@@ -248,7 +248,7 @@ public class rnsResources {
     @ApiOperation(value = "getVehicle", notes = "read single vehicle"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 200, message = "OK", response = Vehicle.class),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found"),
     })
@@ -275,7 +275,7 @@ public class rnsResources {
     @ApiOperation(value = "createVehicle", notes = "create a new vehicle"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Created"),
+            @ApiResponse(code = 201, message = "Created", response = VehicleResponse.class),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 403, message = "Forbidden: Not correct gateType"),
             @ApiResponse(code = 409, message = "Conflict: Duplicated vehicle"),
@@ -320,7 +320,7 @@ public class rnsResources {
     @ApiOperation(value = "updateVehicle", notes = "update single vehicle"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 200, message = "OK", response = VehicleResponse.class),
             @ApiResponse(code = 403, message = "Forbidden: New position is not reachable from the current position"),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 422, message = "Unprocessable Entity: New position is not a valid place")
