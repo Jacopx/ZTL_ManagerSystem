@@ -58,7 +58,6 @@ public class rnsResources {
                             @ApiParam(value = "Searching by placeID") @QueryParam("placeID") String placeID
     ) {
         System.out.println("@GET_PLACESSSSS");
-        UriBuilder root = uriInfo.getAbsolutePathBuilder();
         Places places;
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
@@ -88,8 +87,10 @@ public class rnsResources {
         }
 
         // Translate with correct URI
-        for (Place p:places.getPlace())
+        for (Place p:places.getPlace()) {
+            UriBuilder root = uriInfo.getAbsolutePathBuilder();
             p.setSelf(root.path(p.getId()).toTemplate());
+        }
 
         if (places==null)
             throw new NotFoundException();
@@ -127,10 +128,10 @@ public class rnsResources {
     public Connections getConnections() {
         System.out.println("@GET_CONNECTIONSSSSSS");
         Connections conns = service.getConnections();
-        UriBuilder root = uriInfo.getAbsolutePathBuilder();
 
         // Translate with correct URI
         for (Connection c:conns.getConnection()) {
+            UriBuilder root = uriInfo.getAbsolutePathBuilder();
             c.setSelf(root.path(String.valueOf(c.getId())).toTemplate());
             c.setFromNode(root.path(c.getFrom()).toTemplate());
             c.setToNode(root.path(c.getTo()).toTemplate());
