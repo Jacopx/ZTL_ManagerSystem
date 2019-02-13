@@ -87,13 +87,13 @@ public class rnsResources {
             throw new NotAuthorizedException("Admin privilege required!");
         }
 
+        if (places==null)
+            throw new NotFoundException();
         // Translate with correct URI
-        UriBuilder root = uriInfo.getAbsolutePathBuilder();
+        UriBuilder root = uriInfo.getBaseUriBuilder().path("places");
         for (Place p:places.getPlace())
             p.setSelf(root.clone().path(p.getId()).toTemplate());
 
-        if (places==null)
-            throw new NotFoundException();
         return places;
     }
 
@@ -109,10 +109,11 @@ public class rnsResources {
     public Place getPlace(@ApiParam(value = "Searching by placeID") @PathParam("id") String id) {
         System.out.println("@GET_PLACE#" + id);
         Place place = service.getPlace(id);
-        UriBuilder root = uriInfo.getBaseUriBuilder().path("places");
-        place.setSelf(root.path(place.getId()).toTemplate());
+
         if (place==null)
             throw new NotFoundException();
+        UriBuilder root = uriInfo.getBaseUriBuilder().path("places");
+        place.setSelf(root.path(place.getId()).toTemplate());
         return place;
     }
 
@@ -129,7 +130,10 @@ public class rnsResources {
         System.out.println("@GET_CONNECTIONSSSSSS");
         Connections conns = service.getConnections();
 
-        UriBuilder root = uriInfo.getAbsolutePathBuilder();
+        if(conns == null)
+            throw new NotFoundException();
+
+        UriBuilder root = uriInfo.getBaseUriBuilder().path("connections");
         UriBuilder from, to;
         // Translate with correct URI
         for (Connection c:conns.getConnection()) {
@@ -141,8 +145,6 @@ public class rnsResources {
             c.setToNode(to.path(c.getTo()).toTemplate());
         }
 
-        if(conns == null)
-            throw new NotFoundException();
         return conns;
     }
 
@@ -160,15 +162,16 @@ public class rnsResources {
         System.out.println("@GET_CONNECTION");
         Connection connection = service.getConnection(id);
 
-        UriBuilder root = uriInfo.getAbsolutePathBuilder();
-        connection.setSelf(root.path(String.valueOf(connection.getId())).toTemplate());
+        if (connection==null)
+            throw new NotFoundException();
+
+        UriBuilder root = uriInfo.getBaseUriBuilder().path("connections");
+        connection.setSelf(root.clone().path(String.valueOf(connection.getId())).toTemplate());
         UriBuilder from = uriInfo.getBaseUriBuilder().clone().path("places");
         connection.setFromNode(from.path(connection.getFrom()).toTemplate());
         UriBuilder to = uriInfo.getBaseUriBuilder().clone().path("places");
         connection.setToNode(to.path(connection.getTo()).toTemplate());
 
-        if (connection==null)
-            throw new NotFoundException();
         return connection;
     }
 
