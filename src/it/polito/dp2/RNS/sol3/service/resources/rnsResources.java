@@ -38,10 +38,10 @@ public class rnsResources {
         rns.setPlacesLink(places.toTemplate());
         rns.setVehiclesLink(root.clone().path("vehicles").toTemplate());
         rns.setConnectionsLink(root.clone().path("connections").toTemplate());
-        if(admin == 1) {
-            rns.setPlaces(getPlaces(admin, null, null, null));
-            rns.setVehicles(getVehicles(admin, null, null, null, null, null, null));
-        }
+//        if(admin == 1) {
+//            rns.setPlaces(getPlaces(admin, null, null, null));
+//            rns.setVehicles(getVehicles(admin, null, null, null, null, null, null));
+//        }
         return rns;
     }
 
@@ -51,8 +51,8 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 401, message = "Not Authorized - Admin parameters required"),
-            @ApiResponse(code = 404, message = "Not Found - No vehicles found"),
+            @ApiResponse(code = 401, message = "Not Authorized: Admin parameters required"),
+            @ApiResponse(code = 404, message = "Not Found: No place found"),
     })
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Places getPlaces(@ApiParam(value = "Used for make admin request") @QueryParam("admin") int admin,
@@ -229,9 +229,12 @@ public class rnsResources {
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Created"),
             @ApiResponse(code = 400, message = "Bad Request"),
-            @ApiResponse(code = 406, message = "Unknown Place"),
-            @ApiResponse(code = 409, message = "Not correct gateType"),
-            @ApiResponse(code = 410, message = "Entrance Refused"),
+            @ApiResponse(code = 403, message = "Forbidden: Not correct gateType"),
+//            @ApiResponse(code = 406, message = "Unknown Place"),
+//            @ApiResponse(code = 409, message = "Not correct gateType"),
+            @ApiResponse(code = 409, message = "Conflict: Duplicated vehicle"),
+//            @ApiResponse(code = 410, message = "Entrance Refused"),
+            @ApiResponse(code = 422, message = "Unprocessable Entity: source or destination not available or path computation problem")
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -244,14 +247,16 @@ public class rnsResources {
 
         Vehicle created = service.addVehicle(vehicle);
         switch (created.getState()) {
-            case "REFUSED":
-                return Response.created(self).status(410).build();
-            case "UNKNOWN_PLACE":
-                return Response.created(self).status(406).build();
-            case "WRONG_GATE_TYPE":
-                return Response.created(self).status(409).build();
             case "ERROR":
                 return Response.created(self).status(400).build();
+            case "DUPLICATE":
+                return Response.created(self).status(409).build();
+            case "WRONG_GATE_TYPE":
+                return Response.created(self).status(403).build();
+            case "REFUSED":
+                return Response.created(self).status(422).build();
+            case "UNKNOWN_PLACE":
+                return Response.created(self).status(422).build();
             default:
                 VehicleResponse v = new VehicleResponse();
                 v.setPlateID(created.getId());

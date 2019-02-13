@@ -218,9 +218,9 @@ public class rnsDB {
     public Vehicle addVehicle(Vehicle vehicle) {
 
         if(vehicles.contains(vehicle.getId())) {
-            System.out.println("REFUSED - PRESENT");
+            System.out.println("DUPLICATE - PRESENT");
             Vehicle refused = new Vehicle();
-            refused.setState("REFUSED");
+            refused.setState("DUPLICATE");
             return refused;
         }
 
