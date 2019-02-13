@@ -124,12 +124,12 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
             if(vehicleUpdated.getPath().size() == 0)
                 return null;
             return new ArrayList<String>(vehicleUpdated.getPath());
-        } else if(response.getStatus() == 406) {
+        } else if(response.getStatus() == 403) {
+            // NOT REACHABLE PLACE
+            throw new WrongPlaceException();
+        } else if(response.getStatus() == 422) {
             // WRONG GATE TYPE
             throw new UnknownPlaceException();
-        } else if(response.getStatus() == 409) {
-            // UNKNOWN PLACE
-            throw new WrongPlaceException();
         } else {
             // OTHER REASONS
             throw new ServiceException();

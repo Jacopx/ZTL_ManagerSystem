@@ -412,27 +412,33 @@ public class rnsDB {
         }
 
         if(move != null && !move.isEmpty()) {
-            Vehicle vehicle = vehicleExt.getVehicle();
-            vehicle.setPosition(move);
+            if(placeExtById.get(move) != null) {
+                Vehicle vehicle = vehicleExt.getVehicle();
+                vehicle.setPosition(move);
 
-            if(!vehicle.getShortPaths().contains(move)) {
-                if(isReachable(placeExtById.get(vehicle.getPosition()).getPlace(), placeExtById.get(move).getPlace())) {
-                    vehicle.setPositionNode(placeExtById.get(move).getPlace().getSelf());
+                if(!vehicle.getShortPaths().contains(move)) {
+                    if(isReachable(placeExtById.get(vehicle.getPosition()).getPlace(), placeExtById.get(move).getPlace())) {
+                        vehicle.setPositionNode(placeExtById.get(move).getPlace().getSelf());
 
-                    Set<List<String>> computedPath = computePath(vehicle);
+                        Set<List<String>> computedPath = computePath(vehicle);
 
-                    if (computedPath!= null) {
-                        vehicleExt.setPaths(computedPath);
-                        return vehicle;
-                    } else {
-                        Vehicle refused = new Vehicle();
-                        refused.setState("REFUSED");
-                        return refused;
+                        if (computedPath!= null) {
+                            vehicleExt.setPaths(computedPath);
+                            return vehicle;
+                        } else {
+                            Vehicle refused = new Vehicle();
+                            refused.setState("REFUSED");
+                            return refused;
+                        }
                     }
                 }
+                vehicle.getShortPaths().clear();
+                return vehicle;
+            } else {
+                Vehicle refused = new Vehicle();
+                refused.setState("WRONGPLACE");
+                return refused;
             }
-            vehicle.getShortPaths().clear();
-            return vehicle;
         }
         return null;
     }

@@ -274,8 +274,9 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 400, message = "Bad Request"),
-            @ApiResponse(code = 409, message = "Conflict - Already available in the system"),
+            @ApiResponse(code = 403, message = "Forbidden - New position is not reachable from the current position"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 422, message = "Unprocessable Entity - New position is not a valid place")
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -285,24 +286,30 @@ public class rnsResources {
         System.out.println("@UPDATE_VEHICLE");
         Vehicle updated = service.updateVehicle(id, state, move);
 
-        if (updated==null)
-            throw new NotFoundException();
-
         UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(id);
         URI self = builder.build();
 
-        //@TODO: Adding error response validation
-        VehicleResponse v = new VehicleResponse();
-        v.setPlateID(updated.getId());
-        v.setSelf(updated.getSelf());
-        v.setPositionNode(updated.getPositionNode());
-        v.setFromNode(updated.getFromNode());
-        v.setToNode(updated.getToNode());
-        for (ShortPaths sp : updated.getShortPaths()) {
-            for (SuggPath sgp : sp.getSuggPath())
-                v.getPath().addAll(sgp.getRelation());
+        if (updated==null)
+            throw new NotFoundException();
+
+        switch (updated.getState()) {
+            case "REFUSED":
+                return Response.created(self).status(403).build();
+            case "WRONGPLACE":
+                return Response.created(self).status(422).build();
+            default:
+                VehicleResponse v = new VehicleResponse();
+                v.setPlateID(updated.getId());
+                v.setSelf(updated.getSelf());
+                v.setPositionNode(updated.getPositionNode());
+                v.setFromNode(updated.getFromNode());
+                v.setToNode(updated.getToNode());
+                for (ShortPaths sp : updated.getShortPaths()) {
+                    for (SuggPath sgp : sp.getSuggPath())
+                        v.getPath().addAll(sgp.getRelation());
+                }
+                return Response.created(self).status(200).entity(v).build();
         }
-        return Response.created(self).status(200).entity(v).build();
     }
 
     @DELETE
