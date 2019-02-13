@@ -133,7 +133,9 @@ public class rnsResources {
         for (Connection c:conns.getConnection()) {
             UriBuilder root = uriInfo.getAbsolutePathBuilder();
             c.setSelf(root.path(String.valueOf(c.getId())).toTemplate());
+            root = uriInfo.getAbsolutePathBuilder();
             c.setFromNode(root.path(c.getFrom()).toTemplate());
+            root = uriInfo.getAbsolutePathBuilder();
             c.setToNode(root.path(c.getTo()).toTemplate());
         }
 
