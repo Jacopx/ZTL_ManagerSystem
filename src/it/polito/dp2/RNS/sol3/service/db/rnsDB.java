@@ -395,7 +395,6 @@ public class rnsDB {
                 if(date != null) cal.setTime(date);
 
                 add = v.getVehicle().getEntryTime().toGregorianCalendar().after(cal);
-//                add = v.getVehicle().getEntryTime().toGregorianCalendar().compareTo(cal) == 0;
                 if(!add) continue;
             }
 
