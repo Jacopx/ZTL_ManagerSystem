@@ -18,13 +18,11 @@ import java.net.URI;
 @Api(value = "/")
 public class rnsResources {
     public UriInfo uriInfo;
-    private UriBuilder main;
 
     rnsService service = new rnsService();
 
     public rnsResources(@Context UriInfo uriInfo) {
         this.uriInfo = uriInfo;
-        main = uriInfo.getAbsolutePathBuilder();
     }
 
     @GET
@@ -37,7 +35,6 @@ public class rnsResources {
         RnsSystem rns = new RnsSystem();
 
         UriBuilder root = uriInfo.getAbsolutePathBuilder();
-        main = uriInfo.getAbsolutePathBuilder();
         UriBuilder places = root.clone().path("places");
         rns.setSelf(root.toTemplate());
         rns.setPlacesLink(places.toTemplate());
@@ -133,15 +130,15 @@ public class rnsResources {
         Connections conns = service.getConnections();
 
         UriBuilder root = uriInfo.getAbsolutePathBuilder();
-        UriBuilder temp;
+        UriBuilder from, to;
         // Translate with correct URI
         for (Connection c:conns.getConnection()) {
             c.setSelf(root.clone().path(String.valueOf(c.getId())).toTemplate());
 
-            temp = main.clone().path("places");
-            c.setFromNode(root.path(c.getFrom()).toTemplate());
-            temp = main.clone().path("places");
-            c.setToNode(root.path(c.getTo()).toTemplate());
+            from = uriInfo.getBaseUriBuilder().clone().path("places");
+            c.setFromNode(from.path(c.getFrom()).toTemplate());
+            to = uriInfo.getBaseUriBuilder().clone().path("places");
+            c.setToNode(to.path(c.getTo()).toTemplate());
         }
 
         if(conns == null)
