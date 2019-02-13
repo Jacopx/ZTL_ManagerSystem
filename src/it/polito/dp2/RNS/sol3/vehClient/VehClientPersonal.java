@@ -87,15 +87,15 @@ public class VehClientPersonal implements it.polito.dp2.RNS.lab3.VehClient {
         } else if(response.getStatus() == 400) {
             // BAD REQUEST
             return null;
-        } else if(response.getStatus() == 406) {
+        } else if(response.getStatus() == 403) {
             // WRONG GATE TYPE
-            throw new UnknownPlaceException();
-        } else if(response.getStatus() == 409) {
-            // UNKNOWN PLACE
             throw new WrongPlaceException();
-        } else if(response.getStatus() == 410) {
-            // ENTRANCE REFUSED
+        } else if(response.getStatus() == 409) {
+            // DUPLICATE
             throw new EntranceRefusedException();
+        } else if(response.getStatus() == 422) {
+            // ENTRANCE REFUSED
+            throw new UnknownPlaceException();
         } else {
             // OTHER REASONS
             throw new ServiceException();

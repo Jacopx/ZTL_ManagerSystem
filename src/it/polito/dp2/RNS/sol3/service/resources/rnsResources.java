@@ -230,10 +230,7 @@ public class rnsResources {
             @ApiResponse(code = 201, message = "Created"),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 403, message = "Forbidden: Not correct gateType"),
-//            @ApiResponse(code = 406, message = "Unknown Place"),
-//            @ApiResponse(code = 409, message = "Not correct gateType"),
             @ApiResponse(code = 409, message = "Conflict: Duplicated vehicle"),
-//            @ApiResponse(code = 410, message = "Entrance Refused"),
             @ApiResponse(code = 422, message = "Unprocessable Entity: source or destination not available or path computation problem")
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -249,10 +246,10 @@ public class rnsResources {
         switch (created.getState()) {
             case "ERROR":
                 return Response.created(self).status(400).build();
-            case "DUPLICATE":
-                return Response.created(self).status(409).build();
             case "WRONG_GATE_TYPE":
                 return Response.created(self).status(403).build();
+            case "DUPLICATE":
+                return Response.created(self).status(409).build();
             case "REFUSED":
                 return Response.created(self).status(422).build();
             case "UNKNOWN_PLACE":
