@@ -7,19 +7,24 @@
                 <xsd:element name="placesLink" type="xsd:anyURI"/>
                 <xsd:element name="vehiclesLink" type="xsd:anyURI"/>
                 <xsd:element name="connectionsLink" type="xsd:anyURI"/>
-                <xsd:sequence>
-                    <xsd:element ref="places"/>
-                    <xsd:element ref="vehicles"/>
-                </xsd:sequence>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:complexType name="PageResponseType">
+        <xsd:attribute name="totalPages" type="xsd:positiveInteger"/>
+        <xsd:attribute name="page" type="xsd:positiveInteger"/>
+    </xsd:complexType>
+
     <xsd:element name="places">
         <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="place" minOccurs="0" maxOccurs="unbounded"/>
-            </xsd:sequence>
+            <xsd:complexContent>
+                <xsd:extension base="PageResponseType">
+                    <xsd:sequence>
+                        <xsd:element ref="place" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
 
@@ -65,9 +70,13 @@
 
     <xsd:element name="vehicles">
         <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="vehicle" minOccurs="0" maxOccurs="unbounded"/>
-            </xsd:sequence>
+            <xsd:complexContent>
+                <xsd:extension base="PageResponseType">
+                    <xsd:sequence>
+                        <xsd:element ref="vehicle" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
 
@@ -106,9 +115,13 @@
 
     <xsd:element name="connections">
         <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="connection" minOccurs="0" maxOccurs="unbounded"/>
-            </xsd:sequence>
+            <xsd:complexContent>
+                <xsd:extension base="PageResponseType">
+                    <xsd:sequence>
+                        <xsd:element ref="connection" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
 

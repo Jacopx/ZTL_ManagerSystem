@@ -8,6 +8,7 @@ import it.polito.dp2.RNS.sol3.service.service.SearchPlaces;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import java.math.BigInteger;
 import java.net.URI;
 
 /**
@@ -38,10 +39,6 @@ public class rnsResources {
         rns.setPlacesLink(places.toTemplate());
         rns.setVehiclesLink(root.clone().path("vehicles").toTemplate());
         rns.setConnectionsLink(root.clone().path("connections").toTemplate());
-//        if(admin == 1) {
-//            rns.setPlaces(getPlaces(admin, null, null, null));
-//            rns.setVehicles(getVehicles(admin, null, null, null, null, null, null));
-//        }
         return rns;
     }
 
@@ -61,6 +58,7 @@ public class rnsResources {
                             @ApiParam(value = "Searching by placeID") @QueryParam("placeID") String placeID
     ) {
         System.out.println("@GET_PLACESSSSS");
+        UriBuilder root = uriInfo.getAbsolutePathBuilder();
         Places places;
         if(admin == 1) {
             if(type != null && !type.isEmpty()) {
@@ -89,6 +87,10 @@ public class rnsResources {
             throw new NotAuthorizedException("Admin privilege required!");
         }
 
+        // Translate with correct URI
+        for (Place p:places.getPlace())
+            p.setSelf(root.path(p.getSelf()).toTemplate());
+
         if (places==null)
             throw new NotFoundException();
         return places;
@@ -106,6 +108,8 @@ public class rnsResources {
     public Place getPlace(@ApiParam(value = "Searching by placeID") @PathParam("id") String id) {
         System.out.println("@GET_PLACE#" + id);
         Place place = service.getPlace(id);
+        UriBuilder root = uriInfo.getAbsolutePathBuilder();
+        place.setSelf(root.path(place.getSelf()).toTemplate());
         if (place==null)
             throw new NotFoundException();
         return place;
@@ -123,6 +127,15 @@ public class rnsResources {
     public Connections getConnections() {
         System.out.println("@GET_CONNECTIONSSSSSS");
         Connections conns = service.getConnections();
+        UriBuilder root = uriInfo.getAbsolutePathBuilder();
+
+        // Translate with correct URI
+        for (Connection c:conns.getConnection()) {
+            c.setSelf(root.path(c.getSelf()).toTemplate());
+            c.setFromNode(root.path(c.getFromNode()).toTemplate());
+            c.setToNode(root.path(c.getToNode()).toTemplate());
+        }
+
         if(conns == null)
             throw new NotFoundException();
         return conns;
@@ -141,6 +154,11 @@ public class rnsResources {
     public Connection getConnection(@PathParam("id") long id) {
         System.out.println("@GET_CONNECTION");
         Connection connection = service.getConnection(id);
+        UriBuilder root = uriInfo.getAbsolutePathBuilder();
+        connection.setSelf(root.path(connection.getSelf()).toTemplate());
+        connection.setFromNode(root.path(connection.getFromNode()).toTemplate());
+        connection.setToNode(root.path(connection.getToNode()).toTemplate());
+
         if (connection==null)
             throw new NotFoundException();
         return connection;
@@ -274,9 +292,9 @@ public class rnsResources {
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 403, message = "Forbidden - New position is not reachable from the current position"),
+            @ApiResponse(code = 403, message = "Forbidden: New position is not reachable from the current position"),
             @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 422, message = "Unprocessable Entity - New position is not a valid place")
+            @ApiResponse(code = 422, message = "Unprocessable Entity: New position is not a valid place")
     })
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})

@@ -11,6 +11,7 @@ import it.polito.dp2.RNS.sol3.service.service.SearchVehicles;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -93,7 +94,8 @@ public class rnsDB {
             }
             newGate.setId(gateReader.getId());
             String id = gateReader.getId();
-            newGate.setSelf(URL + "/places/" + id);
+//            newGate.setSelf(URL + "/places/" + id);
+            newGate.setSelf("/places/" + id);
 
             createPlace(id, newGate);
             gates.putIfAbsent(id, placeExtById.get(id));
@@ -110,7 +112,8 @@ public class rnsDB {
             newPark.setId(parkingAreaReader.getId());
             newPark.setParking(park);
             String id = parkingAreaReader.getId();
-            newPark.setSelf(URL + "/places/" + id);
+//            newPark.setSelf(URL + "/places/" + id);
+            newPark.setSelf("/places/" + id);
 
             createPlace(id, newPark);
             parkings.putIfAbsent(id, placeExtById.get(id));
@@ -128,7 +131,8 @@ public class rnsDB {
             newRoadSeg.setId(roadSegmentReader.getId());
             newRoadSeg.setSegment(seg);
             String id = roadSegmentReader.getId();
-            newRoadSeg.setSelf(URL + "/places/" + id);
+//            newRoadSeg.setSelf(URL + "/places/" + id);
+            newRoadSeg.setSelf("/places/" + id);
 
             createPlace(id, newRoadSeg);
             segments.putIfAbsent(id, placeExtById.get(id));
@@ -139,7 +143,8 @@ public class rnsDB {
             Connection newConnection = new Connection();
             long id = getNextConn();
 
-            newConnection.setSelf(URL + "/connections/" + id);
+//            newConnection.setSelf(URL + "/connections/" + id);
+            newConnection.setSelf("/connections/" + id);
             PlaceExt placeFrom = placeExtById.get(connectionReader.getFrom().getId());
             newConnection.setFrom(placeFrom.getPlace().getId());
             newConnection.setFromNode(placeFrom.getPlace().getSelf());
@@ -172,6 +177,9 @@ public class rnsDB {
     // Searching function for places
     private Places searchPlaces(ConcurrentHashMap<String, PlaceExt> place, String keyword, String placeID) {
         Places list = new Places();
+        list.setPage(BigInteger.ONE);
+        list.setTotalPages(BigInteger.ONE);
+
         for(PlaceExt p:place.values()) {
             if(placeID != null && !placeID.isEmpty()) {
                 if (p.getPlace().getId().equals(placeID)) {
@@ -205,6 +213,8 @@ public class rnsDB {
     // Get back all the connections
     public Connections getConnections() {
         Connections list = new Connections();
+        list.setPage(BigInteger.ONE);
+        list.setTotalPages(BigInteger.ONE);
         list.getConnection().addAll(connectionById.values());
         return list;
     }
@@ -346,6 +356,8 @@ public class rnsDB {
     // Proper function for searching vehicles
     private Vehicles searchVehicles(ConcurrentHashMap<String, VehicleExt> vehicles, String keyword, String state, String entryTime, String position) {
         Vehicles list = new Vehicles();
+        list.setPage(BigInteger.ONE);
+        list.setTotalPages(BigInteger.ONE);
         boolean add; int added=0;
         for(VehicleExt v:vehicles.values()) {
             add = true;
