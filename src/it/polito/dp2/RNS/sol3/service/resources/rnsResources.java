@@ -18,6 +18,7 @@ import java.net.URI;
 @Api(value = "/")
 public class rnsResources {
     public UriInfo uriInfo;
+    private UriBuilder main;
 
     rnsService service = new rnsService();
 
@@ -33,7 +34,9 @@ public class rnsResources {
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public RnsSystem getRnsSystem(@ApiParam(value = "Used for make admin request") @QueryParam("admin") int admin) {
         RnsSystem rns = new RnsSystem();
+
         UriBuilder root = uriInfo.getAbsolutePathBuilder();
+        main = uriInfo.getAbsolutePathBuilder();
         UriBuilder places = root.clone().path("places");
         rns.setSelf(root.toTemplate());
         rns.setPlacesLink(places.toTemplate());
@@ -87,10 +90,9 @@ public class rnsResources {
         }
 
         // Translate with correct URI
-        for (Place p:places.getPlace()) {
-            UriBuilder root = uriInfo.getAbsolutePathBuilder();
-            p.setSelf(root.path(p.getId()).toTemplate());
-        }
+        UriBuilder root = uriInfo.getAbsolutePathBuilder();
+        for (Place p:places.getPlace())
+            p.setSelf(root.clone().path(p.getId()).toTemplate());
 
         if (places==null)
             throw new NotFoundException();
@@ -129,13 +131,15 @@ public class rnsResources {
         System.out.println("@GET_CONNECTIONSSSSSS");
         Connections conns = service.getConnections();
 
+        UriBuilder root = uriInfo.getAbsolutePathBuilder();
+        UriBuilder temp;
         // Translate with correct URI
         for (Connection c:conns.getConnection()) {
-            UriBuilder root = uriInfo.getAbsolutePathBuilder();
-            c.setSelf(root.path(String.valueOf(c.getId())).toTemplate());
-            root = uriInfo.getAbsolutePathBuilder();
+            c.setSelf(root.clone().path(String.valueOf(c.getId())).toTemplate());
+
+            temp = main.clone().path("places");
             c.setFromNode(root.path(c.getFrom()).toTemplate());
-            root = uriInfo.getAbsolutePathBuilder();
+            temp = main.clone().path("places");
             c.setToNode(root.path(c.getTo()).toTemplate());
         }
 
@@ -157,10 +161,13 @@ public class rnsResources {
     public Connection getConnection(@PathParam("id") long id) {
         System.out.println("@GET_CONNECTION");
         Connection connection = service.getConnection(id);
+
         UriBuilder root = uriInfo.getAbsolutePathBuilder();
         connection.setSelf(root.path(String.valueOf(connection.getId())).toTemplate());
-        connection.setFromNode(root.path(connection.getFrom()).toTemplate());
-        connection.setToNode(root.path(connection.getTo()).toTemplate());
+        UriBuilder from = main.clone().path("places");
+        connection.setFromNode(from.path(connection.getFrom()).toTemplate());
+        UriBuilder to = main.clone().path("places");
+        connection.setToNode(to.path(connection.getTo()).toTemplate());
 
         if (connection==null)
             throw new NotFoundException();
