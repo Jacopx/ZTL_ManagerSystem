@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DP2 - Ass3: Doc</title>
+</head>
+<style>
+	table, th, td {
+  		border: 1px solid black;
+  		border-collapse: collapse;
+	}
+	th, td {
+  		padding: 5px;
+	}
+	th {
+  		text-align: left;
+	}
+</style>
+<body>
+<h2>RESTful Web Service design doc</h2>
+<p>The system is divided in 3 basic units:
+	<ul>
+  <li>Places</li>
+  <li>Vehicles</li>
+  <li>Connections</li>
+</ul> 
+By using the GET method is possible to retives the list of the respectevely elements. To manage the great possible amount of data, a paging system has been implemented. Each lists can be accesses by dividing them in pages, this can improve performance. Is also possible to accessing to a selected page directly.<br/><br/>
+Single place can be accessed by using the proper {id}, in this case the paging is not require. A place can't have an infinite number of connections to other places.<br/><br/>
+Also a single vehicle can be accessed directly. The suggested path can become really huge in relation to a wolrd-scale system. The retriving of the path is also divided in pages, the first page is always included, the others can be accessed separately.<br/><br/>
+Al kind of classes make use of link to other rescources to simplify the use of the APIs, also the ID of the stuffs (Plate or Place) is available.<br/><br/>
+The system use the basic HTTP Error Code:
+
+<table style="border: 1px solid black;">
+	<tr><th>Error</th><th>Type</th><th>Usage</th></tr>
+	<tr><td>200</td><td>OK</td><td>Correct execution</td></tr>
+	<tr><td>401</td><td>Not Authorized</td><td>Used when the request require the admin option</td></tr> 
+	<tr><td>403</td><td>Forbidden</td><td>Used when some request can't be accepted due to logical error (GateType)</td></tr> 
+	<tr><td>404</td><td>Not Found</td><td>Resource asked not founded</td></tr> 
+	<tr><td>409</td><td>Conflict</td><td>Trying to add a resource already available (ID) in the system</td></tr>
+	<tr><td>422</td><td>Unprocessable Entity</td><td>Retrived when some vehicle actions make use of not correct places or other similar stuff</td></tr> 
+</table>
+
+
+</p>
+</body>
+</html>
