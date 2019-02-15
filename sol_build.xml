@@ -35,6 +35,12 @@
 	<target name="init">
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${gen.dir}"/>
+		<mkdir dir="${basedir}/WebContent/WEB-INF/classes/xsd"/>
+    <copy file="${schema.dir}/rnsSystem.xsd" todir="${basedir}/WebContent/WEB-INF/classes/xsd"/>
+    <mkdir dir="${basedir}/WebContent/WEB-INF/classes/html"/>
+    <copy file="${custom.dir}/html/BadRequestBodyTemplate.html" todir="${basedir}/WebContent/WEB-INF/classes/html"/>
+    <mkdir dir="${basedir}/WebContent/doc"/>
+    <copydir src="${basedir}/doc" dest="${basedir}/WebContent/doc"/>
 	</target>
 
 	<!-- Target generate-bindings -->
