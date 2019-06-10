@@ -385,6 +385,7 @@ public class rnsDB {
             if(entryTime != null && !entryTime.isEmpty()) {
                 Date date = null;
                 try {
+                    // the manual REST will require the escape in case of "+" symbol that is %2B
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
                     date = sdf.parse(entryTime);
                 } catch (ParseException e) {
